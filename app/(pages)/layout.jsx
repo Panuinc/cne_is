@@ -140,13 +140,13 @@ export default function PagesLayout({ children }) {
             <Clock className="w-5 h-5" />
             <span>{currentTime}</span>
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
             <Search />
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer">
             <Bell />
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-warning shadow-md rounded-full cursor-pointer">
             Ima
           </div>
         </div>
