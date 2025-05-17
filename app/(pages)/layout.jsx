@@ -67,10 +67,10 @@ export default function PagesLayout({ children }) {
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-0 py-3 gap-2 border-2 border-dark border-dashed hover:bg-default">
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
+              <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
                 <Dashboard />
               </div>
-              <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+              <div className="flex items-center justify-start w-full h-full p-2 gap-2">
                 Home
               </div>
             </div>
@@ -130,11 +130,11 @@ export default function PagesLayout({ children }) {
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-2 py-3 border-2 border-dark border-dashed">
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
+              <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
                 <Account />
               </div>
               <div
-                className={`flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed ${
+                className={`flex items-center justify-start w-full h-full p-2 gap-2 ${
                   collapsed ? "hidden" : ""
                 }`}
               >
