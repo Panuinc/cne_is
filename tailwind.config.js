@@ -12,8 +12,8 @@ module.exports = {
         white: "#FFFFFF",
         dark: "#000000",
         default: "#CAE2FF",
-        primary: "#0176FD",
-        secondary: "#34DEEB",
+        primary: "#1479FF",
+        secondary: "#37DCE5",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],
