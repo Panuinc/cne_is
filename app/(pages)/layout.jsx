@@ -14,6 +14,8 @@ import {
   Hr,
   Down,
   Account,
+  Setting,
+  It,
 } from "@/components/icons/icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +24,40 @@ export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
-  const [openSubmenu, setOpenSubmenu] = useState(false);
+  const menuItems = [
+    {
+      title: "Human",
+      icon: <Hr />,
+      key: "human",
+      submenus: ["ระดับตำแหน่ง", "ฝ่าย", "แผนก", "ตำแหน่งงาน"],
+    },
+    {
+      title: "Technology",
+      icon: <It />,
+      key: "technology",
+      submenus: ["ใบแจ้งซ่อม", "ใบเบิกคอม", "แบ็คอัพข้อมูล"],
+    },
+  ];
+
+  const [submenuOpen, setSubmenuOpen] = useState({});
+
+  const toggleSubmenu = (key) => {
+    setSubmenuOpen((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const toolMenus = [
+    {
+      label: "Account",
+      icon: <Account />,
+    },
+    {
+      label: "Setting",
+      icon: <Setting />,
+    },
+  ];
 
   useEffect(() => {
     const updateClock = () => {
@@ -66,7 +101,7 @@ export default function PagesLayout({ children }) {
             </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full px-0 py-3 gap-2 border-2 border-dark border-dashed hover:bg-default">
+            <div className="flex items-center justify-center w-full px-0 py-3 gap-2 hover:bg-default">
               <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
                 <Dashboard />
               </div>
@@ -74,45 +109,46 @@ export default function PagesLayout({ children }) {
                 Home
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center w-full gap-2">
+            {menuItems.map((menu) => (
               <div
-                className="flex items-center justify-center w-full px-0 py-3 gap-2 border-2 border-dark border-dashed hover:bg-default cursor-pointer"
-                onClick={() => setOpenSubmenu(!openSubmenu)}
+                key={menu.key}
+                className="flex flex-col items-center justify-center w-full gap-2"
               >
-                <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
-                  <Hr />
-                </div>
-                <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-                  Human
-                </div>
                 <div
-                  className={`flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed transform transition-transform duration-300 ${
-                    openSubmenu ? "-rotate-180" : "rotate-0"
-                  }`}
+                  className="flex items-center justify-center w-full px-0 py-3 gap-2 hover:bg-default cursor-pointer"
+                  onClick={() => toggleSubmenu(menu.key)}
                 >
-                  <Down />
+                  <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
+                    {menu.icon}
+                  </div>
+                  <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+                    {menu.title}
+                  </div>
+                  <div
+                    className={`flex items-center justify-center h-full px-4 py-2 gap-2 transform transition-transform duration-300 ${
+                      submenuOpen[menu.key] ? "-rotate-180" : "rotate-0"
+                    }`}
+                  >
+                    <Down />
+                  </div>
                 </div>
+                {submenuOpen[menu.key] && (
+                  <div className="flex flex-col w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
+                    {menu.submenus.map((sub, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default"
+                      >
+                        {sub}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              {openSubmenu && (
-                <div className="flex flex-col w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
-                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
-                    ระดับตำแหน่ง
-                  </div>
-                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
-                    ฝ่าย
-                  </div>
-                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
-                    แผนก
-                  </div>
-                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
-                    ตำแหน่งงาน
-                  </div>
-                </div>
-              )}
-            </div>
+            ))}
           </div>
-          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-2 border-dark border-dashed">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-t-2 border-default hover:bg-default">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2">
               <Logout /> Logout
             </div>
           </div>
@@ -123,30 +159,35 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
         >
-          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-b-2 border-default">
+          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-b-2 border-white">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2">
               Tools
             </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full px-2 py-3 border-2 border-dark border-dashed">
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
-                <Account />
-              </div>
+            {toolMenus.map((tool, index) => (
               <div
-                className={`flex items-center justify-start w-full h-full p-2 gap-2 ${
-                  collapsed ? "hidden" : ""
-                }`}
+                key={index}
+                className="flex items-center justify-center w-full px-2 py-3 hover:bg-white"
               >
-                Account
+                <div className="flex items-center justify-center h-full px-4 py-2 gap-2">
+                  {tool.icon}
+                </div>
+                <div
+                  className={`flex items-center justify-start w-full h-full p-2 gap-2 ${
+                    collapsed ? "hidden" : ""
+                  }`}
+                >
+                  {tool.label}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
           <div
-            className="flex items-center justify-center w-full h-20 p-3 gap-2 border-2 border-dark border-dashed cursor-pointer"
+            className="flex items-center justify-center w-full h-20 p-3 gap-2 border-t-2 border-white cursor-pointer"
             onClick={() => setCollapsed(!collapsed)}
           >
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               <Left />
             </div>
           </div>
