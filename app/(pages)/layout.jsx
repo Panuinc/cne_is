@@ -147,7 +147,7 @@ export default function PagesLayout({ children }) {
             <Bell />
           </div>
           <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer">
-            Images
+            Ima
           </div>
         </div>
 
