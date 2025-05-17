@@ -225,7 +225,7 @@ export default function PagesLayout({ children }) {
 
       {openMobile && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 xl:hidden p-2 gap-2 border-2 border-dark"
+          className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2 border-2 border-dark"
           onClick={() => setOpenMobile(false)}
         />
       )}
