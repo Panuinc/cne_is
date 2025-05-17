@@ -7,7 +7,7 @@ export default function PagesLayout({ children }) {
   const [openMobile, setOpenMobile] = useState(false);
 
   return (
-    <div className="flex flex-row w-full h-screen overflow-hidden gap-2">
+    <div className="flex flex-row w-full h-screen overflow-hidden gap-20">
       <div
         className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
           ${openMobile ? "translate-x-0" : "-translate-x-full"}
