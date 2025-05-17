@@ -4,18 +4,21 @@ import { Bell, Hamburger, Left } from "@/components/icons/icons";
 
 export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
 
   return (
-    <div className="flex flex-row items-center justify-center w-full h-screen gap-2">
+    <div className="flex flex-row w-full h-screen overflow-hidden gap-2">
       <div
-        className={`${
-          collapsed ? "w-[20%]" : "w-[30%]"
-        } flex flex-row items-center justify-center h-full`}
+        className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
+          ${openMobile ? "translate-x-0" : "-translate-x-full"}
+          xl:static xl:translate-x-0
+          ${collapsed ? "xl:w-[20%]" : "xl:w-[25%]"}
+          w-[90%]`}
       >
         <div
-          className={`flex flex-col items-center justify-start h-full gap-2 bg-white ${
-            collapsed ? "w-[70%]" : "w-[60%]"
-          }`}
+          className={`flex flex-col items-center justify-start h-full gap-2 bg-white
+            ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
+            w-[70%]`}
         >
           <div className="flex items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
             ChannakornEngineer
@@ -36,9 +39,9 @@ export default function PagesLayout({ children }) {
         </div>
 
         <div
-          className={`flex flex-col items-center justify-start h-full gap-2 bg-default ${
-            collapsed ? "w-[30%]" : "w-[40%]"
-          }`}
+          className={`flex flex-col items-center justify-start h-full gap-2 bg-default
+            ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
+            w-[30%]`}
         >
           <div className="flex items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
             Tool
@@ -66,15 +69,29 @@ export default function PagesLayout({ children }) {
         </div>
       </div>
 
+      {openMobile && (
+        <div
+          className="fixed inset-0 z-30 bg-black/40 xl:hidden"
+          onClick={() => setOpenMobile(false)}
+        />
+      )}
+
       <div
-        className={`flex flex-col items-center justify-center h-full gap-2 bg-white ${
-          collapsed ? "w-[80%]" : "w-[70%]"
-        }`}
+        className={`flex flex-col h-full gap-2 bg-white flex-1
+          ${collapsed ? "xl:w-[80%]" : "xl:w-[75%]"}`}
       >
         <div className="flex flex-row items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div
+            className="flex xl:hidden items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed cursor-pointer"
+            onClick={() => setOpenMobile(true)}
+          >
             <Hamburger />
           </div>
+
+          <div className="hidden xl:flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+            <Hamburger />
+          </div>
+
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
             Time
           </div>
@@ -88,7 +105,8 @@ export default function PagesLayout({ children }) {
             Images
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-[90%] p-2 gap-2 border-2 border-dark border-dashed">
+
+        <div className="flex flex-col items-center justify-center w-full flex-1 p-2 gap-2 border-2 border-dark border-dashed overflow-auto">
           {children}
         </div>
       </div>
