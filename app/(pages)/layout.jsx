@@ -26,7 +26,7 @@ const renderSubmenus = (menu, submenuOpen, toggleSubmenu) => (
     className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark"
   >
     <div
-      className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-default"
+      className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark"
       onClick={() => toggleSubmenu(menu.key)}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
@@ -48,7 +48,7 @@ const renderSubmenus = (menu, submenuOpen, toggleSubmenu) => (
         {menu.submenus.map((sub, idx) => (
           <div
             key={idx}
-            className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark rounded-xl hover:bg-default"
+            className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark"
           >
             {sub}
           </div>
@@ -61,7 +61,7 @@ const renderSubmenus = (menu, submenuOpen, toggleSubmenu) => (
 const renderToolMenu = (tool, index, collapsed) => (
   <div
     key={index}
-    className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-white"
+    className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark"
   >
     <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
       {tool.icon}
@@ -178,7 +178,7 @@ export default function PagesLayout({ children }) {
             </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-default">
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
                 <Dashboard />
               </div>
@@ -190,7 +190,7 @@ export default function PagesLayout({ children }) {
               renderSubmenus(menu, submenuOpen, toggleSubmenu)
             )}
           </div>
-          <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark hover:bg-default">
+          <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <Logout /> Logout
             </div>
@@ -239,12 +239,15 @@ export default function PagesLayout({ children }) {
         <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              Header
             </div>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
               1
+            </div>
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              2
             </div>
           </div>
         </div>
