@@ -160,7 +160,7 @@ export default function PagesLayout({ children }) {
           w-[90%]`}
       >
         <div
-          className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark
+          className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark bg-white
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
         >
@@ -198,7 +198,7 @@ export default function PagesLayout({ children }) {
         </div>
 
         <div
-          className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark
+          className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark bg-default
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
         >
@@ -231,7 +231,7 @@ export default function PagesLayout({ children }) {
       )}
 
       <div
-        className={`flex flex-col h-full flex-1 gap-2 ${
+        className={`flex flex-col h-full flex-1 gap-2 bg-white ${
           collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
         }`}
       >
