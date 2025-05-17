@@ -1,6 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Bell, Hamburger, Left } from "@/components/icons/icons";
+import {
+  Bell,
+  Hamburger,
+  Left,
+  Search,
+  CneSystem,
+  CneCloud,
+  CneLeave,
+} from "@/components/icons/icons";
 import { Clock } from "lucide-react";
 
 export default function PagesLayout({ children }) {
@@ -63,7 +71,7 @@ export default function PagesLayout({ children }) {
         >
           <div className="flex items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-              Tool
+              Tools
             </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
@@ -102,28 +110,31 @@ export default function PagesLayout({ children }) {
       >
         <div className="flex flex-row items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
           <div
-            className="flex xl:hidden items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed cursor-pointer"
+            className="flex xl:hidden items-center justify-center w-full h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer"
             onClick={() => setOpenMobile(true)}
           >
             <Hamburger />
           </div>
-
-          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-            1
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+            <CneSystem /> Cne System
           </div>
-
-          <div className="xl:flex hidden items-center justify-center w-60 h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+            <CneCloud /> Cne Cloud
+          </div>
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+            <CneLeave /> ระบบลางาน
+          </div>
+          <div className="xl:flex hidden items-center justify-center min-w-60 h-full aspect-square p-2 gap-2 border-2 border-primary/50 text-primary/50 shadow-md rounded-full">
             <Clock className="w-5 h-5" />
             <span>{currentTime}</span>
           </div>
-
-          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
-            Search
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 shadow-md rounded-full cursor-pointer">
+            <Search />
           </div>
-          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
             <Bell />
           </div>
-          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer">
             Images
           </div>
         </div>
