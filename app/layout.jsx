@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${nunito.variable} ${kanit.variable} antialiased`}>
         <Providers>
-          <div className="flex flex-col items-center justify-center w-full min-h-screen p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex flex-col items-center justify-center w-full min-h-screen gap-2">
             {children}
           </div>
         </Providers>
