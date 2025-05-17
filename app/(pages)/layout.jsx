@@ -1,10 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bell, Hamburger, Left } from "@/components/icons/icons";
+import { Clock } from "lucide-react";
 
 export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      setCurrentTime(time);
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="flex flex-row w-full h-screen overflow-hidden gap-20">
@@ -21,7 +37,9 @@ export default function PagesLayout({ children }) {
             w-[70%]`}
         >
           <div className="flex items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
-            ChannakornEngineer
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+              ChannakornEngineer
+            </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
@@ -44,7 +62,9 @@ export default function PagesLayout({ children }) {
             w-[30%]`}
         >
           <div className="flex items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
-            Tool
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+              Tool
+            </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
@@ -82,26 +102,28 @@ export default function PagesLayout({ children }) {
       >
         <div className="flex flex-row items-center justify-center w-full h-[10%] p-2 gap-2 border-2 border-dark border-dashed">
           <div
-            className="flex xl:hidden items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed cursor-pointer"
+            className="flex xl:hidden items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed cursor-pointer"
             onClick={() => setOpenMobile(true)}
           >
             <Hamburger />
           </div>
 
-          <div className="hidden xl:flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-            <Hamburger />
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+            1
           </div>
 
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-            Time
+          <div className="xl:flex hidden items-center justify-center w-60 h-full p-2 gap-2 border-2 border-dark border-dashed">
+            <Clock className="w-5 h-5" />
+            <span>{currentTime}</span>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+
+          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
             Search
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
             <Bell />
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark border-dashed">
             Images
           </div>
         </div>
