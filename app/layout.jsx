@@ -27,7 +27,11 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/images/logoCompany/com-1.png" />
       </head>
       <body className={`${nunito.variable} ${kanit.variable} antialiased`}>
-        <Providers>1 </Providers>
+        <Providers>
+          <div className="flex items-center justify-center w-full min-h-screen p-2 gap-2 border-2 border-dark border-dashed">
+            1
+          </div>
+        </Providers>
       </body>
     </html>
   );
