@@ -10,6 +10,10 @@ import {
   CneLeave,
   Clock,
   Logout,
+  Dashboard,
+  Hr,
+  Down,
+  Account,
 } from "@/components/icons/icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +22,7 @@ export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
+  const [openSubmenu, setOpenSubmenu] = useState(false);
 
   useEffect(() => {
     const updateClock = () => {
@@ -61,16 +66,49 @@ export default function PagesLayout({ children }) {
             </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
+            <div className="flex items-center justify-center w-full px-0 py-3 gap-2 border-2 border-dark border-dashed hover:bg-default">
               <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
-                1
+                <Dashboard />
               </div>
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
-                text
+                Home
               </div>
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
-                1
+            </div>
+            <div className="flex flex-col items-center justify-center w-full gap-2">
+              <div
+                className="flex items-center justify-center w-full px-0 py-3 gap-2 border-2 border-dark border-dashed hover:bg-default cursor-pointer"
+                onClick={() => setOpenSubmenu(!openSubmenu)}
+              >
+                <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
+                  <Hr />
+                </div>
+                <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
+                  Human
+                </div>
+                <div
+                  className={`flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed transform transition-transform duration-300 ${
+                    openSubmenu ? "-rotate-180" : "rotate-0"
+                  }`}
+                >
+                  <Down />
+                </div>
               </div>
+              {openSubmenu && (
+                <div className="flex flex-col w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
+                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
+                    ระดับตำแหน่ง
+                  </div>
+                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
+                    ฝ่าย
+                  </div>
+                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
+                    แผนก
+                  </div>
+                  <div className="flex items-center justify-start w-full h-full px-2 py-3 gap-2 border-2 border-dark border-dashed rounded-xl cursor-pointer hover:bg-default">
+                    ตำแหน่งงาน
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-2 border-dark border-dashed">
@@ -91,9 +129,9 @@ export default function PagesLayout({ children }) {
             </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 bg-white shadow-md rounded-xl border-2 border-dark border-dashed">
-                1
+            <div className="flex items-center justify-center w-full px-2 py-3 border-2 border-dark border-dashed">
+              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 border-2 border-dark border-dashed">
+                <Account />
               </div>
               <div
                 className={`flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed ${
