@@ -8,9 +8,11 @@ import {
   CneSystem,
   CneCloud,
   CneLeave,
+  Clock,
   Logout,
 } from "@/components/icons/icons";
-import { Clock } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -45,14 +47,18 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
         >
-          <div className="flex items-center justify-center w-full h-[10%] p-3 gap-2 border-b-2 border-default">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-              <img
-                src="/logoCompany/com-4.png"
+          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-b-2 border-default">
+            <Link
+              href="/"
+              className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
+            >
+              <Image
+                src="/logoCompany/com-2.png"
                 alt="logo"
-                className="w-full p-10 min-h-full"
+                fill
+                style={{ objectFit: "contain", objectPosition: "center" }}
               />
-            </div>
+            </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
@@ -67,7 +73,7 @@ export default function PagesLayout({ children }) {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center w-full h-[10%] p-3 gap-2 border-2 border-dark border-dashed">
+          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-2 border-dark border-dashed">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
               <Logout /> Logout
             </div>
@@ -79,18 +85,18 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
         >
-          <div className="flex items-center justify-center w-full h-[10%] p-3 gap-2 border-b-2 border-default">
+          <div className="flex items-center justify-center w-full h-20 p-3 gap-2 border-b-2 border-default">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2">
               Tools
             </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-[80%] gap-2 overflow-auto">
             <div className="flex items-center justify-center w-full px-2 py-3 gap-2 border-2 border-dark border-dashed">
-              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 bg-white shadow-md rounded-xl">
+              <div className="flex items-center justify-center h-full px-4 py-2 gap-2 bg-white shadow-md rounded-xl border-2 border-dark border-dashed">
                 1
               </div>
               <div
-                className={`flex items-center justify-start w-full h-full p-2 gap-2 ${
+                className={`flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark border-dashed ${
                   collapsed ? "hidden" : ""
                 }`}
               >
@@ -99,7 +105,7 @@ export default function PagesLayout({ children }) {
             </div>
           </div>
           <div
-            className="flex items-center justify-center w-full h-[10%] p-3 gap-2 border-2 border-dark border-dashed cursor-pointer"
+            className="flex items-center justify-center w-full h-20 p-3 gap-2 border-2 border-dark border-dashed cursor-pointer"
             onClick={() => setCollapsed(!collapsed)}
           >
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark border-dashed">
@@ -120,33 +126,32 @@ export default function PagesLayout({ children }) {
         className={`flex flex-col h-full gap-2 bg-white flex-1
           ${collapsed ? "xl:w-[80%]" : "xl:w-[75%]"}`}
       >
-        <div className="flex flex-row items-center justify-center w-full h-[10%] p-3 gap-2 border-b-2 border-default">
+        <div className="flex flex-row items-center justify-center w-full h-20 p-3 gap-2 border-b-2 border-default">
           <div
             className="flex xl:hidden items-center justify-center w-full h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer"
             onClick={() => setOpenMobile(true)}
           >
             <Hamburger />
           </div>
-          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-primary text-white shadow-md rounded-full cursor-pointer">
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-primary text-white shadow-md border-2 border-default rounded-full cursor-pointer">
             <CneSystem /> Cne System
           </div>
-          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md border-2 border-default rounded-full cursor-pointer">
             <CneCloud /> Cne Cloud
           </div>
-          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+          <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 bg-default shadow-md border-2 border-default rounded-full cursor-pointer">
             <CneLeave /> ระบบลางาน
           </div>
           <div className="xl:flex hidden items-center justify-center min-w-60 h-full aspect-square p-2 gap-2 border-2 border-primary text-primary shadow-md rounded-full">
-            <Clock className="w-5 h-5" />
-            <span>{currentTime}</span>
+            <Clock /> {currentTime}
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-default shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-default shadow-md border-2 border-default rounded-full cursor-pointer">
             <Search />
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 shadow-md border-2 border-default rounded-full cursor-pointer">
             <Bell />
           </div>
-          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-warning shadow-md rounded-full cursor-pointer">
+          <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 bg-warning shadow-md border-2 border-default rounded-full cursor-pointer">
             Ima
           </div>
         </div>
