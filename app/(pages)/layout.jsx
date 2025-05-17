@@ -20,7 +20,7 @@ import {
   It,
 } from "@/components/icons/icons";
 
-const renderSubmenus = (menu, submenuOpen, toggleSubmenu) => (
+const submenus = (menu, submenuOpen, toggleSubmenu) => (
   <div
     key={menu.key}
     className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark"
@@ -58,7 +58,7 @@ const renderSubmenus = (menu, submenuOpen, toggleSubmenu) => (
   </div>
 );
 
-const renderToolMenu = (tool, index, collapsed) => (
+const toolMenu = (tool, index, collapsed) => (
   <div
     key={index}
     className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark"
@@ -74,7 +74,7 @@ const renderToolMenu = (tool, index, collapsed) => (
   </div>
 );
 
-const renderTopBar = (currentTime, setOpenMobile) => (
+const topBar = (currentTime, setOpenMobile) => (
   <div className="flex flex-row items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
     <div
       className="flex xl:hidden items-center justify-center w-full h-full aspect-square p-2 gap-2 border-2 border-dark"
@@ -187,7 +187,7 @@ export default function PagesLayout({ children }) {
               </div>
             </div>
             {menuItems.map((menu) =>
-              renderSubmenus(menu, submenuOpen, toggleSubmenu)
+              submenus(menu, submenuOpen, toggleSubmenu)
             )}
           </div>
           <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
@@ -209,7 +209,7 @@ export default function PagesLayout({ children }) {
           </div>
           <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
             {toolMenus.map((tool, index) =>
-              renderToolMenu(tool, index, collapsed)
+              toolMenu(tool, index, collapsed)
             )}
           </div>
           <div
@@ -235,7 +235,7 @@ export default function PagesLayout({ children }) {
           collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
         }`}
       >
-        {renderTopBar(currentTime, setOpenMobile)}
+        {topBar(currentTime, setOpenMobile)}
         <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
