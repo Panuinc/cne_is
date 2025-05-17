@@ -24,12 +24,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/logoCompany/com-1.png" />
+        <link rel="icon" href="/logoCompany/com-1.png" />
       </head>
       <body className={`${nunito.variable} ${kanit.variable} antialiased`}>
         <Providers>
-          <div className="flex items-center justify-center w-full min-h-screen p-2 gap-2 border-2 border-dark border-dashed">
-            1
+          <div className="flex flex-col items-center justify-center w-full min-h-screen p-2 gap-2 border-2 border-dark border-dashed">
+            {children}
           </div>
         </Providers>
       </body>
