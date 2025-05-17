@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: var(--nunito), var(--kanit);
+  font-weight: 600;
+  font-size: 1.0rem;
+  color: #545454;
+  background-color: #F5F5F5;
+}
+
+[lang|="th"] {
+  font-family: var(--kanit), sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
