@@ -1,3 +1,5 @@
+const { warning } = require("framer-motion");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,10 +12,13 @@ module.exports = {
     extend: {
       colors: {
         white: "#FFFFFF",
-        dark: "#000000",
-        default: "#CAE2FF",
-        primary: "#1479FF",
-        secondary: "#37DCE5",
+        dark: "#0F1D40",
+        default: "#F5F8FA",
+        primary: "#0094FF",
+        secondary: "#F0F0F0",
+        danger: "#F3625C",
+        warning: "#FFC849",
+        success: "#ACE9CE",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],
