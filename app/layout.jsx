@@ -1,4 +1,5 @@
 import { Kanit, Nunito } from "next/font/google";
+import { SessionProviders } from "./sessionProvider";
 import { Providers } from "./HeroUIProvider";
 import "@/style/globals.css";
 
@@ -22,17 +23,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/logoCompany/com-1.png" />
-      </head>
-      <body className={`${nunito.variable} ${kanit.variable} antialiased`}>
-        <Providers>
-          <div className="flex flex-col items-center justify-center w-full min-h-screen gap-2">
-            {children}
-          </div>
-        </Providers>
-      </body>
-    </html>
+    <SessionProviders>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/logoCompany/com-1.png" />
+        </head>
+        <body className={`${nunito.variable} ${kanit.variable} antialiased`}>
+          <Providers>
+            <div className="flex flex-col items-center justify-center w-full min-h-screen gap-2">
+              {children}
+            </div>
+          </Providers>
+        </body>
+      </html>
+    </SessionProviders>
   );
 }

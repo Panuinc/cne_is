@@ -1,9 +1,751 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+enum Title {
+  Mr  @map("Mr")
+  Mrs @map("Mrs")
+  Ms  @map("Ms")
+}
+
+enum Gender {
+  Male   @map("Male")
+  FeMale @map("FeMale")
+  Other  @map("Other")
+}
+
+enum Citizen {
+  Thai       @map("Thai")
+  Cambodian  @map("Cambodian")
+  Lao        @map("Lao")
+  Burmese    @map("Burmese")
+  Vietnamese @map("Vietnamese")
+}
+
+enum Status {
+  Active
+  InActive
+}
+
+enum WorkStatus {
+  CurrentEmp @map("CurrentEmp")
+  Resign     @map("Resign")
+}
+
+enum EmpEmploymentType {
+  Daily           @map("Daily")
+  Monthly         @map("Monthly")
+  perDisabilities @map("perDisabilities")
+}
+
+enum EmpEmploymentTypes {
+  Monthly
+  Daily
+  Contract
+}
+
+enum RequestReason {
+  Replace
+  New
+}
+
+enum PerReqReasonExperience {
+  NoneExperience
+  Experience1To3Years
+  Experience4YearsUp
+}
+
+enum SkillLevel {
+  Basic
+  Intermediate
+  Advance
+}
+
+enum PerReqReasonComputerSkill {
+  MicrosoftOffice
+  Other
+}
+
+enum PerReqStatus {
+  PendingManagerApprove
+  PendingHrApprove
+  ApprovedSuccess
+  Cancel
+}
+
+enum perReqEducation {
+  PrimaryEducation
+  SecondaryEducation
+  VocationalCertificate
+  HighVocationalCertificate
+  BachelorMasterDegree
+}
+
+enum TrainingType {
+  Prepare_For_Work     @map("Prepare_For_Work")
+  Upgrade_Labor_Skills @map("Upgrade_Labor_Skills")
+  Change_Career_Fields @map("Change_Career_Fields")
+}
+
+enum TrainingInstitutionsType {
+  Internal @map("Internal")
+  External @map("External")
+}
+
+enum trainingStatus {
+  PendingHrApprove @map("PendingHrApprove")
+  PendingMdApprove @map("PendingMdApprove")
+  ApprovedSuccess  @map("ApprovedSuccess")
+  Cancel           @map("Cancel")
+}
+
+enum TrainingEmpResult {
+  Pass     @map("Pass")
+  Not_Pass @map("Not_Pass")
+}
+
+enum warningType {
+  Hr
+  St
+}
+
+enum warningStatus {
+  PendingEmp     @map("PendingEmp")
+  PendingHeadDep @map("PendingHeadDep")
+  PendingManager @map("PendingManager")
+  PendingWitness @map("PendingWitness")
+  PendingMd      @map("PendingMd")
+  Success        @map("Success")
+  Cancel         @map("Cancel")
+}
+
+model Emp {
+  empId          Int       @id @default(autoincrement())
+  empTitle       Title
+  empFirstNameTH String    @db.VarChar(255)
+  empLastNameTH  String    @db.VarChar(255)
+  empFirstNameEN String    @db.VarChar(255)
+  empLastNameEN  String    @db.VarChar(255)
+  empEmail       String    @db.VarChar(255)
+  empTel         String    @db.VarChar(255)
+  empIdCard      String    @db.VarChar(255)
+  empBirthday    DateTime
+  empCitizen     Citizen
+  empGender      Gender
+  empStatus      Status    @default(Active)
+  empCreateBy    Int
+  empCreateAt    DateTime  @default(now()) @db.Timestamp()
+  empUpdateBy    Int?
+  empUpdateAt    DateTime?
+
+  EmpCreateBy Emp? @relation("CreateEmpBy", fields: [empCreateBy], references: [empId])
+  EmpUpdateBy Emp? @relation("UpdateEmpBy", fields: [empUpdateBy], references: [empId])
+
+  createEmp Emp[] @relation("CreateEmpBy")
+  updateEmp Emp[] @relation("UpdateEmpBy")
+
+  empEmpUser     EmpUser[] @relation("EmpUserEmpBy")
+  createdEmpUser EmpUser[] @relation("EmpUserCreatedBy")
+  updatedEmpUser EmpUser[] @relation("EmpUserUpdatedBy")
+
+  empEmpEmployment     EmpEmployment[] @relation("EmpEmploymentEmpBy")
+  parentEmpEmployment  EmpEmployment[] @relation("EmpEmploymentParentBy")
+  createdEmpEmployment EmpEmployment[] @relation("EmpEmploymentCreatedBy")
+  updatedEmpEmployment EmpEmployment[] @relation("EmpEmploymentUpdatedBy")
+
+  empEmpDocument     EmpDocument[] @relation("EmpDocumentEmpBy")
+  createdEmpDocument EmpDocument[] @relation("EmpDocumentCreateBy")
+  updatedEmpDocument EmpDocument[] @relation("EmpDocumentUpdateBy")
+
+  createdRole Role[] @relation("RoleCreateBy")
+  updatedRole Role[] @relation("RoleUpdateBy")
+
+  createdDivision Division[] @relation("DivisionCreateBy")
+  updatedDivision Division[] @relation("DivisionUpdateBy")
+
+  createdDepartment Department[] @relation("DepartmentCreateBy")
+  updatedDepartment Department[] @relation("DepartmentUpdateBy")
+
+  createdPosition Position[] @relation("PositionCreateBy")
+  updatedPosition Position[] @relation("PositionUpdateBy")
+
+  empEmpCv     EmpCv[] @relation("EmpCvEmpBy")
+  createdEmpCv EmpCv[] @relation("EmpCvCreateBy")
+  updatedEmpCv EmpCv[] @relation("EmpCvUpdateBy")
+
+  createdPerReq        PerReq[] @relation("PerReqCreateBy")
+  updatedPerReq        PerReq[] @relation("PerReqUpdateBy")
+  managerApprovePerReq PerReq[] @relation("PerReqManagerApproveBy")
+  hrApprovePerReq      PerReq[] @relation("PerReqHrApproveBy")
+
+  // createdTraining   Training[] @relation("TrainingCreateBy")
+  // updatedTraining   Training[] @relation("TrainingUpdateBy")
+  // hrApproveTraining Training[] @relation("TrainingHrBy")
+  // mdApproveTraining Training[] @relation("TrainingMdBy")
+
+  // createdLaw Law[] @relation("LawCreateBy")
+  // updatedLaw Law[] @relation("LawUpdateBy")
+
+  // createdWarning         Warning[] @relation("WarningCreateBy")
+  // updatedWarning         Warning[] @relation("WarningUpdateBy")
+  // empWarning             Warning[] @relation("WarningEmpBy")
+  // headDepartmentWarning  Warning[] @relation("WarningHeadDepBy")
+  // managerWarning         Warning[] @relation("WarningManagerBy")
+  // personalWitnessWarning Warning[] @relation("WarningWitnessBy")
+  // MdWarning              Warning[] @relation("WarningMdBy")
+
+  // empTrainingEmp TrainingEmp[] @relation("TrainingEmpEmpId")
+
+  // empTrainingEmpCheckIn TrainingEmpCheckIn[] @relation("TrainingEmpCheckInEmpId")
+
+  @@index([empCreateBy])
+  @@index([empUpdateBy])
+}
+
+model EmpUser {
+  empUserId       Int       @id @default(autoincrement())
+  empUserEmpId    Int
+  empUserUsername String?   @db.VarChar(255)
+  empUserPassword String?   @db.VarChar(255)
+  empUserPin      String?   @db.VarChar(255)
+  isFirstLogin    Boolean   @default(true)
+  empUserCreateBy Int
+  empUserCreateAt DateTime  @default(now()) @db.Timestamp()
+  empUserUpdateBy Int?
+  empUserUpdateAt DateTime?
+
+  EmpUserEmpBy    Emp? @relation("EmpUserEmpBy", fields: [empUserEmpId], references: [empId])
+  EmpUserCreateBy Emp? @relation("EmpUserCreatedBy", fields: [empUserCreateBy], references: [empId])
+  EmpUserUpdateBy Emp? @relation("EmpUserUpdatedBy", fields: [empUserUpdateBy], references: [empId])
+
+  @@index([empUserEmpId])
+  @@index([empUserCreateBy])
+  @@index([empUserUpdateBy])
+}
+
+model EmpEmployment {
+  empEmploymentId                  Int                @id @default(autoincrement())
+  empEmploymentEmpId               Int
+  empEmploymentNumber              String?            @db.VarChar(255)
+  empEmploymentCardNumber          String?            @db.VarChar(255)
+  empEmploymentType                EmpEmploymentType?
+  empEmploymentDivisionId          Int?
+  empEmploymentDepartmentId        Int?
+  empEmploymentPositionId          Int?
+  empEmploymentRoleId              Int?
+  empEmploymentParentId            Int?
+  empEmploymentStartWork           DateTime?
+  empEmploymentPicture             String?            @db.VarChar(255)
+  empEmploymentSignature           String?            @db.VarChar(255)
+  empEmploymentEnterType           String?            @db.VarChar(255)
+  empEmploymentPassportNumber      String?            @db.VarChar(255)
+  empEmploymentPassportStartDate   DateTime?
+  empEmploymentPassportEndDate     DateTime?
+  empEmploymentPassportIssuedBy    String?            @db.VarChar(255)
+  empEmploymentPlaceOfBirth        String?            @db.VarChar(255)
+  empEmploymentEnterCheckPoint     String?            @db.VarChar(255)
+  empEmploymentEnterDate           DateTime?
+  empEmploymentImmigration         String?            @db.VarChar(255)
+  empEmploymentTypeOfVisa          String?            @db.VarChar(255)
+  empEmploymentVisaNumber          String?            @db.VarChar(255)
+  empEmploymentVisaIssuedBy        String?            @db.VarChar(255)
+  empEmploymentWorkPermitNumber    String?            @db.VarChar(255)
+  empEmploymentWorkPermitStartDate DateTime?
+  empEmploymentWorkPermitEndDate   DateTime?
+  empEmploymentWorkPermitIssuedBy  String?            @db.VarChar(255)
+  empEmploymentSsoNumber           String?            @db.VarChar(255)
+  empEmploymentSsoHospital         String?            @db.VarChar(255)
+  empEmploymentWorkStatus          WorkStatus?        @default(CurrentEmp)
+  empEmploymentCreateBy            Int
+  empEmploymentCreateAt            DateTime           @default(now()) @db.Timestamp()
+  empEmploymentUpdateBy            Int?
+  empEmploymentUpdateAt            DateTime?
+
+  EmpEmploymentEmpBy    Emp? @relation("EmpEmploymentEmpBy", fields: [empEmploymentEmpId], references: [empId])
+  EmpEmploymentParentBy Emp? @relation("EmpEmploymentParentBy", fields: [empEmploymentParentId], references: [empId])
+  EmpEmploymentCreateBy Emp? @relation("EmpEmploymentCreatedBy", fields: [empEmploymentCreateBy], references: [empId])
+  EmpEmploymentUpdateBy Emp? @relation("EmpEmploymentUpdatedBy", fields: [empEmploymentUpdateBy], references: [empId])
+
+  EmpEmploymentRoleId       Role?       @relation("EmpEmploymentRoleId", fields: [empEmploymentRoleId], references: [roleId])
+  EmpEmploymentDivisionId   Division?   @relation("EmpEmploymentDivisionId", fields: [empEmploymentDivisionId], references: [divisionId])
+  EmpEmploymentDepartmentId Department? @relation("EmpEmploymentDepartmentId", fields: [empEmploymentDepartmentId], references: [departmentId])
+  EmpEmploymentPositionId   Position?   @relation("EmpEmploymentPositionId", fields: [empEmploymentPositionId], references: [positionId])
+
+  @@index([empEmploymentEmpId])
+  @@index([empEmploymentDivisionId])
+  @@index([empEmploymentDepartmentId])
+  @@index([empEmploymentPositionId])
+  @@index([empEmploymentRoleId])
+  @@index([empEmploymentParentId])
+  @@index([empEmploymentCreateBy])
+  @@index([empEmploymentUpdateBy])
+}
+
+model EmpDocument {
+  empDocumentId                          Int       @id @default(autoincrement())
+  empDocumentEmpId                       Int
+  empDocumentIdCardFile                  String?   @db.VarChar(255)
+  empDocumentHomeFile                    String?   @db.VarChar(255)
+  empDocumentProfessionalCertificateFile String?   @db.VarChar(255)
+  empDocumentEducationsFile              String?   @db.VarChar(255)
+  empDocumentPassportFile                String?   @db.VarChar(255)
+  empDocumentImmigrationFile             String?   @db.VarChar(255)
+  empDocumentVisa1File                   String?   @db.VarChar(255)
+  empDocumentVisa2File                   String?   @db.VarChar(255)
+  empDocumentVisa3File                   String?   @db.VarChar(255)
+  empDocumentVisa4File                   String?   @db.VarChar(255)
+  empDocumentVisa5File                   String?   @db.VarChar(255)
+  empDocumentWorkPermit1File             String?   @db.VarChar(255)
+  empDocumentWorkPermit2File             String?   @db.VarChar(255)
+  empDocumentWorkPermit3File             String?   @db.VarChar(255)
+  empDocumentWorkPermit4File             String?   @db.VarChar(255)
+  empDocumentWorkPermit5File             String?   @db.VarChar(255)
+  empDocumentOldPlaceFile                String?   @db.VarChar(255)
+  empDocumentEmployerChange1File         String?   @db.VarChar(255)
+  empDocumentEmployerChange2File         String?   @db.VarChar(255)
+  empDocumentEmployerChange3File         String?   @db.VarChar(255)
+  empDocumentEmployerChange4File         String?   @db.VarChar(255)
+  empDocumentEmployerChange5File         String?   @db.VarChar(255)
+  empDocumentCreateBy                    Int
+  empDocumentCreateAt                    DateTime  @default(now()) @db.Timestamp()
+  empDocumentUpdateBy                    Int?
+  empDocumentUpdateAt                    DateTime?
+
+  EmpDocumentEmpBy    Emp? @relation("EmpDocumentEmpBy", fields: [empDocumentEmpId], references: [empId])
+  EmpDocumentCreateBy Emp? @relation("EmpDocumentCreateBy", fields: [empDocumentCreateBy], references: [empId])
+  EmpDocumentUpdateBy Emp? @relation("EmpDocumentUpdateBy", fields: [empDocumentUpdateBy], references: [empId])
+
+  @@index([empDocumentEmpId])
+  @@index([empDocumentCreateBy])
+  @@index([empDocumentUpdateBy])
+}
+
+model EmpCv {
+  empCvId       Int       @id @default(autoincrement())
+  empCvEmpId    Int
+  empCvCreateBy Int
+  empCvCreateAt DateTime  @default(now()) @db.Timestamp()
+  empCvUpdateBy Int?
+  empCvUpdateAt DateTime?
+
+  EmpCvEmpBy    Emp? @relation("EmpCvEmpBy", fields: [empCvEmpId], references: [empId])
+  EmpCvCreateBy Emp? @relation("EmpCvCreateBy", fields: [empCvCreateBy], references: [empId])
+  EmpCvUpdateBy Emp? @relation("EmpCvUpdateBy", fields: [empCvUpdateBy], references: [empId])
+
+  empCvEducation     EmpCvEducation[]
+  empCvLicense       EmpCvProfessionalLicense[]
+  empCvWorkHistory   EmpCvWorkHistory[]
+  empCvLanguageSkill EmpCvLanguageSkill[]
+
+  @@index([empCvEmpId])
+  @@index([empCvCreateBy])
+  @@index([empCvUpdateBy])
+}
+
+model EmpCvEducation {
+  empCvEducationId            Int       @id @default(autoincrement())
+  empCvEducationEmpCvId       Int
+  empCvEducationDegreeTH      String?   @db.VarChar(255)
+  empCvEducationDegreeEN      String?   @db.VarChar(255)
+  empCvEducationInstitutionTH String?   @db.VarChar(255)
+  empCvEducationInstitutionEN String?   @db.VarChar(255)
+  empCvEducationStartDate     DateTime?
+  empCvEducationEndDate       DateTime?
+
+  empCv EmpCv @relation(fields: [empCvEducationEmpCvId], references: [empCvId])
+
+  @@index([empCvEducationEmpCvId])
+}
+
+model EmpCvProfessionalLicense {
+  empCvLicenseId        Int       @id @default(autoincrement())
+  empCvLicenseEmpCvId   Int
+  empCvLicenseNameTH    String?   @db.VarChar(255)
+  empCvLicenseNameEN    String?   @db.VarChar(255)
+  empCvLicenseNumber    String?   @db.VarChar(255)
+  empCvLicenseStartDate DateTime?
+  empCvLicenseEndDate   DateTime?
+
+  empCv EmpCv @relation(fields: [empCvLicenseEmpCvId], references: [empCvId])
+
+  @@index([empCvLicenseEmpCvId])
+}
+
+model EmpCvWorkHistory {
+  empCvWorkHistoryId            Int       @id @default(autoincrement())
+  empCvWorkHistoryEmpCvId       Int
+  empCvWorkHistoryCompanyNameTH String?   @db.VarChar(255)
+  empCvWorkHistoryCompanyNameEN String?   @db.VarChar(255)
+  empCvWorkHistoryPositionTH    String?   @db.VarChar(255)
+  empCvWorkHistoryPositionEN    String?   @db.VarChar(255)
+  empCvWorkHistoryStartDate     DateTime?
+  empCvWorkHistoryEndDate       DateTime?
+
+  empCv EmpCv @relation(fields: [empCvWorkHistoryEmpCvId], references: [empCvId])
+
+  empCvProjects EmpCvProject[]
+
+  @@index([empCvWorkHistoryEmpCvId])
+}
+
+model EmpCvProject {
+  empCvProjectId            Int     @id @default(autoincrement())
+  empCvProjectWorkHistoryId Int
+  empCvProjectNameTH        String? @db.VarChar(255)
+  empCvProjectNameEN        String? @db.VarChar(255)
+  empCvProjectDescriptionTH String? @db.VarChar(255)
+  empCvProjectDescriptionEN String? @db.VarChar(255)
+
+  empCvWorkHistory EmpCvWorkHistory @relation(fields: [empCvProjectWorkHistoryId], references: [empCvWorkHistoryId])
+
+  @@index([empCvProjectWorkHistoryId])
+}
+
+model EmpCvLanguageSkill {
+  empCvLanguageSkillId          Int         @id @default(autoincrement())
+  empCvLanguageSkillEmpCvId     Int
+  empCvLanguageSkillNameTH      String?     @db.VarChar(255)
+  empCvLanguageSkillNameEN      String?     @db.VarChar(255)
+  empCvLanguageSkillProficiency SkillLevel?
+
+  empCv EmpCv @relation(fields: [empCvLanguageSkillEmpCvId], references: [empCvId])
+
+  @@index([empCvLanguageSkillEmpCvId])
+}
+
+model Role {
+  roleId       Int       @id @default(autoincrement())
+  roleName     String    @db.VarChar(255)
+  roleStatus   Status    @default(Active)
+  roleCreateBy Int
+  roleCreateAt DateTime  @default(now()) @db.Timestamp()
+  roleUpdateBy Int?
+  roleUpdateAt DateTime?
+
+  RoleCreateBy Emp? @relation("RoleCreateBy", fields: [roleCreateBy], references: [empId])
+  RoleUpdateBy Emp? @relation("RoleUpdateBy", fields: [roleUpdateBy], references: [empId])
+
+  roleIdEmpEmployment EmpEmployment[] @relation("EmpEmploymentRoleId")
+
+  @@index([roleCreateBy])
+  @@index([roleUpdateBy])
+}
+
+model Division {
+  divisionId       Int       @id @default(autoincrement())
+  divisionName     String    @db.VarChar(255)
+  divisionStatus   Status    @default(Active)
+  divisionCreateBy Int
+  divisionCreateAt DateTime  @default(now()) @db.Timestamp()
+  divisionUpdateBy Int?
+  divisionUpdateAt DateTime?
+
+  DivisionCreateBy Emp? @relation("DivisionCreateBy", fields: [divisionCreateBy], references: [empId])
+  DivisionUpdateBy Emp? @relation("DivisionUpdateBy", fields: [divisionUpdateBy], references: [empId])
+
+  divisionIdDepartment    Department[]    @relation("DepartmentDivisionId")
+  divisionIdPosition      Position[]      @relation("PositionDivisionId")
+  divisionIdEmpEmployment EmpEmployment[] @relation("EmpEmploymentDivisionId")
+  divisionIdPerReq        PerReq[]        @relation("PerReqDivisionId")
+
+  @@index([divisionCreateBy])
+  @@index([divisionUpdateBy])
+}
+
+model Department {
+  departmentId         Int       @id @default(autoincrement())
+  departmentDivisionId Int
+  departmentName       String    @db.VarChar(255)
+  departmentStatus     Status    @default(Active)
+  departmentCreateBy   Int
+  departmentCreateAt   DateTime  @default(now()) @db.Timestamp()
+  departmentUpdateBy   Int?
+  departmentUpdateAt   DateTime?
+
+  DepartmentCreateBy   Emp?      @relation("DepartmentCreateBy", fields: [departmentCreateBy], references: [empId])
+  DepartmentUpdateBy   Emp?      @relation("DepartmentUpdateBy", fields: [departmentUpdateBy], references: [empId])
+  DepartmentDivisionId Division? @relation("DepartmentDivisionId", fields: [departmentDivisionId], references: [divisionId])
+
+  departmentIdPosition      Position[]      @relation("PositionDepartmentId")
+  departmentIdEmpEmployment EmpEmployment[] @relation("EmpEmploymentDepartmentId")
+  departmentIdPerReq        PerReq[]        @relation("PerReqDepartmentId")
+
+  @@index([departmentDivisionId])
+  @@index([departmentCreateBy])
+  @@index([departmentUpdateBy])
+}
+
+model Position {
+  positionId           Int       @id @default(autoincrement())
+  positionDivisionId   Int
+  positionDepartmentId Int
+  positionNameTH       String    @db.VarChar(255)
+  positionNameEN       String    @db.VarChar(255)
+  positionStatus       Status    @default(Active)
+  positionCreateBy     Int
+  positionCreateAt     DateTime  @default(now()) @db.Timestamp()
+  positionUpdateBy     Int?
+  positionUpdateAt     DateTime?
+
+  PositionCreateBy     Emp?        @relation("PositionCreateBy", fields: [positionCreateBy], references: [empId])
+  PositionUpdateBy     Emp?        @relation("PositionUpdateBy", fields: [positionUpdateBy], references: [empId])
+  PositionDivisionId   Division?   @relation("PositionDivisionId", fields: [positionDivisionId], references: [divisionId])
+  PositionDepartmentId Department? @relation("PositionDepartmentId", fields: [positionDepartmentId], references: [departmentId])
+
+  positionIdEmpEmployment EmpEmployment[] @relation("EmpEmploymentPositionId")
+  positionIdPosJobDes     PosJobDes[]     @relation("PosJobDesPositionId")
+  positionIdPerReq        PerReq[]        @relation("PerReqPositionId")
+
+  @@index([positionDivisionId])
+  @@index([positionDepartmentId])
+  @@index([positionCreateBy])
+  @@index([positionUpdateBy])
+}
+
+model PosJobDes {
+  posJobDesId             Int     @id @default(autoincrement())
+  posJobDesPositionId     Int
+  posJobDesAge            String?
+  posJobDesSex            String? @db.Text
+  posJobDesEducations     String? @db.Text
+  posJobDesSkill          String? @db.Text
+  posJobDesExperience     String? @db.Text
+  posJobDesResponsibility String? @db.Text
+
+  PosJobDesPositionId Position? @relation("PosJobDesPositionId", fields: [posJobDesPositionId], references: [positionId])
+
+  @@index([posJobDesPositionId])
+}
+
+model PerReq {
+  perReqId                      Int                       @id @default(autoincrement())
+  perReqDocumentId              String                    @db.VarChar(255)
+  perReqDesiredDate             DateTime
+  perReqDivisionId              Int
+  perReqDepartmentId            Int
+  perReqPositionId              Int
+  perReqAmount                  Int
+  perReqEmpEmploymentType       EmpEmploymentTypes
+  perReqEmpEmploymentTypeNote   String?                   @db.VarChar(255)
+  perReqReasonForRequest        RequestReason
+  perReqReasonForRequestNote    String?                   @db.VarChar(255)
+  perReqReasonAge               String                    @db.VarChar(255)
+  perReqReasonGender            Gender
+  perReqReasonEducation         perReqEducation
+  perReqReasonEducationNote     String?                   @db.VarChar(255)
+  perReqReasonExperience        PerReqReasonExperience
+  perReqReasonComputerSkill     PerReqReasonComputerSkill
+  perReqReasonComputerSkillNote String?                   @db.VarChar(255)
+  perReqReasonEnglishSkill      SkillLevel
+  perReqReasonOtherSkill        String                    @db.VarChar(255)
+  perReqStatus                  PerReqStatus              @default(PendingManagerApprove)
+  perReqCreateBy                Int
+  perReqCreateAt                DateTime                  @default(now()) @db.Timestamp()
+  perReqUpdateBy                Int?
+  perReqUpdateAt                DateTime?
+  perReqReasonManagerApproveBy  Int?
+  perReqReasonManagerApproveAt  DateTime?
+  perReqReasonHrApproveBy       Int?
+  perReqReasonHrApproveAt       DateTime?
+
+  PerReqCreateBy         Emp? @relation("PerReqCreateBy", fields: [perReqCreateBy], references: [empId])
+  PerReqUpdateBy         Emp? @relation("PerReqUpdateBy", fields: [perReqUpdateBy], references: [empId])
+  PerReqManagerApproveBy Emp? @relation("PerReqManagerApproveBy", fields: [perReqReasonManagerApproveBy], references: [empId])
+  PerReqHrApproveBy      Emp? @relation("PerReqHrApproveBy", fields: [perReqReasonHrApproveBy], references: [empId])
+
+  PerReqDivisionId   Division?   @relation("PerReqDivisionId", fields: [perReqDivisionId], references: [divisionId])
+  PerReqDepartmentId Department? @relation("PerReqDepartmentId", fields: [perReqDepartmentId], references: [departmentId])
+  PerReqPositionId   Position?   @relation("PerReqPositionId", fields: [perReqPositionId], references: [positionId])
+
+  @@index([perReqCreateBy])
+  @@index([perReqUpdateBy])
+  @@index([perReqReasonManagerApproveBy])
+  @@index([perReqReasonHrApproveBy])
+  @@index([perReqDivisionId])
+  @@index([perReqDepartmentId])
+  @@index([perReqPositionId])
+}
+
+// model Training {
+//   trainingId                Int                      @id @default(autoincrement())
+//   trainingType              TrainingType
+//   trainingName              String                   @db.VarChar(255)
+//   trainingObjectives        String                   @db.VarChar(1000)
+//   trainingTargetGroup       String                   @db.VarChar(1000)
+//   trainingInstitutionsType  TrainingInstitutionsType
+//   trainingStartDate         DateTime
+//   trainingEndDate           DateTime
+//   trainingInstitutions      String                   @db.VarChar(255)
+//   trainingLecturer          String                   @db.VarChar(255)
+//   trainingLocation          String                   @db.VarChar(255)
+//   trainingPrice             Float
+//   trainingEquipmentPrice    Float
+//   trainingFoodPrice         Float
+//   trainingFarePrice         Float
+//   trainingOtherExpenses     String                   @db.VarChar(255)
+//   trainingOtherPrice        Float
+//   trainingSumPrice          Float
+//   trainingReferenceDocument String                   @db.VarChar(255)
+//   trainingRemark            String                   @db.VarChar(255)
+//   trainingRequireKnowledge  String                   @db.VarChar(255)
+//   trainingStatus            trainingStatus           @default(PendingHrApprove)
+//   trainingPreTest           String?                  @db.VarChar(255)
+//   trainingPostTest          String?                  @db.VarChar(255)
+//   trainingPictureLink       String?                  @db.VarChar(255)
+//   trainingCreateBy          Int
+//   trainingCreateAt          DateTime                 @default(now()) @db.Timestamp()
+//   trainingUpdateBy          Int?
+//   trainingUpdateAt          DateTime?
+//   trainingHrBy              Int?
+//   trainingHrAt              DateTime?
+//   trainingMdBy              Int?
+//   trainingMdAt              DateTime?
+
+//   TrainingCreateBy Emp? @relation("TrainingCreateBy", fields: [trainingCreateBy], references: [empId])
+//   TrainingUpdateBy Emp? @relation("TrainingUpdateBy", fields: [trainingUpdateBy], references: [empId])
+//   TrainingHrBy     Emp? @relation("TrainingHrBy", fields: [trainingHrBy], references: [empId])
+//   TrainingMdBy     Emp? @relation("TrainingMdBy", fields: [trainingMdBy], references: [empId])
+
+//   empTrainingTraining        TrainingEmp[]        @relation("TrainingEmpTrainingId")
+//   empTrainingCheckInTraining TrainingEmpCheckIn[] @relation("TrainingEmpCheckInTrainingId")
+
+//   @@index([trainingCreateBy])
+//   @@index([trainingUpdateBy])
+//   @@index([trainingHrBy])
+//   @@index([trainingMdBy])
+// }
+
+// model TrainingEmp {
+//   trainingEmpId                 Int               @id @default(autoincrement())
+//   trainingEmpTrainingId         Int
+//   trainingEmpEmpId              Int
+//   trainingEmpResult             TrainingEmpResult @default(Not_Pass)
+//   trainingEmpCertificatePicture String?           @db.VarChar(255)
+
+//   TrainingEmpTrainingId Training? @relation("TrainingEmpTrainingId", fields: [trainingEmpTrainingId], references: [trainingId])
+//   TrainingEmpEmpId      Emp       @relation("TrainingEmpEmpId", fields: [trainingEmpEmpId], references: [empId])
+
+//   @@index([trainingEmpTrainingId])
+//   @@index([trainingEmpEmpId])
+// }
+
+// model TrainingEmpCheckIn {
+//   trainingEmpCheckInId             Int       @id @default(autoincrement())
+//   trainingEmpCheckInTrainingId     Int
+//   trainingEmpCheckInEmpId          Int
+//   trainingEmpCheckInTrainingDate   DateTime?
+//   trainingEmpCheckInMorningCheck   DateTime?
+//   trainingEmpCheckInAfterNoonCheck DateTime?
+
+//   TrainingEmpCheckInTrainingId Training? @relation("TrainingEmpCheckInTrainingId", fields: [trainingEmpCheckInTrainingId], references: [trainingId])
+//   TrainingEmpCheckInEmpId      Emp?      @relation("TrainingEmpCheckInEmpId", fields: [trainingEmpCheckInEmpId], references: [empId])
+
+//   @@index([trainingEmpCheckInTrainingId])
+//   @@index([trainingEmpCheckInEmpId])
+// }
+
+// model Law {
+//   lawId       Int       @id @default(autoincrement())
+//   lawName     String    @db.VarChar(255)
+//   lawStatus   Status    @default(Active)
+//   lawCreateBy Int
+//   lawCreateAt DateTime  @default(now()) @db.Timestamp()
+//   lawUpdateBy Int?
+//   lawUpdateAt DateTime?
+
+//   LawCreateBy Emp? @relation("LawCreateBy", fields: [lawCreateBy], references: [empId])
+//   LawUpdateBy Emp? @relation("LawUpdateBy", fields: [lawUpdateBy], references: [empId])
+
+//   lawIdLawTopic LawTopic[] @relation("LawTopicLawId")
+
+//   @@index([lawCreateBy])
+//   @@index([lawUpdateBy])
+// }
+
+// model LawTopic {
+//   lawTopicId     Int    @id @default(autoincrement())
+//   lawTopicLawId  Int
+//   lawTopicName   String @db.VarChar(255)
+//   lawTopicStatus Status @default(Active)
+
+//   LawTopicLawId Law? @relation("LawTopicLawId", fields: [lawTopicLawId], references: [lawId])
+
+//   lawIdLawDetails LawDetail[] @relation("LawDetailLawTopicId")
+
+//   @@index([lawTopicLawId])
+// }
+
+// model LawDetail {
+//   lawDetailId         Int    @id @default(autoincrement())
+//   lawDetailLawTopicId Int
+//   lawDetailName       String @db.VarChar(255)
+//   lawDetailStatus     Status @default(Active)
+
+//   LawDetailLawTopicId LawTopic? @relation("LawDetailLawTopicId", fields: [lawDetailLawTopicId], references: [lawTopicId])
+
+//   LawDetailIdWarningDetail WarningDetail[] @relation("WarningDetailLawDetailId")
+
+//   @@index([lawDetailLawTopicId])
+// }
+// model Warning {
+//   warningId              Int           @id @default(autoincrement())
+//   warningType            warningType
+//   warningNumber          String        @db.VarChar(255)
+//   warningIssuedDate      DateTime
+//   warningDetail          String        @db.VarChar(255)
+//   warningPunishment      String        @db.VarChar(255)
+//   warningVerbalCount     Int?
+//   warningWrittenCount    Int?
+//   warningSuspensionDays  Int?
+//   warningTerminationDate DateTime?
+//   warningFile            String?       @db.VarChar(255)
+//   warningStatus          warningStatus @default(PendingEmp)
+//   warningCreateBy        Int
+//   warningCreateAt        DateTime      @default(now()) @db.Timestamp()
+//   warningUpdateBy        Int?
+//   warningUpdateAt        DateTime?
+//   warningEmpBy           Int
+//   warningEmpAt           DateTime?
+//   warningHeadDepBy       Int?
+//   warningHeadDepAt       DateTime?
+//   warningManagerBy       Int?
+//   warningManagerAt       DateTime?
+//   warningWitnessBy       Int?
+//   warningWitnessAt       DateTime?
+//   warningMdBy            Int?
+//   warningMdAt            DateTime?
+
+//   WarningCreateBy  Emp? @relation("WarningCreateBy", fields: [warningCreateBy], references: [empId])
+//   WarningUpdateBy  Emp? @relation("WarningUpdateBy", fields: [warningUpdateBy], references: [empId])
+//   WarningEmpBy     Emp? @relation("WarningEmpBy", fields: [warningEmpBy], references: [empId])
+//   WarningHeadDepBy Emp? @relation("WarningHeadDepBy", fields: [warningHeadDepBy], references: [empId])
+//   WarningManagerBy Emp? @relation("WarningManagerBy", fields: [warningManagerBy], references: [empId])
+//   WarningWitnessBy Emp? @relation("WarningWitnessBy", fields: [warningWitnessBy], references: [empId])
+//   WarningMdBy      Emp? @relation("WarningMdBy", fields: [warningMdBy], references: [empId])
+
+//   warningIdWarningDetail WarningDetail[] @relation("WarningDetailWarningId")
+
+//   @@index([warningCreateBy])
+//   @@index([warningUpdateBy])
+//   @@index([warningEmpBy])
+//   @@index([warningHeadDepBy])
+//   @@index([warningManagerBy])
+//   @@index([warningWitnessBy])
+//   @@index([warningMdBy])
+// }
+// model WarningDetail {
+//   warningDetailId          Int @id @default(autoincrement())
+//   warningDetailWarningId   Int
+//   warningDetailLawDetailId Int
+
+//   WarningDetailWarningId   Warning   @relation("WarningDetailWarningId", fields: [warningDetailWarningId], references: [warningId])
+//   WarningDetailLawDetailId LawDetail @relation("WarningDetailLawDetailId", fields: [warningDetailLawDetailId], references: [lawDetailId])
+
+//   @@index([warningDetailWarningId])
+//   @@index([warningDetailLawDetailId])
+// }
