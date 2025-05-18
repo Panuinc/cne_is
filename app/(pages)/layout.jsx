@@ -167,9 +167,9 @@ export default function PagesLayout({ children }) {
 
   const menuItems = [
     {
-      title: "Human",
+      title: "บุคคล",
       icon: <Hr />,
-      key: "human",
+      key: "บุคคล",
       submenus: [
         { title: "ระดับตำแหน่ง", href: "/role" },
         { title: "ฝ่าย", href: "/division" },
@@ -178,9 +178,9 @@ export default function PagesLayout({ children }) {
       ],
     },
     {
-      title: "Technology",
+      title: "สารสนเทศ",
       icon: <It />,
-      key: "technology",
+      key: "สารสนเทศ",
       submenus: [
         { title: "ใบแจ้งซ่อม", href: "/tech/repair" },
         { title: "ใบเบิกคอม", href: "/tech/request" },
@@ -190,8 +190,8 @@ export default function PagesLayout({ children }) {
   ];
 
   const toolMenus = [
-    { label: "Account", icon: <Account />, href: "/account" },
-    { label: "Setting", icon: <Setting />, href: "/setting" },
+    { label: "บัญชี", icon: <Account />, href: "/account" },
+    { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
   ];
 
   useEffect(() => {
@@ -246,7 +246,7 @@ export default function PagesLayout({ children }) {
                 <Dashboard />
               </div>
               <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                Home
+                หน้าหลัก
               </div>
             </Link>
             {menuItems.map((menu) =>
@@ -255,7 +255,7 @@ export default function PagesLayout({ children }) {
           </div>
           <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default">
-              <Logout /> Logout
+              <Logout /> ออกจากระบบ
             </div>
           </div>
         </div>
