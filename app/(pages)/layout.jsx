@@ -116,7 +116,7 @@ const topBar = (currentTime, setOpenMobile) => (
     <Link
       href="http://49.0.66.19:8023/Main/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-secondary bg-secondary text-white rounded-full shadow-md"
     >
       <CneSystem /> Cne System
     </Link>
@@ -134,7 +134,7 @@ const topBar = (currentTime, setOpenMobile) => (
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary/50 text-white rounded-full shadow-md">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-secondary bg-secondary/50 text-white rounded-full shadow-md">
       <Clock /> {currentTime}
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md">
