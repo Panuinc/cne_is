@@ -6,8 +6,8 @@ body {
   font-family: var(--nunito), var(--kanit);
   font-weight: 600;
   font-size: 1.0rem;
-  color: #565758;
-  background-color: #FFF000
+  color: #414141;
+  background-color: #F3F9FF
 }
 
 [lang|="th"] {
