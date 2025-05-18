@@ -234,20 +234,8 @@ export default function PagesLayout({ children }) {
         }`}
       >
         {topBar(currentTime, setOpenMobile)}
-        <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              Header
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-              1
-            </div>
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-              2
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-start w-full flex-1 py-2 gap-2 overflow-auto">
+          {children}
         </div>
       </div>
     </div>
