@@ -142,7 +142,7 @@ const topBar = (currentTime, setOpenMobile) => (
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md relative">
       <Image
-        src="/other/mascot-1.png"
+        src="/mascot/mascot-1.png"
         alt="mascot-1"
         fill
         style={{ objectFit: "contain", objectPosition: "center" }}
