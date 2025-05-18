@@ -23,10 +23,10 @@ import {
 const submenus = (menu, submenuOpen, toggleSubmenu) => (
   <div
     key={menu.key}
-    className="flex flex-col items-center justify-center w-full p-2 gap-2"
+    className="flex flex-col items-center justify-center w-full gap-2"
   >
     <div
-      className="flex items-center justify-center w-full p-2 hover:bg-default"
+      className="flex items-center justify-center w-full p-2 gap-2 hover:bg-default"
       onClick={() => toggleSubmenu(menu.key)}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
@@ -61,7 +61,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu) => (
 const toolMenu = (tool, index, collapsed) => (
   <div
     key={index}
-    className="flex flex-col xl:flex-row items-center justify-center w-full p-2 hover:bg-white"
+    className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-white"
   >
     <div className="flex items-center justify-center h-full p-2 gap-2">
       {tool.icon}
@@ -75,32 +75,32 @@ const toolMenu = (tool, index, collapsed) => (
 );
 
 const topBar = (currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-center w-full min-h-20 p-2 gap-2 border-b-2 border-default">
+  <div className="flex flex-row items-center justify-center w-full min-h-[88px] p-2 gap-2 border-b-2 border-default">
     <div
       className="flex xl:hidden items-center justify-center w-full h-full p-2 gap-2"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
     </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-primary bg-primary text-white shadow-md rounded-full">
+    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2">
       <CneSystem /> Cne System
     </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default shadow-md rounded-full">
+    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2">
       <CneCloud /> Cne Cloud
     </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default shadow-md rounded-full">
+    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2">
       <CneLeave /> ระบบลางาน
     </div>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-secondary bg-secondary/50 text-white shadow-md rounded-full">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-14 min-h-14 p-2 gap-2 border-2 border-default bg-default shadow-md rounded-full">
+    <div className="flex items-center justify-center min-w-16 h-full p-2 gap-2">
       <Search />
     </div>
-    <div className="flex items-center justify-center min-w-14 min-h-14 p-2 gap-2 border-2 border-white bg-white shadow-md rounded-full">
+    <div className="flex items-center justify-center min-w-16 h-full p-2 gap-2">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-14 min-h-14 p-2 gap-2 border-2 border-danger bg-danger text-white shadow-md rounded-full">
+    <div className="flex items-center justify-center min-w-16 h-full p-2 gap-2">
       Ima
     </div>
   </div>
@@ -151,12 +151,12 @@ export default function PagesLayout({ children }) {
   }, []);
 
   return (
-    <div className="flex flex-row w-full h-screen overflow-hidden gap-2">
+    <div className="flex flex-row w-full h-screen overflow-hidden">
       <div
         className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
           ${openMobile ? "translate-x-0" : "-translate-x-full"}
           xl:static xl:translate-x-0
-          ${collapsed ? "xl:w-[20%]" : "xl:w-[25%]"}
+          ${collapsed ? "xl:w-[24%]" : "xl:w-[25%]"}
           w-[90%]`}
       >
         <div
@@ -164,7 +164,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
         >
-          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-b-2 border-default">
+          <div className="flex items-center justify-center w-full min-h-[88px] p-2 gap-2 border-b-2 border-default">
             <Link
               href="/"
               className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
@@ -190,7 +190,7 @@ export default function PagesLayout({ children }) {
               submenus(menu, submenuOpen, toggleSubmenu)
             )}
           </div>
-          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-t-2 border-default">
+          <div className="flex items-center justify-center w-full min-h-[88px] p-2 gap-2 border-t-2 border-default">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default">
               <Logout /> Logout
             </div>
@@ -202,7 +202,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
         >
-          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-b-2 border-white">
+          <div className="flex items-center justify-center w-full min-h-[88px] p-2 gap-2 border-b-2 border-white">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2">
               Tools
             </div>
@@ -211,10 +211,10 @@ export default function PagesLayout({ children }) {
             {toolMenus.map((tool, index) => toolMenu(tool, index, collapsed))}
           </div>
           <div
-            className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-t-2 border-white"
+            className="flex items-center justify-center w-full min-h-[88px] p-2 gap-2 border-t-2 border-white"
             onClick={() => setCollapsed(!collapsed)}
           >
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 hover:bg-white">
               <Left />
             </div>
           </div>
@@ -234,7 +234,7 @@ export default function PagesLayout({ children }) {
         }`}
       >
         {topBar(currentTime, setOpenMobile)}
-        <div className="flex flex-col items-center justify-start w-full flex-1 py-2 gap-2 overflow-auto">
+        <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 overflow-auto">
           {children}
         </div>
       </div>
