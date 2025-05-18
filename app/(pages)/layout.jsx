@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import UILogoutProvider from "@/components/other/UILogoutProvider";
+import Loading from "@/components/other/UILoading";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -157,6 +160,15 @@ export default function PagesLayout({ children }) {
   const [currentTime, setCurrentTime] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState({});
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session && status !== "loading") router.push("/");
+  }, [session, status, router]);
+
+  if (status === "loading") return <Loading />;
+  if (!session) return null;
 
   const toggleSubmenu = (key) => {
     setSubmenuOpen((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -209,98 +221,104 @@ export default function PagesLayout({ children }) {
   }, []);
 
   return (
-    <div className="flex flex-row w-full h-screen overflow-hidden">
-      <div
-        className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
+    <UILogoutProvider>
+      <div className="flex flex-row w-full h-screen overflow-hidden">
+        <div
+          className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
           ${openMobile ? "translate-x-0" : "-translate-x-full"}
           xl:static xl:translate-x-0
           ${collapsed ? "xl:w-[24%]" : "xl:w-[25%]"}
           w-[90%]`}
-      >
-        <div
-          className={`flex flex-col items-center justify-between h-full bg-white
+        >
+          <div
+            className={`flex flex-col items-center justify-between h-full bg-white
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
-        >
-          <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-default">
-            <Link
-              href="/home"
-              className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
-            >
-              <Image
-                src="/logoCompany/com-2.png"
-                alt="logo"
-                fill
-                style={{ objectFit: "contain", objectPosition: "center" }}
-              />
-            </Link>
-          </div>
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-            <Link
-              href="/home"
-              className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
-                isDashboardActive ? "bg-default text-dark" : ""
-              }`}
-            >
-              <div className="flex items-center justify-center h-full p-2 gap-2">
-                <Dashboard />
-              </div>
-              <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                หน้าหลัก
-              </div>
-            </Link>
-            {menuItems.map((menu) =>
-              submenus(menu, submenuOpen, toggleSubmenu)
-            )}
-          </div>
-          <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default">
-              <Logout /> ออกจากระบบ
+          >
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-default">
+              <Link
+                href="/home"
+                className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
+              >
+                <Image
+                  src="/logoCompany/com-2.png"
+                  alt="logo"
+                  fill
+                  style={{ objectFit: "contain", objectPosition: "center" }}
+                />
+              </Link>
+            </div>
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
+              <Link
+                href="/home"
+                className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
+                  isDashboardActive ? "bg-default text-dark" : ""
+                }`}
+              >
+                <div className="flex items-center justify-center h-full p-2 gap-2">
+                  <Dashboard />
+                </div>
+                <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+                  หน้าหลัก
+                </div>
+              </Link>
+              {menuItems.map((menu) =>
+                submenus(menu, submenuOpen, toggleSubmenu)
+              )}
+            </div>
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
+              <Link
+                href="/logout"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default"
+              >
+                <Logout /> ออกจากระบบ
+              </Link>
             </div>
           </div>
-        </div>
 
-        <div
-          className={`flex flex-col items-center justify-between h-full bg-default
+          <div
+            className={`flex flex-col items-center justify-between h-full bg-default
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
-        >
-          <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-white">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-              Tools
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-            {toolMenus.map((tool, index) => toolMenu(tool, index, collapsed))}
-          </div>
-          <div
-            className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-white"
-            onClick={() => setCollapsed(!collapsed)}
           >
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 hover:bg-white">
-              <Left />
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-white">
+              <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+                Tools
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
+              {toolMenus.map((tool, index) => toolMenu(tool, index, collapsed))}
+            </div>
+            <div
+              className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-white"
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 hover:bg-white">
+                <Left />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {openMobile && (
+        {openMobile && (
+          <div
+            className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2"
+            onClick={() => setOpenMobile(false)}
+          />
+        )}
+
         <div
-          className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2"
-          onClick={() => setOpenMobile(false)}
-        />
-      )}
-
-      <div
-        className={`flex flex-col h-full flex-1 bg-white ${
-          collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
-        }`}
-      >
-        {topBar(currentTime, setOpenMobile)}
-        <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 overflow-auto">
-          {children}
+          className={`flex flex-col h-full flex-1 bg-white ${
+            collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
+          }`}
+        >
+          {topBar(currentTime, setOpenMobile)}
+          <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 overflow-auto">
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </UILogoutProvider>
   );
 }
