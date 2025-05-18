@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import { Input, Button } from "@heroui/react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import UIAnimatedText from "@/components/other/UIAnimatedText";
 
 export default function UIChangePassword({
   newPassword,
@@ -34,19 +34,9 @@ export default function UIChangePassword({
     >
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <motion.div
-            className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-secondary"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              duration: 0.6,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          >
-            เปลี่ยนแล้ว ... อย่าลืมจดนะ
-          </motion.div>
+          <UIAnimatedText>เปลี่ยนแล้ว ... อย่าลืมจดนะ</UIAnimatedText>
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Input
             type="password"
@@ -55,12 +45,13 @@ export default function UIChangePassword({
             size="md"
             variant="bordered"
             color="secondary"
-            radius="xl"
+            radius="lg"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             isRequired
           />
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Input
             type="password"
@@ -69,12 +60,13 @@ export default function UIChangePassword({
             size="md"
             variant="bordered"
             color="secondary"
-            radius="xl"
+            radius="lg"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             isRequired
           />
         </div>
+
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
           <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-secondary">
             เลข 6 หลัก
@@ -96,6 +88,7 @@ export default function UIChangePassword({
             ))}
           </div>
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Button
             color="secondary"
@@ -108,6 +101,7 @@ export default function UIChangePassword({
           </Button>
         </div>
       </div>
+
       <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-secondary rounded-tr-3xl rounded-br-3xl">
         <div className="flex items-center justify-center w-full min-h-[600px] p-2 gap-2 relative">
           <Image
