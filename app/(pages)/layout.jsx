@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -20,59 +21,86 @@ import {
   It,
 } from "@/components/icons/icons";
 
-const submenus = (menu, submenuOpen, toggleSubmenu) => (
-  <div
-    key={menu.key}
-    className="flex flex-col items-center justify-center w-full gap-2"
-  >
+const submenus = (menu, submenuOpen, toggleSubmenu) => {
+  const pathname = usePathname();
+  const hasSubmenu = Array.isArray(menu.submenus) && menu.submenus.length > 0;
+
+  const isSubActive =
+    hasSubmenu &&
+    menu.submenus.some(
+      (item) =>
+        item.href && (pathname === item.href || pathname.startsWith(item.href))
+    );
+
+  return (
     <div
-      className="flex items-center justify-center w-full p-2 gap-2 hover:bg-default"
-      onClick={() => toggleSubmenu(menu.key)}
+      key={menu.key}
+      className="flex flex-col items-center justify-center w-full gap-2"
+    >
+      <div
+        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
+          isSubActive ? "bg-default text-dark" : ""
+        }`}
+        onClick={() => toggleSubmenu(menu.key)}
+      >
+        <div className="flex items-center justify-center h-full p-2 gap-2">
+          {menu.icon}
+        </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+          {menu.title}
+        </div>
+        <div
+          className={`flex items-center justify-center h-full p-2 gap-2 transform transition-transform duration-300 ${
+            submenuOpen[menu.key] ? "-rotate-180" : "rotate-0"
+          }`}
+        >
+          <Down />
+        </div>
+      </div>
+      {submenuOpen[menu.key] && (
+        <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-default">
+          {menu.submenus.map((sub, idx) => (
+            <Link
+              key={idx}
+              href={sub.href}
+              className={`flex items-center justify-start w-full h-full px-2 py-3 gap-2 hover:bg-default ${
+                pathname === sub.href || pathname.startsWith(sub.href)
+                  ? "bg-default text-dark"
+                  : ""
+              }`}
+            >
+              {sub.title}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const toolMenu = (tool, index, collapsed) => {
+  const pathname = usePathname();
+  const isActive = pathname === tool.href || pathname.startsWith(tool.href);
+
+  return (
+    <Link
+      key={index}
+      href={tool.href}
+      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-white ${
+        isActive ? "bg-white text-dark" : ""
+      }`}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
-        {menu.icon}
+        {tool.icon}
       </div>
-      <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-        {menu.title}
-      </div>
-      <div
-        className={`flex items-center justify-center h-full p-2 gap-2 transform transition-transform duration-300 ${
-          submenuOpen[menu.key] ? "-rotate-180" : "rotate-0"
-        }`}
-      >
-        <Down />
-      </div>
-    </div>
-    {submenuOpen[menu.key] && (
-      <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-default">
-        {menu.submenus.map((sub, idx) => (
-          <div
-            key={idx}
-            className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default"
-          >
-            {sub}
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
-
-const toolMenu = (tool, index, collapsed) => (
-  <div
-    key={index}
-    className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-white"
-  >
-    <div className="flex items-center justify-center h-full p-2 gap-2">
-      {tool.icon}
-    </div>
-    {!collapsed && (
-      <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-        {tool.label}
-      </div>
-    )}
-  </div>
-);
+      {!collapsed && (
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+          {tool.label}
+        </div>
+      )}
+    </Link>
+  );
+};
 
 const topBar = (currentTime, setOpenMobile) => (
   <div className="flex flex-row items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-default">
@@ -128,29 +156,42 @@ export default function PagesLayout({ children }) {
   const [openMobile, setOpenMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState({});
+  const pathname = usePathname();
 
   const toggleSubmenu = (key) => {
     setSubmenuOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  const isDashboardActive =
+    pathname === "/home" || pathname.startsWith("/home");
 
   const menuItems = [
     {
       title: "Human",
       icon: <Hr />,
       key: "human",
-      submenus: ["ระดับตำแหน่ง", "ฝ่าย", "แผนก", "ตำแหน่งงาน"],
+      submenus: [
+        { title: "ระดับตำแหน่ง", href: "/role" },
+        { title: "ฝ่าย", href: "/division" },
+        { title: "แผนก", href: "/department" },
+        { title: "ตำแหน่งงาน", href: "/position" },
+      ],
     },
     {
       title: "Technology",
       icon: <It />,
       key: "technology",
-      submenus: ["ใบแจ้งซ่อม", "ใบเบิกคอม", "แบ็คอัพข้อมูล"],
+      submenus: [
+        { title: "ใบแจ้งซ่อม", href: "/tech/repair" },
+        { title: "ใบเบิกคอม", href: "/tech/request" },
+        { title: "แบ็คอัพข้อมูล", href: "/tech/backup" },
+      ],
     },
   ];
 
   const toolMenus = [
-    { label: "Account", icon: <Account /> },
-    { label: "Setting", icon: <Setting /> },
+    { label: "Account", icon: <Account />, href: "/account" },
+    { label: "Setting", icon: <Setting />, href: "/setting" },
   ];
 
   useEffect(() => {
@@ -195,14 +236,19 @@ export default function PagesLayout({ children }) {
             </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full p-2 gap-2 hover:bg-default">
+            <Link
+              href="/home"
+              className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
+                isDashboardActive ? "bg-default text-dark" : ""
+              }`}
+            >
               <div className="flex items-center justify-center h-full p-2 gap-2">
                 <Dashboard />
               </div>
               <div className="flex items-center justify-start w-full h-full p-2 gap-2">
                 Home
               </div>
-            </div>
+            </Link>
             {menuItems.map((menu) =>
               submenus(menu, submenuOpen, toggleSubmenu)
             )}
