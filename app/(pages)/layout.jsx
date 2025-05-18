@@ -44,7 +44,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu) => (
       </div>
     </div>
     {submenuOpen[menu.key] && (
-      <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-dark">
+      <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-default">
         {menu.submenus.map((sub, idx) => (
           <div
             key={idx}
