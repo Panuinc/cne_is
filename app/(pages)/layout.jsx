@@ -178,7 +178,7 @@ export default function PagesLayout({ children }) {
             </Link>
           </div>
           <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-            <div className="flex items-center justify-center w-full p-2 gap-2">
+            <div className="flex items-center justify-center w-full p-2 gap-2 hover:bg-default">
               <div className="flex items-center justify-center h-full p-2 gap-2">
                 <Dashboard />
               </div>
@@ -191,7 +191,7 @@ export default function PagesLayout({ children }) {
             )}
           </div>
           <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-t-2 border-default">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default">
               <Logout /> Logout
             </div>
           </div>
