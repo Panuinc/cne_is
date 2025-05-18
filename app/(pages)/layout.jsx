@@ -75,9 +75,9 @@ const toolMenu = (tool, index, collapsed) => (
 );
 
 const topBar = (currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
+  <div className="flex flex-row items-center justify-center w-full min-h-20 p-2 gap-2 border-2 border-dark">
     <div
-      className="flex xl:hidden items-center justify-center w-full h-full aspect-square p-2 gap-2 border-2 border-dark"
+      className="flex xl:hidden items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
@@ -91,16 +91,16 @@ const topBar = (currentTime, setOpenMobile) => (
     <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
       <CneLeave /> ระบบลางาน
     </div>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full aspect-square p-2 gap-2 border-2 border-dark">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-dark">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 border-2 border-dark">
+    <div className="flex items-center justify-center w-14 h-full p-2 gap-2 border-2 border-dark">
       <Search />
     </div>
-    <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 border-2 border-dark">
+    <div className="flex items-center justify-center w-14 h-full p-2 gap-2 border-2 border-dark">
       <Bell />
     </div>
-    <div className="flex items-center justify-center w-14 h-full aspect-square p-2 gap-2 border-2 border-dark">
+    <div className="flex items-center justify-center w-14 h-full p-2 gap-2 border-2 border-dark">
       Ima
     </div>
   </div>
@@ -164,7 +164,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
         >
-          <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-2 border-dark">
             <Link
               href="/"
               className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark relative"
@@ -190,7 +190,7 @@ export default function PagesLayout({ children }) {
               submenus(menu, submenuOpen, toggleSubmenu)
             )}
           </div>
-          <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <Logout /> Logout
             </div>
@@ -202,7 +202,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
         >
-          <div className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               Tools
             </div>
@@ -213,7 +213,7 @@ export default function PagesLayout({ children }) {
             )}
           </div>
           <div
-            className="flex items-center justify-center w-full h-20 p-2 gap-2 border-2 border-dark"
+            className="flex items-center justify-center w-full min-h-20 p-2 gap-2 border-2 border-dark"
             onClick={() => setCollapsed(!collapsed)}
           >
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
@@ -231,7 +231,7 @@ export default function PagesLayout({ children }) {
       )}
 
       <div
-        className={`flex flex-col h-full flex-1 gap-2 bg-white ${
+        className={`flex flex-col h-full flex-1 p-2 gap-2 bg-white border-2 border-dark ${
           collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
         }`}
       >
