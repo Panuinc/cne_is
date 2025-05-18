@@ -17,6 +17,7 @@ module.exports = {
         default: "#F3F9FF",
         primary: "#1479FF",
         secondary: "#37DCE5",
+        warning: "#ECC66A",
         danger: "#F3C1C2",
       },
       fontFamily: {
