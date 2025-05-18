@@ -82,15 +82,27 @@ const topBar = (currentTime, setOpenMobile) => (
     >
       <Hamburger />
     </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md">
+    <Link
+      href="http://49.0.66.19:8023/Main/"
+      target="_blank"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md"
+    >
       <CneSystem /> Cne System
-    </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md">
+    </Link>
+    <Link
+      href="http://cnecloud01.myqnapcloud.com:8011/cgi-bin/"
+      target="_blank"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md"
+    >
       <CneCloud /> Cne Cloud
-    </div>
-    <div className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md">
+    </Link>
+    <Link
+      href="http://49.0.64.242:8088/LoginERS/login.aspx"
+      target="_blank"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md"
+    >
       <CneLeave /> ระบบลางาน
-    </div>
+    </Link>
     <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary/50 text-white rounded-full shadow-md">
       <Clock /> {currentTime}
     </div>
@@ -100,8 +112,13 @@ const topBar = (currentTime, setOpenMobile) => (
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-danger text-white rounded-full shadow-md">
-      Ima
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md relative">
+      <Image
+        src="/other/mascot-1.png"
+        alt="mascot-1"
+        fill
+        style={{ objectFit: "contain", objectPosition: "center" }}
+      />
     </div>
   </div>
 );
