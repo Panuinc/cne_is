@@ -43,11 +43,11 @@ export class PositionController {
 
       const parsedData = positionPostSchema.parse(data);
 
-      const existingPosition = await PositionService.getPositionByName(parsedData.positionName);
+      const existingPosition = await PositionService.getPositionByName(parsedData.positionNameTH);
       if (existingPosition) {
         return NextResponse.json(
           {
-            error: `Position name '${parsedData.positionName}' already exists`,
+            error: `Position name '${parsedData.positionNameTH}' already exists`,
           },
           { status: 400 }
         );
