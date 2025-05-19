@@ -31,7 +31,10 @@ export class EmpService {
         empEmpEmployment: {
           include: {
             EmpEmploymentDivisionId: {
-              select: { divisionName: true },
+              select: {
+                divisionName: true,
+                divisionNameShot: true,
+              },
             },
             EmpEmploymentDepartmentId: {
               select: { departmentName: true },
@@ -118,7 +121,10 @@ export class EmpService {
         empEmpEmployment: {
           include: {
             EmpEmploymentDivisionId: {
-              select: { divisionName: true },
+              select: {
+                divisionName: true,
+                divisionNameShot: true,
+              },
             },
             EmpEmploymentDepartmentId: {
               select: { departmentName: true },

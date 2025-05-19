@@ -17,7 +17,10 @@ export class EmpEmploymentService {
           select: { roleName: true },
         },
         EmpEmploymentDivisionId: {
-          select: { divisionName: true },
+          select: {
+            divisionName: true,
+            divisionNameShot: true,
+          },
         },
         EmpEmploymentDepartmentId: {
           select: { departmentName: true },

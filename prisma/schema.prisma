@@ -439,6 +439,7 @@ model Role {
 model Division {
   divisionId       Int       @id @default(autoincrement())
   divisionName     String    @db.VarChar(255)
+  divisionNameShot String    @db.VarChar(255)
   divisionStatus   Status    @default(Active)
   divisionCreateBy Int
   divisionCreateAt DateTime  @default(now()) @db.Timestamp()
