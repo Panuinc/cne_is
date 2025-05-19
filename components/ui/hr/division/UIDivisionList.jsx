@@ -54,7 +54,7 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIRoleList({ data = [], error = "" }) {
+export default function UIDivisionList({ data = [], error = "" }) {
   const { data: session, status } = useSession();
 
   if (status === "loading") return null;
@@ -72,17 +72,18 @@ export default function UIRoleList({ data = [], error = "" }) {
 
   const columns = useMemo(() => {
     const baseColumns = [
-      { name: "ลำดับ", uid: "roleId" },
-      { name: "ระดับตำแหน่ง", uid: "roleName" },
-      { name: "สถานะการใช้งาน", uid: "roleStatus" },
+      { name: "ลำดับ", uid: "divisionId" },
+      { name: "ฝ่าย", uid: "divisionName" },
+      { name: "ตัวย่อฝ่าย", uid: "divisionNameShot" },
+      { name: "สถานะการใช้งาน", uid: "divisionStatus" },
     ];
 
     if (canManage) {
       baseColumns.push(
         { name: "สร้างโดย", uid: "createdBy" },
-        { name: "สร้างเมื่อวันที่", uid: "roleCreateAt" },
+        { name: "สร้างเมื่อวันที่", uid: "divisionCreateAt" },
         { name: "แก้ไขโดย", uid: "updatedBy" },
-        { name: "แก้ไขเมื่อวันที่", uid: "roleUpdateAt" },
+        { name: "แก้ไขเมื่อวันที่", uid: "divisionUpdateAt" },
         { name: "การจัดการ", uid: "actions" }
       );
     }
@@ -93,13 +94,13 @@ export default function UIRoleList({ data = [], error = "" }) {
   const filteredData = useMemo(() => {
     let result = data;
     if (searchTerm.trim()) {
-      result = result.filter((role) =>
-        role.roleName?.toLowerCase().includes(searchTerm.toLowerCase())
+      result = result.filter((division) =>
+        division.divisionName?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== "all") {
       result = result.filter(
-        (role) => role.roleStatus?.toLowerCase() === statusFilter
+        (division) => division.divisionStatus?.toLowerCase() === statusFilter
       );
     }
     return result;
@@ -112,7 +113,7 @@ export default function UIRoleList({ data = [], error = "" }) {
   const handleAction = useCallback(
     (action, item) => {
       if (action === "edit") {
-        router.push(`/role/${item.roleId}`);
+        router.push(`/division/${item.divisionId}`);
       }
     },
     [router]
@@ -121,32 +122,32 @@ export default function UIRoleList({ data = [], error = "" }) {
   const renderCell = useCallback(
     (item, idx, colKey) => {
       switch (colKey) {
-        case "roleId":
+        case "divisionId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
-        case "roleStatus":
+        case "divisionStatus":
           return (
             <Button
               size="sm"
               color={
-                item.roleStatus?.toLowerCase() === "active"
+                item.divisionStatus?.toLowerCase() === "active"
                   ? "success"
                   : "danger"
               }
               radius="lg"
               className="min-w-10 min-h-10 text-white"
             >
-              {item.roleStatus?.toLowerCase() === "active"
+              {item.divisionStatus?.toLowerCase() === "active"
                 ? "เปิดใช้งาน"
                 : "ปิดใช้งาน"}
             </Button>
           );
         case "createdBy":
-          return item.RoleCreateBy
-            ? `${item.RoleCreateBy.empFirstNameTH} ${item.RoleCreateBy.empLastNameTH}`
+          return item.DivisionCreateBy
+            ? `${item.DivisionCreateBy.empFirstNameTH} ${item.DivisionCreateBy.empLastNameTH}`
             : "-";
         case "updatedBy":
-          return item.RoleUpdateBy
-            ? `${item.RoleUpdateBy.empFirstNameTH} ${item.RoleUpdateBy.empLastNameTH}`
+          return item.DivisionUpdateBy
+            ? `${item.DivisionUpdateBy.empFirstNameTH} ${item.DivisionUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
           if (!canManage) return null;
@@ -193,7 +194,7 @@ export default function UIRoleList({ data = [], error = "" }) {
           {canManage && (
             <Button
               as={Link}
-              href="/role/create"
+              href="/division/create"
               color="primary"
               size="md"
               radius="lg"

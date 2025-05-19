@@ -4,7 +4,7 @@ import React from "react";
 import UIHeader from "@/components/other/UIHeader";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
 
-export default function UIRoleForm({
+export default function UIDivisionForm({
   header,
   formRef,
   onSubmit,
@@ -31,18 +31,34 @@ export default function UIRoleForm({
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             <Input
-              name="roleName"
+              name="divisionName"
               type="text"
-              label="ระดับตำแหน่ง"
+              label="ฝ่าย"
               placeholder="Please Enter Data"
               size="md"
               variant="bordered"
               color="primary"
               radius="lg"
-              value={formData.roleName || ""}
-              onChange={handleInputChange("roleName")}
-              isInvalid={!!errors.roleName}
-              errorMessage={errors.roleName}
+              value={formData.divisionName || ""}
+              onChange={handleInputChange("divisionName")}
+              isInvalid={!!errors.divisionName}
+              errorMessage={errors.divisionName}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="divisionNameShot"
+              type="text"
+              label="ตัวย่อฝ่าย"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.divisionNameShot || ""}
+              onChange={handleInputChange("divisionNameShot")}
+              isInvalid={!!errors.divisionNameShot}
+              errorMessage={errors.divisionNameShot}
             />
           </div>
         </div>
@@ -51,18 +67,20 @@ export default function UIRoleForm({
           <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="divisionStatus"
                 label="สถานะการใช้งาน"
                 placeholder="Please Enter Data"
                 size="md"
                 variant="bordered"
                 color="primary"
                 radius="lg"
-                value={formData.roleStatus || ""}
-                selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                onChange={handleInputChange("roleStatus")}
-                isInvalid={!!errors.roleStatus}
-                errorMessage={errors.roleStatus}
+                value={formData.divisionStatus || ""}
+                selectedKeys={
+                  formData.divisionStatus ? [formData.divisionStatus] : []
+                }
+                onChange={handleInputChange("divisionStatus")}
+                isInvalid={!!errors.divisionStatus}
+                errorMessage={errors.divisionStatus}
               >
                 <SelectItem key="Active" value="Active">
                   เปิดใช้งาน
