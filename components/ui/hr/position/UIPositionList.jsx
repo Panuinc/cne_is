@@ -173,7 +173,7 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
               color="none"
               radius="lg"
               isDisabled={!posJobDesId}
-              className="text-primary"
+              className="text-secondary"
               onPress={() => onExportPDF?.(posJobDesId)}
             >
               <Document />
