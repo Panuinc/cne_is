@@ -94,7 +94,7 @@ export class EmpEmploymentController {
         const fileName = `${empEmploymentNumber}_${empEmploymentId}.png`;
         const folderPath = path.join(
           process.cwd(),
-          "public/images/empEmployment",
+          "public/empEmployment",
           folder
         );
         await mkdir(folderPath, { recursive: true });

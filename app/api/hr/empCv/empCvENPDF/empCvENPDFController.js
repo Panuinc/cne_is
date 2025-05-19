@@ -185,7 +185,6 @@ export class EmpCvENController {
           path.join(
             process.cwd(),
             "public",
-            "images",
             "logoCompany",
             "com-1.png"
           )
@@ -296,7 +295,7 @@ export class EmpCvENController {
         <div class="flex flex-row items-start justify-center w-full gap-1 p-1">
             <div class="sidebar flex flex-col w-4/12 gap-1 bg-default" style="min-height:calc(100vh - 80px);">
                 <div class="flex justify-center p-2">
-                    <img src="${process.env.NEXT_PUBLIC_API_URL}/images/empEmployment/userPicture/${empEmploymentPicture}"
+                    <img src="${process.env.NEXT_PUBLIC_API_URL}/empEmployment/userPicture/${empEmploymentPicture}"
                         class="w-44 mx-auto" />
                 </div>
                 <div class="flex items-center p-2 gap-1">

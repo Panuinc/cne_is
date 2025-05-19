@@ -76,7 +76,6 @@ export class PosJobDesPDFController {
           path.join(
             process.cwd(),
             "public",
-            "images",
             "logoCompany",
             "com-1.png"
           )
