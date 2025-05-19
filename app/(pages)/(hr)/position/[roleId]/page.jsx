@@ -144,7 +144,6 @@ export default function positionUpdate() {
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}
-        setErrors={setErrors}
         formData={formData}
         handleInputChange={handleChange}
         operatedBy={nameTH}
