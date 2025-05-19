@@ -11,15 +11,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-        colors: {
+      colors: {
         white: "#FFFFFF",
-        dark: "#000000",           // Charcoal earth-tone
-        default: "#F5F5F5",        // Warm off-white background
-        primary: "#733DF2",        // Rich mocha brown (main brand)
-        secondary: "#3B85FF",      // Soft sand (used for accent or highlight)
-        warning: "#FFD530",        // Earth-tone amber (warning)
-        danger: "#FE424D",         // Terracotta red (alert/danger)
-        success: "#2DDEF8",           // Cool moss green-gray (status/info)
+        dark: "#000000",
+        default: "#F5F5F5",
+        primary: "#3B85FF",
+        secondary: "#733DF2",
+        warning: "#FFD530",
+        danger: "#FE424D",
+        success: "#2DDEF8",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],
