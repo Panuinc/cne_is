@@ -205,8 +205,8 @@ export default function UIRoleList({ data = [], error = "" }) {
         </div>
       </div>
 
-      <div className="xl:flex hidden flex-col w-full p-2 gap-2">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+      <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
           <UISelectFilter
             selectedValue={statusFilter}
             items={statusOptions}
@@ -216,10 +216,10 @@ export default function UIRoleList({ data = [], error = "" }) {
       </div>
 
       <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
-        <div className="flex items-center justify-start w-full xl:w-9/12 h-full px-4 py-2 gap-2">
+        <div className="flex items-center justify-start w-full xl:w-9/12 h-full p-2 gap-2">
           จำนวนข้อมูล
         </div>
-        <div className="flex items-center justify-center w-full xl:w-3/12 h-full px-4 py-2 gap-2">
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
           <Select
             label="จำนวนข้อมูล"
             placeholder="จำนวนข้อมูล"
