@@ -99,9 +99,7 @@ export default function departmentCreate() {
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}
-        setErrors={setErrors}
         formData={formData}
-        setFormData={setFormData}
         handleInputChange={handleChange}
         operatedBy={nameTH}
         divisionOptions={divisionOptions}

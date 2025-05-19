@@ -10,7 +10,6 @@ export default function UIDepartmentForm({
   onSubmit,
   errors,
   formData,
-  setFormData,
   handleInputChange,
   isUpdate,
   operatedBy,
@@ -48,13 +47,7 @@ export default function UIDepartmentForm({
               }
               isInvalid={!!errors.departmentDivisionId}
               errorMessage={errors.departmentDivisionId}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  departmentDivisionId: value,
-                }));
-              }}
+              onChange={handleInputChange("departmentDivisionId")}
             >
               {divisionOptions.map((div) => (
                 <SelectItem key={div.divisionId} value={String(div.divisionId)}>
