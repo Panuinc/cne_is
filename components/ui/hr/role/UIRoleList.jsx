@@ -150,7 +150,7 @@ export default function UIRoleList({ data = [], error = "" }) {
         case "actions":
           if (!canManage) return null;
           return (
-            <div className="flex items-center justify-center p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center p-2 gap-2">
               <Dropdown>
                 <DropdownTrigger>
                   <Button isIconOnly variant="none" className="text-primary">
@@ -171,9 +171,9 @@ export default function UIRoleList({ data = [], error = "" }) {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto border-2 border-dark">
-      <div className="flex flex-row items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+    <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
+      <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
           <Input
             isClearable
             label="ค้นหา"
@@ -188,7 +188,7 @@ export default function UIRoleList({ data = [], error = "" }) {
           />
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center h-full p-2 gap-2">
           {canManage && (
             <Button
               as={Link}
@@ -196,15 +196,17 @@ export default function UIRoleList({ data = [], error = "" }) {
               color="primary"
               size="md"
               radius="lg"
-              className="flex items-center justify-center w-6/12 h-full p-4 gap-2"
+              className="flex items-center justify-center w-full h-full p-4 gap-2"
               startContent={<Folder />}
-            />
+            >
+              เพิ่มใหม่
+            </Button>
           )}
         </div>
       </div>
 
-      <div className="xl:flex hidden flex-col w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="xl:flex hidden flex-col w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <UISelectFilter
             selectedValue={statusFilter}
             items={statusOptions}
@@ -213,14 +215,14 @@ export default function UIRoleList({ data = [], error = "" }) {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex items-center justify-start w-full h-full px-4 py-2 gap-2 border-2 border-dark">
-          จำนวนข้อมูลต่อหน้า
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-start w-full xl:w-9/12 h-full px-4 py-2 gap-2">
+          จำนวนข้อมูล
         </div>
-        <div className="flex items-center justify-end w-full h-full px-4 py-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full px-4 py-2 gap-2">
           <Select
-            label="เลือกจำนวนข้อมูล"
-            placeholder="เลือกจำนวนข้อมูล"
+            label="จำนวนข้อมูล"
+            placeholder="จำนวนข้อมูล"
             size="md"
             variant="bordered"
             color="primary"
@@ -240,7 +242,7 @@ export default function UIRoleList({ data = [], error = "" }) {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
         <UICustomTable
           columns={columns}
           data={filteredData}
