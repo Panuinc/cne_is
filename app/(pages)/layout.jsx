@@ -156,6 +156,7 @@ export default function PagesLayout({ children }) {
   const [openMobile, setOpenMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState({});
+
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -164,12 +165,23 @@ export default function PagesLayout({ children }) {
     if (!session && status !== "loading") router.push("/");
   }, [session, status, router]);
 
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      );
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (status === "loading") return <Loading />;
   if (!session) return null;
 
-  const toggleSubmenu = (key) => {
+  const toggleSubmenu = (key) =>
     setSubmenuOpen((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
 
   const isDashboardActive =
     pathname === "/home" || pathname.startsWith("/home");
@@ -203,20 +215,6 @@ export default function PagesLayout({ children }) {
     { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
   ];
 
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      const time = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      setCurrentTime(time);
-    };
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <UILogoutProvider>
       <div className="flex flex-row w-full h-screen overflow-hidden">
@@ -245,6 +243,7 @@ export default function PagesLayout({ children }) {
                 />
               </Link>
             </div>
+
             <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
               <Link
                 href="/home"
@@ -263,6 +262,7 @@ export default function PagesLayout({ children }) {
                 submenus(menu, submenuOpen, toggleSubmenu, pathname)
               )}
             </div>
+
             <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
               <Link
                 href="/logout"
