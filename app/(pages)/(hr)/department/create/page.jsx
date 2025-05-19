@@ -30,7 +30,11 @@ export default function departmentCreate() {
         });
         const result = await res.json();
         if (res.ok) {
-          setDivisionOptions(result.division || []);
+          setDivisionOptions(
+            (result.division || []).filter(
+              (division) => division.divisionStatus === "Active"
+            )
+          );
         } else {
           toast.error(result.error || "Failed to load division data.");
         }

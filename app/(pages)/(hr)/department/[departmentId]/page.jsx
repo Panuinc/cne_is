@@ -24,6 +24,28 @@ export default function departmentUpdate() {
   const [divisionOptions, setDivisionOptions] = useState([]);
 
   useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/hr/division", {
+          headers: { "secret-token": SECRET_TOKEN || "" },
+        });
+        const result = await res.json();
+        if (res.ok) {
+          setDivisionOptions(
+            (result.division || []).filter(
+              (division) => division.divisionStatus === "Active"
+            )
+          );
+        } else {
+          toast.error(result.error || "Failed to load division data.");
+        }
+      } catch (err) {
+        toast.error(`Failed to load division data: ${err.message}`);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (!departmentId) return;
     (async () => {
       try {
@@ -42,24 +64,6 @@ export default function departmentUpdate() {
       }
     })();
   }, [departmentId]);
-
-    useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch("/api/hr/division", {
-          headers: { "secret-token": SECRET_TOKEN || "" },
-        });
-        const result = await res.json();
-        if (res.ok) {
-          setDivisionOptions(result.division || []);
-        } else {
-          toast.error(result.error || "Failed to load division data.");
-        }
-      } catch (err) {
-        toast.error(`Failed to load division data: ${err.message}`);
-      }
-    })();
-  }, []);
 
   const handleChange = useCallback(
     (field) => (e) => {
