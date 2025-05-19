@@ -22,6 +22,7 @@ import {
   Account,
   Setting,
   It,
+  Organize,
 } from "@/components/icons/icons";
 
 const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
@@ -151,6 +152,27 @@ const topBar = (currentTime, setOpenMobile) => (
   </div>
 );
 
+const mainMenuItem = (menu, pathname) => {
+  const isActive = pathname === menu.href || pathname.startsWith(menu.href);
+
+  return (
+    <Link
+      key={menu.href}
+      href={menu.href}
+      className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
+        isActive ? "bg-default text-dark" : ""
+      }`}
+    >
+      <div className="flex items-center justify-center h-full p-2 gap-2">
+        {menu.icon}
+      </div>
+      <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+        {menu.label}
+      </div>
+    </Link>
+  );
+};
+
 export default function PagesLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
@@ -215,6 +237,11 @@ export default function PagesLayout({ children }) {
     { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
   ];
 
+  const mainMenus = [
+    { label: "หน้าหลัก", icon: <Dashboard />, href: "/home" },
+    { label: "แผนผังองค์กร", icon: <Organize />, href: "/organize" },
+  ];
+
   return (
     <UILogoutProvider>
       <div className="flex flex-row w-full h-screen overflow-hidden">
@@ -245,19 +272,7 @@ export default function PagesLayout({ children }) {
             </div>
 
             <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-              <Link
-                href="/home"
-                className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
-                  isDashboardActive ? "bg-default text-dark" : ""
-                }`}
-              >
-                <div className="flex items-center justify-center h-full p-2 gap-2">
-                  <Dashboard />
-                </div>
-                <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  หน้าหลัก
-                </div>
-              </Link>
+              {mainMenus.map((menu) => mainMenuItem(menu, pathname))}
               {menuItems.map((menu) =>
                 submenus(menu, submenuOpen, toggleSubmenu, pathname)
               )}
