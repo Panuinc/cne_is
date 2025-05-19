@@ -24,7 +24,7 @@ export default function UIDivisionForm({
       >
         <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
           <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ข้อมูล ระดับตำแหน่งงาน
+            ข้อมูล ฝ่าย
           </div>
         </div>
 

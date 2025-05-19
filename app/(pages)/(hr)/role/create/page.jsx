@@ -69,7 +69,7 @@ export default function roleCreate() {
     <>
       <Toaster position="top-right" />
       <UIRoleForm
-        header="เพิ่ม ระดับตำแหน่งงาน"
+        header="เพิ่ม ระดับตำแหน่ง"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

@@ -31,7 +31,7 @@ export default function RoleList() {
 
   return (
     <UIRoleList
-      header="ระดับตำแหน่งงาน"
+      header="ระดับตำแหน่ง"
       data={roleDataList}
       error={errorMessage}
     />

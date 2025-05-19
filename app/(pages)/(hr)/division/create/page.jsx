@@ -72,7 +72,7 @@ export default function divisionCreate() {
     <>
       <Toaster position="top-right" />
       <UIDivisionForm
-        header="เพิ่ม ระดับตำแหน่งงาน"
+        header="เพิ่ม ฝ่าย"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

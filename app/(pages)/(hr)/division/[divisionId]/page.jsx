@@ -94,7 +94,7 @@ export default function divisionUpdate() {
     <>
       <Toaster position="top-right" />
       <UIDivisionForm
-        header="แก้ไข ระดับตำแหน่งงาน"
+        header="แก้ไข ฝ่าย"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

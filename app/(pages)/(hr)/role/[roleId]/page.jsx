@@ -90,7 +90,7 @@ export default function roleUpdate() {
     <>
       <Toaster position="top-right" />
       <UIRoleForm
-        header="แก้ไข ระดับตำแหน่งงาน"
+        header="แก้ไข ระดับตำแหน่ง"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

@@ -31,7 +31,7 @@ export default function DivisionList() {
 
   return (
     <UIDivisionList
-      header="ระดับตำแหน่งงาน"
+      header="ฝ่าย"
       data={divisionDataList}
       error={errorMessage}
     />
