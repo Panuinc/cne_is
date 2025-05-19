@@ -9,11 +9,11 @@ export default function UIAnimatedText({ children }) {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return <div className="text-xl text-secondary">{children}</div>;
+  if (!isClient) return <div className="text-xl text-primary">{children}</div>;
 
   return (
     <motion.div
-      className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-secondary"
+      className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-primary"
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{

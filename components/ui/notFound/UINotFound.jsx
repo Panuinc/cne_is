@@ -17,7 +17,7 @@ export default function UINotFound() {
 
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Button
-            color="secondary"
+            color="primary"
             size="md"
             radius="xlgl"
             type="submit"
@@ -28,7 +28,7 @@ export default function UINotFound() {
         </div>
       </div>
 
-      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-secondary rounded-tr-3xl rounded-br-3xl">
+      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-primary rounded-tr-3xl rounded-br-3xl">
         <div className="flex items-center justify-center w-full min-h-[600px] p-2 gap-2 relative">
           <Image
             src="/mascot/mascot-2.png"

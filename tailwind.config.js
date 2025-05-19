@@ -14,12 +14,12 @@ module.exports = {
         colors: {
         white: "#FFFFFF",
         dark: "#2E2D2B",           // Charcoal earth-tone
-        default: "#F4F1EE",        // Warm off-white background
-        primary: "#8B5E3C",        // Rich mocha brown (main brand)
-        secondary: "#D6A76C",      // Soft sand (used for accent or highlight)
-        warning: "#E1B866",        // Earth-tone amber (warning)
-        danger: "#C55A5A",         // Terracotta red (alert/danger)
-        success: "#7F9C96",           // Cool moss green-gray (status/info)
+        default: "#F5F5F5",        // Warm off-white background
+        primary: "#733DF2",        // Rich mocha brown (main brand)
+        secondary: "#3B85FF",      // Soft sand (used for accent or highlight)
+        warning: "#FFD530",        // Earth-tone amber (warning)
+        danger: "#FE424D",         // Terracotta red (alert/danger)
+        success: "#2DDEF8",           // Cool moss green-gray (status/info)
       },
       fontFamily: {
         kanit: ["var(--kanit)"],

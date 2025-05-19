@@ -44,7 +44,7 @@ export default function UIChangePassword({
             placeholder="Please Enter Data"
             size="md"
             variant="bordered"
-            color="secondary"
+            color="primary"
             radius="lg"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
@@ -59,7 +59,7 @@ export default function UIChangePassword({
             placeholder="Please Enter Data"
             size="md"
             variant="bordered"
-            color="secondary"
+            color="primary"
             radius="lg"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -68,7 +68,7 @@ export default function UIChangePassword({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-secondary">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-primary">
             เลข 6 หลัก
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -83,7 +83,7 @@ export default function UIChangePassword({
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}
-                className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-secondary rounded-xl"
+                className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-primary rounded-xl"
               />
             ))}
           </div>
@@ -91,7 +91,7 @@ export default function UIChangePassword({
 
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Button
-            color="secondary"
+            color="primary"
             size="md"
             radius="lg"
             type="submit"
@@ -102,7 +102,7 @@ export default function UIChangePassword({
         </div>
       </div>
 
-      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-secondary rounded-tr-3xl rounded-br-3xl">
+      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-primary rounded-tr-3xl rounded-br-3xl">
         <div className="flex items-center justify-center w-full min-h-[600px] p-2 gap-2 relative">
           <Image
             src="/mascot/mascot-3.png"
