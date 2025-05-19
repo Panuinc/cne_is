@@ -57,12 +57,9 @@ export class PosJobDesPDFController {
       };
 
       const toOrderedList = (text = "") =>
-        text
+        (text || "")
           .split(/\r?\n/)
-          .map((l, i) => {
-            const raw = l.trim();
-            return raw;
-          })
+          .map((l) => l.trim())
           .filter((l) => l.length > 0)
           .map((l, i, arr) => {
             const cleaned = l.replace(/^\d+\.\s*/, "");
@@ -73,12 +70,7 @@ export class PosJobDesPDFController {
 
       const logoBase64 = fs
         .readFileSync(
-          path.join(
-            process.cwd(),
-            "public",
-            "logoCompany",
-            "com-1.png"
-          )
+          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
         )
         .toString("base64");
 
@@ -282,7 +274,7 @@ export class PosJobDesPDFController {
           </div>
         `,
       });
-      
+
       await browser.close();
 
       return new NextResponse(pdfBuffer, {
