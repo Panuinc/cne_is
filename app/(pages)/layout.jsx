@@ -183,31 +183,6 @@ export default function PagesLayout({ children }) {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!session && status !== "loading") router.push("/");
-  }, [session, status, router]);
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-      );
-    };
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  if (status === "loading") return <Loading />;
-  if (!session) return null;
-
-  const toggleSubmenu = (key) =>
-    setSubmenuOpen((prev) => ({ ...prev, [key]: !prev[key] }));
-
-  const isDashboardActive =
-    pathname === "/home" || pathname.startsWith("/home");
-
   const menuItems = [
     {
       title: "บุคคล",
@@ -241,6 +216,45 @@ export default function PagesLayout({ children }) {
     { label: "หน้าหลัก", icon: <Dashboard />, href: "/home" },
     { label: "แผนผังองค์กร", icon: <Organize />, href: "/organize" },
   ];
+
+  useEffect(() => {
+    if (!session && status !== "loading") router.push("/");
+  }, [session, status, router]);
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      );
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const initialOpen = {};
+    menuItems.forEach((menu) => {
+      if (
+        Array.isArray(menu.submenus) &&
+        menu.submenus.some(
+          (item) =>
+            item.href &&
+            (pathname === item.href || pathname.startsWith(item.href))
+        )
+      ) {
+        initialOpen[menu.key] = true;
+      }
+    });
+    setSubmenuOpen(initialOpen);
+  }, [pathname]);
+
+  if (status === "loading") return <Loading />;
+  if (!session) return null;
+
+  const toggleSubmenu = (key) =>
+    setSubmenuOpen((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
     <UILogoutProvider>
