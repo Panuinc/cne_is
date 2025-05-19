@@ -13,7 +13,7 @@ module.exports = {
     extend: {
         colors: {
         white: "#FFFFFF",
-        dark: "#2E2D2B",           // Charcoal earth-tone
+        dark: "#000000",           // Charcoal earth-tone
         default: "#F5F5F5",        // Warm off-white background
         primary: "#733DF2",        // Rich mocha brown (main brand)
         secondary: "#3B85FF",      // Soft sand (used for accent or highlight)
