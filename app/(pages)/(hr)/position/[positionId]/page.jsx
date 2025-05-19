@@ -49,13 +49,23 @@ export default function positionUpdate() {
           departmentRes.json(),
         ]);
 
-        if (divisionRes.ok) setDivisionOptions(divisionData.division || []);
-        else toast.error(divisionData.error || "Failed to load division data");
+        if (divisionRes.ok) {
+          const activeDivisions = (divisionData.division || []).filter(
+            (division) => division.divisionStatus === "Active"
+          );
+          setDivisionOptions(activeDivisions);
+        } else {
+          toast.error(divisionData.error || "Failed to load division data");
+        }
 
-        if (departmentRes.ok)
-          setAllDepartmentData(departmentData.department || []);
-        else
+        if (departmentRes.ok) {
+          const activeDepartments = (departmentData.department || []).filter(
+            (department) => department.departmentStatus === "Active"
+          );
+          setAllDepartmentData(activeDepartments);
+        } else {
           toast.error(departmentData.error || "Failed to load department data");
+        }
       } catch (error) {
         toast.error("Failed to fetch division or department: " + error.message);
       }
