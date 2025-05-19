@@ -24,10 +24,8 @@ import {
   It,
 } from "@/components/icons/icons";
 
-const submenus = (menu, submenuOpen, toggleSubmenu) => {
-  const pathname = usePathname();
+const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
   const hasSubmenu = Array.isArray(menu.submenus) && menu.submenus.length > 0;
-
   const isSubActive =
     hasSubmenu &&
     menu.submenus.some(
@@ -41,7 +39,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu) => {
       className="flex flex-col items-center justify-center w-full gap-2"
     >
       <div
-        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default ${
+        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default cursor-pointer ${
           isSubActive ? "bg-default text-dark" : ""
         }`}
         onClick={() => toggleSubmenu(menu.key)}
@@ -81,8 +79,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu) => {
   );
 };
 
-const toolMenu = (tool, index, collapsed) => {
-  const pathname = usePathname();
+const toolMenu = (tool, index, collapsed, pathname) => {
   const isActive = pathname === tool.href || pathname.startsWith(tool.href);
 
   return (
@@ -106,9 +103,9 @@ const toolMenu = (tool, index, collapsed) => {
 };
 
 const topBar = (currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-default">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white border-2 border-default">
     <div
-      className="flex xl:hidden items-center justify-start w-full h-full p-2 gap-2"
+      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
@@ -116,34 +113,34 @@ const topBar = (currentTime, setOpenMobile) => (
     <Link
       href="http://49.0.66.19:8023/Main/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md"
     >
       <CneSystem /> Cne System
     </Link>
     <Link
       href="http://cnecloud01.myqnapcloud.com:8011/cgi-bin/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md"
     >
       <CneCloud /> Cne Cloud
     </Link>
     <Link
       href="http://49.0.64.242:8088/LoginERS/login.aspx"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md"
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary/50 text-white rounded-full shadow-md">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md">
       <Search />
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-default text-dark rounded-full shadow-md relative">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-full shadow-md relative">
       <Image
         src="/mascot/mascot-1.png"
         alt="mascot-1"
@@ -263,7 +260,7 @@ export default function PagesLayout({ children }) {
                 </div>
               </Link>
               {menuItems.map((menu) =>
-                submenus(menu, submenuOpen, toggleSubmenu)
+                submenus(menu, submenuOpen, toggleSubmenu, pathname)
               )}
             </div>
             <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
@@ -288,7 +285,9 @@ export default function PagesLayout({ children }) {
               </div>
             </div>
             <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
-              {toolMenus.map((tool, index) => toolMenu(tool, index, collapsed))}
+              {toolMenus.map((tool, index) =>
+                toolMenu(tool, index, collapsed, pathname)
+              )}
             </div>
             <div
               className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-white"
