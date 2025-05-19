@@ -1,6 +1,0 @@
-2025-05-19 21:56:35 [error]: เกิดข้อผิดพลาดระหว่างสร้าง PosJobDes PDF {
-  "error": "Cannot read properties of null (reading 'split')"
-}
-2025-05-19 21:57:44 [error]: เกิดข้อผิดพลาดระหว่างสร้าง PosJobDes PDF {
-  "error": "Cannot read properties of null (reading 'split')"
-}
