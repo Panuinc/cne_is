@@ -32,26 +32,6 @@ export default function positionUpdate() {
   });
   const [divisionOptions, setDivisionOptions] = useState([]);
   const [departmentOptions, setAllDepartmentData] = useState([]);
-  
-  useEffect(() => {
-    if (!positionId) return;
-    (async () => {
-      try {
-        const res = await fetch(`/api/hr/position/${positionId}`, {
-          headers: { "secret-token": SECRET_TOKEN || "" },
-        });
-        const result = await res.json();
-
-        if (res.ok && result.position?.length) {
-          setFormData(result.position[0]);
-        } else {
-          toast.error(result.error || "Failed to load position data.");
-        }
-      } catch (err) {
-        toast.error(`Failed to load data: ${err.message}`);
-      }
-    })();
-  }, [positionId]);
 
   useEffect(() => {
     (async () => {
@@ -89,6 +69,26 @@ export default function positionUpdate() {
         String(d.departmentDivisionId) === String(formData.positionDivisionId)
     );
   }, [departmentOptions, formData.positionDivisionId]);
+
+  useEffect(() => {
+    if (!positionId) return;
+    (async () => {
+      try {
+        const res = await fetch(`/api/hr/position/${positionId}`, {
+          headers: { "secret-token": SECRET_TOKEN || "" },
+        });
+        const result = await res.json();
+
+        if (res.ok && result.position?.length) {
+          setFormData(result.position[0]);
+        } else {
+          toast.error(result.error || "Failed to load position data.");
+        }
+      } catch (err) {
+        toast.error(`Failed to load data: ${err.message}`);
+      }
+    })();
+  }, [positionId]);
 
   const handleChange = useCallback(
     (field) => (e) => {
