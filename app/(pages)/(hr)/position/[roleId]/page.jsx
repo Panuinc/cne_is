@@ -32,6 +32,7 @@ export default function positionUpdate() {
   });
   const [divisionOptions, setDivisionOptions] = useState([]);
   const [departmentOptions, setAllDepartmentData] = useState([]);
+  
   useEffect(() => {
     if (!positionId) return;
     (async () => {
