@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import UIPositionList from "@/components/ui/hr/position/UIPositionList";
+import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
@@ -33,7 +34,7 @@ export default function PositionList() {
 
   const handleExportPDF = async (posJobDesId) => {
     if (!posJobDesId) {
-      alert("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
+      toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
       return;
     }
 
@@ -49,16 +50,19 @@ export default function PositionList() {
       const pdfUrl = URL.createObjectURL(blob);
       window.open(pdfUrl, "_blank");
     } catch (error) {
-      alert(error.message || "เกิดข้อผิดพลาดในการส่งออก PDF");
+      toast.error(error.message || "เกิดข้อผิดพลาดในการส่งออก PDF");
     }
   };
 
   return (
-    <UIPositionList
-      header="ตำแหน่งงาน"
-      data={positionDataList}
-      error={errorMessage}
-      onExportPDF={handleExportPDF}
-    />
+    <>
+      <Toaster position="top-right" />
+      <UIPositionList
+        header="ตำแหน่งงาน"
+        data={positionDataList}
+        error={errorMessage}
+        onExportPDF={handleExportPDF}
+      />
+    </>
   );
 }

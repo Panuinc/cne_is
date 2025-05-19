@@ -124,13 +124,13 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
         if (posJobDesId) {
           router.push(`/posJobDes/${posJobDesId}`);
         } else {
-          alert("ไม่พบข้อมูลใบกำหนดลักษณะงานของตำแหน่งนี้");
+          toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงานของตำแหน่งนี้");
         }
       }
     },
     [router]
   );
-
+  
   const renderCell = useCallback(
     (item, idx, colKey) => {
       switch (colKey) {
