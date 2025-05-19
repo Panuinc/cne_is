@@ -233,7 +233,7 @@ export default function PagesLayout({ children }) {
   ];
 
   const toolMenus = [
-    { label: "บัญชี", icon: <Account />, href: "/account" },
+    { label: "โปรไฟล์", icon: <Account />, href: "/account" },
     { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
   ];
 
