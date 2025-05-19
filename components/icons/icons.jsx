@@ -199,14 +199,14 @@ export function Down() {
       height={24}
       viewBox="0 0 24 24"
     >
-      <g fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <circle cx={12} cy={12} r={10}></circle>
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m15 10.5l-3 3l-3-3"
-        ></path>
-      </g>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="m19 9l-7 6l-7-6"
+      ></path>
     </svg>
   );
 }
@@ -356,6 +356,22 @@ export function Organize() {
           d="M2 2h20M9 10.5l1.293-1.293c.333-.333.5-.5.707-.5s.374.167.707.5l.586.586c.333.333.5.5.707.5s.374-.167.707-.5L15 8.5M12 21v-4m-2 5l2-1m2 1l-2-1"
         ></path>
         <path d="M20 2v8.5c0 3.064 0 4.596-1.004 5.548s-2.62.952-5.853.952h-2.286c-3.232 0-4.849 0-5.853-.952S4 13.564 4 10.5V2"></path>
+      </g>
+    </svg>
+  );
+}
+
+export function Folder() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+    >
+      <g fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" d="M10 14h2m0 0h2m-2 0v2m0-2v-2"></path>
+        <path d="M2 6.95c0-.883 0-1.324.07-1.692A4 4 0 0 1 5.257 2.07C5.626 2 6.068 2 6.95 2c.386 0 .58 0 .766.017a4 4 0 0 1 2.18.904c.144.119.28.255.554.529L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .848.352C14.098 6 14.675 6 15.828 6h.374c2.632 0 3.949 0 4.804.77q.119.105.224.224c.77.855.77 2.172.77 4.804V14c0 3.771 0 5.657-1.172 6.828S17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172S2 17.771 2 14z"></path>
       </g>
     </svg>
   );

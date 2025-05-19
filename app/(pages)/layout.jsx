@@ -338,13 +338,13 @@ export default function PagesLayout({ children }) {
 
         {openMobile && (
           <div
-            className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2"
+            className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2 "
             onClick={() => setOpenMobile(false)}
           />
         )}
 
         <div
-          className={`flex flex-col h-full flex-1 bg-white ${
+          className={`flex flex-col h-full flex-1 bg-white overflow-auto ${
             collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
           }`}
         >
