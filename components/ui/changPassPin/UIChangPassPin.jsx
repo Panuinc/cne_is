@@ -83,7 +83,7 @@ export default function UIChangePassword({
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}
-                className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-primary rounded-xl"
+                className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-primary rounded-lg"
               />
             ))}
           </div>

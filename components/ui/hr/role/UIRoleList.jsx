@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Search, Setting } from "@/components/icons/icons";
 import UICustomTable from "@/components/other/UICustomTable";
+import { Folder, Search, Setting } from "@/components/icons/icons";
 import UICustomPagination from "@/components/other/UICustomPagination";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+
 import {
   Input,
   Button,
@@ -21,7 +22,7 @@ import {
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
   { name: "ใช้งาน", uniqueIdentifier: "active" },
-  { name: "ใช้งาน", uniqueIdentifier: "inactive" },
+  { name: "ไม่ใช้งาน", uniqueIdentifier: "inactive" },
 ];
 
 const rowsOptions = [5, 10, 15];
