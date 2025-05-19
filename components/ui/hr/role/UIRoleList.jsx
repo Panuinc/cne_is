@@ -133,7 +133,7 @@ export default function UIRoleList({ data = [], error = "" }) {
                   : "danger"
               }
               radius="lg"
-              className="min-w-8 min-h-8"
+              className="min-w-10 min-h-10 text-white"
             >
               {item.roleStatus?.toLowerCase() === "active"
                 ? "ใช้งาน"
