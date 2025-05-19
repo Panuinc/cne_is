@@ -21,8 +21,8 @@ import {
 
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "ใช้งาน", uniqueIdentifier: "active" },
-  { name: "ไม่ใช้งาน", uniqueIdentifier: "inactive" },
+  { name: "เปิดใช้งาน", uniqueIdentifier: "active" },
+  { name: "ปิดใช้งาน", uniqueIdentifier: "inactive" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -136,8 +136,8 @@ export default function UIRoleList({ data = [], error = "" }) {
               className="min-w-10 min-h-10 text-white"
             >
               {item.roleStatus?.toLowerCase() === "active"
-                ? "ใช้งาน"
-                : "ไม่ใช้งาน"}
+                ? "เปิดใช้งาน"
+                : "ปิดใช้งาน"}
             </Button>
           );
         case "createdBy":

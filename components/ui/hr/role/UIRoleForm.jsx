@@ -65,10 +65,10 @@ export default function UIRoleForm({
                 errorMessage={errors.roleStatus}
               >
                 <SelectItem key="Active" value="Active">
-                  ใช้งาน
+                  เปิดใช้งาน
                 </SelectItem>
                 <SelectItem key="InActive" value="InActive">
-                  ไม่ใช้งาน
+                  ปิดใช้งาน
                 </SelectItem>
               </Select>
             </div>
