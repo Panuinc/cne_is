@@ -73,7 +73,7 @@ export default function UIEmpList({ data = [], error = "" }) {
   const columns = useMemo(() => {
     const baseColumns = [
       { name: "ลำดับ", uid: "empId" },
-      { name: "ชื่อ (TH)", uid: "empFirstName" },
+      { name: "ชื่อ (TH)", uid: "empFirstNameTH" },
       { name: "สถานะการใช้งาน", uid: "empStatus" },
     ];
 
@@ -94,7 +94,7 @@ export default function UIEmpList({ data = [], error = "" }) {
     let result = data;
     if (searchTerm.trim()) {
       result = result.filter((emp) =>
-        emp.empFirstName?.toLowerCase().includes(searchTerm.toLowerCase())
+        emp.empFirstNameTH?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== "all") {
