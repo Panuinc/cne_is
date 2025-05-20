@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function UIUnauthorized() {
   return (
-    <div className="flex flex-row items-center justify-center w-full xl:w-6/12 gap-2 bg-white shadow-md rounded-3xl">
+    <div className="flex flex-row items-center justify-center w-full h-full xl:w-6/12 gap-2 bg-white shadow-md rounded-3xl">
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
         <motion.div
           className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-primary font-[600]"
