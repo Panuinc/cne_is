@@ -21,11 +21,18 @@ export default function UIEmpCvForm({
   return (
     <>
       <UIHeader Header={header} />
+
       <form
         ref={formRef}
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
       >
+        <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+          <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+            ข้อมูล เรซูเม่
+          </div>
+        </div>
+
         <div className="flex flex-col xl:flex-row items-center justify-end w-full h-full p-2 gap-2">
           {["TH", "EN"].map((lng) => (
             <div
@@ -46,8 +53,10 @@ export default function UIEmpCvForm({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            การศึกษา
+          <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+              การศึกษา
+            </div>
           </div>
 
           {formData.empCvEducations.map((edu, i) => (
@@ -206,8 +215,10 @@ export default function UIEmpCvForm({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ใบอนุญาตประกอบวิชาชีพ
+          <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+              ใบอนุญาตประกอบวิชาชีพ
+            </div>
           </div>
 
           {formData.empCvLicenses.map((lic, i) => (
@@ -340,8 +351,10 @@ export default function UIEmpCvForm({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ประวัติการทำงาน
+          <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+              ประวัติการทำงาน
+            </div>
           </div>
 
           {formData.empCvWorkHistories.map((wh, wi) => (
@@ -463,8 +476,10 @@ export default function UIEmpCvForm({
               </div>
 
               <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
-                <div className="flex items-center justify-start w-full h-full p-2 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-                  โปรเจคที่ผ่านมา
+                <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+                  <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+                    โปรเจคที่ผ่านมา
+                  </div>
                 </div>
 
                 {(wh.empCvProjects || []).map((proj, pi) => (
@@ -610,8 +625,10 @@ export default function UIEmpCvForm({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ความสามารถทางภาษา
+          <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+              ความสามารถทางภาษา
+            </div>
           </div>
 
           {formData.empCvLanguageSkills.map((lang, i) => (
