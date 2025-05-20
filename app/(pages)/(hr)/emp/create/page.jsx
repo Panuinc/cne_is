@@ -16,7 +16,19 @@ export default function empCreate() {
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ empName: "" });
+  const [formData, setFormData] = useState({
+    empTitle: "",
+    empFirstNameTH: "",
+    empLastNameTH: "",
+    empFirstNameEN: "",
+    empLastNameEN: "",
+    empEmail: "",
+    empTel: "",
+    empIdCard: "",
+    empBirthday: "",
+    empCitizen: "",
+    empGender: "",
+  });
 
   const handleChange = useCallback(
     (field) => (e) => {

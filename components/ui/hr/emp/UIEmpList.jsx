@@ -25,6 +25,19 @@ const statusOptions = [
   { name: "ปิดใช้งาน", uniqueIdentifier: "inactive" },
 ];
 
+const empTypeOptions = [
+  { name: "ทั้งหมด", uniqueIdentifier: "all" },
+  { name: "รายเดือน", uniqueIdentifier: "Monthly" },
+  { name: "รายเดือน (คนพิการ)", uniqueIdentifier: "perDisabilities" },
+  { name: "รายวัน", uniqueIdentifier: "Daily" },
+];
+
+const genderOptions = [
+  { name: "ทั้งหมด", uniqueIdentifier: "all" },
+  { name: "ชาย", uniqueIdentifier: "Male" },
+  { name: "หญิง", uniqueIdentifier: "FeMale" },
+];
+
 const rowsOptions = [5, 10, 15];
 
 const UISelectFilter = ({

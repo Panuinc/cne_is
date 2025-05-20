@@ -17,7 +17,20 @@ export default function empUpdate() {
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ empName: "", empStatus: "" });
+  const [formData, setFormData] = useState({
+    empTitle: "",
+    empFirstNameTH: "",
+    empLastNameTH: "",
+    empFirstNameEN: "",
+    empLastNameEN: "",
+    empEmail: "",
+    empTel: "",
+    empIdCard: "",
+    empBirthday: "",
+    empCitizen: "",
+    empGender: "",
+    empStatus: "",
+  });
 
   useEffect(() => {
     if (!empId) return;

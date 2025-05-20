@@ -30,20 +30,228 @@ export default function UIRoleForm({
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <Input
-              name="empFirstName"
-              type="text"
-              label="ชื่อ (TH)"
+            <Select
+              name="empTitle"
+              label="คำนำหน้าชื่อ"
               placeholder="Please Enter Data"
               size="md"
               variant="bordered"
               color="primary"
               radius="lg"
-              value={formData.empFirstName || ""}
-              onChange={handleInputChange("empFirstName")}
-              isInvalid={!!errors.empFirstName}
-              errorMessage={errors.empFirstName}
+              value={formData.empTitle || ""}
+              selectedKeys={formData.empTitle ? [formData.empTitle] : []}
+              onChange={handleInputChange("empTitle")}
+              isInvalid={!!errors.empTitle}
+              errorMessage={errors.empTitle}
+            >
+              <SelectItem key="Mr" value="Mr">
+                นาย
+              </SelectItem>
+              <SelectItem key="Mrs" value="Mrs">
+                นาง
+              </SelectItem>
+              <SelectItem key="Ms" value="Ms">
+                นางสาว
+              </SelectItem>
+            </Select>
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empFirstNameTH"
+              type="text"
+              label="ชื่อพนักงาน (TH)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empFirstNameTH}
+              onChange={handleInputChange("empFirstNameTH")}
+              isInvalid={!!errors.empFirstNameTH}
+              errorMessage={errors.empFirstNameTH}
             />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empLastNameTH"
+              type="text"
+              label="นามสกุลพนักงาน (TH)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empLastNameTH}
+              onChange={handleInputChange("empLastNameTH")}
+              isInvalid={!!errors.empLastNameTH}
+              errorMessage={errors.empLastNameTH}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empFirstNameEN"
+              type="text"
+              label="ชื่อพนักงาน (EN)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empFirstNameEN}
+              onChange={handleInputChange("empFirstNameEN")}
+              isInvalid={!!errors.empFirstNameEN}
+              errorMessage={errors.empFirstNameEN}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empLastNameEN"
+              type="text"
+              label="นามสกุลพนักงาน (EN)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empLastNameEN}
+              onChange={handleInputChange("empLastNameEN")}
+              isInvalid={!!errors.empLastNameEN}
+              errorMessage={errors.empLastNameEN}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empEmail"
+              type="email"
+              label="อีเมลล์"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empEmail}
+              onChange={handleInputChange("empEmail")}
+              isInvalid={!!errors.empEmail}
+              errorMessage={errors.empEmail}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empTel"
+              type="number"
+              label="เบอร์โทรศัพท์"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empTel}
+              onChange={handleInputChange("empTel")}
+              isInvalid={!!errors.empTel}
+              errorMessage={errors.empTel}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empIdCard"
+              type="number"
+              label="เลขบัตรประชาชน"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empIdCard}
+              onChange={handleInputChange("empIdCard")}
+              isInvalid={!!errors.empIdCard}
+              errorMessage={errors.empIdCard}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Input
+              name="empBirthday"
+              type="date"
+              label="วันเกิด"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empBirthday}
+              onChange={handleInputChange("empBirthday")}
+              isInvalid={!!errors.empBirthday}
+              errorMessage={errors.empBirthday}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Select
+              name="empCitizen"
+              label="สัญชาติ"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empCitizen || ""}
+              selectedKeys={formData.empCitizen ? [formData.empCitizen] : []}
+              onChange={handleInputChange("empCitizen")}
+              isInvalid={!!errors.empCitizen}
+              errorMessage={errors.empCitizen}
+            >
+              <SelectItem key="Thai" value="Thai">
+                ไทย
+              </SelectItem>
+              <SelectItem key="Cambodian" value="Cambodian">
+                กัมพูชา
+              </SelectItem>
+              <SelectItem key="Lao" value="Lao">
+                ลาว
+              </SelectItem>
+              <SelectItem key="Burmese" value="Burmese">
+                พม่า
+              </SelectItem>
+              <SelectItem key="Vietnam" value="Vietnam">
+                เวียดนาม
+              </SelectItem>
+            </Select>
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <Select
+              name="empGender"
+              label="เพศ"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="bordered"
+              color="primary"
+              radius="lg"
+              value={formData.empGender || ""}
+              selectedKeys={formData.empGender ? [formData.empGender] : []}
+              onChange={handleInputChange("empGender")}
+              isInvalid={!!errors.empGender}
+              errorMessage={errors.empGender}
+            >
+              <SelectItem key="Male" value="Male">
+                ชาย
+              </SelectItem>
+              <SelectItem key="FeMale" value="FeMale">
+                หญิง
+              </SelectItem>
+            </Select>
           </div>
         </div>
 
@@ -64,11 +272,11 @@ export default function UIRoleForm({
                 isInvalid={!!errors.empStatus}
                 errorMessage={errors.empStatus}
               >
-                <SelectItem key="Active" value="Active">
-                  เปิดใช้งาน
-                </SelectItem>
                 <SelectItem key="InActive" value="InActive">
                   ปิดใช้งาน
+                </SelectItem>
+                <SelectItem key="Active" value="Active">
+                  เปิดใช้งาน
                 </SelectItem>
               </Select>
             </div>
@@ -83,7 +291,7 @@ export default function UIRoleForm({
               placeholder="Please Enter Data"
               size="md"
               variant="flat"
-              color="default"
+              color="primary"
               radius="lg"
               value={operatedBy}
               readOnly
