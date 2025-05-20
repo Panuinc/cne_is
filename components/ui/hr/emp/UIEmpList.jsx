@@ -137,7 +137,7 @@ export default function UIEmpList({ data = [], error = "" }) {
       ),
     ];
     return [
-      { name: "ฝ่ายทั้งหมด", uniqueIdentifier: "all" },
+      { name: "ทั้งหมด", uniqueIdentifier: "all" },
       ...unique.map((name) => ({ name, uniqueIdentifier: name })),
     ];
   }, [data]);
@@ -154,7 +154,7 @@ export default function UIEmpList({ data = [], error = "" }) {
       ),
     ];
     return [
-      { name: "แผนกทั้งหมด", uniqueIdentifier: "all" },
+      { name: "ทั้งหมด", uniqueIdentifier: "all" },
       ...unique.map((name) => ({ name, uniqueIdentifier: name })),
     ];
   }, [data]);
@@ -171,7 +171,7 @@ export default function UIEmpList({ data = [], error = "" }) {
       ),
     ];
     return [
-      { name: "ตำแหน่งทั้งหมด", uniqueIdentifier: "all" },
+      { name: "ทั้งหมด", uniqueIdentifier: "all" },
       ...unique.map((name) => ({ name, uniqueIdentifier: name })),
     ];
   }, [data]);
