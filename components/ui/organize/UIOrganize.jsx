@@ -50,7 +50,7 @@ export default function UIOrganize({
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark overflow-auto">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark overflow-auto">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             Channakorn Engineer
           </div>
