@@ -133,8 +133,8 @@ export default function UIDepartmentList({ data = [], error = "" }) {
               size="sm"
               color={
                 item.departmentStatus?.toLowerCase() === "active"
-                  ? "success"
-                  : "danger"
+                  ? "primary"
+                  : "secondary"
               }
               radius="lg"
               className="min-w-10 min-h-10 text-white"

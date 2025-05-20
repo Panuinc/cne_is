@@ -142,8 +142,8 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
               size="sm"
               color={
                 item.positionStatus?.toLowerCase() === "active"
-                  ? "success"
-                  : "danger"
+                  ? "primary"
+                  : "secondary"
               }
               radius="lg"
               className="min-w-10 min-h-10 text-white"
