@@ -243,7 +243,7 @@ export class PosJobDesPDFController {
             บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
         </div>
 
-        <div class="flex items-center justify-center w-full h-full p-1 gap-2">
+        <div class="flex items-center justify-start w-full h-full p-1 gap-2">
             <ol class="list-decimal pl-6">
                 ${toOrderedList(posJobDesResponsibility)}
             </ol>
