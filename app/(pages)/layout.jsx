@@ -193,6 +193,7 @@ export default function PagesLayout({ children }) {
         { title: "ฝ่าย", href: "/division" },
         { title: "แผนก", href: "/department" },
         { title: "ตำแหน่งงาน", href: "/position" },
+        { title: "พนักงาน", href: "/emp" },
       ],
     },
     {
