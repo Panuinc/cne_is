@@ -34,7 +34,7 @@ export default function UIDepartmentForm({
             <Select
               name="departmentDivisionId"
               label="ฝ่าย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -61,7 +61,7 @@ export default function UIDepartmentForm({
               name="departmentName"
               type="text"
               label="แผนก"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -80,7 +80,7 @@ export default function UIDepartmentForm({
               <Select
                 name="departmentStatus"
                 label="สถานะการใช้งาน"
-                placeholder="Please Enter Data"
+                placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="primary"
@@ -109,7 +109,7 @@ export default function UIDepartmentForm({
             <Input
               type="text"
               label="ดำเนินการโดย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
               color="default"

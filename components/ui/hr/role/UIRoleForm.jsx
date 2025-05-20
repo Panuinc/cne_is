@@ -34,7 +34,7 @@ export default function UIRoleForm({
               name="roleName"
               type="text"
               label="ระดับตำแหน่ง"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -53,7 +53,7 @@ export default function UIRoleForm({
               <Select
                 name="roleStatus"
                 label="สถานะการใช้งาน"
-                placeholder="Please Enter Data"
+                placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="primary"
@@ -80,7 +80,7 @@ export default function UIRoleForm({
             <Input
               type="text"
               label="ดำเนินการโดย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
               color="default"

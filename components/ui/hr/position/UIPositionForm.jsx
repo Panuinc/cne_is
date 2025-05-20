@@ -35,7 +35,7 @@ export default function UIPositionForm({
             <Select
               name="positionDivisionId"
               label="ฝ่าย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -61,7 +61,7 @@ export default function UIPositionForm({
             <Select
               name="positionDepartmentId"
               label="แผนก"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -94,7 +94,7 @@ export default function UIPositionForm({
               name="positionNameTH"
               type="text"
               label="ตำแหน่งงาน (TH)"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -110,7 +110,7 @@ export default function UIPositionForm({
               name="positionNameEN"
               type="text"
               label="ตำแหน่งงาน (EN)"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
@@ -129,7 +129,7 @@ export default function UIPositionForm({
               <Select
                 name="positionStatus"
                 label="สถานะการใช้งาน"
-                placeholder="Please Enter Data"
+                placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="primary"
@@ -158,7 +158,7 @@ export default function UIPositionForm({
             <Input
               type="text"
               label="ดำเนินการโดย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
               color="default"

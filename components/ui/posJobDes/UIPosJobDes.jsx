@@ -88,7 +88,7 @@ export default function UIPosJobDes({
                 <Input
                   name="posJobDesAge"
                   label="อายุ"
-                  placeholder="Please Enter Data"
+                  placeholder="กรุณากรอกข้อมูล"
                   size="md"
                   variant="bordered"
                   color="primary"
@@ -109,7 +109,7 @@ export default function UIPosJobDes({
                 <Select
                   name="posJobDesSex"
                   label="เพศ"
-                  placeholder="Please Enter Data"
+                  placeholder="กรุณากรอกข้อมูล"
                   size="md"
                   variant="bordered"
                   color="primary"
@@ -235,7 +235,7 @@ export default function UIPosJobDes({
             <Input
               type="text"
               label="ดำเนินการโดย"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
               color="default"

@@ -42,7 +42,7 @@ export default function UIChangePassword({
           <Input
             type="password"
             label="รหัสผ่านใหม่"
-            placeholder="Please Enter Data"
+            placeholder="กรุณากรอกข้อมูล"
             size="md"
             variant="bordered"
             color="primary"
@@ -57,7 +57,7 @@ export default function UIChangePassword({
           <Input
             type="password"
             label="ยืนยันรหัสผ่าน"
-            placeholder="Please Enter Data"
+            placeholder="กรุณากรอกข้อมูล"
             size="md"
             variant="bordered"
             color="primary"

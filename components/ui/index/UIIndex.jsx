@@ -59,7 +59,7 @@ export default function UIIndex(props) {
               <Input
                 type="text"
                 label="ชื่อบัญชีผู้ใช้"
-                placeholder="Please Enter Data"
+                placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="primary"
@@ -73,7 +73,7 @@ export default function UIIndex(props) {
               <Input
                 type="password"
                 label="รหัสผ่าน"
-                placeholder="Please Enter Data"
+                placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="primary"

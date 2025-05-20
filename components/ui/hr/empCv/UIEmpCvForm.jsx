@@ -69,7 +69,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvEducations[${i}].empCvEducationDegreeTH`}
                     label="ระดับการศึกษา (TH)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -89,7 +89,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvEducations[${i}].empCvEducationDegreeEN`}
                     label="ระดับการศึกษา (EN)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -109,7 +109,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvEducations[${i}].empCvEducationInstitutionTH`}
                     label="สถาบันการศึกษา (TH)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -126,7 +126,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvEducations[${i}].empCvEducationInstitutionEN`}
                     label="สถาบันการศึกษา (EN)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -147,7 +147,7 @@ export default function UIEmpCvForm({
                     name={`empCvEducations[${i}].empCvEducationStartDate`}
                     type="date"
                     label="วันที่เริ่ม"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -168,7 +168,7 @@ export default function UIEmpCvForm({
                     name={`empCvEducations[${i}].empCvEducationEndDate`}
                     type="date"
                     label="วันที่สิ้นสุด"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -231,7 +231,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvLicenses[${i}].empCvLicenseNameTH`}
                     label="ชื่อใบอนุญาตประกอบวิชาชีพ (TH)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -248,7 +248,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvLicenses[${i}].empCvLicenseNameEN`}
                     label="ชื่อใบอนุญาตประกอบวิชาชีพ (EN)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -268,7 +268,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvLicenses[${i}].empCvLicenseNumber`}
                     label="หมายเลขใบอนุญาตประกอบวิชาชีพ"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -286,7 +286,7 @@ export default function UIEmpCvForm({
                     name={`empCvLicenses[${i}].empCvLicenseStartDate`}
                     type="date"
                     label="วันที่เริ่ม"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -304,7 +304,7 @@ export default function UIEmpCvForm({
                     name={`empCvLicenses[${i}].empCvLicenseEndDate`}
                     type="date"
                     label="วันที่สิ้นสุด"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -367,7 +367,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryCompanyNameTH`}
                     label="ชื่อบริษัท (TH)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -384,7 +384,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryCompanyNameEN`}
                     label="ชื่อบริษัท (EN)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -404,7 +404,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryPositionTH`}
                     label="ตำแหน่งงาน (TH)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -421,7 +421,7 @@ export default function UIEmpCvForm({
                   <Input
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryPositionEN`}
                     label="ตำแหน่งงาน (EN)"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -442,7 +442,7 @@ export default function UIEmpCvForm({
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryStartDate`}
                     type="date"
                     label="วันที่เริ่ม"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -460,7 +460,7 @@ export default function UIEmpCvForm({
                     name={`empCvWorkHistories[${wi}].empCvWorkHistoryEndDate`}
                     type="date"
                     label="วันที่สิ้นสุด"
-                    placeholder="Please Enter Data"
+                    placeholder="กรุณากรอกข้อมูล"
                     size="md"
                     variant="bordered"
                     color="primary"
@@ -492,7 +492,7 @@ export default function UIEmpCvForm({
                         <Input
                           name={`empCvWorkHistories[${wi}].empCvProjects[${pi}].empCvProjectNameTH`}
                           label="ชื่อโปรเจค (TH)"
-                          placeholder="Please Enter Data"
+                          placeholder="กรุณากรอกข้อมูล"
                           size="md"
                           variant="bordered"
                           color="primary"
@@ -509,7 +509,7 @@ export default function UIEmpCvForm({
                         <Input
                           name={`empCvWorkHistories[${wi}].empCvProjects[${pi}].empCvProjectNameEN`}
                           label="ชื่อโปรเจค (EN)"
-                          placeholder="Please Enter Data"
+                          placeholder="กรุณากรอกข้อมูล"
                           size="md"
                           variant="bordered"
                           color="primary"
@@ -529,7 +529,7 @@ export default function UIEmpCvForm({
                         <Input
                           name={`empCvWorkHistories[${wi}].empCvProjects[${pi}].empCvProjectDescriptionTH`}
                           label="รายละเอียดโปรเจค (TH)"
-                          placeholder="Please Enter Data"
+                          placeholder="กรุณากรอกข้อมูล"
                           size="md"
                           variant="bordered"
                           color="primary"
@@ -546,7 +546,7 @@ export default function UIEmpCvForm({
                         <Input
                           name={`empCvWorkHistories[${wi}].empCvProjects[${pi}].empCvProjectDescriptionEN`}
                           label="รายละเอียดโปรเจค (EN)"
-                          placeholder="Please Enter Data"
+                          placeholder="กรุณากรอกข้อมูล"
                           size="md"
                           variant="bordered"
                           color="primary"
@@ -640,7 +640,7 @@ export default function UIEmpCvForm({
                 <Input
                   name={`empCvLanguageSkills[${i}].empCvLanguageSkillNameTH`}
                   label="ความสามารถทางภาษา (TH)"
-                  placeholder="Please Enter Data"
+                  placeholder="กรุณากรอกข้อมูล"
                   size="md"
                   variant="bordered"
                   color="primary"
@@ -657,7 +657,7 @@ export default function UIEmpCvForm({
                 <Input
                   name={`empCvLanguageSkills[${i}].empCvLanguageSkillNameEN`}
                   label="ความสามารถทางภาษา (EN)"
-                  placeholder="Please Enter Data"
+                  placeholder="กรุณากรอกข้อมูล"
                   size="md"
                   variant="bordered"
                   color="primary"
@@ -674,7 +674,7 @@ export default function UIEmpCvForm({
                 <Select
                   name={`empCvLanguageSkills[${i}].empCvLanguageSkillProficiency`}
                   label="ระดับคะแนน"
-                  placeholder="Please Enter Data"
+                  placeholder="กรุณากรอกข้อมูล"
                   size="md"
                   variant="bordered"
                   color="primary"
@@ -734,7 +734,7 @@ export default function UIEmpCvForm({
               name="operatedBy"
               type="text"
               label="Operated By"
-              placeholder="Please Enter Data"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="primary"
