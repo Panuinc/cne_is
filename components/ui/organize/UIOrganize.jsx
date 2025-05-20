@@ -43,7 +43,7 @@ export default function UIOrganize({
 
   return (
     <>
-      <UIHeader Header="Organize" />
+      <UIHeader Header="แผนผังองค์กร" />
       <div className="flex flex-col items-center justify-start w-full h-full p-4 gap-4 bg-white overflow-auto">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-60 p-2 gap-4 bg-white">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
