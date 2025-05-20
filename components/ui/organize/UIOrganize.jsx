@@ -1,7 +1,12 @@
+"use client";
 import UIHeader from "@/components/other/UIHeader";
 import React from "react";
 
-export default function UIOrganize() {
+export default function UIOrganize({
+  divisions = [],
+  departments = [],
+  employees = [],
+}) {
   return (
     <>
       <UIHeader Header="Organize" />
@@ -24,7 +29,7 @@ export default function UIOrganize() {
                 จำนวนพนักงาน
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                จำนวนพนักงาน
+                {employees.length}
               </div>
             </div>
             <div className="flex flex-col items-center justify-center w-full h-full p-2 border-2 border-dark bg-white shadow-md rounded-xl">
@@ -32,7 +37,7 @@ export default function UIOrganize() {
                 จำนวนฝ่าย
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                จำนวนฝ่าย
+                {divisions.length}
               </div>
             </div>
             <div className="flex flex-col items-center justify-center w-full h-full p-2 border-2 border-dark bg-white shadow-md rounded-xl">
@@ -40,13 +45,21 @@ export default function UIOrganize() {
                 จำนวนแผนก
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                จำนวนแผนก
+                {departments.length}
               </div>
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          1
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark overflow-auto">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            Channakorn Engineer
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            Division
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            Department
+          </div>
         </div>
       </div>
     </>
