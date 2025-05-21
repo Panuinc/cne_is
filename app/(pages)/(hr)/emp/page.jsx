@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import UIEmpList from "@/components/ui/hr/emp/UIEmpList";
+
+import React, { useEffect, useState } from "react";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
