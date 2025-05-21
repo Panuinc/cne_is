@@ -40,8 +40,8 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
       className="flex flex-col items-center justify-center w-full gap-2"
     >
       <div
-        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default rounded-lg cursor-pointer ${
-          isSubActive ? "bg-default text-dark" : ""
+        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
+          isSubActive ? "bg-primary text-white" : ""
         }`}
         onClick={() => toggleSubmenu(menu.key)}
       >
@@ -60,14 +60,14 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
         </div>
       </div>
       {submenuOpen[menu.key] && (
-        <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-default">
+        <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-primary">
           {menu.submenus.map((sub, idx) => (
             <Link
               key={idx}
               href={sub.href}
-              className={`flex items-center justify-start w-full h-full px-2 py-3 gap-2 hover:bg-default rounded-lg ${
+              className={`flex items-center justify-start w-full h-full px-2 py-3 gap-2 hover:bg-primary hover:text-white rounded-lg ${
                 pathname === sub.href || pathname.startsWith(sub.href)
-                  ? "bg-default text-dark"
+                  ? "bg-primary text-white"
                   : ""
               }`}
             >
@@ -87,8 +87,8 @@ const toolMenu = (tool, index, collapsed, pathname) => {
     <Link
       key={index}
       href={tool.href}
-      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-white rounded-lg ${
-        isActive ? "bg-white text-dark" : ""
+      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg ${
+        isActive ? "bg-primary text-white" : ""
       }`}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
@@ -104,9 +104,9 @@ const toolMenu = (tool, index, collapsed, pathname) => {
 };
 
 const topBar = (currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white border-b-2 border-default">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-default">
     <div
-      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md"
+      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
@@ -114,34 +114,34 @@ const topBar = (currentTime, setOpenMobile) => (
     <Link
       href="http://49.0.66.19:8023/Main/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
     >
       <CneSystem /> Cne System
     </Link>
     <Link
       href="http://cnecloud01.myqnapcloud.com:8011/cgi-bin/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
     >
       <CneCloud /> Cne Cloud
     </Link>
     <Link
       href="http://49.0.64.242:8088/LoginERS/login.aspx"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full">
       <Search />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 border-2 border-default bg-white text-dark rounded-lg shadow-md relative">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full relative">
       <Image
         src="/mascot/mascot-1.png"
         alt="mascot-1"
@@ -159,8 +159,8 @@ const mainMenuItem = (menu, pathname) => {
     <Link
       key={menu.href}
       href={menu.href}
-      className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-default rounded-lg ${
-        isActive ? "bg-default text-dark" : ""
+      className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg ${
+        isActive ? "bg-primary text-white" : ""
       }`}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
@@ -272,7 +272,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
           >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-default">
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
               <Link
                 href="/home"
                 className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
@@ -293,11 +293,11 @@ export default function PagesLayout({ children }) {
               )}
             </div>
 
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-default">
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
               <Link
                 href="/logout"
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-default rounded-lg"
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg"
               >
                 <Logout /> ออกจากระบบ
               </Link>
@@ -309,9 +309,9 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
           >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-b-2 border-white">
-              <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                Tools
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+                {""}
               </div>
             </div>
             <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
@@ -320,7 +320,7 @@ export default function PagesLayout({ children }) {
               )}
             </div>
             <div
-              className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-t-2 border-white"
+              className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2"
               onClick={() => setCollapsed(!collapsed)}
             >
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 rounded-lg cursor-pointer">
