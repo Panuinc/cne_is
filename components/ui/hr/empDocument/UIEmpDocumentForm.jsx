@@ -26,12 +26,6 @@ export default function UIEmpDocumentForm({
       >
         {formData.EmpDocumentEmpBy?.empCitizen === "Thai" && (
           <>
-            <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-              <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-                เอกสารสำหรับคนไทย
-              </div>
-            </div>
-
             <div className="flex flex-row items-end justify-center w-full h-full p-2 gap-2">
               <Input
                 name="empDocumentIdCardFile"
@@ -145,7 +139,7 @@ export default function UIEmpDocumentForm({
         {formData.EmpDocumentEmpBy?.empCitizen !== "Thai" && (
           <>
             <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-              <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+              <div className="flex items-center justify-center h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
                 เอกสารสำหรับคนต่างด้าว
               </div>
             </div>
@@ -343,9 +337,9 @@ export default function UIEmpDocumentForm({
             <Input
               type="text"
               label="ดำเนินการโดย"
-              placeholder="ดำเนินการโดย"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="flat"
               color="primary"
               radius="lg"
               value={operatedBy}
