@@ -38,7 +38,7 @@ export default function Organize() {
           const activeDepartments = (depData.department || []).filter(
             (department) => department.departmentStatus === "Active"
           );
-          const activeEmployees = (empData.employee || []).filter(
+          const activeEmployees = (empData.emp  || []).filter(
             (employee) => employee.empStatus === "Active"
           );
 
