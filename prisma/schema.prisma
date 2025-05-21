@@ -32,11 +32,6 @@ enum Status {
   InActive
 }
 
-enum WorkStatus {
-  CurrentEmp @map("CurrentEmp")
-  Resign     @map("Resign")
-}
-
 enum EmpEmploymentType {
   Daily           @map("Daily")
   Monthly         @map("Monthly")
