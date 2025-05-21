@@ -69,7 +69,7 @@ export default function UIChangePassword({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-primary">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2">
             เลข 6 หลัก
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">

@@ -13,7 +13,7 @@ export default function UIAnimatedText({ children }) {
 
   return (
     <motion.div
-      className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-primary"
+      className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-primary font-[600]"
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{

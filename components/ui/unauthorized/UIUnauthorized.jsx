@@ -3,24 +3,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@heroui/react";
-import { motion } from "framer-motion";
+import UIAnimatedText from "@/components/other/UIAnimatedText";
 
 export default function UIUnauthorized() {
   return (
     <div className="flex flex-row items-center justify-center w-full h-full xl:w-6/12 gap-2 bg-white shadow-md rounded-3xl">
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
-        <motion.div
-          className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl text-primary font-[600]"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            duration: 0.6,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        >
-          ขออภัยเป็นอย่างยิ่ง
-        </motion.div>
+        <UIAnimatedText>ขออภัยเป็นอย่างยิ่ง</UIAnimatedText>
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           คุณไม่มีสิทธิ์ในการเข้าถึงหน้านี้
         </div>
