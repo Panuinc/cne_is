@@ -50,7 +50,7 @@ export default function UIIndex(props) {
             property="true"
           />
         </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl font-[600]">
           Channakorn Internal System
         </div>
         {!isPinMode && (

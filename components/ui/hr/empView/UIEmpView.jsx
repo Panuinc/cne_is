@@ -77,7 +77,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
           <div className="h-24"></div>
 
           <div className="flex justify-center mb-4">
-            <div className="px-6 py-2  text-center text-xl font-semibold">
+            <div className="px-6 py-2  text-center">
               {formData.empFirstNameTH} {formData.empLastNameTH}
             </div>
           </div>
