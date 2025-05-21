@@ -1,6 +1,7 @@
 "use client";
 
 import UIDepartmentForm from "@/components/ui/hr/department/UIDepartmentForm";
+
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

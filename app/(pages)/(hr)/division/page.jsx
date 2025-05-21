@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import UIDivisionList from "@/components/ui/hr/division/UIDivisionList";
+
+import React, { useEffect, useState } from "react";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
