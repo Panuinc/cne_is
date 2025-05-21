@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
 import UIHeader from "@/components/other/UIHeader";
+
+import React from "react";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
 
 export default function UIRoleForm({
@@ -22,12 +23,6 @@ export default function UIRoleForm({
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-          <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ข้อมูล ระดับตำแหน่ง
-          </div>
-        </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             <Input
@@ -83,7 +78,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
-              color="default"
+              color="primary"
               radius="lg"
               value={operatedBy}
               readOnly

@@ -1,11 +1,12 @@
 "use client";
 
+import UICustomTable from "@/components/other/UICustomTable";
+import UICustomPagination from "@/components/other/UICustomPagination";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import UICustomTable from "@/components/other/UICustomTable";
 import { Folder, Search, Setting } from "@/components/icons/icons";
-import UICustomPagination from "@/components/other/UICustomPagination";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import {
@@ -28,14 +29,14 @@ const statusOptions = [
 const rowsOptions = [5, 10, 15];
 
 const UISelectFilter = ({
+  label,
   selectedValue,
   items,
   onChange,
   isDisabled = false,
 }) => (
   <Select
-    label="สถานะการใช้งาน"
-    placeholder="กรุณาเลือกสถานะ"
+    label={label}
     size="md"
     variant="bordered"
     color="primary"
@@ -61,7 +62,6 @@ export default function UIRoleList({ data = [], error = "" }) {
 
   const roleName = session?.user?.roleName;
   const divisionName = session?.user?.divisionName;
-
   const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "บุคคล";
 
   const router = useRouter();
@@ -209,6 +209,7 @@ export default function UIRoleList({ data = [], error = "" }) {
       <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
         <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
           <UISelectFilter
+            label="สถานะการใช้งาน"
             selectedValue={statusFilter}
             items={statusOptions}
             onChange={setStatusFilter}

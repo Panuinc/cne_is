@@ -559,7 +559,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                   {["TH", "EN"].map((lng) => (
                     <Button
                       key={lng}
-                      color="default"
+                      color="primary"
                       size="lg"
                       radius="lg"
                       type="button"

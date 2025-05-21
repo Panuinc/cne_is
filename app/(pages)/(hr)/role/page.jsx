@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import UIRoleList from "@/components/ui/hr/role/UIRoleList";
+
+import React, { useEffect, useState } from "react";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 

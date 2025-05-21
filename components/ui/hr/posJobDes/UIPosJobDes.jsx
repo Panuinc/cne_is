@@ -238,7 +238,7 @@ export default function UIPosJobDes({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="flat"
-              color="default"
+              color="primary"
               radius="lg"
               value={operatedBy}
               readOnly
