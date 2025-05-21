@@ -1,6 +1,7 @@
 "use client";
 
 import UIPosJobDes from "@/components/ui/hr/posJobDes/UIPosJobDes";
+
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
