@@ -103,7 +103,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
   );
 };
 
-const topBar = (currentTime, setOpenMobile) => (
+const topBar = (session, currentTime, setOpenMobile) => (
   <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-default">
     <div
       className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
@@ -143,8 +143,12 @@ const topBar = (currentTime, setOpenMobile) => (
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full relative">
       <Image
-        src="/mascot/mascot-1.png"
-        alt="mascot-1"
+        src={
+          session.user?.picture
+            ? `/empEmployment/userPicture/${session.user.picture}`
+            : "/banner/default.png"
+        }
+        alt={session.user?.nameEN || "user"}
         fill
         style={{ objectFit: "contain", objectPosition: "center" }}
       />
@@ -349,7 +353,7 @@ export default function PagesLayout({ children }) {
             collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
           }`}
         >
-          {topBar(currentTime, setOpenMobile)}
+          {topBar(session, currentTime, setOpenMobile)}
           <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 overflow-auto">
             {children}
           </div>
