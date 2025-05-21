@@ -167,6 +167,14 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
                   <span className="font-[600]">ชื่อบัญชีการใช้งาน : </span>
                   {formData.empEmpUser?.[0]?.empUserUsername || "-"}
                 </div>
+                <div className="flex items-center justify-end w-full h-full p-2 gap-2">
+                  <a
+                    href="/changPassPin"
+                    className="text-sm text-primary font-[600] underline hover:text-danger transition"
+                  >
+                    เปลี่ยนรหัสผ่าน
+                  </a>
+                </div>
               </div>
             </div>
 
