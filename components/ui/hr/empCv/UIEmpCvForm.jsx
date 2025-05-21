@@ -1,7 +1,9 @@
 "use client";
+
+import UIHeader from "@/components/other/UIHeader";
+
 import React from "react";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
-import UIHeader from "@/components/other/UIHeader";
 
 export default function UIEmpCvForm({
   header,
@@ -16,7 +18,6 @@ export default function UIEmpCvForm({
   handleAddProject,
   handleRemoveProject,
   operatedBy,
-  exportPdf,
 }) {
   return (
     <>
@@ -27,34 +28,9 @@ export default function UIEmpCvForm({
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-          <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ข้อมูล เรซูเม่
-          </div>
-        </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-end w-full h-full p-2 gap-2">
-          {["TH", "EN"].map((lng) => (
-            <div
-              key={lng}
-              className="flex items-center justify-center w-full h-full p-2 gap-2"
-            >
-              <Button
-                color="primary"
-                size="md"
-                radius="lg"
-                className="flex items-center justify-center w-4/12 h-full gap-2"
-                onPress={() => exportPdf(lng)}
-              >
-                Preview PDF ({lng})
-              </Button>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
               การศึกษา
             </div>
           </div>
@@ -62,7 +38,7 @@ export default function UIEmpCvForm({
           {formData.empCvEducations.map((edu, i) => (
             <div
               key={i}
-              className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl"
+              className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl"
             >
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -186,10 +162,10 @@ export default function UIEmpCvForm({
               <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-end w-full h-full p-2 gap-2">
                   <Button
-                    color="primary"
+                    color="danger"
                     size="md"
                     radius="lg"
-                    className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                    className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                     onPress={handleRemoveSection("empCvEducations", i)}
                   >
                     ลบประวัติการศึกษา
@@ -205,7 +181,7 @@ export default function UIEmpCvForm({
                 color="primary"
                 size="md"
                 radius="lg"
-                className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                 onPress={handleAddSection("empCvEducations", {})}
               >
                 เพิ่มประวัติการศึกษา
@@ -214,9 +190,9 @@ export default function UIEmpCvForm({
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
               ใบอนุญาตประกอบวิชาชีพ
             </div>
           </div>
@@ -224,7 +200,7 @@ export default function UIEmpCvForm({
           {formData.empCvLicenses.map((lic, i) => (
             <div
               key={i}
-              className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl"
+              className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl"
             >
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -322,10 +298,10 @@ export default function UIEmpCvForm({
               <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-end w-full h-full p-2 gap-2">
                   <Button
-                    color="primary"
+                    color="danger"
                     size="md"
                     radius="lg"
-                    className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                    className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                     onPress={handleRemoveSection("empCvLicenses", i)}
                   >
                     ลบใบอนุญาตประกอบวิชาชีพ
@@ -341,7 +317,7 @@ export default function UIEmpCvForm({
                 color="primary"
                 size="md"
                 radius="lg"
-                className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                 onPress={handleAddSection("empCvLicenses", {})}
               >
                 เพิ่มใบอนุญาตประกอบวิชาชีพ
@@ -350,9 +326,9 @@ export default function UIEmpCvForm({
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
               ประวัติการทำงาน
             </div>
           </div>
@@ -360,7 +336,7 @@ export default function UIEmpCvForm({
           {formData.empCvWorkHistories.map((wh, wi) => (
             <div
               key={wi}
-              className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl"
+              className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl"
             >
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -475,9 +451,9 @@ export default function UIEmpCvForm({
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
                 <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-                  <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+                  <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
                     โปรเจคที่ผ่านมา
                   </div>
                 </div>
@@ -485,7 +461,7 @@ export default function UIEmpCvForm({
                 {(wh.empCvProjects || []).map((proj, pi) => (
                   <div
                     key={pi}
-                    className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl"
+                    className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl"
                   >
                     <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                       <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -564,10 +540,10 @@ export default function UIEmpCvForm({
                     <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                       <div className="flex items-center justify-end w-full h-full p-2 gap-2">
                         <Button
-                          color="primary"
+                          color="danger"
                           size="md"
                           radius="lg"
-                          className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                          className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                           onPress={handleRemoveProject(wi, pi)}
                         >
                           ลบโปรเจคที่ผ่านมา
@@ -583,6 +559,7 @@ export default function UIEmpCvForm({
                       color="primary"
                       size="md"
                       radius="lg"
+                      className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                       onPress={handleAddProject(wi)}
                     >
                       เพิ่มโปรเจคที่ผ่านมา
@@ -594,10 +571,10 @@ export default function UIEmpCvForm({
               <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-end w-full h-full p-2 gap-2">
                   <Button
-                    color="primary"
+                    color="danger"
                     size="md"
                     radius="lg"
-                    className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                    className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                     onPress={handleRemoveSection("empCvWorkHistories", wi)}
                   >
                     ลบประวัติการทำงาน
@@ -613,7 +590,7 @@ export default function UIEmpCvForm({
                 color="primary"
                 size="md"
                 radius="lg"
-                className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                 onPress={handleAddSection("empCvWorkHistories", {
                   empCvProjects: [],
                 })}
@@ -624,9 +601,9 @@ export default function UIEmpCvForm({
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
               ความสามารถทางภาษา
             </div>
           </div>
@@ -634,7 +611,7 @@ export default function UIEmpCvForm({
           {formData.empCvLanguageSkills.map((lang, i) => (
             <div
               key={i}
-              className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-default rounded-xl"
+              className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 rounded-xl"
             >
               <div className="flex items-center justify-center w-full h-full p-2 gap-2">
                 <Input
@@ -700,10 +677,10 @@ export default function UIEmpCvForm({
               <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2">
                   <Button
-                    color="primary"
+                    color="danger"
                     size="md"
                     radius="lg"
-                    className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                    className="flex items-center justify-center w-full h-full p-4 gap-2"
                     onPress={handleRemoveSection("empCvLanguageSkills", i)}
                   >
                     ลบความสามารถทางภาษา
@@ -719,7 +696,7 @@ export default function UIEmpCvForm({
                 color="primary"
                 size="md"
                 radius="lg"
-                className="flex items-center justify-center w-4/12 h-full p-3 gap-2"
+                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                 onPress={handleAddSection("empCvLanguageSkills", {})}
               >
                 เพิ่มความสามารถทางภาษา
@@ -731,12 +708,11 @@ export default function UIEmpCvForm({
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             <Input
-              name="operatedBy"
               type="text"
-              label="Operated By"
+              label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="flat"
               color="primary"
               radius="lg"
               value={operatedBy}

@@ -297,8 +297,8 @@ export default function UIEmpList({ data = [], error = "" }) {
                   <DropdownItem key="edit">แก้ไข</DropdownItem>
                   <DropdownItem key="empUser">บัญชีการใช้งาน</DropdownItem>
                   <DropdownItem key="empEmployment">การจ้างงาน</DropdownItem>
-                  <DropdownItem key="empCv">เรซูเม่</DropdownItem>
                   <DropdownItem key="empDocument">เอกสาร</DropdownItem>
+                  <DropdownItem key="empCv">เรซูเม่</DropdownItem>
                   <DropdownItem key="empView">รายละเอียด</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
