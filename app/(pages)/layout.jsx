@@ -60,7 +60,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
         </div>
       </div>
       {submenuOpen[menu.key] && (
-        <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-primary">
+        <div className="flex flex-col w-full h-full pl-2 p-2 gap-2 border-l-2 border-default">
           {menu.submenus.map((sub, idx) => (
             <Link
               key={idx}
@@ -132,7 +132,7 @@ const topBar = (currentTime, setOpenMobile) => (
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 bg-white text-dark hover:text-primary rounded-full">
       <Clock /> {currentTime}
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark hover:text-primary rounded-full">
@@ -210,7 +210,7 @@ export default function PagesLayout({ children }) {
 
   const toolMenus = [
     { label: "โปรไฟล์", icon: <Account />, href: "/account" },
-    { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
+    // { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
   ];
 
   const mainMenus = [
