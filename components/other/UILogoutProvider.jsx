@@ -1,4 +1,5 @@
 "use client";
+
 import React, { memo } from "react";
 import { signOut } from "next-auth/react";
 import { useIdleTimer } from "react-idle-timer";

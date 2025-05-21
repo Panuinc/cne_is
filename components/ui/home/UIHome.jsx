@@ -1,4 +1,7 @@
+"use client"
+
 import UIHeader from "@/components/other/UIHeader";
+
 import React from "react";
 
 export default function UIHome() {

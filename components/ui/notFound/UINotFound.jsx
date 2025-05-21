@@ -1,10 +1,11 @@
 "use client";
 
+import UIAnimatedText from "@/components/other/UIAnimatedText";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@heroui/react";
-import UIAnimatedText from "@/components/other/UIAnimatedText";
 
 export default function UINotFound() {
   return (
