@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { Input, Button } from "@heroui/react";
 import Image from "next/image";
+import { Input, Button } from "@heroui/react";
+import React, { useState, useRef } from "react";
 import UIAnimatedText from "@/components/other/UIAnimatedText";
 
 export default function UIChangePassword({
