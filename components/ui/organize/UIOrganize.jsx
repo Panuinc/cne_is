@@ -6,9 +6,9 @@ import { Tree, TreeNode } from "react-organizational-chart";
 
 function StatBox({ label, value }) {
   return (
-    <div className="flex flex-col items-center justify-evenly w-full h-full p-4 bg-white border-2 border-default shadow-md rounded-xl">
-      <div className="text-sm font-[600]">{label}</div>
-      <div className="text-lg font-[600]">{value}</div>
+    <div className="flex flex-col items-center justify-evenly w-full h-full p-4 bg-primary text-white rounded-xl">
+      <div className="font-[600]">{label}</div>
+      <div className="text-xl font-[600]">{value}</div>
     </div>
   );
 }
@@ -56,9 +56,9 @@ export default function UIOrganize({
       <div className="flex flex-col items-center justify-start w-full h-full p-4 gap-4 bg-white overflow-auto">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-60 p-2 gap-4 bg-white">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
-            <div className="text-lg font-[600]">STRUCTURE</div>
-            <div>CHANNAKORN ENGINEER</div>
-            <div>COMPANY</div>
+            <div className="text-xl font-[600]">STRUCTURE</div>
+            <div className="text-lg font-[600]">CHANNAKORN ENGINEER</div>
+            <div className="text-md font-[600]">COMPANY</div>
           </div>
           <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-4">
             <StatBox label="จำนวนพนักงาน" value={employees.length} />
