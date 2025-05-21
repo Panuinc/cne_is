@@ -196,16 +196,16 @@ export default function PagesLayout({ children }) {
         { title: "พนักงาน", href: "/emp" },
       ],
     },
-    {
-      title: "สารสนเทศ",
-      icon: <It />,
-      key: "สารสนเทศ",
-      submenus: [
-        { title: "ใบแจ้งซ่อม", href: "/tech/repair" },
-        { title: "ใบเบิกคอม", href: "/tech/request" },
-        { title: "แบ็คอัพข้อมูล", href: "/tech/backup" },
-      ],
-    },
+    // {
+    //   title: "สารสนเทศ",
+    //   icon: <It />,
+    //   key: "สารสนเทศ",
+    //   submenus: [
+    //     { title: "ใบแจ้งซ่อม", href: "/tech/repair" },
+    //     { title: "ใบเบิกคอม", href: "/tech/request" },
+    //     { title: "แบ็คอัพข้อมูล", href: "/tech/backup" },
+    //   ],
+    // },
   ];
 
   const toolMenus = [
