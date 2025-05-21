@@ -106,7 +106,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
 const topBar = (currentTime, setOpenMobile) => (
   <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-default">
     <div
-      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2"
+      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
@@ -114,31 +114,31 @@ const topBar = (currentTime, setOpenMobile) => (
     <Link
       href="http://49.0.66.19:8023/Main/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneSystem /> Cne System
     </Link>
     <Link
       href="http://cnecloud01.myqnapcloud.com:8011/cgi-bin/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneCloud /> Cne Cloud
     </Link>
     <Link
       href="http://49.0.64.242:8088/LoginERS/login.aspx"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneLeave /> ระบบลางาน
     </Link>
     <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-primary bg-primary text-white rounded-full shadow-md">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark hover:text-primary rounded-full">
       <Search />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark hover:text-primary rounded-full">
       <Bell />
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 bg-white text-dark rounded-full relative">
