@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import UICustomTable from "@/components/other/UICustomTable";
 import { Folder, Search, Setting, Trash } from "@/components/icons/icons";
 import UICustomPagination from "@/components/other/UICustomPagination";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
@@ -21,8 +20,8 @@ import {
 
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "เปิดใช้งาน", uniqueIdentifier: "active" },
-  { name: "ปิดใช้งาน", uniqueIdentifier: "inactive" },
+  { name: "คงอยู่", uniqueIdentifier: "active" },
+  { name: "ลาออก", uniqueIdentifier: "inactive" },
 ];
 
 const empTypeOptions = [
@@ -30,12 +29,6 @@ const empTypeOptions = [
   { name: "รายเดือน", uniqueIdentifier: "Monthly" },
   { name: "รายเดือน (คนพิการ)", uniqueIdentifier: "perDisabilities" },
   { name: "รายวัน", uniqueIdentifier: "Daily" },
-];
-
-const genderOptions = [
-  { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "ชาย", uniqueIdentifier: "Male" },
-  { name: "หญิง", uniqueIdentifier: "FeMale" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -89,41 +82,6 @@ export default function UIEmpList({ data = [], error = "" }) {
 
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  const columns = useMemo(() => {
-    const baseColumns = [
-      { name: "ลำดับ", uid: "empId" },
-      { name: "ชื่อพนักงาน (TH)", uid: "empFirstNameTH" },
-      { name: "นามสกุลพนักงาน (TH)", uid: "empLastNameTH" },
-      { name: "อีเมลล์", uid: "empEmail" },
-      { name: "เบอร์โทร", uid: "empTel" },
-      { name: "สัญชาติ", uid: "empCitizen" },
-      { name: "เพศ", uid: "empGender" },
-      { name: "สถานะการใช้งาน", uid: "empStatus" },
-
-      { name: "รหัสพนักงาน", uid: "empEmploymentNumber" },
-      { name: "ประเภทพนักงาน", uid: "empEmploymentType" },
-      { name: "ชื่อฝ่าย", uid: "divisionName" },
-      { name: "ชื่อแผนก", uid: "departmentName" },
-      { name: "ตำแหน่งงาน", uid: "positionName" },
-      { name: "บทบาทหน้าที่", uid: "roleName" },
-      { name: "ผู้บังคับบัญชา", uid: "parentName" },
-      { name: "รูปภาพ", uid: "empEmploymentPicture" },
-      { name: "ลายเซ็น", uid: "empEmploymentSignature" },
-    ];
-
-    if (canManage) {
-      baseColumns.push(
-        { name: "สร้างโดย", uid: "createdBy" },
-        { name: "สร้างเมื่อวันที่", uid: "empCreateAt" },
-        { name: "แก้ไขโดย", uid: "updatedBy" },
-        { name: "แก้ไขเมื่อวันที่", uid: "empUpdateAt" },
-        { name: "การจัดการ", uid: "actions" }
-      );
-    }
-
-    return baseColumns;
-  }, [canManage]);
 
   const divisionOptions = useMemo(() => {
     const unique = [
@@ -291,22 +249,6 @@ export default function UIEmpList({ data = [], error = "" }) {
       switch (colKey) {
         case "empId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
-        case "empTitle":
-          if (item.empTitle === "Mr") return "นาย";
-          if (item.empTitle === "Mrs") return "นาง";
-          if (item.empTitle === "Ms") return "นางสาว";
-          return item.empTitle || "-";
-        case "empCitizen":
-          if (item.empCitizen === "Thai") return "ไทย";
-          if (item.empCitizen === "Cambodian") return "กัมพูชา";
-          if (item.empCitizen === "Lao") return "ลาว";
-          if (item.empCitizen === "Burmese") return "พม่า";
-          if (item.empCitizen === "Vietnam") return "เวียดนาม";
-          return item.empCitizen || "-";
-        case "empGender":
-          if (item.empGender === "Male") return "ชาย";
-          if (item.empGender === "FeMale") return "หญิง";
-          return item.empGender || "-";
         case "empStatus":
           return (
             <Button
@@ -326,16 +268,6 @@ export default function UIEmpList({ data = [], error = "" }) {
           );
         case "empEmploymentNumber":
           return item.empEmpEmployment?.[0]?.empEmploymentNumber || "-";
-        case "empEmploymentType":
-          if (item.empEmpEmployment?.[0]?.empEmploymentType === "Monthly")
-            return "รายเดือน";
-          if (
-            item.empEmpEmployment?.[0]?.empEmploymentType === "perDisabilities"
-          )
-            return "รายเดือน (คนพิการ)";
-          if (item.empEmpEmployment?.[0]?.empEmploymentType === "Daily")
-            return "รายวัน";
-          return item.empEmpEmployment?.[0]?.empEmploymentType || "-";
         case "divisionName":
           return (
             item.empEmpEmployment?.[0]?.EmpEmploymentDivisionId?.divisionName ||
@@ -351,28 +283,6 @@ export default function UIEmpList({ data = [], error = "" }) {
             item.empEmpEmployment?.[0]?.EmpEmploymentPositionId
               ?.positionNameTH || "-"
           );
-        case "roleName":
-          return (
-            item.empEmpEmployment?.[0]?.EmpEmploymentRoleId?.roleName || "-"
-          );
-        case "parentName":
-          return item.empEmpEmployment?.[0]?.EmpEmploymentParentBy
-            ? `${item.empEmpEmployment[0].EmpEmploymentParentBy.empFirstNameTH} ${item.empEmpEmployment[0].EmpEmploymentParentBy.empLastNameTH}`
-            : "-";
-        case "empEmploymentPicture":
-          return item.empEmpEmployment?.[0]?.empEmploymentPicture ? "มี" : "-";
-        case "empEmploymentSignature":
-          return item.empEmpEmployment?.[0]?.empEmploymentSignature
-            ? "มี"
-            : "-";
-        case "createdBy":
-          return item.EmpCreateBy
-            ? `${item.EmpCreateBy.empFirstNameTH} ${item.EmpCreateBy.empLastNameTH}`
-            : "-";
-        case "updatedBy":
-          return item.EmpUpdateBy
-            ? `${item.EmpUpdateBy.empFirstNameTH} ${item.EmpUpdateBy.empLastNameTH}`
-            : "-";
         case "actions":
           if (!canManage) return null;
           return (
@@ -455,14 +365,6 @@ export default function UIEmpList({ data = [], error = "" }) {
         </div>
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <UISelectFilter
-            label="เพศ"
-            selectedValue={genderFilter}
-            items={genderOptions}
-            onChange={setGenderFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
             label="ฝ่าย"
             selectedValue={divisionFilter}
             items={divisionOptions}
@@ -533,15 +435,50 @@ export default function UIEmpList({ data = [], error = "" }) {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
-        <UICustomTable
-          columns={columns}
-          data={filteredData}
-          pageNumber={pageNumber}
-          rowsPerPage={rowsPerPage}
-          error={error}
-          renderCell={renderCell}
-        />
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+        {filteredData
+          .slice((pageNumber - 1) * rowsPerPage, pageNumber * rowsPerPage)
+          .map((item, idx) => {
+            const pictureFile =
+              item.empEmpEmployment?.[0]?.empEmploymentPicture;
+            const imageUrl = pictureFile
+              ? `/empEmployment/userPicture/${pictureFile}`
+              : null;
+
+            return (
+              <div
+                key={item.empId}
+                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-white shadow-md rounded-3xl"
+              >
+                {item.empStatus?.toLowerCase() === "inactive" && (
+                  <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
+                    <span className="text-5xl font-bold text-danger/75 rotate-[-20deg]">
+                      ลาออก
+                    </span>
+                  </div>
+                )}
+
+                {canManage && (
+                  <div className="absolute top-2 right-2 z-50">
+                    {renderCell(item, idx, "actions")}
+                  </div>
+                )}
+
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt="รูปพนักงาน"
+                    className="w-40 h-40 object-contain rounded-full"
+                  />
+                )}
+
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+                  {renderCell(item, idx, "empFirstNameTH")}{" "}
+                  {renderCell(item, idx, "empLastNameTH")}
+                </div>
+              </div>
+            );
+          })}
       </div>
 
       <UICustomPagination

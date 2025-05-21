@@ -273,10 +273,10 @@ export default function UIRoleForm({
                 errorMessage={errors.empStatus}
               >
                 <SelectItem key="InActive" value="InActive">
-                  ปิดใช้งาน
+                  ลาออก
                 </SelectItem>
                 <SelectItem key="Active" value="Active">
-                  เปิดใช้งาน
+                  คงอยู่
                 </SelectItem>
               </Select>
             </div>
