@@ -349,7 +349,7 @@ export default function UIEmpList({ data = [], error = "" }) {
       <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <UISelectFilter
-            label="สถานะการใช้งาน"
+            label="สถานะพนักงาน"
             selectedValue={statusFilter}
             items={statusOptions}
             onChange={setStatusFilter}
