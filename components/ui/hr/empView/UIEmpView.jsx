@@ -613,8 +613,8 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <span className="font-[600]">Viewed by : </span>
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
+            <span className="font-[600]">ดำเนินการโดย : </span>
             {operatedBy}
           </div>
         </div>

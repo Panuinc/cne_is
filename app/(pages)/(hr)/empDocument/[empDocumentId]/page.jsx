@@ -1,10 +1,11 @@
 "use client";
 
+import UIEmpDocumentForm from "@/components/ui/hr/empDocument/UIEmpDocumentForm";
+
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import UIEmpDocumentForm from "@/components/ui/hr/empDocument/UIEmpDocumentForm";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 

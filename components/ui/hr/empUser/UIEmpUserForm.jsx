@@ -1,7 +1,9 @@
 "use client";
+
+import UIHeader from "@/components/other/UIHeader";
+
 import React from "react";
 import { Input, Button } from "@heroui/react";
-import UIHeader from "@/components/other/UIHeader";
 
 export default function UIEmpUserForm({
   header,
@@ -63,7 +65,7 @@ export default function UIEmpUserForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="flat"
               color="primary"
               radius="lg"
               value={operatedBy}

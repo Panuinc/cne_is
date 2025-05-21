@@ -1,7 +1,9 @@
 "use client";
+
+import UIHeader from "@/components/other/UIHeader";
+
 import React, { useState, useEffect } from "react";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
-import UIHeader from "@/components/other/UIHeader";
 import SignatureCanvas from "react-signature-canvas";
 
 export default function UIEmpEmploymentForm({
@@ -60,17 +62,11 @@ export default function UIEmpEmploymentForm({
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
         encType="multipart/form-data"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-          <div className="flex items-center justify-center h-full p-4 gap-2 bg-primary/75 border-2 border-primary text-white rounded-lg">
-            ข้อมูล การจ้างงานพนักงาน
-          </div>
-        </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
             {previews.employmentPicture && !isEditingPicture ? (
               <>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+                <div className="flex items-center justify-center h-full p-2 gap-2 bg-default rounded-full">
                   <img
                     src={previews.employmentPicture}
                     alt="Current Picture"
@@ -420,7 +416,7 @@ export default function UIEmpEmploymentForm({
           formData.EmpEmploymentEmpBy?.empCitizen !== "Thai" && (
             <>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
-                <div className="flex items-center justify-start w-full h-full p-4 p-2 gap-2">
+                <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-b-2 border-default text-primary font-[600]">
                   สำหรับแรงงานต่างด้าว
                 </div>
               </div>
@@ -807,8 +803,9 @@ export default function UIEmpEmploymentForm({
             <Input
               type="text"
               label="ดำเนินการโดย"
+              placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="flat"
               color="primary"
               radius="lg"
               value={operatedBy}
