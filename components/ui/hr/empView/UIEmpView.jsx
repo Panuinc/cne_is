@@ -41,7 +41,9 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
     const signature = formData?.empEmpEmployment?.[0]?.empEmploymentSignature;
     setSignatureSrc(
-      signature ? `/empEmployment/signature/${signature}` : "/banner/default.png"
+      signature
+        ? `/empEmployment/signature/${signature}`
+        : "/banner/default.png"
     );
   }, [formData]);
 
@@ -406,11 +408,6 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
                   <span className="">วันที่เริ่มงาน : </span>
                   {formData.empEmpEmployment?.[0]?.empEmploymentStartWork ||
-                    "-"}
-                </div>
-                <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">สถานะพนักงาน : </span>
-                  {formData.empEmpEmployment?.[0]?.empEmploymentWorkStatus ||
                     "-"}
                 </div>
               </div>

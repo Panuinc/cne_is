@@ -260,7 +260,6 @@ model EmpEmployment {
   empEmploymentWorkPermitIssuedBy  String?            @db.VarChar(255)
   empEmploymentSsoNumber           String?            @db.VarChar(255)
   empEmploymentSsoHospital         String?            @db.VarChar(255)
-  empEmploymentWorkStatus          WorkStatus?        @default(CurrentEmp)
   empEmploymentCreateBy            Int
   empEmploymentCreateAt            DateTime           @default(now()) @db.Timestamp()
   empEmploymentUpdateBy            Int?

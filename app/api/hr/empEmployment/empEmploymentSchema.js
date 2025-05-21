@@ -113,9 +113,5 @@ export const empEmploymentPutSchema = z.object({
     "Please provide hospital name"
   ).optional(),
 
-  empEmploymentWorkStatus: preprocessEnum(
-    ["CurrentEmp", "Resign"],
-    "Please provide work status"
-  ),
   empEmploymentUpdateBy: preprocessInt("Please provide updater ID"),
 });

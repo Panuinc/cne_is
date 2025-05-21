@@ -55,7 +55,6 @@ export default function EmpEmploymentUpdate() {
     empEmploymentWorkPermitIssuedBy: "",
     empEmploymentSsoNumber: "",
     empEmploymentSsoHospital: "",
-    empEmploymentWorkStatus: "",
   });
 
   const [previews, setPreviews] = useState({

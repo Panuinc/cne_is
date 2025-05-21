@@ -802,32 +802,6 @@ export default function UIEmpEmploymentForm({
             </>
           )}
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <Select
-              name="empEmploymentWorkStatus"
-              label="สถานะพนักงาน"
-              placeholder="Please Select Data"
-              size="md"
-              variant="bordered"
-              color="primary"
-              radius="lg"
-              value={formData.empEmploymentWorkStatus || ""}
-              selectedKeys={[formData.empEmploymentWorkStatus] || ""}
-              onChange={handleInputChange("empEmploymentWorkStatus")}
-              isInvalid={!!errors.empEmploymentWorkStatus}
-              errorMessage={errors.empEmploymentWorkStatus}
-            >
-              <SelectItem value="CurrentEmp" key="CurrentEmp">
-                พนักงาน
-              </SelectItem>
-              <SelectItem value="Resign" key="Resign">
-                ลาออก
-              </SelectItem>
-            </Select>
-          </div>
-        </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             <Input
