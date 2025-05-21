@@ -1,9 +1,11 @@
 "use client";
+
+import UIEmpView from "@/components/ui/hr/empView/UIEmpView";
+
 import React, { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import UIEmpView from "@/components/ui/hr/empView/UIEmpView";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
@@ -16,7 +18,6 @@ export default function EmpView() {
 
   useEffect(() => {
     if (!empId) return;
-
     (async () => {
       try {
         const res = await fetch(`/api/hr/empMain/${empId}`, {
@@ -27,8 +28,7 @@ export default function EmpView() {
         if (res.ok && result.emp?.length) {
           setFormData(result.emp[0]);
         } else {
-          const msg = result.error || "Failed to load emp data.";
-          toast.error(msg);
+          toast.error(result.error || "Failed to load emp data.");
         }
       } catch (err) {
         toast.error(`Failed to load data: ${err.message}`);

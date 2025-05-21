@@ -1,11 +1,19 @@
 "use client";
+import UIHeader from "@/components/other/UIHeader";
 
 import React from "react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Document } from "@/components/icons/icons";
 import { Button } from "@heroui/react";
-import UIHeader from "@/components/other/UIHeader";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/th";
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
+dayjs.locale("th");
 
 function translateEmploymentType(value) {
   if (value === "Monthly") return "รายเดือน";
@@ -47,6 +55,25 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
     );
   }, [formData]);
 
+  const startDate = formData.empEmpEmployment?.[0]?.empEmploymentStartWork;
+  const start = startDate ? dayjs(startDate) : null;
+  const now = dayjs();
+
+  const getThaiWorkDuration = (start, end) => {
+    if (!start) return "-";
+    const diff = dayjs.duration(end.diff(start));
+
+    const years = diff.years();
+    const months = diff.months();
+
+    let result = "";
+    if (years > 0) result += `${years} ปี`;
+    if (months > 0) result += `${years > 0 ? " " : ""}${months} เดือน`;
+    if (result === "") result = "น้อยกว่า 1 เดือน";
+    return result;
+  };
+
+  const workDuration = getThaiWorkDuration(start, now);
   return (
     <>
       <UIHeader Header={header} />
@@ -62,7 +89,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
           ></div>
 
           <div className="absolute left-1/2 top-48 transform -translate-x-1/2">
-            <div className="w-40 h-40 border-2 overflow-hidden shadow-lg">
+            <div className="w-40 h-40 border-2 overflow-hidden shadow-md rounded-full">
               <Image
                 src={imgSrc}
                 width={150}
@@ -77,7 +104,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
           <div className="h-24"></div>
 
           <div className="flex justify-center mb-4">
-            <div className="px-6 py-2  text-center">
+            <div className="px-6 py-2 text-center text-xl font-[600]">
               {formData.empFirstNameTH} {formData.empLastNameTH}
             </div>
           </div>
@@ -85,72 +112,72 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
         <div className="flex flex-col xl:flex-row items-start justify-center w-full p-2 gap-2">
           <div className="flex flex-col items-start justify-center w-full p-2 gap-2">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-tl-xl rounded-tr-xl">
-              <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลพนักงาน
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">ชื่อภาษาอังกฤษ : </span>
+                  <span className="font-[600]">ชื่อภาษาอังกฤษ : </span>
                   {formData.empFirstNameEN || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">นามสกุลภาษาอังกฤษ : </span>
+                  <span className="font-[600]">นามสกุลภาษาอังกฤษ : </span>
                   {formData.empLastNameEN || "-"}
                 </div>
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">อีเมลล์ : </span>
+                  <span className="font-[600]">อีเมลล์ : </span>
                   {formData.empEmail || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">เบอร์โทร : </span>
+                  <span className="font-[600]">เบอร์โทร : </span>
                   {formData.empTel || "-"}
                 </div>
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">บัตรประชาชน : </span>
+                  <span className="font-[600]">บัตรประชาชน : </span>
                   {formData.empIdCard || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">วันเกิด : </span>
+                  <span className="font-[600]">วันเกิด : </span>
                   {formData.empBirthday || "-"}
                 </div>
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">สัญชาติ : </span>
+                  <span className="font-[600]">สัญชาติ : </span>
                   {translateCitizen(formData.empCitizen)}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">เพศ : </span>
+                  <span className="font-[600]">เพศ : </span>
                   {translateGender(formData.empGender)}
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-tl-xl rounded-tr-xl">
-              <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลบัญชีการใช้งาน
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">ชื่อบัญชีการใช้งาน : </span>
+                  <span className="font-[600]">ชื่อบัญชีการใช้งาน : </span>
                   {formData.empEmpUser?.[0]?.empUserUsername || "-"}
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-tl-xl rounded-tr-xl">
-              <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลเอกสาร
               </div>
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">ทะเบียนบ้าน : </span>
+                  <span className="font-[600]">ทะเบียนบ้าน : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentIdCardFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentIdCardFile}`}
@@ -164,7 +191,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                   )}
                 </div>
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">บัตรประชาชน : </span>
+                  <span className="font-[600]">บัตรประชาชน : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentHomeFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentHomeFile}`}
@@ -181,7 +208,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">ใบประกอบวิชาชีพ : </span>
+                  <span className="font-[600]">ใบประกอบวิชาชีพ : </span>
                   {formData.empEmpDocument?.[0]
                     ?.empDocumentProfessionalCertificateFile ? (
                     <a
@@ -196,7 +223,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                   )}
                 </div>
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">วุฒิการศึกษา : </span>
+                  <span className="font-[600]">วุฒิการศึกษา : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentEducationsFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentEducationsFile}`}
@@ -213,7 +240,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">พาสปอร์ต : </span>
+                  <span className="font-[600]">พาสปอร์ต : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentPassportFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentPassportFile}`}
@@ -227,7 +254,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                   )}
                 </div>
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">ตรวจคนเข้าเมือง : </span>
+                  <span className="font-[600]">ตรวจคนเข้าเมือง : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentImmigrationFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentImmigrationFile}`}
@@ -244,7 +271,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-between w-full h-full p-2 gap-2">
-                  <span className="">ใบแจ้งออกจากที่เก่า : </span>
+                  <span className="font-[600]">ใบแจ้งออกจากที่เก่า : </span>
                   {formData.empEmpDocument?.[0]?.empDocumentOldPlaceFile ? (
                     <a
                       href={`${formData.empEmpDocument[0].empDocumentOldPlaceFile}`}
@@ -270,7 +297,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                       key={year}
                       className="flex items-center justify-between w-full h-full p-2 gap-2"
                     >
-                      <span className="">{`VISA ปีที่ ${year} : `}</span>
+                      <span className="font-[600]">{`VISA ปีที่ ${year} : `}</span>
                       {visaFile ? (
                         <a
                           href={visaFile}
@@ -298,7 +325,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                       key={year}
                       className="flex items-center justify-between w-full h-full p-2 gap-2"
                     >
-                      <span className="">{`ใบอนุญาตทำงาน ปีที่ ${year} : `}</span>
+                      <span className="font-[600]">{`ใบอนุญาตทำงาน ปีที่ ${year} : `}</span>
                       {workPermitFile ? (
                         <a
                           href={workPermitFile}
@@ -326,7 +353,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                       key={year}
                       className="flex items-center justify-between w-full h-full p-2 gap-2"
                     >
-                      <span className="">{`ใบเปลี่ยนนายจ้าง ${year} : `}</span>
+                      <span className="font-[600]">{`ใบเปลี่ยนนายจ้าง ${year} : `}</span>
                       {employerChangeFile ? (
                         <a
                           href={employerChangeFile}
@@ -346,18 +373,18 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
           </div>
 
           <div className="flex flex-col items-start justify-center w-full p-2 gap-2">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-tl-xl rounded-tr-xl">
-              <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลการจ้างงาน
               </div>
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">รหัสพนักงาน : </span>
+                  <span className="font-[600]">รหัสพนักงาน : </span>
                   {formData.empEmpEmployment?.[0]?.empEmploymentNumber || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">เลขบัตรพนักงาน : </span>
+                  <span className="font-[600]">เลขบัตรพนักงาน : </span>
                   {formData.empEmpEmployment?.[0]?.empEmploymentCardNumber ||
                     "-"}
                 </div>
@@ -365,13 +392,13 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">ประเภทของการจ้างงาน : </span>
+                  <span className="font-[600]">ประเภทของการจ้างงาน : </span>
                   {translateEmploymentType(
                     formData.empEmpEmployment?.[0]?.empEmploymentType
                   )}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">สังกัดฝ่าย : </span>
+                  <span className="font-[600]">สังกัดฝ่าย : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentDivisionId
                     ?.divisionName || "-"}
                 </div>
@@ -379,12 +406,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">สังกัดแผนก : </span>
+                  <span className="font-[600]">สังกัดแผนก : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentDepartmentId
                     ?.departmentName || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">ตำแหน่งงาน : </span>
+                  <span className="font-[600]">ตำแหน่งงาน : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentPositionId
                     ?.positionName || "-"}
                 </div>
@@ -392,12 +419,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">บทบาทหน้าที่ : </span>
+                  <span className="font-[600]">บทบาทหน้าที่ : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentRoleId
                     ?.roleName || "-"}
                 </div>
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">ผู้บังคับบัญชา : </span>
+                  <span className="font-[600]">ผู้บังคับบัญชา : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentParentBy
                     ?.empFirstNameTH
                     ? `${formData.empEmpEmployment?.[0]?.EmpEmploymentParentBy?.empFirstNameTH} ${formData.empEmpEmployment?.[0]?.EmpEmploymentParentBy?.empLastNameTH}`
@@ -406,9 +433,13 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
               </div>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                  <span className="">วันที่เริ่มงาน : </span>
+                  <span className="font-[600]">วันที่เริ่มงาน : </span>
                   {formData.empEmpEmployment?.[0]?.empEmploymentStartWork ||
                     "-"}
+                </div>
+                <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+                  <span className="font-[600]">อายุงาน : </span>
+                  {workDuration}
                 </div>
               </div>
 
@@ -424,20 +455,20 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                   />
                 </div>
               </div>
-              {formData.EmpDocumentEmpBy?.empCitizen !== "Thai" && (
+              {formData.empCitizen !== "Thai" && (
                 <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2">
-                  <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+                  <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                     ข้อมูลการจ้างงานสำหรับต่างด้าว
                   </div>
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ประเภทของพนักงาน : </span>
+                      <span className="font-[600]">ประเภทของพนักงาน : </span>
                       {formData.empEmpEmployment?.[0]?.empEmploymentEnterType ||
                         "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">เลขที่ Passport NO : </span>
+                      <span className="font-[600]">เลขที่ Passport NO : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentPassportNumber || "-"}
                     </div>
@@ -445,12 +476,16 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">วันที่ออกหน้า Passport :</span>
+                      <span className="font-[600]">
+                        วันที่ออกหน้า Passport :
+                      </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentPassportStartDate || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">วันที่หมดหน้า Passport :</span>
+                      <span className="font-[600]">
+                        วันที่หมดหน้า Passport :
+                      </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentPassportEndDate || "-"}
                     </div>
@@ -458,12 +493,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ออกให้โดย : </span>
+                      <span className="font-[600]">ออกให้โดย : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentPassportIssuedBy || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">สถานที่เกิด : </span>
+                      <span className="font-[600]">สถานที่เกิด : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentPlaceOfBirth || "-"}
                     </div>
@@ -471,12 +506,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">เข้ามาทางด่าน : </span>
+                      <span className="font-[600]">เข้ามาทางด่าน : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentEnterCheckPoint || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">วันที่ : </span>
+                      <span className="font-[600]">วันที่ : </span>
                       {formData.empEmpEmployment?.[0]?.empEmploymentEnterDate ||
                         "-"}
                     </div>
@@ -484,12 +519,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ตม ๖. ลำดับที่ : </span>
+                      <span className="font-[600]">ตม ๖. ลำดับที่ : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentImmigration || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ตรวจลงตราประเภท : </span>
+                      <span className="font-[600]">ตรวจลงตราประเภท : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentTypeOfVisa || "-"}
                     </div>
@@ -497,12 +532,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">เลขที่ : </span>
+                      <span className="font-[600]">เลขที่ : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentVisaNumber || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ออกให้ที่ : </span>
+                      <span className="font-[600]">ออกให้ที่ : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentVisaIssuedBy || "-"}
                     </div>
@@ -510,12 +545,14 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ใบอนุญาตทำงานปัจจุบัน เลขที่ : </span>
+                      <span className="font-[600]">
+                        ใบอนุญาตทำงานปัจจุบัน เลขที่ :{" "}
+                      </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentWorkPermitNumber || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ออกให้วันที่ : </span>
+                      <span className="font-[600]">ออกให้วันที่ : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentWorkPermitStartDate || "-"}
                     </div>
@@ -523,12 +560,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ใช้ได้ถึงวันที่ : </span>
+                      <span className="font-[600]">ใช้ได้ถึงวันที่ : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentWorkPermitEndDate || "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ออกให้ที่จังหวัด : </span>
+                      <span className="font-[600]">ออกให้ที่จังหวัด : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentWorkPermitIssuedBy || "-"}
                     </div>
@@ -536,12 +573,12 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
                   <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">เลขที่ประกันสังคม : </span>
+                      <span className="font-[600]">เลขที่ประกันสังคม : </span>
                       {formData.empEmpEmployment?.[0]?.empEmploymentSsoNumber ||
                         "-"}
                     </div>
                     <div className="flex items-center justify-start w-full h-full p-2 gap-2">
-                      <span className="">ชื่อสถานรักษาพยาบาล : </span>
+                      <span className="font-[600]">ชื่อสถานรักษาพยาบาล : </span>
                       {formData.empEmpEmployment?.[0]
                         ?.empEmploymentSsoHospital || "-"}
                     </div>
@@ -550,8 +587,8 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
               )}
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-tl-xl rounded-tr-xl">
-              <div className="flex items-center justify-start w-full h-full p-3 gap-2">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+              <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลเรซูเม่
               </div>
               {formData.empEmpCv?.[0]?.empCvId && exportPdf && (
@@ -566,7 +603,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                       className="flex items-center justify-center w-full h-full p-3 gap-2"
                       onPress={() => exportPdf(lng)}
                     >
-                      Preview PDF ({lng})
+                      เรซูเม่ ({lng})
                     </Button>
                   ))}
                 </div>
@@ -577,7 +614,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <span className="">Viewed by : </span>
+            <span className="font-[600]">Viewed by : </span>
             {operatedBy}
           </div>
         </div>
