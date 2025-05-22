@@ -533,7 +533,6 @@ model PerReq {
   perReqReasonLanguageSkills   PerReqLanguageSkill[]
   perReqDrivingLicenses        PerReqDrivingLicense[]
   perReqProfessionalLicenses   PerReqProfessionalLicense[]
-  perReqTrainingCertificates   PerReqTrainingCertificate[]
   perReqStatus                 PerReqStatus                @default(PendingManagerApprove)
   perReqCreateBy               Int
   perReqCreateAt               DateTime                    @default(now()) @db.Timestamp()
@@ -602,16 +601,6 @@ model PerReqProfessionalLicense {
   perReq PerReq @relation(fields: [perReqProfessionalLicensePerReqId], references: [perReqId])
 
   @@index([perReqProfessionalLicensePerReqId])
-}
-
-model PerReqTrainingCertificate {
-  perReqTrainingCertificateId       Int    @id @default(autoincrement())
-  perReqTrainingCertificatePerReqId Int
-  perReqTrainingCertificateName     String @db.VarChar(255)
-
-  perReq PerReq @relation(fields: [perReqTrainingCertificatePerReqId], references: [perReqId])
-
-  @@index([perReqTrainingCertificatePerReqId])
 }
 
 // model Training {

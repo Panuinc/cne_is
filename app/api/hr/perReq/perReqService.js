@@ -44,7 +44,6 @@ export class PerReqService {
         perReqReasonLanguageSkills: true,
         perReqDrivingLicenses: true,
         perReqProfessionalLicenses: true,
-        perReqTrainingCertificates: true,
       },
     });
   }
@@ -84,7 +83,6 @@ export class PerReqService {
         perReqReasonLanguageSkills: true,
         perReqDrivingLicenses: true,
         perReqProfessionalLicenses: true,
-        perReqTrainingCertificates: true,
       },
     });
   }
@@ -105,9 +103,6 @@ export class PerReqService {
           : undefined,
         perReqProfessionalLicenses: data.perReqProfessionalLicenses
           ? { create: data.perReqProfessionalLicenses }
-          : undefined,
-        perReqTrainingCertificates: data.perReqTrainingCertificates
-          ? { create: data.perReqTrainingCertificates }
           : undefined,
       },
     });
@@ -143,12 +138,6 @@ export class PerReqService {
           deleteMany: {},
           ...(data.perReqProfessionalLicenses
             ? { create: data.perReqProfessionalLicenses }
-            : {}),
-        },
-        perReqTrainingCertificates: {
-          deleteMany: {},
-          ...(data.perReqTrainingCertificates
-            ? { create: data.perReqTrainingCertificates }
             : {}),
         },
       },

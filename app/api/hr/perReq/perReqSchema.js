@@ -115,17 +115,6 @@ export const perReqPostSchema = z.object({
       })
     )
     .optional(),
-
-  perReqTrainingCertificates: z
-    .array(
-      z.object({
-        perReqTrainingCertificateName: preprocessString(
-          "Please provide training certificate name."
-        ),
-      })
-    )
-    .optional(),
-
   perReqCreateBy: preprocessInt("Please provide creator user ID."),
 });
 
@@ -223,16 +212,6 @@ export const perReqPutSchema = z
         z.object({
           perReqProfessionalLicenseName: preprocessString(
             "Please provide professional license name."
-          ),
-        })
-      )
-      .optional(),
-
-    perReqTrainingCertificates: z
-      .array(
-        z.object({
-          perReqTrainingCertificateName: preprocessString(
-            "Please provide training certificate name."
           ),
         })
       )
