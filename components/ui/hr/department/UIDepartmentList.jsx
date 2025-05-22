@@ -68,8 +68,25 @@ export default function UIDepartmentList({ data = [], error = "" }) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [divisionFilter, setDivisionFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const divisionOptions = useMemo(() => {
+    const divisions = Array.from(
+      new Set(
+        data
+          .map((item) => item.DepartmentDivisionId?.divisionName)
+          .filter(Boolean)
+      )
+    );
+    return [{ name: "ทั้งหมด", uniqueIdentifier: "all" }].concat(
+      divisions.map((name) => ({
+        name,
+        uniqueIdentifier: name,
+      }))
+    );
+  }, [data]);
 
   const columns = useMemo(() => {
     const baseColumns = [
@@ -107,12 +124,18 @@ export default function UIDepartmentList({ data = [], error = "" }) {
           department.departmentStatus?.toLowerCase() === statusFilter
       );
     }
+    if (divisionFilter !== "all") {
+      result = result.filter(
+        (department) =>
+          department.DepartmentDivisionId?.divisionName === divisionFilter
+      );
+    }
     return result;
-  }, [data, searchTerm, statusFilter]);
+  }, [data, searchTerm, statusFilter, divisionFilter]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, statusFilter, divisionFilter]);
 
   const handleAction = useCallback(
     (action, item) => {
@@ -220,6 +243,15 @@ export default function UIDepartmentList({ data = [], error = "" }) {
             selectedValue={statusFilter}
             items={statusOptions}
             onChange={setStatusFilter}
+          />
+        </div>
+
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+          <UISelectFilter
+            label="ฝ่าย"
+            selectedValue={divisionFilter}
+            items={divisionOptions}
+            onChange={setDivisionFilter}
           />
         </div>
       </div>

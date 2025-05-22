@@ -68,8 +68,38 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [divisionFilter, setDivisionFilter] = useState("all");
+  const [departmentFilter, setDepartmentFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const divisionOptions = useMemo(() => {
+    const divisions = Array.from(
+      new Set(
+        data
+          .map((item) => item.PositionDivisionId?.divisionName)
+          .filter(Boolean)
+      )
+    );
+    return [
+      { name: "ทั้งหมด", uniqueIdentifier: "all" },
+      ...divisions.map((name) => ({ name, uniqueIdentifier: name })),
+    ];
+  }, [data]);
+
+  const departmentOptions = useMemo(() => {
+    const departments = Array.from(
+      new Set(
+        data
+          .map((item) => item.PositionDepartmentId?.departmentName)
+          .filter(Boolean)
+      )
+    );
+    return [
+      { name: "ทั้งหมด", uniqueIdentifier: "all" },
+      ...departments.map((name) => ({ name, uniqueIdentifier: name })),
+    ];
+  }, [data]);
 
   const columns = useMemo(() => {
     const baseColumns = [
@@ -109,12 +139,24 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
         (position) => position.positionStatus?.toLowerCase() === statusFilter
       );
     }
+    if (divisionFilter !== "all") {
+      result = result.filter(
+        (position) =>
+          position.PositionDivisionId?.divisionName === divisionFilter
+      );
+    }
+    if (departmentFilter !== "all") {
+      result = result.filter(
+        (position) =>
+          position.PositionDepartmentId?.departmentName === departmentFilter
+      );
+    }
     return result;
-  }, [data, searchTerm, statusFilter]);
+  }, [data, searchTerm, statusFilter, divisionFilter, departmentFilter]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, statusFilter, divisionFilter, departmentFilter]);
 
   const handleAction = useCallback(
     (action, item) => {
@@ -247,6 +289,22 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
             selectedValue={statusFilter}
             items={statusOptions}
             onChange={setStatusFilter}
+          />
+        </div>
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+          <UISelectFilter
+            label="ฝ่าย"
+            selectedValue={divisionFilter}
+            items={divisionOptions}
+            onChange={setDivisionFilter}
+          />
+        </div>
+        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+          <UISelectFilter
+            label="แผนก"
+            selectedValue={departmentFilter}
+            items={departmentOptions}
+            onChange={setDepartmentFilter}
           />
         </div>
       </div>
