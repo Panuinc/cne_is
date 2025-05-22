@@ -70,51 +70,11 @@ export const perReqPostSchema = z.object({
     "Please select experience level."
   ),
 
-  perReqReasonComputerSkills: z
-    .array(
-      z.object({
-        perReqComputerSkillName: preprocessString(
-          "Please provide computer skill name."
-        ),
-        perReqComputerSkillIsOther: z.boolean().optional(),
-      })
-    )
-    .optional(),
+  perReqComputerSkills: z.array(z.any()).optional(),
+  perReqLanguageSkills: z.array(z.any()).optional(),
+  perReqDrivingLicenses: z.array(z.any()).optional(),
+  perReqProfessionalLicenses: z.array(z.any()).optional(),
 
-  perReqReasonLanguageSkills: z
-    .array(
-      z.object({
-        perReqLanguage: preprocessEnum(
-          ["Thai", "Chinese", "English", "Japanese", "None"],
-          "Please select a language."
-        ),
-        perReqLanguageSkillLevel: preprocessEnum(
-          ["Basic", "Good", "Excellent"],
-          "Please select a proficiency level."
-        ),
-      })
-    )
-    .optional(),
-
-  perReqDrivingLicenses: z
-    .array(
-      z.object({
-        perReqDrivingLicenseType: preprocessString(
-          "Please provide driving license type."
-        ),
-      })
-    )
-    .optional(),
-
-  perReqProfessionalLicenses: z
-    .array(
-      z.object({
-        perReqProfessionalLicenseName: preprocessString(
-          "Please provide professional license name."
-        ),
-      })
-    )
-    .optional(),
   perReqCreateBy: preprocessInt("Please provide creator user ID."),
 });
 
@@ -171,51 +131,10 @@ export const perReqPutSchema = z
       "Please select experience level."
     ),
 
-    perReqReasonComputerSkills: z
-      .array(
-        z.object({
-          perReqComputerSkillName: preprocessString(
-            "Please provide computer skill name."
-          ),
-          perReqComputerSkillIsOther: z.boolean().optional(),
-        })
-      )
-      .optional(),
-
-    perReqReasonLanguageSkills: z
-      .array(
-        z.object({
-          perReqLanguage: preprocessEnum(
-            ["Thai", "Chinese", "English", "Japanese", "None"],
-            "Please select a language."
-          ),
-          perReqLanguageSkillLevel: preprocessEnum(
-            ["Basic", "Good", "Excellent"],
-            "Please select a proficiency level."
-          ),
-        })
-      )
-      .optional(),
-
-    perReqDrivingLicenses: z
-      .array(
-        z.object({
-          perReqDrivingLicenseType: preprocessString(
-            "Please provide driving license type."
-          ),
-        })
-      )
-      .optional(),
-
-    perReqProfessionalLicenses: z
-      .array(
-        z.object({
-          perReqProfessionalLicenseName: preprocessString(
-            "Please provide professional license name."
-          ),
-        })
-      )
-      .optional(),
+    perReqComputerSkills: z.array(z.any()).optional(),
+    perReqLanguageSkills: z.array(z.any()).optional(),
+    perReqDrivingLicenses: z.array(z.any()).optional(),
+    perReqProfessionalLicenses: z.array(z.any()).optional(),
 
     perReqStatus: preprocessEnum(
       [

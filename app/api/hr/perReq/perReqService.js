@@ -40,10 +40,6 @@ export class PerReqService {
             positionNameTH: true,
           },
         },
-        perReqReasonComputerSkills: true,
-        perReqReasonLanguageSkills: true,
-        perReqDrivingLicenses: true,
-        perReqProfessionalLicenses: true,
       },
     });
   }
@@ -79,10 +75,6 @@ export class PerReqService {
             positionNameTH: true,
           },
         },
-        perReqReasonComputerSkills: true,
-        perReqReasonLanguageSkills: true,
-        perReqDrivingLicenses: true,
-        perReqProfessionalLicenses: true,
       },
     });
   }
@@ -92,18 +84,10 @@ export class PerReqService {
     return prisma.perReq.create({
       data: {
         ...data,
-        perReqReasonComputerSkills: data.perReqReasonComputerSkills
-          ? { create: data.perReqReasonComputerSkills }
-          : undefined,
-        perReqReasonLanguageSkills: data.perReqReasonLanguageSkills
-          ? { create: data.perReqReasonLanguageSkills }
-          : undefined,
-        perReqDrivingLicenses: data.perReqDrivingLicenses
-          ? { create: data.perReqDrivingLicenses }
-          : undefined,
-        perReqProfessionalLicenses: data.perReqProfessionalLicenses
-          ? { create: data.perReqProfessionalLicenses }
-          : undefined,
+        perReqComputerSkills: data.perReqComputerSkills || [],
+        perReqLanguageSkills: data.perReqLanguageSkills || [],
+        perReqDrivingLicenses: data.perReqDrivingLicenses || [],
+        perReqProfessionalLicenses: data.perReqProfessionalLicenses || [],
       },
     });
   }
@@ -116,30 +100,10 @@ export class PerReqService {
       where: { perReqId },
       data: {
         ...data,
-        perReqReasonComputerSkills: {
-          deleteMany: {},
-          ...(data.perReqReasonComputerSkills
-            ? { create: data.perReqReasonComputerSkills }
-            : {}),
-        },
-        perReqReasonLanguageSkills: {
-          deleteMany: {},
-          ...(data.perReqReasonLanguageSkills
-            ? { create: data.perReqReasonLanguageSkills }
-            : {}),
-        },
-        perReqDrivingLicenses: {
-          deleteMany: {},
-          ...(data.perReqDrivingLicenses
-            ? { create: data.perReqDrivingLicenses }
-            : {}),
-        },
-        perReqProfessionalLicenses: {
-          deleteMany: {},
-          ...(data.perReqProfessionalLicenses
-            ? { create: data.perReqProfessionalLicenses }
-            : {}),
-        },
+        perReqComputerSkills: data.perReqComputerSkills || [],
+        perReqLanguageSkills: data.perReqLanguageSkills || [],
+        perReqDrivingLicenses: data.perReqDrivingLicenses || [],
+        perReqProfessionalLicenses: data.perReqProfessionalLicenses || [],
       },
     });
   }

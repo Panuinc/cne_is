@@ -75,6 +75,15 @@ export class PerReqController {
       const formData = await request.formData();
       const data = Object.fromEntries(formData.entries());
 
+      data.perReqComputerSkills = JSON.parse(data.perReqComputerSkills || "[]");
+      data.perReqLanguageSkills = JSON.parse(data.perReqLanguageSkills || "[]");
+      data.perReqDrivingLicenses = JSON.parse(
+        data.perReqDrivingLicenses || "[]"
+      );
+      data.perReqProfessionalLicenses = JSON.parse(
+        data.perReqProfessionalLicenses || "[]"
+      );
+
       const parsedData = perReqPostSchema.parse(data);
       const localNow = getLocalNow();
       const documentId = await PerReqService.generateDocumentId();
@@ -109,6 +118,15 @@ export class PerReqController {
 
       const formData = await request.formData();
       const data = Object.fromEntries(formData.entries());
+
+      data.perReqComputerSkills = JSON.parse(data.perReqComputerSkills || "[]");
+      data.perReqLanguageSkills = JSON.parse(data.perReqLanguageSkills || "[]");
+      data.perReqDrivingLicenses = JSON.parse(
+        data.perReqDrivingLicenses || "[]"
+      );
+      data.perReqProfessionalLicenses = JSON.parse(
+        data.perReqProfessionalLicenses || "[]"
+      );
 
       const parsedData = perReqPutSchema.parse({
         ...data,
