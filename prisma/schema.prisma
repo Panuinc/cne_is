@@ -51,8 +51,8 @@ enum RequestReason {
 
 enum PerReqReasonExperience {
   NoneExperience
-  Experience1To3Years
-  Experience4YearsUp
+  Experience1To4Years
+  Experience5YearsUp
 }
 
 enum SkillProficiency {

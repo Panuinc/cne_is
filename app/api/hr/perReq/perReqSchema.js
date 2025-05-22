@@ -66,7 +66,7 @@ export const perReqPostSchema = z.object({
   ).optional(),
 
   perReqReasonExperience: preprocessEnum(
-    ["NoneExperience", "Experience1To3Years", "Experience4YearsUp"],
+    ["NoneExperience", "Experience1To4Years", "Experience5YearsUp"],
     "Please select experience level."
   ),
 
@@ -178,7 +178,7 @@ export const perReqPutSchema = z
     ).optional(),
 
     perReqReasonExperience: preprocessEnum(
-      ["NoneExperience", "Experience1To3Years", "Experience4YearsUp"],
+      ["NoneExperience", "Experience1To4Years", "Experience5YearsUp"],
       "Please select experience level."
     ),
 

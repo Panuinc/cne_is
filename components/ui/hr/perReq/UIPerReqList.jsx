@@ -23,8 +23,8 @@ import {
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
   { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
-  { name: "รอฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
-  { name: "อนุมัติสำเร็จ", uniqueIdentifier: "ApprovedSuccess" },
+  { name: "รอผู้จัดการฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  { name: "อนุมัติแล้ว", uniqueIdentifier: "ApprovedSuccess" },
   { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
 
@@ -106,7 +106,9 @@ export default function UIPerReqList({ data = [], error = "" }) {
     let result = data;
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
-        perReq.perReqDocumentId?.toLowerCase().includes(searchTerm.toLowerCase())
+        perReq.perReqDocumentId
+          ?.toLowerCase()
+          .includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== "all") {
@@ -144,8 +146,8 @@ export default function UIPerReqList({ data = [], error = "" }) {
           };
 
           const statusLabelMap = {
-            PendingManagerApprove: "รอผู้จัดการอนุมัติ",
-            PendingHrApprove: "รอฝ่ายบุคคลอนุมัติ",
+            PendingManagerApprove: "รอผู้จัดการฝ่ายอนุมัติ",
+            PendingHrApprove: "รอผู้จัดการฝ่ายบุคคลอนุมัติ",
             ApprovedSuccess: "อนุมัติแล้ว",
             Cancel: "ยกเลิก",
           };
