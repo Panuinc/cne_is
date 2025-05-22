@@ -33,7 +33,7 @@ export default function UIPositionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={isUpdate}
               selectedKeys={
@@ -59,7 +59,7 @@ export default function UIPositionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={!formData.positionDivisionId || isUpdate}
               selectedKeys={
@@ -92,7 +92,7 @@ export default function UIPositionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.positionNameTH || ""}
               onChange={handleInputChange("positionNameTH")}
@@ -108,7 +108,7 @@ export default function UIPositionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.positionNameEN || ""}
               onChange={handleInputChange("positionNameEN")}
@@ -127,7 +127,7 @@ export default function UIPositionForm({
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.positionStatus || ""}
                 selectedKeys={
@@ -156,7 +156,7 @@ export default function UIPositionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

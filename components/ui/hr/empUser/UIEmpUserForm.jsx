@@ -32,7 +32,7 @@ export default function UIEmpUserForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empUserUsername || ""}
               onChange={handleInputChange("empUserUsername")}
@@ -48,7 +48,7 @@ export default function UIEmpUserForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empUserPassword || ""}
               onChange={handleInputChange("empUserPassword")}
@@ -66,7 +66,7 @@ export default function UIEmpUserForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

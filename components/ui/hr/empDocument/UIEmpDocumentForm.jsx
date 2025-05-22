@@ -34,7 +34,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentIdCardFile || ""}
                 onChange={handleInputChange("empDocumentIdCardFile")}
@@ -60,7 +60,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentHomeFile || ""}
                 onChange={handleInputChange("empDocumentHomeFile")}
@@ -87,7 +87,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentProfessionalCertificateFile || ""}
                 onChange={handleInputChange(
@@ -115,7 +115,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentEducationsFile || ""}
                 onChange={handleInputChange("empDocumentEducationsFile")}
@@ -152,7 +152,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentPassportFile || ""}
                 onChange={handleInputChange("empDocumentPassportFile")}
@@ -179,7 +179,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentImmigrationFile || ""}
                 onChange={handleInputChange("empDocumentImmigrationFile")}
@@ -206,7 +206,7 @@ export default function UIEmpDocumentForm({
                 placeholder="https://example.com"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empDocumentOldPlaceFile || ""}
                 onChange={handleInputChange("empDocumentOldPlaceFile")}
@@ -340,7 +340,7 @@ export default function UIEmpDocumentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

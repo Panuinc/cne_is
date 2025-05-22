@@ -62,7 +62,7 @@ export default function UIIndex(props) {
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={empUserUsername}
                 onChange={(e) => setEmpUserUsername(e.target.value)}
@@ -76,7 +76,7 @@ export default function UIIndex(props) {
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={empUserCredential}
                 onChange={(e) => setEmpUserCredential(e.target.value)}

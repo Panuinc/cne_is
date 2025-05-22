@@ -32,7 +32,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.roleName || ""}
               onChange={handleInputChange("roleName")}
@@ -51,7 +51,7 @@ export default function UIRoleForm({
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.roleStatus || ""}
                 selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
@@ -78,7 +78,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

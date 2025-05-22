@@ -31,7 +31,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empTitle || ""}
               selectedKeys={formData.empTitle ? [formData.empTitle] : []}
@@ -61,7 +61,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empFirstNameTH}
               onChange={handleInputChange("empFirstNameTH")}
@@ -77,7 +77,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empLastNameTH}
               onChange={handleInputChange("empLastNameTH")}
@@ -96,7 +96,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empFirstNameEN}
               onChange={handleInputChange("empFirstNameEN")}
@@ -112,7 +112,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empLastNameEN}
               onChange={handleInputChange("empLastNameEN")}
@@ -131,7 +131,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empEmail}
               onChange={handleInputChange("empEmail")}
@@ -147,7 +147,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empTel}
               onChange={handleInputChange("empTel")}
@@ -166,7 +166,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empIdCard}
               onChange={handleInputChange("empIdCard")}
@@ -182,7 +182,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empBirthday}
               onChange={handleInputChange("empBirthday")}
@@ -200,7 +200,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empCitizen || ""}
               selectedKeys={formData.empCitizen ? [formData.empCitizen] : []}
@@ -232,7 +232,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empGender || ""}
               selectedKeys={formData.empGender ? [formData.empGender] : []}
@@ -259,7 +259,7 @@ export default function UIRoleForm({
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.empStatus || ""}
                 selectedKeys={formData.empStatus ? [formData.empStatus] : []}
@@ -286,7 +286,7 @@ export default function UIRoleForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

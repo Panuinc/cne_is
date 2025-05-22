@@ -220,7 +220,7 @@ export default function UIPosJobDes({
               placeholder={`1. ...\n2. ...\n3. ...`}
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               minRows={4}
               value={formData.posJobDesResponsibility || ""}
@@ -239,7 +239,7 @@ export default function UIPosJobDes({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

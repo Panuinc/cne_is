@@ -32,7 +32,7 @@ export default function UIDivisionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.divisionName || ""}
               onChange={handleInputChange("divisionName")}
@@ -48,7 +48,7 @@ export default function UIDivisionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.divisionNameShot || ""}
               onChange={handleInputChange("divisionNameShot")}
@@ -67,7 +67,7 @@ export default function UIDivisionForm({
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.divisionStatus || ""}
                 selectedKeys={
@@ -96,7 +96,7 @@ export default function UIDivisionForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

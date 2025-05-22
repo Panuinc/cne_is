@@ -126,7 +126,7 @@ export default function UIEmpEmploymentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empEmploymentNumber || ""}
               onChange={handleInputChange("empEmploymentNumber")}
@@ -142,7 +142,7 @@ export default function UIEmpEmploymentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empEmploymentCardNumber || ""}
               onChange={handleInputChange("empEmploymentCardNumber")}
@@ -160,7 +160,7 @@ export default function UIEmpEmploymentForm({
               placeholder="Please Select Data"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               selectedKeys={
                 formData.empEmploymentType ? [formData.empEmploymentType] : []
@@ -187,7 +187,7 @@ export default function UIEmpEmploymentForm({
               placeholder="เลือกฝ่าย"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               selectedKeys={
                 formData.empEmploymentDivisionId
@@ -215,7 +215,7 @@ export default function UIEmpEmploymentForm({
               placeholder="เลือกแผนก"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={!formData.empEmploymentDivisionId}
               selectedKeys={
@@ -244,7 +244,7 @@ export default function UIEmpEmploymentForm({
               placeholder="เลือกตำแหน่ง"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={
                 !formData.empEmploymentDivisionId ||
@@ -276,7 +276,7 @@ export default function UIEmpEmploymentForm({
               placeholder="เลือกบทบาทหน้าที่"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               selectedKeys={
                 formData.empEmploymentRoleId
@@ -301,7 +301,7 @@ export default function UIEmpEmploymentForm({
               placeholder="เลือกผู้บังคับบัญชา"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={!formData.empEmploymentDivisionId}
               selectedKeys={
@@ -331,7 +331,7 @@ export default function UIEmpEmploymentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.empEmploymentStartWork || ""}
               onChange={handleInputChange("empEmploymentStartWork")}
@@ -806,7 +806,7 @@ export default function UIEmpEmploymentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly

@@ -32,7 +32,7 @@ export default function UIDepartmentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={isUpdate}
               selectedKeys={
@@ -59,7 +59,7 @@ export default function UIDepartmentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={formData.departmentName || ""}
               onChange={handleInputChange("departmentName")}
@@ -78,7 +78,7 @@ export default function UIDepartmentForm({
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
-                color="primary"
+                color="none"
                 radius="lg"
                 value={formData.departmentStatus || ""}
                 selectedKeys={
@@ -107,7 +107,7 @@ export default function UIDepartmentForm({
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
-              color="primary"
+              color="none"
               radius="lg"
               value={operatedBy}
               readOnly
