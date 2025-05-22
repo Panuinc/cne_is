@@ -1018,35 +1018,58 @@ export default function UIPerReqForm({
               </Checkbox>
             </div>
           </div>
-          {formData.perReqProfessionalLicenseName === "กว" && (
+          {["กว", "กส"].includes(formData.perReqProfessionalLicenseName) && (
             <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-              <label className="w-full xl:w-3/12">ระดับ กว</label>
-              <select
-                className="w-full xl:w-9/12 p-2 border border-gray-300 rounded-lg"
-                value={formData.perReqProfessionalLicenseLevel || ""}
-                onChange={handleInputChange("perReqProfessionalLicenseLevel")}
-              >
-                <option value="">-- เลือกระดับ --</option>
-                <option value="ภาคีวิศวกร">ภาคีวิศวกร</option>
-                <option value="ภาคีวิศวกรพิเศษ">ภาคีวิศวกรพิเศษ</option>
-                <option value="สามัญวิศวกร">สามัญวิศวกร</option>
-                <option value="วุฒิวิศวกร">วุฒิวิศวกร</option>
-              </select>
-            </div>
-          )}
-          {/* Sub-levels for กส */}
-          {formData.perReqProfessionalLicenseName === "กส" && (
-            <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-              <label className="w-full xl:w-3/12">ระดับ กส</label>
-              <select
-                className="w-full xl:w-9/12 p-2 border border-gray-300 rounded-lg"
-                value={formData.perReqProfessionalLicenseLevel || ""}
-                onChange={handleInputChange("perReqProfessionalLicenseLevel")}
-              >
-                <option value="">-- เลือกระดับ --</option>
-                <option value="สามัญสถาปนิก">ระดับสามัญสถาปนิก</option>
-                <option value="วุฒิสถาปนิก">ระดับวุฒิสถาปนิก</option>
-              </select>
+              <label className="w-full xl:w-3/12">
+                {formData.perReqProfessionalLicenseName === "กว"
+                  ? "ระดับ กว"
+                  : "ระดับ กส"}
+              </label>
+              <div className="w-full xl:w-9/12">
+                <Select
+                  name="perReqProfessionalLicenseLevel"
+                  aria-label={`ระดับ ${formData.perReqProfessionalLicenseName}`}
+                  placeholder="-- เลือกระดับ --"
+                  size="md"
+                  variant="bordered"
+                  color="none"
+                  radius="lg"
+                  selectedKeys={
+                    formData.perReqProfessionalLicenseLevel
+                      ? [formData.perReqProfessionalLicenseLevel]
+                      : []
+                  }
+                  onChange={handleInputChange("perReqProfessionalLicenseLevel")}
+                  isInvalid={!!errors.perReqProfessionalLicenseLevel}
+                  errorMessage={errors.perReqProfessionalLicenseLevel}
+                >
+                  {formData.perReqProfessionalLicenseName === "กว" ? (
+                    <>
+                      <SelectItem key="ภาคีวิศวกร" value="ภาคีวิศวกร">
+                        ภาคีวิศวกร
+                      </SelectItem>
+                      <SelectItem key="ภาคีวิศวกรพิเศษ" value="ภาคีวิศวกรพิเศษ">
+                        ภาคีวิศวกรพิเศษ
+                      </SelectItem>
+                      <SelectItem key="สามัญวิศวกร" value="สามัญวิศวกร">
+                        สามัญวิศวกร
+                      </SelectItem>
+                      <SelectItem key="วุฒิวิศวกร" value="วุฒิวิศวกร">
+                        วุฒิวิศวกร
+                      </SelectItem>
+                    </>
+                  ) : (
+                    <>
+                      <SelectItem key="สามัญสถาปนิก" value="สามัญสถาปนิก">
+                        สามัญสถาปนิก
+                      </SelectItem>
+                      <SelectItem key="วุฒิสถาปนิก" value="วุฒิสถาปนิก">
+                        วุฒิสถาปนิก
+                      </SelectItem>
+                    </>
+                  )}
+                </Select>
+              </div>
             </div>
           )}
         </div>

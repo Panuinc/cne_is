@@ -61,19 +61,35 @@ export default function perReqUpdate() {
           positionRes.json(),
         ]);
 
-        if (divisionRes.ok) setDivisionOptions(divisionData.division || []);
-        else toast.error(divisionData.error || "Failed to load division data");
+        if (divisionRes.ok) {
+          const activeDivisions = (divisionData.division || []).filter(
+            (division) => division.divisionStatus === "Active"
+          );
+          setDivisionOptions(activeDivisions);
+        } else {
+          toast.error(divisionData.error || "Failed to load division data");
+        }
 
-        if (departmentRes.ok)
-          setDepartmentOptions(departmentData.department || []);
-        else
+        if (departmentRes.ok) {
+          const activeDepartments = (departmentData.department || []).filter(
+            (department) => department.departmentStatus === "Active"
+          );
+          setDepartmentOptions(activeDepartments);
+        } else {
           toast.error(departmentData.error || "Failed to load department data");
+        }
 
-        if (positionRes.ok) setPositionOptions(positionData.position || []);
-        else toast.error(positionData.error || "Failed to load position data");
+        if (positionRes.ok) {
+          const activePositions = (positionData.position || []).filter(
+            (position) => position.positionStatus === "Active"
+          );
+          setPositionOptions(activePositions);
+        } else {
+          toast.error(positionData.error || "Failed to load position data");
+        }
       } catch (error) {
         toast.error(
-          "Failed to fetch division or department or position: " + error.message
+          "Failed to fetch division, department or position: " + error.message
         );
       }
     })();
