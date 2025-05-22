@@ -129,7 +129,7 @@ export default function UIRoleList({ data = [], error = "" }) {
               size="sm"
               color={
                 item.roleStatus?.toLowerCase() === "active"
-                  ? "success"
+                  ? "primary"
                   : "danger"
               }
               radius="lg"

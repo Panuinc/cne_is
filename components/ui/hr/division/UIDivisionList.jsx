@@ -131,7 +131,7 @@ export default function UIDivisionList({ data = [], error = "" }) {
               size="sm"
               color={
                 item.divisionStatus?.toLowerCase() === "active"
-                  ? "success"
+                  ? "primary"
                   : "danger"
               }
               radius="lg"

@@ -256,7 +256,7 @@ export default function UIEmpList({ data = [], error = "" }) {
               size="sm"
               color={
                 item.empStatus?.toLowerCase() === "active"
-                  ? "success"
+                  ? "primary"
                   : "danger"
               }
               radius="lg"

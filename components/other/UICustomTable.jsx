@@ -49,7 +49,7 @@ export default function UICustomTable({
     <Table
       isHeaderSticky
       aria-label="Data Table"
-      shadow="sm"
+      shadow="none"
       topContent={topContent}
       topContentPlacement="outside"
       bottomContent={bottomContent}

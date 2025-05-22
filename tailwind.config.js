@@ -12,12 +12,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        white: "#FDFCF7",
+        white: "#FFFFFF",
         dark: "#010000",
         default: "#EFEEE9",
-        info: "#FCF9E8",
         primary: "#9ABE26",
         secondary: "#FCE389",
+        danger: "#CCBB9D",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],
