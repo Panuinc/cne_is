@@ -233,7 +233,7 @@ export default function UIPerReqList({ data = [], error = "" }) {
       <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
         <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
           <UISelectFilter
-            label="สถานะการใช้งาน"
+            label="สถานะการอนุมัติ"
             selectedValue={statusFilter}
             items={statusOptions}
             onChange={setStatusFilter}
