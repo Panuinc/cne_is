@@ -61,8 +61,8 @@ export class EmpCvENController {
 <table class="w-full p-2 gap-2 text-sm">
     <thead>
         <tr class="bg-green">
-            <th class="border-b-2 p-2">Project Name</th>
-            <th class="border-b-2 p-2">Project Description</th>
+            <th class="border-b-1 p-2">Project Name</th>
+            <th class="border-b-1 p-2">Project Description</th>
         </tr>
     </thead>
     <tbody>
@@ -71,7 +71,7 @@ export class EmpCvENController {
             (proj) => `
         <tr>
             <td class="align-top p-2">● ${proj.empCvProjectNameEN || "-"}</td>
-            <td class="align-top border-l-2 p-2">
+            <td class="align-top border-l-1 p-2">
                 - ${proj.empCvProjectDescriptionEN || "-"}
             </td>
         </tr>

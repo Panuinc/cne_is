@@ -30,7 +30,7 @@ export default function UIEmpCvForm({
       >
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-1 border-default text-primary font-[600]">
               การศึกษา
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function UIEmpCvForm({
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-1 border-default text-primary font-[600]">
               ใบอนุญาตประกอบวิชาชีพ
             </div>
           </div>
@@ -328,7 +328,7 @@ export default function UIEmpCvForm({
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-1 border-default text-primary font-[600]">
               ประวัติการทำงาน
             </div>
           </div>
@@ -453,7 +453,7 @@ export default function UIEmpCvForm({
 
               <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
                 <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-                  <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
+                  <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-1 border-default text-primary font-[600]">
                     โปรเจคที่ผ่านมา
                   </div>
                 </div>
@@ -603,7 +603,7 @@ export default function UIEmpCvForm({
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 rounded-xl border-4 border-default">
           <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-2 border-default text-primary font-[600]">
+            <div className="flex items-center justify-start w-full h-full p-4 gap-2 border-b-1 border-default text-primary font-[600]">
               ความสามารถทางภาษา
             </div>
           </div>

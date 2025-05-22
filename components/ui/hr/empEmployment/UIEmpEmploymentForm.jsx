@@ -416,7 +416,7 @@ export default function UIEmpEmploymentForm({
           formData.EmpEmploymentEmpBy?.empCitizen !== "Thai" && (
             <>
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
-                <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-b-2 border-default text-primary font-[600]">
+                <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-b-1 border-default text-primary font-[600]">
                   สำหรับแรงงานต่างด้าว
                 </div>
               </div>

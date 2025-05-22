@@ -23,7 +23,7 @@ export default function UIPosJobDes({
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
       >
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-b-2 border-default">
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-b-1 border-default">
           <div className="flex flex-col items-center justify-center w-3/12 h-full p-2 gap-2">
             <Image
               src="/logoCompany/com-1.png"
@@ -67,13 +67,13 @@ export default function UIPosJobDes({
             <div className="flex items-center justify-start w-3/12 h-full p-2 gap-2">
               {item.label}
             </div>
-            <div className="flex items-center justify-start w-9/12 h-full p-2 gap-2 border-b-2 border-default">
+            <div className="flex items-center justify-start w-9/12 h-full p-2 gap-2 border-b-1 border-default">
               {item.value}
             </div>
           </div>
         ))}
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 bg-default border-b-2 border-default">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 bg-default border-b-1 border-default">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             คุณสมบัติ (Qualification)
           </div>
@@ -207,7 +207,7 @@ export default function UIPosJobDes({
           ))}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 bg-default border-b-2 border-default">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 bg-default border-b-1 border-default">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
           </div>

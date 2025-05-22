@@ -61,8 +61,8 @@ export class EmpCvTHController {
 <table class="w-full p-2 gap-2 text-sm">
     <thead>
         <tr class="bg-green">
-            <th class="border-b-2 p-2">ชื่อโปรเจค</th>
-            <th class="border-b-2 p-2">รายละเอียด</th>
+            <th class="border-b-1 p-2">ชื่อโปรเจค</th>
+            <th class="border-b-1 p-2">รายละเอียด</th>
         </tr>
     </thead>
     <tbody>
@@ -71,7 +71,7 @@ export class EmpCvTHController {
             (proj) => `
         <tr>
             <td class="align-top p-2">● ${proj.empCvProjectNameTH || "-"}</td>
-            <td class="align-top border-l-2 p-2">
+            <td class="align-top border-l-1 p-2">
                 - ${proj.empCvProjectDescriptionTH || "-"}
             </td>
         </tr>

@@ -123,7 +123,7 @@ export class PosJobDesPDFController {
 </head>
 
 <body class="flex flex-col items-center justify-start w-full h-screen gap-2 border-1">
-    <div class="flex flex-row items-center justify-center w-full border-b-2">
+    <div class="flex flex-row items-center justify-center w-full border-b-1">
         <div class="flex flex-col items-center justify-center w-3/12 h-full p-1 gap-2 border-r font_bold">
             <img src="data:image/png;base64,${logoBase64}" class="w-24" />
             บริษัท ชาญนครวิศวกรรม
@@ -139,7 +139,7 @@ export class PosJobDesPDFController {
             ตำแหน่ง
         </div>
 
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-2">
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
             ${positionNameTH}
         </div>
     </div>
@@ -149,7 +149,7 @@ export class PosJobDesPDFController {
             สังกัดฝ่าย
         </div>
 
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-2">
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
             ${divisionName}
         </div>
     </div>
@@ -159,7 +159,7 @@ export class PosJobDesPDFController {
             สังกัดแผนก
         </div>
 
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-2">
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
             ${departmentName}
         </div>
     </div>
@@ -169,13 +169,13 @@ export class PosJobDesPDFController {
             ผู้บังคับบัญชา
         </div>
 
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-2">
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
             หัวหน้าแผนก/ผู้ช่วยผู้จัดการฝ่าย/ผู้จัดการฝ่าย ${divisionName}
         </div>
     </div>
 
     <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-2 border-b-2 font_bold">
+        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-1 border-b-1 font_bold">
             คุณสมบัติ (Qualification)
         </div>
 
@@ -239,7 +239,7 @@ export class PosJobDesPDFController {
     </div>
 
     <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-2 border-b-2 font_bold">
+        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-1 border-b-1 font_bold">
             บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
         </div>
 
