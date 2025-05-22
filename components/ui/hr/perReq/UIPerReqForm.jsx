@@ -60,7 +60,6 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -92,7 +91,6 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -220,7 +218,6 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -289,7 +286,6 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -344,7 +340,6 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -414,7 +409,6 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -525,7 +519,6 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
@@ -580,12 +573,489 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
+        //
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+              ความสามารถด้านคอมพิวเตอร์
+            </div>
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="MicrosoftOffice"
+                isSelected={
+                  formData.perReqComputerSkillName === "MicrosoftOffice"
+                }
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "MicrosoftOffice" },
+                  })
+                }
+              >
+                Microsoft Office
+              </Checkbox>
 
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="MicrosoftProject"
+                isSelected={
+                  formData.perReqComputerSkillName === "MicrosoftProject"
+                }
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "MicrosoftProject" },
+                  })
+                }
+              >
+                Microsoft Project
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Revit"
+                isSelected={formData.perReqComputerSkillName === "Revit"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Revit" },
+                  })
+                }
+              >
+                Revit
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Autocad"
+                isSelected={formData.perReqComputerSkillName === "Autocad"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Autocad" },
+                  })
+                }
+              >
+                Autocad
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Sketchup"
+                isSelected={formData.perReqComputerSkillName === "Sketchup"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Sketchup" },
+                  })
+                }
+              >
+                Sketchup
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Solidwork"
+                isSelected={formData.perReqComputerSkillName === "Solidwork"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Solidwork" },
+                  })
+                }
+              >
+                Solidwork
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Canva"
+                isSelected={formData.perReqComputerSkillName === "Canva"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Canva" },
+                  })
+                }
+              >
+                Canva
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="Adobe"
+                isSelected={formData.perReqComputerSkillName === "Adobe"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Adobe" },
+                  })
+                }
+              >
+                Adobe
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="BPluse"
+                isSelected={formData.perReqComputerSkillName === "BPluse"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "BPluse" },
+                  })
+                }
+              >
+                B-Pluse
+              </Checkbox>
+
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="อื่นๆ"
+                isSelected={formData.perReqComputerSkillName === "Other"}
+                onChange={() =>
+                  handleInputChange("perReqComputerSkillName")({
+                    target: { value: "Other" },
+                  })
+                }
+              >
+                อื่นๆ
+              </Checkbox>
+            </div>
+          </div>
+          {formData.perReqComputerSkillName === "Other" && (
+            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="perReqComputerSkillIsOther"
+                  type="text"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="bordered"
+                  color="none"
+                  radius="lg"
+                  value={formData.perReqComputerSkillIsOther || ""}
+                  onChange={handleInputChange("perReqComputerSkillIsOther")}
+                  isInvalid={!!errors.perReqComputerSkillIsOther}
+                  errorMessage={errors.perReqComputerSkillIsOther}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+              ความสามารถทางด้านภาษา
+            </div>
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+                    ภาษา อังกฤษ
+                  </div>
+                  <div className="flex flex-col xl:flex-row items-start justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+                      <Checkbox
+                        size="lg"
+                        color="default"
+                        aria-label="พอใช้"
+                        isSelected={
+                          formData.perReqReasonEnglishSkill === "Basic"
+                        }
+                        onChange={() =>
+                          handleInputChange("perReqReasonEnglishSkill")({
+                            target: { value: "Basic" },
+                          })
+                        }
+                      >
+                        พอใช้
+                      </Checkbox>
+                      <Checkbox
+                        size="lg"
+                        color="default"
+                        aria-label="ดี"
+                        isSelected={
+                          formData.perReqReasonEnglishSkill === "Good"
+                        }
+                        onChange={() =>
+                          handleInputChange("perReqReasonEnglishSkill")({
+                            target: { value: "Good" },
+                          })
+                        }
+                      >
+                        ดี
+                      </Checkbox>
+                      <Checkbox
+                        size="lg"
+                        color="default"
+                        aria-label="ดีมาก"
+                        isSelected={
+                          formData.perReqReasonEnglishSkill === "Excellent"
+                        }
+                        onChange={() =>
+                          handleInputChange("perReqReasonEnglishSkill")({
+                            target: { value: "Excellent" },
+                          })
+                        }
+                      >
+                        ดีมาก
+                      </Checkbox>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+                    ภาษา จีน
+                  </div>
+                  <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+                    <Checkbox
+                      size="lg"
+                      color="default"
+                      aria-label="พอใช้"
+                      isSelected={formData.perReqReasonEnglishSkill === "Basic"}
+                      onChange={() =>
+                        handleInputChange("perReqReasonEnglishSkill")({
+                          target: { value: "Basic" },
+                        })
+                      }
+                    >
+                      พอใช้
+                    </Checkbox>
+                    <Checkbox
+                      size="lg"
+                      color="default"
+                      aria-label="ดี"
+                      isSelected={formData.perReqReasonEnglishSkill === "Good"}
+                      onChange={() =>
+                        handleInputChange("perReqReasonEnglishSkill")({
+                          target: { value: "Good" },
+                        })
+                      }
+                    >
+                      ดี
+                    </Checkbox>
+                    <Checkbox
+                      size="lg"
+                      color="default"
+                      aria-label="ดีมาก"
+                      isSelected={
+                        formData.perReqReasonEnglishSkill === "Excellent"
+                      }
+                      onChange={() =>
+                        handleInputChange("perReqReasonEnglishSkill")({
+                          target: { value: "Excellent" },
+                        })
+                      }
+                    >
+                      ดีมาก
+                    </Checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+              ใบอนุญาตขับขี่
+            </div>
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่บ.1"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.1"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่บ.1" },
+                  })
+                }
+              >
+                ใบขับขี่ บ.1
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่บ.2"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.2"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่บ.2" },
+                  })
+                }
+              >
+                ใบขับขี่ บ.2
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่บ.3"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.3"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่บ.3" },
+                  })
+                }
+              >
+                ใบขับขี่ บ.3
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่บ.4"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.4"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่บ.4" },
+                  })
+                }
+              >
+                ใบขับขี่ บ.4
+              </Checkbox>{" "}
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่บ.4"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.4"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่บ.4" },
+                  })
+                }
+              >
+                ใบขับขี่ บ.4
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่ท.1"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.1"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่ท.1" },
+                  })
+                }
+              >
+                ใบขับขี่ ท.1
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่ท.2"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.2"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่ท.2" },
+                  })
+                }
+              >
+                ใบขับขี่ ท.2
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่ท.3"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.3"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่ท.3" },
+                  })
+                }
+              >
+                ใบขับขี่ ท.3
+              </Checkbox>
+              <Checkbox
+                size="md"
+                color="none"
+                aria-label="ใบขับขี่ท.4"
+                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.4"}
+                onChange={() =>
+                  handleInputChange("perReqReasonForRequest")({
+                    target: { value: "ใบขับขี่ท.4" },
+                  })
+                }
+              >
+                ใบขับขี่ ท.4
+              </Checkbox>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+              ใบอนุญาตประกอบวิชาชีพ
+            </div>
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+              <Checkbox
+                size="lg"
+                color="default"
+                aria-label="กส"
+                isSelected={formData.perReqProfessionalLicenseName === "กส"}
+                onChange={() =>
+                  handleInputChange("perReqProfessionalLicenseName")({
+                    target: { value: "กส" },
+                  })
+                }
+              >
+                กส
+              </Checkbox>
+              <Checkbox
+                size="lg"
+                color="default"
+                aria-label="กว"
+                isSelected={formData.perReqProfessionalLicenseName === "กว"}
+                onChange={() =>
+                  handleInputChange("perReqProfessionalLicenseName")({
+                    target: { value: "กว" },
+                  })
+                }
+              >
+                กว
+              </Checkbox>
+            </div>
+          </div>
+          {formData.perReqProfessionalLicenseName === "กว" && (
+            <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+              <label className="w-full xl:w-3/12">ระดับ กว</label>
+              <select
+                className="w-full xl:w-9/12 p-2 border border-gray-300 rounded-lg"
+                value={formData.perReqProfessionalLicenseLevel || ""}
+                onChange={handleInputChange("perReqProfessionalLicenseLevel")}
+              >
+                <option value="">-- เลือกระดับ --</option>
+                <option value="ภาคีวิศวกร">ภาคีวิศวกร</option>
+                <option value="ภาคีวิศวกรพิเศษ">ภาคีวิศวกรพิเศษ</option>
+                <option value="สามัญวิศวกร">สามัญวิศวกร</option>
+                <option value="วุฒิวิศวกร">วุฒิวิศวกร</option>
+              </select>
+            </div>
+          )}
+          {/* Sub-levels for กส */}
+          {formData.perReqProfessionalLicenseName === "กส" && (
+            <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+              <label className="w-full xl:w-3/12">ระดับ กส</label>
+              <select
+                className="w-full xl:w-9/12 p-2 border border-gray-300 rounded-lg"
+                value={formData.perReqProfessionalLicenseLevel || ""}
+                onChange={handleInputChange("perReqProfessionalLicenseLevel")}
+              >
+                <option value="">-- เลือกระดับ --</option>
+                <option value="สามัญสถาปนิก">ระดับสามัญสถาปนิก</option>
+                <option value="วุฒิสถาปนิก">ระดับวุฒิสถาปนิก</option>
+              </select>
+            </div>
+          )}
+        </div>
+        //
         <div className="flex flex-col xl:flex-row items-center justify-evenly w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Image
-                src={`/empEmployment/${signature}`}
+                src={`/empEmployment/signature/${signature}`}
                 alt="signature"
                 width={100}
                 height={100}
@@ -622,7 +1092,6 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
             <Button

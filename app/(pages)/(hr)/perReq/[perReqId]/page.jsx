@@ -18,7 +18,85 @@ export default function perReqUpdate() {
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ perReqName: "", perReqStatus: "" });
+  const [formData, setFormData] = useState({
+    perReqDesiredDate: "",
+    perReqDivisionId: "",
+    perReqDepartmentId: "",
+    perReqPositionId: "",
+    perReqAmount: "",
+    perReqEmpEmploymentType: "",
+    perReqEmpEmploymentTypeNote: "",
+    perReqReasonForRequest: "",
+    perReqReasonForRequestNote: "",
+    perReqReasonAge: "",
+    perReqReasonGender: "",
+    perReqReasonEducation: "",
+    perReqReasonEducationNote: "",
+    perReqReasonExperience: "",
+    perReqStatus: "",
+  });
+
+  const [divisionOptions, setDivisionOptions] = useState([]);
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [positionOptions, setPositionOptions] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [divisionRes, departmentRes, positionRes] = await Promise.all([
+          fetch("/api/hr/division", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+          fetch("/api/hr/department", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+          fetch("/api/hr/position", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+        ]);
+
+        const [divisionData, departmentData, positionData] = await Promise.all([
+          divisionRes.json(),
+          departmentRes.json(),
+          positionRes.json(),
+        ]);
+
+        if (divisionRes.ok) setDivisionOptions(divisionData.division || []);
+        else toast.error(divisionData.error || "Failed to load division data");
+
+        if (departmentRes.ok)
+          setDepartmentOptions(departmentData.department || []);
+        else
+          toast.error(departmentData.error || "Failed to load department data");
+
+        if (positionRes.ok) setPositionOptions(positionData.position || []);
+        else toast.error(positionData.error || "Failed to load position data");
+      } catch (error) {
+        toast.error(
+          "Failed to fetch division or department or position: " + error.message
+        );
+      }
+    })();
+  }, []);
+
+  const filteredDepartmentData = useMemo(() => {
+    if (!formData.perReqDivisionId) return [];
+    return departmentOptions.filter(
+      (dept) =>
+        Number(dept.departmentDivisionId) === Number(formData.perReqDivisionId)
+    );
+  }, [departmentOptions, formData.perReqDivisionId]);
+
+  const filteredPositionData = useMemo(() => {
+    const divId = Number(formData.perReqDivisionId);
+    const deptId = Number(formData.perReqDepartmentId);
+    if (!divId) return [];
+    return positionOptions.filter(
+      (pos) =>
+        Number(pos.positionDivisionId) === divId &&
+        (!deptId || Number(pos.positionDepartmentId) === deptId)
+    );
+  }, [positionOptions, formData.perReqDivisionId, formData.perReqDepartmentId]);
 
   useEffect(() => {
     if (!perReqId) return;
@@ -51,6 +129,7 @@ export default function perReqUpdate() {
     []
   );
 
+  const cancelRef = useRef(false);
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -58,6 +137,11 @@ export default function perReqUpdate() {
 
       const form = new FormData(formRef.current);
       form.append("perReqUpdateBy", userId);
+
+      form.append(
+        "perReqStatus",
+        cancelRef.current ? "Cancel" : "PendingManagerApprove"
+      );
 
       try {
         const res = await fetch(`/api/hr/perReq/${perReqId}`, {
@@ -82,6 +166,8 @@ export default function perReqUpdate() {
         }
       } catch (err) {
         toast.error(`Failed to update perReq: ${err.message}`);
+      } finally {
+        cancelRef.current = false;
       }
     },
     [userId, perReqId, router]
@@ -96,7 +182,11 @@ export default function perReqUpdate() {
         onSubmit={handleSubmit}
         errors={errors}
         formData={formData}
+        cancelRef={cancelRef}
         handleInputChange={handleChange}
+        divisionOptions={divisionOptions}
+        departmentOptions={filteredDepartmentData}
+        positionOptions={filteredPositionData}
         operatedBy={nameTH}
         isUpdate
       />

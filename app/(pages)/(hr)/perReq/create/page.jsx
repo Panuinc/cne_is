@@ -2,7 +2,13 @@
 
 import UIPerReqForm from "@/components/ui/hr/perReq/UIPerReqForm";
 
-import React, { useState, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,13 +17,94 @@ const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 export default function perReqCreate() {
   const { data: sessionData } = useSession();
-  const { id: userId = "", nameTH = "" } = sessionData?.user ?? {};
+  const {
+    id: userId = "",
+    nameTH = "",
+    signature = "",
+  } = sessionData?.user ?? {};
 
   const router = useRouter();
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ perReqName: "" });
+  const [formData, setFormData] = useState({
+    perReqDesiredDate: "",
+    perReqDivisionId: "",
+    perReqDepartmentId: "",
+    perReqPositionId: "",
+    perReqAmount: "",
+    perReqEmpEmploymentType: "",
+    perReqEmpEmploymentTypeNote: "",
+    perReqReasonForRequest: "",
+    perReqReasonForRequestNote: "",
+    perReqReasonAge: "",
+    perReqReasonGender: "",
+    perReqReasonEducation: "",
+    perReqReasonEducationNote: "",
+    perReqReasonExperience: "",
+  });
+
+  const [divisionOptions, setDivisionOptions] = useState([]);
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [positionOptions, setPositionOptions] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [divisionRes, departmentRes, positionRes] = await Promise.all([
+          fetch("/api/hr/division", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+          fetch("/api/hr/department", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+          fetch("/api/hr/position", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
+        ]);
+
+        const [divisionData, departmentData, positionData] = await Promise.all([
+          divisionRes.json(),
+          departmentRes.json(),
+          positionRes.json(),
+        ]);
+
+        if (divisionRes.ok) setDivisionOptions(divisionData.division || []);
+        else toast.error(divisionData.error || "Failed to load division data");
+
+        if (departmentRes.ok)
+          setDepartmentOptions(departmentData.department || []);
+        else
+          toast.error(departmentData.error || "Failed to load department data");
+
+        if (positionRes.ok) setPositionOptions(positionData.position || []);
+        else toast.error(positionData.error || "Failed to load position data");
+      } catch (error) {
+        toast.error(
+          "Failed to fetch division or department or position: " + error.message
+        );
+      }
+    })();
+  }, []);
+
+  const filteredDepartmentData = useMemo(() => {
+    if (!formData.perReqDivisionId) return [];
+    return departmentOptions.filter(
+      (dept) =>
+        Number(dept.departmentDivisionId) === Number(formData.perReqDivisionId)
+    );
+  }, [departmentOptions, formData.perReqDivisionId]);
+
+  const filteredPositionData = useMemo(() => {
+    const divId = Number(formData.perReqDivisionId);
+    const deptId = Number(formData.perReqDepartmentId);
+    if (!divId) return [];
+    return positionOptions.filter(
+      (pos) =>
+        Number(pos.positionDivisionId) === divId &&
+        (!deptId || Number(pos.positionDepartmentId) === deptId)
+    );
+  }, [positionOptions, formData.perReqDivisionId, formData.perReqDepartmentId]);
 
   const handleChange = useCallback(
     (field) => (e) => {
@@ -76,7 +163,11 @@ export default function perReqCreate() {
         errors={errors}
         formData={formData}
         handleInputChange={handleChange}
+        divisionOptions={divisionOptions}
+        departmentOptions={filteredDepartmentData}
+        positionOptions={filteredPositionData}
         operatedBy={nameTH}
+        signature={signature}
       />
     </>
   );
