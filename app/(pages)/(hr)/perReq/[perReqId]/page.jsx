@@ -2,7 +2,13 @@
 
 import UIPerReqForm from "@/components/ui/hr/perReq/UIPerReqForm";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -33,6 +39,10 @@ export default function perReqUpdate() {
     perReqReasonEducation: "",
     perReqReasonEducationNote: "",
     perReqReasonExperience: "",
+    perReqComputerSkills: [],
+    perReqLanguageSkills: [],
+    perReqDrivingLicenses: [],
+    perReqProfessionalLicenses: [],
     perReqStatus: "",
   });
 
@@ -159,6 +169,23 @@ export default function perReqUpdate() {
         cancelRef.current ? "Cancel" : "PendingManagerApprove"
       );
 
+      form.append(
+        "perReqComputerSkills",
+        JSON.stringify(formData.perReqComputerSkills)
+      );
+      form.append(
+        "perReqLanguageSkills",
+        JSON.stringify(formData.perReqLanguageSkills)
+      );
+      form.append(
+        "perReqDrivingLicenses",
+        JSON.stringify(formData.perReqDrivingLicenses)
+      );
+      form.append(
+        "perReqProfessionalLicenses",
+        JSON.stringify(formData.perReqProfessionalLicenses)
+      );
+
       try {
         const res = await fetch(`/api/hr/perReq/${perReqId}`, {
           method: "PUT",
@@ -186,7 +213,7 @@ export default function perReqUpdate() {
         cancelRef.current = false;
       }
     },
-    [userId, perReqId, router]
+    [userId, perReqId, router, formData]
   );
 
   return (
@@ -200,6 +227,7 @@ export default function perReqUpdate() {
         formData={formData}
         cancelRef={cancelRef}
         handleInputChange={handleChange}
+        setFormData={setFormData}
         divisionOptions={divisionOptions}
         departmentOptions={filteredDepartmentData}
         positionOptions={filteredPositionData}

@@ -42,6 +42,10 @@ export default function perReqCreate() {
     perReqReasonEducation: "",
     perReqReasonEducationNote: "",
     perReqReasonExperience: "",
+    perReqComputerSkills: [],
+    perReqLanguageSkills: [],
+    perReqDrivingLicenses: [],
+    perReqProfessionalLicenses: [],
   });
 
   const [divisionOptions, setDivisionOptions] = useState([]);
@@ -141,6 +145,23 @@ export default function perReqCreate() {
       const form = new FormData(formRef.current);
       form.append("perReqCreateBy", userId);
 
+      form.append(
+        "perReqComputerSkills",
+        JSON.stringify(formData.perReqComputerSkills || [])
+      );
+      form.append(
+        "perReqLanguageSkills",
+        JSON.stringify(formData.perReqLanguageSkills || [])
+      );
+      form.append(
+        "perReqDrivingLicenses",
+        JSON.stringify(formData.perReqDrivingLicenses || [])
+      );
+      form.append(
+        "perReqProfessionalLicenses",
+        JSON.stringify(formData.perReqProfessionalLicenses || [])
+      );
+
       try {
         const res = await fetch("/api/hr/perReq", {
           method: "POST",
@@ -166,7 +187,7 @@ export default function perReqCreate() {
         toast.error(`Failed to create perReq: ${err.message}`);
       }
     },
-    [userId, router]
+    [userId, router, formData]
   );
 
   return (
@@ -178,6 +199,7 @@ export default function perReqCreate() {
         onSubmit={handleSubmit}
         errors={errors}
         formData={formData}
+        setFormData={setFormData}
         handleInputChange={handleChange}
         divisionOptions={divisionOptions}
         departmentOptions={filteredDepartmentData}
