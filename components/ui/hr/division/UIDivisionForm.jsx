@@ -95,7 +95,7 @@ export default function UIDivisionForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="flat"
+              variant="bordered"
               color="primary"
               radius="lg"
               value={operatedBy}

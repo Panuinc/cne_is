@@ -65,7 +65,7 @@ export default function UIEmpUserForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="flat"
+              variant="bordered"
               color="primary"
               radius="lg"
               value={operatedBy}

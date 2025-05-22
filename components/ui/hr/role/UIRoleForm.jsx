@@ -77,7 +77,7 @@ export default function UIRoleForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="flat"
+              variant="bordered"
               color="primary"
               radius="lg"
               value={operatedBy}
