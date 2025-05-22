@@ -669,9 +669,9 @@ export default function UIEmpCvForm({
                     )({ target: { value: e.target?.value || e } })
                   }
                 >
-                  <SelectItem key="Basic">ขั้นพื้นฐาน</SelectItem>
-                  <SelectItem key="Intermediate">ระดับกลาง</SelectItem>
-                  <SelectItem key="Advance">ขั้นสูง</SelectItem>
+                  <SelectItem key="Basic">พอใช้</SelectItem>
+                  <SelectItem key="Good">ดี</SelectItem>
+                  <SelectItem key="Excellent">ดีมาก</SelectItem>
                 </Select>
               </div>
               <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">

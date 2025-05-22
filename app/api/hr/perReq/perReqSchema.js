@@ -83,8 +83,8 @@ export const perReqPostSchema = z.object({
   ).optional(),
 
   perReqReasonEnglishSkill: preprocessEnum(
-    ["Basic", "Intermediate", "Advance"],
-    "Please provide the per req reason english skill as 'Basic' or 'Intermediate' or 'Advance'"
+    ["Basic", "Good", "Excellent"],
+    "Please provide the per req reason english skill as 'Basic' or 'Good' or 'Excellent'"
   ),
 
   perReqReasonOtherSkill: preprocessString(
@@ -160,8 +160,8 @@ export const perReqPutSchema = z.object({
   ).optional(),
 
   perReqReasonEnglishSkill: preprocessEnum(
-    ["Basic", "Intermediate", "Advance"],
-    "Please provide the per req reason english skill as 'Basic' or 'Intermediate' or 'Advance'"
+    ["Basic", "Good", "Excellent"],
+    "Please provide the per req reason english skill as 'Basic' or 'Good' or 'Excellent'"
   ),
 
   perReqReasonOtherSkill: preprocessString(

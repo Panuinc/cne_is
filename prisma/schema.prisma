@@ -55,15 +55,10 @@ enum PerReqReasonExperience {
   Experience4YearsUp
 }
 
-enum SkillLevel {
+enum SkillProficiency {
   Basic
-  Intermediate
-  Advance
-}
-
-enum PerReqReasonComputerSkill {
-  MicrosoftOffice
-  Other
+  Good
+  Excellent
 }
 
 enum PerReqStatus {
@@ -401,11 +396,11 @@ model EmpCvProject {
 }
 
 model EmpCvLanguageSkill {
-  empCvLanguageSkillId          Int         @id @default(autoincrement())
+  empCvLanguageSkillId          Int               @id @default(autoincrement())
   empCvLanguageSkillEmpCvId     Int
-  empCvLanguageSkillNameTH      String?     @db.VarChar(255)
-  empCvLanguageSkillNameEN      String?     @db.VarChar(255)
-  empCvLanguageSkillProficiency SkillLevel?
+  empCvLanguageSkillNameTH      String?           @db.VarChar(255)
+  empCvLanguageSkillNameEN      String?           @db.VarChar(255)
+  empCvLanguageSkillProficiency SkillProficiency?
 
   empCv EmpCv @relation(fields: [empCvLanguageSkillEmpCvId], references: [empCvId])
 
@@ -518,35 +513,36 @@ model PosJobDes {
 }
 
 model PerReq {
-  perReqId                      Int                       @id @default(autoincrement())
-  perReqDocumentId              String                    @db.VarChar(255)
-  perReqDesiredDate             DateTime
-  perReqDivisionId              Int
-  perReqDepartmentId            Int
-  perReqPositionId              Int
-  perReqAmount                  Int
-  perReqEmpEmploymentType       EmpEmploymentTypes
-  perReqEmpEmploymentTypeNote   String?                   @db.VarChar(255)
-  perReqReasonForRequest        RequestReason
-  perReqReasonForRequestNote    String?                   @db.VarChar(255)
-  perReqReasonAge               String                    @db.VarChar(255)
-  perReqReasonGender            Gender
-  perReqReasonEducation         perReqEducation
-  perReqReasonEducationNote     String?                   @db.VarChar(255)
-  perReqReasonExperience        PerReqReasonExperience
-  perReqReasonComputerSkill     PerReqReasonComputerSkill
-  perReqReasonComputerSkillNote String?                   @db.VarChar(255)
-  perReqReasonEnglishSkill      SkillLevel
-  perReqReasonOtherSkill        String                    @db.VarChar(255)
-  perReqStatus                  PerReqStatus              @default(PendingManagerApprove)
-  perReqCreateBy                Int
-  perReqCreateAt                DateTime                  @default(now()) @db.Timestamp()
-  perReqUpdateBy                Int?
-  perReqUpdateAt                DateTime?
-  perReqReasonManagerApproveBy  Int?
-  perReqReasonManagerApproveAt  DateTime?
-  perReqReasonHrApproveBy       Int?
-  perReqReasonHrApproveAt       DateTime?
+  perReqId                     Int                         @id @default(autoincrement())
+  perReqDocumentId             String                      @db.VarChar(255)
+  perReqDesiredDate            DateTime
+  perReqDivisionId             Int
+  perReqDepartmentId           Int
+  perReqPositionId             Int
+  perReqAmount                 Int
+  perReqEmpEmploymentType      EmpEmploymentTypes
+  perReqEmpEmploymentTypeNote  String?                     @db.VarChar(255)
+  perReqReasonForRequest       RequestReason
+  perReqReasonForRequestNote   String?                     @db.VarChar(255)
+  perReqReasonAge              String                      @db.VarChar(255)
+  perReqReasonGender           Gender
+  perReqReasonEducation        perReqEducation
+  perReqReasonEducationNote    String?                     @db.VarChar(255)
+  perReqReasonExperience       PerReqReasonExperience
+  perReqReasonComputerSkills   PerReqComputerSkill[]
+  perReqReasonLanguageSkills   PerReqLanguageSkill[]
+  perReqDrivingLicenses        PerReqDrivingLicense[]
+  perReqProfessionalLicenses   PerReqProfessionalLicense[]
+  perReqTrainingCertificates   PerReqTrainingCertificate[]
+  perReqStatus                 PerReqStatus                @default(PendingManagerApprove)
+  perReqCreateBy               Int
+  perReqCreateAt               DateTime                    @default(now()) @db.Timestamp()
+  perReqUpdateBy               Int?
+  perReqUpdateAt               DateTime?
+  perReqReasonManagerApproveBy Int?
+  perReqReasonManagerApproveAt DateTime?
+  perReqReasonHrApproveBy      Int?
+  perReqReasonHrApproveAt      DateTime?
 
   PerReqCreateBy         Emp? @relation("PerReqCreateBy", fields: [perReqCreateBy], references: [empId])
   PerReqUpdateBy         Emp? @relation("PerReqUpdateBy", fields: [perReqUpdateBy], references: [empId])
@@ -564,6 +560,58 @@ model PerReq {
   @@index([perReqDivisionId])
   @@index([perReqDepartmentId])
   @@index([perReqPositionId])
+}
+
+model PerReqComputerSkill {
+  perReqComputerSkillId       Int     @id @default(autoincrement())
+  perReqComputerSkillPerReqId Int
+  perReqComputerSkillName     String  @db.VarChar(255)
+  perReqComputerSkillIsOther  Boolean @default(false)
+
+  perReq PerReq @relation(fields: [perReqComputerSkillPerReqId], references: [perReqId])
+
+  @@index([perReqComputerSkillPerReqId])
+}
+
+model PerReqLanguageSkill {
+  perReqLanguageSkillId       Int              @id @default(autoincrement())
+  perReqLanguageSkillPerReqId Int
+  perReqLanguage              String           @db.VarChar(255)
+  perReqLanguageSkillLevel    SkillProficiency
+
+  perReq PerReq @relation(fields: [perReqLanguageSkillPerReqId], references: [perReqId])
+
+  @@index([perReqLanguageSkillPerReqId])
+}
+
+model PerReqDrivingLicense {
+  perReqDrivingLicenseId       Int    @id @default(autoincrement())
+  perReqDrivingLicensePerReqId Int
+  perReqDrivingLicenseType     String @db.VarChar(255)
+
+  perReq PerReq @relation(fields: [perReqDrivingLicensePerReqId], references: [perReqId])
+
+  @@index([perReqDrivingLicensePerReqId])
+}
+
+model PerReqProfessionalLicense {
+  perReqProfessionalLicenseId       Int    @id @default(autoincrement())
+  perReqProfessionalLicensePerReqId Int
+  perReqProfessionalLicenseName     String @db.VarChar(255)
+
+  perReq PerReq @relation(fields: [perReqProfessionalLicensePerReqId], references: [perReqId])
+
+  @@index([perReqProfessionalLicensePerReqId])
+}
+
+model PerReqTrainingCertificate {
+  perReqTrainingCertificateId       Int    @id @default(autoincrement())
+  perReqTrainingCertificatePerReqId Int
+  perReqTrainingCertificateName     String @db.VarChar(255)
+
+  perReq PerReq @relation(fields: [perReqTrainingCertificatePerReqId], references: [perReqId])
+
+  @@index([perReqTrainingCertificatePerReqId])
 }
 
 // model Training {
