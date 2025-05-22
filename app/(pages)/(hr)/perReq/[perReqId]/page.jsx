@@ -1,6 +1,6 @@
 "use client";
 
-import UIRoleForm from "@/components/ui/hr/role/UIRoleForm";
+import UIPerReqForm from "@/components/ui/hr/perReq/UIPerReqForm";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
@@ -9,36 +9,36 @@ import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
-export default function roleUpdate() {
+export default function perReqUpdate() {
   const { data: sessionData } = useSession();
   const { id: userId = "", nameTH = "" } = sessionData?.user ?? {};
 
   const router = useRouter();
-  const { roleId } = useParams();
+  const { perReqId } = useParams();
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ roleName: "", roleStatus: "" });
+  const [formData, setFormData] = useState({ perReqName: "", perReqStatus: "" });
 
   useEffect(() => {
-    if (!roleId) return;
+    if (!perReqId) return;
     (async () => {
       try {
-        const res = await fetch(`/api/hr/role/${roleId}`, {
+        const res = await fetch(`/api/hr/perReq/${perReqId}`, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
         const result = await res.json();
 
-        if (res.ok && result.role?.length) {
-          setFormData(result.role[0]);
+        if (res.ok && result.perReq?.length) {
+          setFormData(result.perReq[0]);
         } else {
-          toast.error(result.error || "Failed to load role data.");
+          toast.error(result.error || "Failed to load perReq data.");
         }
       } catch (err) {
         toast.error(`Failed to load data: ${err.message}`);
       }
     })();
-  }, [roleId]);
+  }, [perReqId]);
 
   const handleChange = useCallback(
     (field) => (e) => {
@@ -54,13 +54,13 @@ export default function roleUpdate() {
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      if (!roleId || !formRef.current) return;
+      if (!perReqId || !formRef.current) return;
 
       const form = new FormData(formRef.current);
-      form.append("roleUpdateBy", userId);
+      form.append("perReqUpdateBy", userId);
 
       try {
-        const res = await fetch(`/api/hr/role/${roleId}`, {
+        const res = await fetch(`/api/hr/perReq/${perReqId}`, {
           method: "PUT",
           body: form,
           headers: { "secret-token": SECRET_TOKEN || "" },
@@ -70,7 +70,7 @@ export default function roleUpdate() {
 
         if (res.ok) {
           toast.success(result.message);
-          setTimeout(() => router.push("/role"), 2000);
+          setTimeout(() => router.push("/perReq"), 2000);
         } else {
           if (result.details) {
             const fieldErrors = Object.fromEntries(
@@ -78,20 +78,20 @@ export default function roleUpdate() {
             );
             setErrors(fieldErrors);
           }
-          toast.error(result.error || "Failed to update role.");
+          toast.error(result.error || "Failed to update perReq.");
         }
       } catch (err) {
-        toast.error(`Failed to update role: ${err.message}`);
+        toast.error(`Failed to update perReq: ${err.message}`);
       }
     },
-    [userId, roleId, router]
+    [userId, perReqId, router]
   );
 
   return (
     <>
       <Toaster position="top-right" />
-      <UIRoleForm
-        header="แก้ไข ระดับตำแหน่ง"
+      <UIPerReqForm
+        header="แก้ไข ขออัตรากำลังคน"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

@@ -77,7 +77,6 @@ export class PerReqController {
 
       const parsedData = perReqPostSchema.parse(data);
       const localNow = getLocalNow();
-
       const documentId = await PerReqService.generateDocumentId();
 
       const newPerReq = await PerReqService.createPerReq({

@@ -55,7 +55,7 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIRoleList({ data = [], error = "" }) {
+export default function UIPerReqList({ data = [], error = "" }) {
   const { data: session, status } = useSession();
 
   if (status === "loading") return null;
@@ -72,17 +72,17 @@ export default function UIRoleList({ data = [], error = "" }) {
 
   const columns = useMemo(() => {
     const baseColumns = [
-      { name: "ลำดับ", uid: "roleId" },
-      { name: "ระดับตำแหน่ง", uid: "roleName" },
-      { name: "สถานะการใช้งาน", uid: "roleStatus" },
+      { name: "ลำดับ", uid: "perReqId" },
+      { name: "ขออัตรากำลังคน", uid: "perReqName" },
+      { name: "สถานะการใช้งาน", uid: "perReqStatus" },
     ];
 
     if (canManage) {
       baseColumns.push(
         { name: "สร้างโดย", uid: "createdBy" },
-        { name: "สร้างเมื่อวันที่", uid: "roleCreateAt" },
+        { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
         { name: "แก้ไขโดย", uid: "updatedBy" },
-        { name: "แก้ไขเมื่อวันที่", uid: "roleUpdateAt" },
+        { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
         { name: "การจัดการ", uid: "actions" }
       );
     }
@@ -93,13 +93,13 @@ export default function UIRoleList({ data = [], error = "" }) {
   const filteredData = useMemo(() => {
     let result = data;
     if (searchTerm.trim()) {
-      result = result.filter((role) =>
-        role.roleName?.toLowerCase().includes(searchTerm.toLowerCase())
+      result = result.filter((perReq) =>
+        perReq.perReqName?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== "all") {
       result = result.filter(
-        (role) => role.roleStatus?.toLowerCase() === statusFilter
+        (perReq) => perReq.perReqStatus?.toLowerCase() === statusFilter
       );
     }
     return result;
@@ -112,7 +112,7 @@ export default function UIRoleList({ data = [], error = "" }) {
   const handleAction = useCallback(
     (action, item) => {
       if (action === "edit") {
-        router.push(`/role/${item.roleId}`);
+        router.push(`/perReq/${item.perReqId}`);
       }
     },
     [router]
@@ -121,32 +121,32 @@ export default function UIRoleList({ data = [], error = "" }) {
   const renderCell = useCallback(
     (item, idx, colKey) => {
       switch (colKey) {
-        case "roleId":
+        case "perReqId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
-        case "roleStatus":
+        case "perReqStatus":
           return (
             <Button
               size="sm"
               color={
-                item.roleStatus?.toLowerCase() === "active"
+                item.perReqStatus?.toLowerCase() === "active"
                   ? "primary"
                   : "danger"
               }
               radius="lg"
               className="min-w-10 min-h-10 text-white"
             >
-              {item.roleStatus?.toLowerCase() === "active"
+              {item.perReqStatus?.toLowerCase() === "active"
                 ? "เปิดใช้งาน"
                 : "ปิดใช้งาน"}
             </Button>
           );
         case "createdBy":
-          return item.RoleCreateBy
-            ? `${item.RoleCreateBy.empFirstNameTH} ${item.RoleCreateBy.empLastNameTH}`
+          return item.PerReqCreateBy
+            ? `${item.PerReqCreateBy.empFirstNameTH} ${item.PerReqCreateBy.empLastNameTH}`
             : "-";
         case "updatedBy":
-          return item.RoleUpdateBy
-            ? `${item.RoleUpdateBy.empFirstNameTH} ${item.RoleUpdateBy.empLastNameTH}`
+          return item.PerReqUpdateBy
+            ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
           if (!canManage) return null;
@@ -178,7 +178,7 @@ export default function UIRoleList({ data = [], error = "" }) {
           <Input
             isClearable
             label="ค้นหา"
-            placeholder="ค้นหาโดยข้อมูล ระดับตำแหน่ง"
+            placeholder="ค้นหาโดยข้อมูล ขออัตรากำลังคน"
             size="md"
             variant="bordered"
             color="primary"
@@ -193,7 +193,7 @@ export default function UIRoleList({ data = [], error = "" }) {
           {canManage && (
             <Button
               as={Link}
-              href="/role/create"
+              href="/perReq/create"
               color="primary"
               size="md"
               radius="lg"

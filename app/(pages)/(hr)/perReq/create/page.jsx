@@ -1,6 +1,6 @@
 "use client";
 
-import UIRoleForm from "@/components/ui/hr/role/UIRoleForm";
+import UIPerReqForm from "@/components/ui/hr/perReq/UIPerReqForm";
 
 import React, { useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
-export default function roleCreate() {
+export default function perReqCreate() {
   const { data: sessionData } = useSession();
   const { id: userId = "", nameTH = "" } = sessionData?.user ?? {};
 
@@ -17,7 +17,7 @@ export default function roleCreate() {
   const formRef = useRef(null);
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({ roleName: "" });
+  const [formData, setFormData] = useState({ perReqName: "" });
 
   const handleChange = useCallback(
     (field) => (e) => {
@@ -36,10 +36,10 @@ export default function roleCreate() {
       if (!formRef.current) return;
 
       const form = new FormData(formRef.current);
-      form.append("roleCreateBy", userId);
+      form.append("perReqCreateBy", userId);
 
       try {
-        const res = await fetch("/api/hr/role", {
+        const res = await fetch("/api/hr/perReq", {
           method: "POST",
           body: form,
           headers: { "secret-token": SECRET_TOKEN || "" },
@@ -49,7 +49,7 @@ export default function roleCreate() {
 
         if (res.ok) {
           toast.success(result.message);
-          setTimeout(() => router.push("/role"), 2000);
+          setTimeout(() => router.push("/perReq"), 2000);
         } else {
           if (result.details) {
             const fieldErrors = Object.fromEntries(
@@ -57,10 +57,10 @@ export default function roleCreate() {
             );
             setErrors(fieldErrors);
           }
-          toast.error(result.error || "Failed to create role.");
+          toast.error(result.error || "Failed to create perReq.");
         }
       } catch (err) {
-        toast.error(`Failed to create role: ${err.message}`);
+        toast.error(`Failed to create perReq: ${err.message}`);
       }
     },
     [userId, router]
@@ -69,8 +69,8 @@ export default function roleCreate() {
   return (
     <>
       <Toaster position="top-right" />
-      <UIRoleForm
-        header="เพิ่ม ระดับตำแหน่ง"
+      <UIPerReqForm
+        header="เพิ่ม ขออัตรากำลังคน"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

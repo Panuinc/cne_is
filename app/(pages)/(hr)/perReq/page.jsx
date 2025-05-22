@@ -1,29 +1,29 @@
 "use client";
 
-import UIRoleList from "@/components/ui/hr/role/UIRoleList";
+import UIPerReqList from "@/components/ui/hr/perReq/UIPerReqList";
 
 import React, { useEffect, useState } from "react";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
-export default function RoleList() {
-  const [roleDataList, setRoleDataList] = useState([]);
+export default function PerReqList() {
+  const [perReqDataList, setPerReqDataList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     (async () => {
       try {
-        const roleResponse = await fetch("/api/hr/role", {
+        const perReqResponse = await fetch("/api/hr/perReq", {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
 
-        const roleJsonData = await roleResponse.json();
+        const perReqJsonData = await perReqResponse.json();
 
-        if (!roleResponse.ok) {
-          throw new Error(roleJsonData.error || "Failed to load role data");
+        if (!perReqResponse.ok) {
+          throw new Error(perReqJsonData.error || "Failed to load perReq data");
         }
 
-        setRoleDataList(roleJsonData.role || []);
+        setPerReqDataList(perReqJsonData.perReq || []);
       } catch (errorObject) {
         setErrorMessage(errorObject.message || "Failed to load data");
       }
@@ -31,9 +31,9 @@ export default function RoleList() {
   }, []);
 
   return (
-    <UIRoleList
-      header="ระดับตำแหน่ง"
-      data={roleDataList}
+    <UIPerReqList
+      header="ขออัตรากำลังคน"
+      data={perReqDataList}
       error={errorMessage}
     />
   );

@@ -5,7 +5,7 @@ import UIHeader from "@/components/other/UIHeader";
 import React from "react";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
 
-export default function UIRoleForm({
+export default function UIPerReqForm({
   header,
   formRef,
   onSubmit,
@@ -26,18 +26,18 @@ export default function UIRoleForm({
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
             <Input
-              name="roleName"
+              name="perReqName"
               type="text"
-              label="ระดับตำแหน่ง"
+              label="ขออัตรากำลังคน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
               variant="bordered"
               color="none"
               radius="lg"
-              value={formData.roleName || ""}
-              onChange={handleInputChange("roleName")}
-              isInvalid={!!errors.roleName}
-              errorMessage={errors.roleName}
+              value={formData.perReqName || ""}
+              onChange={handleInputChange("perReqName")}
+              isInvalid={!!errors.perReqName}
+              errorMessage={errors.perReqName}
             />
           </div>
         </div>
@@ -46,18 +46,18 @@ export default function UIRoleForm({
           <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="perReqStatus"
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
                 variant="bordered"
                 color="none"
                 radius="lg"
-                value={formData.roleStatus || ""}
-                selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                onChange={handleInputChange("roleStatus")}
-                isInvalid={!!errors.roleStatus}
-                errorMessage={errors.roleStatus}
+                value={formData.perReqStatus || ""}
+                selectedKeys={formData.perReqStatus ? [formData.perReqStatus] : []}
+                onChange={handleInputChange("perReqStatus")}
+                isInvalid={!!errors.perReqStatus}
+                errorMessage={errors.perReqStatus}
               >
                 <SelectItem key="Active" value="Active">
                   เปิดใช้งาน
