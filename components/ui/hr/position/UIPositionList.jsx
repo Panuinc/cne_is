@@ -213,10 +213,10 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
           return (
             <Button
               size="lg"
-              color="primary"
+              color="none"
               radius="lg"
               isDisabled={!posJobDesId}
-              className="text-white"
+              className="text-primary"
               onPress={() => onExportPDF?.(posJobDesId)}
             >
               <Document />

@@ -36,7 +36,7 @@ export default function UICustomTable({
     return paginatedData.map((item, index) => (
       <TableRow
         key={index}
-        className="h-14 border-b-2 border-default text-center"
+        className="h-14 border-b-2 border-default text-sm text-center"
       >
         {(columnKey) => (
           <TableCell>{renderCell(item, index, columnKey)}</TableCell>
