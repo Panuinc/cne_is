@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        white: "#FFFFFF",
+        white: "#FDFCF7",
         dark: "#010000",
         default: "#EFEEE9",
         primary: "#9ABE26",
