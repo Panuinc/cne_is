@@ -39,7 +39,7 @@ const UISelectFilter = ({
     label={label}
     size="md"
     variant="bordered"
-    color="primary"
+    color="none"
     radius="lg"
     isDisabled={isDisabled}
     selectedKeys={[selectedValue]}
@@ -257,9 +257,8 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
             placeholder="ค้นหาโดยข้อมูล ตำแหน่งงาน"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
-            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -319,7 +318,7 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
             placeholder="จำนวนข้อมูล"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
             selectedKeys={[String(rowsPerPage)]}
             onChange={(e) => {

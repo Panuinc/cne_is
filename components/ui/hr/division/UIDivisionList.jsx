@@ -39,7 +39,7 @@ const UISelectFilter = ({
     label={label}
     size="md"
     variant="bordered"
-    color="primary"
+    color="none"
     radius="lg"
     isDisabled={isDisabled}
     selectedKeys={[selectedValue]}
@@ -183,9 +183,8 @@ export default function UIDivisionList({ data = [], error = "" }) {
             placeholder="ค้นหาโดยข้อมูล ระดับตำแหน่ง"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
-            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -229,7 +228,7 @@ export default function UIDivisionList({ data = [], error = "" }) {
             placeholder="จำนวนข้อมูล"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
             selectedKeys={[String(rowsPerPage)]}
             onChange={(e) => {

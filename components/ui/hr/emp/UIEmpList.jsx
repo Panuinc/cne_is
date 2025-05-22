@@ -46,7 +46,7 @@ const UISelectFilter = ({
     placeholder={`กรุณาเลือก${label}`}
     size="md"
     variant="bordered"
-    color="primary"
+    color="none"
     radius="lg"
     isDisabled={isDisabled}
     selectedKeys={[selectedValue]}
@@ -322,9 +322,8 @@ export default function UIEmpList({ data = [], error = "" }) {
             placeholder="ค้นหาโดยข้อมูล ชื่อ (TH)"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
-            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -419,7 +418,7 @@ export default function UIEmpList({ data = [], error = "" }) {
             placeholder="จำนวนข้อมูล"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
             selectedKeys={[String(rowsPerPage)]}
             onChange={(e) => {
