@@ -324,7 +324,7 @@ export default function UIEmpList({ data = [], error = "" }) {
             variant="bordered"
             color="primary"
             radius="lg"
-            startContent={<Search />}
+            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -390,7 +390,7 @@ export default function UIEmpList({ data = [], error = "" }) {
         </div>
         <div className="flex items-center justify-end w-full h-full p-2 gap-2">
           <Button
-            color="primary"
+            color="danger"
             size="md"
             radius="lg"
             startContent={<Trash />}
@@ -449,7 +449,7 @@ export default function UIEmpList({ data = [], error = "" }) {
             return (
               <div
                 key={item.empId}
-                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-white rounded-3xl"
+                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-default border-1 border-default rounded-3xl"
               >
                 {item.empStatus?.toLowerCase() === "inactive" && (
                   <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">

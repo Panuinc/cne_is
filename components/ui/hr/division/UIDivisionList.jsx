@@ -185,7 +185,7 @@ export default function UIDivisionList({ data = [], error = "" }) {
             variant="bordered"
             color="primary"
             radius="lg"
-            startContent={<Search />}
+            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
