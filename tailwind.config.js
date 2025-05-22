@@ -13,13 +13,13 @@ module.exports = {
     extend: {
       colors: {
         white: "#FFFFFF",
-        dark: "#707070",
-        default: "#F5F5FF",
-        primary: "#8DC8FE",
-        secondary: "#FF9EC2",
-        warning: "#FFEB6C",
-        danger: "#FF5907",
-        success: "#7EE7A7",
+        dark: "#3C3C3C",
+        default: "#F6F6F6",
+        primary: "#DECBAB",
+        secondary: "#8A5010",
+        warning: "#F7D033",
+        danger: "#B22E29",
+        success: "#9CC61C",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],
