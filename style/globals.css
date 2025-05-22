@@ -4,10 +4,10 @@
 
 body {
   font-family: var(--nunito), var(--kanit);
-  font-weight: 600;
+  font-weight: 300;
   font-size: 0.85rem;
-  color: #3C3C3C;
-  background-color: #F6F6F6
+  color: #010000;
+  background-color: #EFEEE9
 }
 
 [lang|="th"] {

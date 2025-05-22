@@ -90,7 +90,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
           ></div>
 
           <div className="absolute left-1/2 top-48 transform -translate-x-1/2">
-            <div className="w-40 h-40 border-2 overflow-hidden shadow-md rounded-full">
+            <div className="w-40 h-40 border-1 overflow-hidden rounded-full">
               <Image
                 src={imgSrc}
                 width={150}
@@ -113,7 +113,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
 
         <div className="flex flex-col xl:flex-row items-start justify-center w-full p-2 gap-2">
           <div className="flex flex-col items-start justify-center w-full p-2 gap-2">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default rounded-xl">
               <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลพนักงาน
               </div>
@@ -159,7 +159,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default rounded-xl">
               <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลบัญชีการใช้งาน
               </div>
@@ -179,7 +179,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default rounded-xl">
               <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลเอกสาร
               </div>
@@ -382,7 +382,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
           </div>
 
           <div className="flex flex-col items-start justify-center w-full p-2 gap-2">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default rounded-xl">
               <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลการจ้างงาน
               </div>
@@ -596,7 +596,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
               )}
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default rounded-xl">
               <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-2 border-default text-primary font-[600]">
                 ข้อมูลเรซูเม่
               </div>

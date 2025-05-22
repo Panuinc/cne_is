@@ -449,7 +449,7 @@ export default function UIEmpList({ data = [], error = "" }) {
             return (
               <div
                 key={item.empId}
-                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-white shadow-md rounded-3xl"
+                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-white rounded-3xl"
               >
                 {item.empStatus?.toLowerCase() === "inactive" && (
                   <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">

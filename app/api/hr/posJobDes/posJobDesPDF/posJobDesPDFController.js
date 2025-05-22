@@ -122,7 +122,7 @@ export class PosJobDesPDFController {
     </style>
 </head>
 
-<body class="flex flex-col items-center justify-start w-full h-screen gap-2 border-2">
+<body class="flex flex-col items-center justify-start w-full h-screen gap-2 border-1">
     <div class="flex flex-row items-center justify-center w-full border-b-2">
         <div class="flex flex-col items-center justify-center w-3/12 h-full p-1 gap-2 border-r font_bold">
             <img src="data:image/png;base64,${logoBase64}" class="w-24" />

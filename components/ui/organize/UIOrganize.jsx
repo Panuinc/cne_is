@@ -38,7 +38,7 @@ export default function UIOrganize({
   const renderNode = (node) => (
     <TreeNode
       label={
-        <div className="rounded-xl bg-white border-2 border-default p-4 shadow-md text-sm text-center">
+        <div className="rounded-xl bg-white border-1 border-default p-4 text-sm text-center">
           <div className="font-[600]">{node.name}</div>
           <div className="text-xs text-dark/50">{node.type}</div>
         </div>
@@ -73,7 +73,7 @@ export default function UIOrganize({
             lineColor={"#00000050"}
             lineBorderRadius={"10px"}
             label={
-              <div className="p-4 shadow-md text-sm text-center bg-white border-2 border-default rounded-xl">
+              <div className="p-4 text-sm text-center bg-white border-1 border-default rounded-xl">
                 <div className="font-[600]">{treeData.name}</div>
                 <div className="text-xs text-dark/50">{treeData.type}</div>
               </div>
