@@ -22,8 +22,10 @@ import {
 
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "เปิดใช้งาน", uniqueIdentifier: "active" },
-  { name: "ปิดใช้งาน", uniqueIdentifier: "inactive" },
+  { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
+  { name: "รอฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  { name: "อนุมัติสำเร็จ", uniqueIdentifier: "ApprovedSuccess" },
+  { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -39,7 +41,7 @@ const UISelectFilter = ({
     label={label}
     size="md"
     variant="bordered"
-    color="primary"
+    color="none"
     radius="lg"
     isDisabled={isDisabled}
     selectedKeys={[selectedValue]}
@@ -73,16 +75,26 @@ export default function UIPerReqList({ data = [], error = "" }) {
   const columns = useMemo(() => {
     const baseColumns = [
       { name: "ลำดับ", uid: "perReqId" },
-      { name: "ขออัตรากำลังคน", uid: "perReqName" },
+      { name: "เลขที่รหัสใบร้องขอ", uid: "perReqDocumentId" },
       { name: "สถานะการใช้งาน", uid: "perReqStatus" },
     ];
 
     if (canManage) {
       baseColumns.push(
-        { name: "สร้างโดย", uid: "createdBy" },
+        { name: "ผู้ร้องขอ", uid: "createdBy" },
         { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
         { name: "แก้ไขโดย", uid: "updatedBy" },
         { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
+        {
+          name: "อนุมัติโดย : ผู้จัดการฝ่าย",
+          uid: "perReqReasonManagerApproveBy",
+        },
+        { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonManagerApproveAt" },
+        {
+          name: "อนุมัติโดย : ผู้จัดการฝ่ายบุคคล",
+          uid: "perReqReasonHrApproveBy",
+        },
+        { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonHrApproveAt" },
         { name: "การจัดการ", uid: "actions" }
       );
     }
@@ -94,7 +106,7 @@ export default function UIPerReqList({ data = [], error = "" }) {
     let result = data;
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
-        perReq.perReqName?.toLowerCase().includes(searchTerm.toLowerCase())
+        perReq.perReqDocumentId?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== "all") {
@@ -124,22 +136,35 @@ export default function UIPerReqList({ data = [], error = "" }) {
         case "perReqId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
         case "perReqStatus":
+          const statusColorMap = {
+            PendingManagerApprove: "secondary",
+            PendingHrApprove: "secondary",
+            ApprovedSuccess: "success",
+            Cancel: "danger",
+          };
+
+          const statusLabelMap = {
+            PendingManagerApprove: "รอผู้จัดการอนุมัติ",
+            PendingHrApprove: "รอฝ่ายบุคคลอนุมัติ",
+            ApprovedSuccess: "อนุมัติแล้ว",
+            Cancel: "ยกเลิก",
+          };
+
+          const statusKey = item.perReqStatus || "Cancel";
+          const color = statusColorMap[statusKey] || "default";
+          const label = statusLabelMap[statusKey] || "-";
+
           return (
             <Button
               size="sm"
-              color={
-                item.perReqStatus?.toLowerCase() === "active"
-                  ? "primary"
-                  : "danger"
-              }
+              color={color}
               radius="lg"
               className="min-w-10 min-h-10 text-white"
             >
-              {item.perReqStatus?.toLowerCase() === "active"
-                ? "เปิดใช้งาน"
-                : "ปิดใช้งาน"}
+              {label}
             </Button>
           );
+
         case "createdBy":
           return item.PerReqCreateBy
             ? `${item.PerReqCreateBy.empFirstNameTH} ${item.PerReqCreateBy.empLastNameTH}`
@@ -181,9 +206,8 @@ export default function UIPerReqList({ data = [], error = "" }) {
             placeholder="ค้นหาโดยข้อมูล ขออัตรากำลังคน"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
-            
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -227,7 +251,7 @@ export default function UIPerReqList({ data = [], error = "" }) {
             placeholder="จำนวนข้อมูล"
             size="md"
             variant="bordered"
-            color="primary"
+            color="none"
             radius="lg"
             selectedKeys={[String(rowsPerPage)]}
             onChange={(e) => {
