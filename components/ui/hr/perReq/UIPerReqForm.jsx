@@ -76,13 +76,43 @@ export default function UIPerReqForm({
     [setFormData]
   );
 
+  const toggleLanguageLevel = useCallback(
+    (language, level) => {
+      if (!setFormData) return;
+      setFormData((prev) => {
+        const list = prev.perReqLanguageSkills || [];
+        const idx = list.findIndex((l) => l.language === language);
+        const current = list[idx];
+
+        if (current?.level === level) {
+          return {
+            ...prev,
+            perReqLanguageSkills: list.filter((l) => l.language !== language),
+          };
+        }
+
+        if (idx === -1) {
+          return {
+            ...prev,
+            perReqLanguageSkills: [...list, { language, level }],
+          };
+        }
+
+        const updated = [...list];
+        updated[idx] = { language, level };
+        return { ...prev, perReqLanguageSkills: updated };
+      });
+    },
+    [setFormData]
+  );
+
   return (
     <>
       <UIHeader Header={header} />
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark bg-white overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto"
       >
         <input
           type="hidden"
@@ -109,10 +139,9 @@ export default function UIPerReqForm({
           name="perReqReasonExperience"
           value={formData.perReqReasonExperience || ""}
         />
-
-        <div className="flex xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-3/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex xl:flex-row items-center justify-center w-full p-2 gap-2 border-b-1 border-default">
+          <div className="flex flex-col items-center justify-center w-3/12 h-full p-2 gap-2">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               <Image
                 src="/logoCompany/com-1.png"
                 alt="com-1"
@@ -121,33 +150,33 @@ export default function UIPerReqForm({
                 priority
               />
             </div>
-            <div className="xl:flex hidden items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="xl:flex hidden items-center justify-center w-full h-full p-2 gap-2 font-[600]">
               CHANNAKORN
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-9/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-9/12 h-full p-2 gap-2">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-3xl font-[600]">
               ใบขออนุมัติอัตรากำลังคน
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl font-[600]">
               (Personnel Request)
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               วันที่ร้องขอ
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               {formattedDate}
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               วันที่ต้องการ
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Input
                 name="perReqDesiredDate"
                 placeholder="Please Enter Data"
@@ -164,12 +193,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ฝ่าย
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Select
                 name="perReqDivisionId"
                 placeholder="Please Enter Data"
@@ -197,11 +226,11 @@ export default function UIPerReqForm({
               </Select>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               แผนก
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Select
                 name="perReqDepartmentId"
                 placeholder="Please Enter Data"
@@ -230,11 +259,11 @@ export default function UIPerReqForm({
               </Select>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ตำแหน่ง
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Select
                 name="perReqPositionId"
                 placeholder="Please Enter Data"
@@ -265,11 +294,11 @@ export default function UIPerReqForm({
               </Select>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               จำนวน
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Input
                 name="perReqAmount"
                 placeholder="Please Enter Data"
@@ -287,12 +316,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ประเภทการจ้างงาน
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 { val: "Monthly", label: "รายเดือน" },
                 { val: "Daily", label: "รายวัน" },
@@ -316,7 +345,7 @@ export default function UIPerReqForm({
             </div>
           </div>
           {formData.perReqEmpEmploymentType === "Contract" && (
-            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2">
               <Input
                 name="perReqEmpEmploymentTypeNote"
                 placeholder="Please Enter Data"
@@ -334,12 +363,12 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               เหตุผลในการขอรับ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               <Checkbox
                 size="md"
                 color="none"
@@ -369,7 +398,7 @@ export default function UIPerReqForm({
             </div>
           </div>
           {formData.perReqReasonForRequest === "Replace" && (
-            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2">
               <Input
                 name="perReqReasonForRequestNote"
                 placeholder="Please Enter Data"
@@ -386,12 +415,17 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 bg-default">
+          <div className="flex items-center justify-center w-full p-2 gap-2 font-[600]">
+            คุณสมบัติทั่วไป
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               อายุ
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2">
               <Input
                 name="perReqReasonAge"
                 placeholder="Please Enter Data"
@@ -407,11 +441,11 @@ export default function UIPerReqForm({
               />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               เพศ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 { val: "Male", label: "ชาย" },
                 { val: "FeMale", label: "หญิง" },
@@ -435,12 +469,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               การศึกษา
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 { val: "PrimaryEducation", label: "ประถมศึกษา" },
                 { val: "SecondaryEducation", label: "มัธยมศึกษา" },
@@ -472,7 +506,7 @@ export default function UIPerReqForm({
             "HighVocationalCertificate",
             "BachelorMasterDegree",
           ].includes(formData.perReqReasonEducation) && (
-            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2">
               <Input
                 name="perReqReasonEducationNote"
                 placeholder="Please Enter Data"
@@ -490,12 +524,12 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ประสบการณ์
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 { val: "NoneExperience", label: "ไม่มีประสบการณ์" },
                 { val: "Experience1To4Years", label: "ประสบการณ์ 1-4 ปี" },
@@ -519,12 +553,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ความสามารถด้านคอมพิวเตอร์
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 "MicrosoftOffice",
                 "MicrosoftProject",
@@ -567,7 +601,7 @@ export default function UIPerReqForm({
             </div>
           </div>
           {(formData.perReqComputerSkills || []).includes("Other") && (
-            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2">
               <Input
                 name="perReqComputerSkillIsOther"
                 placeholder="Please Enter Data"
@@ -584,9 +618,9 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ความสามารถทางภาษา
             </div>
             <div className="flex flex-col gap-2 w-full xl:w-9/12">
@@ -602,12 +636,12 @@ export default function UIPerReqForm({
                 return (
                   <div
                     key={lang}
-                    className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark"
+                    className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2"
                   >
-                    <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+                    <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2">
                       {label}
                     </div>
-                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
                       {[
                         { level: "Basic", text: "พอใช้" },
                         { level: "Good", text: "ดี" },
@@ -619,26 +653,7 @@ export default function UIPerReqForm({
                           color="none"
                           aria-label={text}
                           isSelected={current?.level === level}
-                          onChange={() => {
-                            if (!setFormData) return;
-                            setFormData((prev) => {
-                              const list = prev.perReqLanguageSkills || [];
-                              const idx = list.findIndex(
-                                (l) => l.language === lang
-                              );
-                              if (idx === -1)
-                                return {
-                                  ...prev,
-                                  perReqLanguageSkills: [
-                                    ...list,
-                                    { language: lang, level },
-                                  ],
-                                };
-                              const next = [...list];
-                              next[idx] = { language: lang, level };
-                              return { ...prev, perReqLanguageSkills: next };
-                            });
-                          }}
+                          onChange={() => toggleLanguageLevel(lang, level)}
                         >
                           {text}
                         </Checkbox>
@@ -650,12 +665,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ใบอนุญาตขับขี่
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {["บ.1", "บ.2", "บ.3", "บ.4", "ท.1", "ท.2", "ท.3", "ท.4"].map(
                 (lic) => (
                   <Checkbox
@@ -677,12 +692,12 @@ export default function UIPerReqForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ใบอนุญาตประกอบวิชาชีพ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
               {[
                 { name: "กส", label: "กส" },
                 { name: "กว", label: "กว" },
@@ -705,7 +720,7 @@ export default function UIPerReqForm({
           {(formData.perReqProfessionalLicenses || []).some(
             (p) => p.name === "กว" || p.name === "กส"
           ) && (
-            <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2">
               <label className="w-full xl:w-3/12">เลือกระดับ</label>
               <div className="w-full xl:w-9/12">
                 <Select
@@ -766,9 +781,9 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-evenly w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-evenly w-full p-2 gap-2">
+          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               <Image
                 src={`/empEmployment/signature/${signature}`}
                 alt="signature"
@@ -777,57 +792,66 @@ export default function UIPerReqForm({
                 priority
               />
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               ({operatedBy})
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               {formattedDate}
             </div>
+            <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
+              ผู้ร้องขอ
+            </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (รออนุมัติ)
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (ผู้จัดการฝ่าย)
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (รออนุมัติ)
+            </div>
+            <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
+              ผู้อนุมัติ
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (รออนุมัติ)
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (ผู้จัดการฝ่าย บุคคล)
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               (รออนุมัติ)
+            </div>
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 font-[600]">
+              ผู้รับทราบ
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-row items-center justify-end w-full p-2 gap-2">
+          <div className="flex items-center justify-center h-full p-2 gap-2">
             <Button
               color="primary"
               size="md"
               radius="lg"
               type="submit"
-              className="flex items-center justify-center w-2/12 h-full p-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
               onPress={() => cancelRef && (cancelRef.current = false)}
             >
               บันทึก
             </Button>
           </div>
           {isUpdate && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center h-full p-2 gap-2">
               <Button
                 color="danger"
                 size="md"
                 radius="lg"
                 type="submit"
-                className="flex items-center justify-center w-2/12 h-full p-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                 onPress={() => cancelRef && (cancelRef.current = true)}
               >
                 ยกเลิก
