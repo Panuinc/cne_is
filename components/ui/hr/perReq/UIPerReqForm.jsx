@@ -361,7 +361,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ประเภทการจ้างงาน
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 { val: "Monthly", label: "รายเดือน" },
                 { val: "Daily", label: "รายวัน" },
@@ -408,7 +408,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               เหตุผลในการขอรับ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               <Checkbox
                 size="md"
                 color="none"
@@ -485,7 +485,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               เพศ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 { val: "Male", label: "ชาย" },
                 { val: "FeMale", label: "หญิง" },
@@ -514,7 +514,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               การศึกษา
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 { val: "PrimaryEducation", label: "ประถมศึกษา" },
                 { val: "SecondaryEducation", label: "มัธยมศึกษา" },
@@ -569,7 +569,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ประสบการณ์
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 { val: "NoneExperience", label: "ไม่มีประสบการณ์" },
                 { val: "Experience1To4Years", label: "ประสบการณ์ 1-4 ปี" },
@@ -598,7 +598,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ความสามารถด้านคอมพิวเตอร์
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 "MicrosoftOffice",
                 "MicrosoftProject",
@@ -681,7 +681,7 @@ export default function UIPerReqForm({
                     <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2">
                       {label}
                     </div>
-                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
                       {[
                         { level: "Basic", text: "พอใช้" },
                         { level: "Good", text: "ดี" },
@@ -689,7 +689,7 @@ export default function UIPerReqForm({
                       ].map(({ level, text }) => (
                         <Checkbox
                           key={level}
-                          size="lg"
+                          size="md"
                           color="none"
                           aria-label={text}
                           isSelected={current?.level === level}
@@ -710,7 +710,7 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ใบอนุญาตขับขี่
             </div>
-            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {["บ.1", "บ.2", "บ.3", "บ.4", "ท.1", "ท.2", "ท.3", "ท.4"].map(
                 (lic) => (
                   <Checkbox
@@ -737,14 +737,14 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 font-[600]">
               ใบอนุญาตประกอบวิชาชีพ
             </div>
-            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
               {[
                 { name: "กส", label: "กส" },
                 { name: "กว", label: "กว" },
               ].map(({ name, label }) => (
                 <Checkbox
                   key={name}
-                  size="lg"
+                  size="md"
                   color="none"
                   aria-label={label}
                   isSelected={(formData.perReqProfessionalLicenses || []).some(
