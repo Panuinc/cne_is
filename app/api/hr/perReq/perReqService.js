@@ -14,32 +14,60 @@ export class PerReqService {
     return prisma.perReq.findMany({
       include: {
         PerReqCreateBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqUpdateBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqManagerApproveBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqHrApproveBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
-        },
-        PerReqDivisionId: {
           select: {
-            divisionName: true,
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
           },
         },
-        PerReqDepartmentId: {
-          select: {
-            departmentName: true,
-          },
-        },
-        PerReqPositionId: {
-          select: {
-            positionNameTH: true,
-          },
-        },
+        PerReqDivisionId: { select: { divisionName: true } },
+        PerReqDepartmentId: { select: { departmentName: true } },
+        PerReqPositionId: { select: { positionNameTH: true } },
       },
     });
   }
@@ -49,32 +77,60 @@ export class PerReqService {
       where: { perReqId },
       include: {
         PerReqCreateBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqUpdateBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqManagerApproveBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
+          select: {
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
+          },
         },
         PerReqHrApproveBy: {
-          select: { empFirstNameTH: true, empLastNameTH: true },
-        },
-        PerReqDivisionId: {
           select: {
-            divisionName: true,
+            empFirstNameTH: true,
+            empLastNameTH: true,
+            empEmpEmployment: {
+              orderBy: { empEmploymentCreateAt: "desc" },
+              take: 1,
+              select: {
+                empEmploymentSignature: true,
+              },
+            },
           },
         },
-        PerReqDepartmentId: {
-          select: {
-            departmentName: true,
-          },
-        },
-        PerReqPositionId: {
-          select: {
-            positionNameTH: true,
-          },
-        },
+        PerReqDivisionId: { select: { divisionName: true } },
+        PerReqDepartmentId: { select: { departmentName: true } },
+        PerReqPositionId: { select: { positionNameTH: true } },
       },
     });
   }

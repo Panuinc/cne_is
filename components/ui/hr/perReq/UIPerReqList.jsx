@@ -2,13 +2,12 @@
 
 import UICustomTable from "@/components/other/UICustomTable";
 import UICustomPagination from "@/components/other/UICustomPagination";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Folder, Setting } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-
+import toast from "react-hot-toast";
 import {
   Input,
   Button,
@@ -57,50 +56,46 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIPerReqList({ data = [], error = "" }) {
-  const { data: session, status } = useSession();
-
+export default function UIPerReqList({
+  data = [],
+  error = "",
+  onApprove,
+  onReject,
+}) {
+  const { data: sessionData, status } = useSession();
   if (status === "loading") return null;
 
-  const roleName = session?.user?.roleName;
-  const divisionName = session?.user?.divisionName;
-  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "บุคคล";
-
   const router = useRouter();
+  const { id: userId } = sessionData?.user || {};
+
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const columns = useMemo(() => {
-    const baseColumns = [
+  const columns = useMemo(
+    () => [
       { name: "ลำดับ", uid: "perReqId" },
       { name: "เลขที่รหัสใบร้องขอ", uid: "perReqDocumentId" },
       { name: "สถานะการใช้งาน", uid: "perReqStatus" },
-    ];
-
-    if (canManage) {
-      baseColumns.push(
-        { name: "ผู้ร้องขอ", uid: "createdBy" },
-        { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
-        { name: "แก้ไขโดย", uid: "updatedBy" },
-        { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
-        {
-          name: "อนุมัติโดย : ผู้จัดการฝ่าย",
-          uid: "perReqReasonManagerApproveBy",
-        },
-        { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonManagerApproveAt" },
-        {
-          name: "อนุมัติโดย : ผู้จัดการฝ่ายบุคคล",
-          uid: "perReqReasonHrApproveBy",
-        },
-        { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonHrApproveAt" },
-        { name: "การจัดการ", uid: "actions" }
-      );
-    }
-
-    return baseColumns;
-  }, [canManage]);
+      { name: "ผู้ร้องขอ", uid: "createdBy" },
+      { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
+      { name: "แก้ไขโดย", uid: "updatedBy" },
+      { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
+      {
+        name: "อนุมัติโดย : ผู้จัดการฝ่าย",
+        uid: "perReqReasonManagerApproveBy",
+      },
+      { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonManagerApproveAt" },
+      {
+        name: "อนุมัติโดย : ผู้จัดการฝ่ายบุคคล",
+        uid: "perReqReasonHrApproveBy",
+      },
+      { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonHrApproveAt" },
+      { name: "การจัดการ", uid: "actions" },
+    ],
+    []
+  );
 
   const filteredData = useMemo(() => {
     let result = data;
@@ -123,13 +118,29 @@ export default function UIPerReqList({ data = [], error = "" }) {
     setPageNumber(1);
   }, [searchTerm, statusFilter]);
 
+  const nextStatus = (item) =>
+    item.perReqStatus === "PendingManagerApprove"
+      ? "PendingHrApprove"
+      : "ApprovedSuccess";
+
   const handleAction = useCallback(
-    (action, item) => {
+    async (action, item) => {
+      const mgrStage = item.perReqStatus === "PendingManagerApprove";
+
       if (action === "edit") {
-        router.push(`/perReq/${item.perReqId}`);
+        return router.push(`/perReq/${item.perReqId}`);
       }
+
+      const newStatus = action === "approve" ? nextStatus(item) : "Cancel";
+      const response =
+        action === "approve"
+          ? await onApprove(item, newStatus, userId, mgrStage)
+          : await onReject(item, newStatus, userId, mgrStage);
+
+      if (response.success) toast.success(response.message);
+      else toast.error(response.message);
     },
-    [router]
+    [router, userId, onApprove, onReject]
   );
 
   const renderCell = useCallback(
@@ -141,32 +152,26 @@ export default function UIPerReqList({ data = [], error = "" }) {
           const statusColorMap = {
             PendingManagerApprove: "secondary",
             PendingHrApprove: "secondary",
-            ApprovedSuccess: "success",
+            ApprovedSuccess: "primary",
             Cancel: "danger",
           };
-
           const statusLabelMap = {
             PendingManagerApprove: "รอผู้จัดการฝ่ายอนุมัติ",
             PendingHrApprove: "รอผู้จัดการฝ่ายบุคคลอนุมัติ",
             ApprovedSuccess: "อนุมัติแล้ว",
             Cancel: "ยกเลิก",
           };
-
           const statusKey = item.perReqStatus || "Cancel";
-          const color = statusColorMap[statusKey] || "default";
-          const label = statusLabelMap[statusKey] || "-";
-
           return (
             <Button
               size="sm"
-              color={color}
+              color={statusColorMap[statusKey] || "default"}
               radius="lg"
-              className="min-w-10 min-h-10 text-white"
+              className="text-white"
             >
-              {label}
+              {statusLabelMap[statusKey] || "-"}
             </Button>
           );
-
         case "createdBy":
           return item.PerReqCreateBy
             ? `${item.PerReqCreateBy.empFirstNameTH} ${item.PerReqCreateBy.empLastNameTH}`
@@ -176,7 +181,16 @@ export default function UIPerReqList({ data = [], error = "" }) {
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          if (!canManage) return null;
+          const isOwner = String(item.perReqCreateBy) === String(userId);
+          const canEdit =
+            isOwner && item.perReqStatus === "PendingManagerApprove";
+          const canApprove =
+            !isOwner &&
+            (item.perReqStatus === "PendingManagerApprove" ||
+              item.perReqStatus === "PendingHrApprove");
+
+          if (!canEdit && !canApprove) return null; // ❌ ไม่ให้เห็นปุ่มใดเลย
+
           return (
             <div className="flex items-center justify-center p-2 gap-2">
               <Dropdown>
@@ -186,7 +200,13 @@ export default function UIPerReqList({ data = [], error = "" }) {
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu onAction={(key) => handleAction(key, item)}>
-                  <DropdownItem key="edit">แก้ไข</DropdownItem>
+                  {canEdit && <DropdownItem key="edit">แก้ไข</DropdownItem>}
+                  {canApprove && (
+                    <>
+                      <DropdownItem key="approve">อนุมัติ</DropdownItem>
+                      <DropdownItem key="reject">ปฏิเสธ</DropdownItem>
+                    </>
+                  )}
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -195,7 +215,7 @@ export default function UIPerReqList({ data = [], error = "" }) {
           return item[colKey] || "-";
       }
     },
-    [handleAction, pageNumber, rowsPerPage, canManage]
+    [handleAction, pageNumber, rowsPerPage, userId]
   );
 
   return (
@@ -214,21 +234,18 @@ export default function UIPerReqList({ data = [], error = "" }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-
         <div className="flex items-center justify-center h-full p-2 gap-2">
-          {canManage && (
-            <Button
-              as={Link}
-              href="/perReq/create"
-              color="primary"
-              size="md"
-              radius="lg"
-              className="flex items-center justify-center w-full h-full p-4 gap-2"
-              startContent={<Folder />}
-            >
-              เพิ่มใหม่
-            </Button>
-          )}
+          <Button
+            as={Link}
+            href="/perReq/create"
+            color="primary"
+            size="md"
+            radius="lg"
+            className="flex items-center justify-center w-full h-full p-4 gap-2"
+            startContent={<Folder />}
+          >
+            เพิ่มใหม่
+          </Button>
         </div>
       </div>
 

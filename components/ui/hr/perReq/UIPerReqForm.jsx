@@ -1,7 +1,6 @@
 "use client";
 
 import UIHeader from "@/components/other/UIHeader";
-
 import Image from "next/image";
 import React, { useCallback } from "react";
 import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
@@ -9,6 +8,7 @@ import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 export default function UIPerReqForm({
   header,
   formRef,
+  actionRef,
   onSubmit,
   cancelRef,
   errors,
@@ -16,11 +16,13 @@ export default function UIPerReqForm({
   handleInputChange,
   setFormData,
   isUpdate,
-  operatedBy,
-  signature,
+  isCreate = false,
   divisionOptions = [],
   departmentOptions = [],
   positionOptions = [],
+  allowApprove = false,
+  onApprove = () => {},
+  onReject = () => {},
 }) {
   const today = new Date();
   const formattedDate = today.toLocaleDateString("th-TH", {
@@ -28,6 +30,43 @@ export default function UIPerReqForm({
     month: "long",
     day: "numeric",
   });
+
+  const getSignatureBlock = (title, nameObj, sigFile, date) => {
+    const isRequester = title === "ผู้ร้องขอ";
+
+    return (
+      <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+          {sigFile ? (
+            <Image
+              src={`/empEmployment/signature/${sigFile}`}
+              alt="signature"
+              width={100}
+              height={100}
+              priority
+            />
+          ) : isRequester ? (
+            "ผู้ร้องขอ"
+          ) : (
+            "(รออนุมัติ)"
+          )}
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+          {nameObj
+            ? `(${nameObj.empFirstNameTH} ${nameObj.empLastNameTH})`
+            : isRequester
+            ? "ผู้ร้องขอ"
+            : "(รออนุมัติ)"}
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+          {date || (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)")}
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
+          {title}
+        </div>
+      </div>
+    );
+  };
 
   const toggleArrayValue = useCallback(
     (field, value) => {
@@ -625,9 +664,9 @@ export default function UIPerReqForm({
             </div>
             <div className="flex flex-col gap-2 w-full xl:w-9/12">
               {[
+                { lang: "Thai", label: "ภาษา ไทย" },
                 { lang: "English", label: "ภาษา อังกฤษ" },
                 { lang: "Chinese", label: "ภาษา จีน" },
-                { lang: "Thai", label: "ภาษา ไทย" },
                 { lang: "Japanese", label: "ภาษา ญี่ปุ่น" },
               ].map(({ lang, label }) => {
                 const current = (formData.perReqLanguageSkills || []).find(
@@ -781,82 +820,101 @@ export default function UIPerReqForm({
             </div>
           )}
         </div>
+
         <div className="flex flex-col xl:flex-row items-center justify-evenly w-full p-2 gap-2">
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              <Image
-                src={`/empEmployment/signature/${signature}`}
-                alt="signature"
-                width={100}
-                height={100}
-                priority
-              />
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              ({operatedBy})
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              {formattedDate}
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
-              ผู้ร้องขอ
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (รออนุมัติ)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (ผู้จัดการฝ่าย)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (รออนุมัติ)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
-              ผู้อนุมัติ
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (รออนุมัติ)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (ผู้จัดการฝ่าย บุคคล)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              (รออนุมัติ)
-            </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 font-[600]">
-              ผู้รับทราบ
-            </div>
-          </div>
+          {getSignatureBlock(
+            "ผู้ร้องขอ",
+            formData.PerReqCreateBy,
+            formData.PerReqCreateBy?.empEmpEmployment?.[0]
+              ?.empEmploymentSignature,
+            formData.perReqCreateAt
+              ? new Date(formData.perReqCreateAt).toLocaleDateString("th-TH", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : null
+          )}
+          {getSignatureBlock(
+            "ผู้อนุมัติ",
+            formData.PerReqManagerApproveBy,
+            formData.PerReqManagerApproveBy?.empEmpEmployment?.[0]
+              ?.empEmploymentSignature,
+            formData.perReqReasonManagerApproveAt
+              ? new Date(
+                  formData.perReqReasonManagerApproveAt
+                ).toLocaleDateString("th-TH", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : null
+          )}
+          {getSignatureBlock(
+            "ผู้รับทราบ",
+            formData.PerReqHrApproveBy,
+            formData.PerReqHrApproveBy?.empEmpEmployment?.[0]
+              ?.empEmploymentSignature,
+            formData.perReqReasonHrApproveAt
+              ? new Date(formData.perReqReasonHrApproveAt).toLocaleDateString(
+                  "th-TH",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )
+              : null
+          )}
         </div>
+
         <div className="flex flex-row items-center justify-end w-full p-2 gap-2">
-          <div className="flex items-center justify-center h-full p-2 gap-2">
-            <Button
-              color="primary"
-              size="md"
-              radius="lg"
-              type="submit"
-              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
-              onPress={() => cancelRef && (cancelRef.current = false)}
-            >
-              บันทึก
-            </Button>
-          </div>
-          {isUpdate && (
-            <div className="flex items-center justify-center h-full p-2 gap-2">
+          {allowApprove ? (
+            <>
               <Button
-                color="danger"
-                size="md"
+                color="success"
                 radius="lg"
                 type="submit"
-                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
-                onPress={() => cancelRef && (cancelRef.current = true)}
+                onPress={onApprove}
+              >
+                อนุมัติ
+              </Button>
+              <Button
+                color="danger"
+                radius="lg"
+                type="submit"
+                onPress={onReject}
               >
                 ยกเลิก
               </Button>
-            </div>
+            </>
+          ) : (
+            <>
+              {(isUpdate || isCreate) && (
+                <Button
+                  color="warning"
+                  radius="lg"
+                  type="submit"
+                  onPress={() => {
+                    cancelRef && (cancelRef.current = false);
+                  }}
+                >
+                  บันทึก
+                </Button>
+              )}
+              {isUpdate && (
+                <Button
+                  color="danger"
+                  radius="lg"
+                  type="submit"
+                  onPress={() => {
+                    actionRef.current = "cancel";
+                  }}
+                >
+                  ยกเลิกเอกสาร
+                </Button>
+              )}
+            </>
           )}
         </div>
       </form>

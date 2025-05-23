@@ -14,22 +14,16 @@ export class PerReqController {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
-      const perReq = await PerReqService.getAllPerReq();
-      if (!perReq?.length) {
+      const list = await PerReqService.getAllPerReq();
+      if (!list.length)
         return NextResponse.json({ error: "No perReq found" }, { status: 404 });
-      }
 
-      const formattedPerReqs = formatPerReqData(perReq);
       return NextResponse.json(
-        {
-          message: "Successfully retrieved perReq",
-          perReq: formattedPerReqs,
-        },
+        { message: "Success", perReq: formatPerReqData(list) },
         { status: 200 }
       );
-    } catch (error) {
-      return handleGetErrors(error, ip, "Failed to retrieve perReq");
+    } catch (err) {
+      return handleGetErrors(err, ip, "Failed to retrieve perReq");
     }
   }
 
@@ -37,33 +31,20 @@ export class PerReqController {
     let ip = "";
     try {
       ip = await validateRequest(request);
+      const id = Number(perReqId);
+      if (Number.isNaN(id))
+        return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
-      const parsedPerReqId = parseInt(perReqId, 10);
-      if (isNaN(parsedPerReqId)) {
-        return NextResponse.json(
-          { error: "Invalid perReq ID" },
-          { status: 400 }
-        );
-      }
+      const one = await PerReqService.getPerReqById(id);
+      if (!one)
+        return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-      const perReq = await PerReqService.getPerReqById(parsedPerReqId);
-      if (!perReq) {
-        return NextResponse.json(
-          { error: "PerReq not found" },
-          { status: 404 }
-        );
-      }
-
-      const formattedPerReq = formatPerReqData([perReq]);
       return NextResponse.json(
-        {
-          message: "Successfully retrieved perReq",
-          perReq: formattedPerReq,
-        },
+        { message: "Success", perReq: formatPerReqData([one]) },
         { status: 200 }
       );
-    } catch (error) {
-      return handleGetErrors(error, ip, "Failed to retrieve perReq");
+    } catch (err) {
+      return handleGetErrors(err, ip, "Failed to retrieve perReq");
     }
   }
 
@@ -71,35 +52,27 @@ export class PerReqController {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const formData = await request.formData();
-      const data = Object.fromEntries(formData.entries());
+      const raw = Object.fromEntries(formData.entries());
 
-      data.perReqComputerSkills = JSON.parse(data.perReqComputerSkills || "[]");
-      data.perReqLanguageSkills = JSON.parse(data.perReqLanguageSkills || "[]");
-      data.perReqDrivingLicenses = JSON.parse(
-        data.perReqDrivingLicenses || "[]"
-      );
-      data.perReqProfessionalLicenses = JSON.parse(
-        data.perReqProfessionalLicenses || "[]"
+      raw.perReqComputerSkills = JSON.parse(raw.perReqComputerSkills || "[]");
+      raw.perReqLanguageSkills = JSON.parse(raw.perReqLanguageSkills || "[]");
+      raw.perReqDrivingLicenses = JSON.parse(raw.perReqDrivingLicenses || "[]");
+      raw.perReqProfessionalLicenses = JSON.parse(
+        raw.perReqProfessionalLicenses || "[]"
       );
 
-      const parsedData = perReqPostSchema.parse(data);
-      const localNow = getLocalNow();
-      const documentId = await PerReqService.generateDocumentId();
-
-      const newPerReq = await PerReqService.createPerReq({
-        ...parsedData,
-        perReqDocumentId: documentId,
-        perReqCreateAt: localNow,
+      const data = perReqPostSchema.parse(raw);
+      const perReqDocumentId = await PerReqService.generateDocumentId();
+      const perReq = await PerReqService.createPerReq({
+        ...data,
+        perReqDocumentId,
+        perReqDesiredDate: data.perReqDesiredDate ?? null,
       });
 
-      return NextResponse.json(
-        { message: "PerReq created successfully", perReq: newPerReq },
-        { status: 201 }
-      );
-    } catch (error) {
-      return handleErrors(error, ip, "Failed to create perReq");
+      return NextResponse.json({ message: "Created", perReq }, { status: 201 });
+    } catch (err) {
+      return handleErrors(err, ip, "Failed to create perReq");
     }
   }
 
@@ -107,47 +80,65 @@ export class PerReqController {
     let ip = "";
     try {
       ip = await validateRequest(request);
+      const id = Number(perReqId);
+      if (Number.isNaN(id))
+        return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
-      const parsedPerReqId = parseInt(perReqId, 10);
-      if (isNaN(parsedPerReqId)) {
+      const formData = await request.formData();
+      const raw = Object.fromEntries(formData.entries());
+      raw.perReqComputerSkills = JSON.parse(raw.perReqComputerSkills || "[]");
+      raw.perReqLanguageSkills = JSON.parse(raw.perReqLanguageSkills || "[]");
+      raw.perReqDrivingLicenses = JSON.parse(raw.perReqDrivingLicenses || "[]");
+      raw.perReqProfessionalLicenses = JSON.parse(
+        raw.perReqProfessionalLicenses || "[]"
+      );
+
+      const data = perReqPutSchema.parse({ ...raw, perReqId: id });
+      const localNow = getLocalNow();
+
+      const approveFlow =
+        ["PendingHrApprove", "ApprovedSuccess", "Cancel"].includes(
+          data.perReqStatus
+        ) &&
+        (data.perReqReasonManagerApproveBy || data.perReqReasonHrApproveBy);
+
+      if (approveFlow) {
+        const payload = {
+          perReqStatus: data.perReqStatus,
+          perReqUpdateAt: localNow,
+        };
+
+        if (data.perReqReasonManagerApproveBy) {
+          payload.perReqReasonManagerApproveBy = Number(
+            data.perReqReasonManagerApproveBy
+          );
+          payload.perReqReasonManagerApproveAt = localNow;
+        }
+        if (data.perReqReasonHrApproveBy) {
+          payload.perReqReasonHrApproveBy = Number(
+            data.perReqReasonHrApproveBy
+          );
+          payload.perReqReasonHrApproveAt = localNow;
+        }
+
+        const perReq = await PerReqService.updatePerReq(id, payload);
         return NextResponse.json(
-          { error: "Invalid perReq ID" },
-          { status: 400 }
+          { message: "PerReq status updated", perReq },
+          { status: 200 }
         );
       }
 
-      const formData = await request.formData();
-      const data = Object.fromEntries(formData.entries());
-
-      data.perReqComputerSkills = JSON.parse(data.perReqComputerSkills || "[]");
-      data.perReqLanguageSkills = JSON.parse(data.perReqLanguageSkills || "[]");
-      data.perReqDrivingLicenses = JSON.parse(
-        data.perReqDrivingLicenses || "[]"
-      );
-      data.perReqProfessionalLicenses = JSON.parse(
-        data.perReqProfessionalLicenses || "[]"
-      );
-
-      const parsedData = perReqPutSchema.parse({
+      const perReq = await PerReqService.updatePerReq(id, {
         ...data,
-        perReqId: parsedPerReqId,
-      });
-
-      const localNow = getLocalNow();
-      const updatedPerReq = await PerReqService.updatePerReq(parsedPerReqId, {
-        ...parsedData,
         perReqUpdateAt: localNow,
       });
 
       return NextResponse.json(
-        {
-          message: "PerReq updated successfully",
-          perReq: updatedPerReq,
-        },
+        { message: "PerReq updated", perReq },
         { status: 200 }
       );
-    } catch (error) {
-      return handleErrors(error, ip, "Failed to update perReq");
+    } catch (err) {
+      return handleErrors(err, ip, "Failed to update perReq");
     }
   }
 }

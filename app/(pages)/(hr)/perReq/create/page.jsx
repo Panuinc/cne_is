@@ -17,11 +17,7 @@ const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 export default function perReqCreate() {
   const { data: sessionData } = useSession();
-  const {
-    id: userId = "",
-    nameTH = "",
-    signature = "",
-  } = sessionData?.user ?? {};
+  const { id: userId = "", nameTH = "" } = sessionData?.user ?? {};
 
   const router = useRouter();
   const formRef = useRef(null);
@@ -208,7 +204,7 @@ export default function perReqCreate() {
         departmentOptions={filteredDepartmentData}
         positionOptions={filteredPositionData}
         operatedBy={nameTH}
-        signature={signature}
+        isCreate={true}
       />
     </>
   );

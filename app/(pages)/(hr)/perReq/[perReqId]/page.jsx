@@ -5,8 +5,8 @@ import UIPerReqForm from "@/components/ui/hr/perReq/UIPerReqForm";
 import React, {
   useState,
   useRef,
-  useEffect,
   useCallback,
+  useEffect,
   useMemo,
 } from "react";
 import { useSession } from "next-auth/react";
@@ -17,15 +17,18 @@ const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 export default function perReqUpdate() {
   const { data: sessionData } = useSession();
-  const {
-    id: userId = "",
-    nameTH = "",
-    signature = "",
-  } = sessionData?.user ?? {};
-
   const router = useRouter();
   const { perReqId } = useParams();
+
+  const {
+    id: userId = "",
+    roleName,
+    divisionName,
+    nameTH = "",
+  } = sessionData?.user ?? {};
+
   const formRef = useRef(null);
+  const actionRef = useRef("save");
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -57,7 +60,7 @@ export default function perReqUpdate() {
   useEffect(() => {
     (async () => {
       try {
-        const [divisionRes, departmentRes, positionRes] = await Promise.all([
+        const [divRes, depRes, posRes] = await Promise.all([
           fetch("/api/hr/division", {
             headers: { "secret-token": SECRET_TOKEN || "" },
           }),
@@ -68,65 +71,19 @@ export default function perReqUpdate() {
             headers: { "secret-token": SECRET_TOKEN || "" },
           }),
         ]);
-
-        const [divisionData, departmentData, positionData] = await Promise.all([
-          divisionRes.json(),
-          departmentRes.json(),
-          positionRes.json(),
+        const [divData, depData, posData] = await Promise.all([
+          divRes.json(),
+          depRes.json(),
+          posRes.json(),
         ]);
-
-        if (divisionRes.ok) {
-          const activeDivisions = (divisionData.division || []).filter(
-            (division) => division.divisionStatus === "Active"
-          );
-          setDivisionOptions(activeDivisions);
-        } else {
-          toast.error(divisionData.error || "Failed to load division data");
-        }
-
-        if (departmentRes.ok) {
-          const activeDepartments = (departmentData.department || []).filter(
-            (department) => department.departmentStatus === "Active"
-          );
-          setDepartmentOptions(activeDepartments);
-        } else {
-          toast.error(departmentData.error || "Failed to load department data");
-        }
-
-        if (positionRes.ok) {
-          const activePositions = (positionData.position || []).filter(
-            (position) => position.positionStatus === "Active"
-          );
-          setPositionOptions(activePositions);
-        } else {
-          toast.error(positionData.error || "Failed to load position data");
-        }
-      } catch (error) {
-        toast.error(
-          "Failed to fetch division, department or position: " + error.message
-        );
+        if (divRes.ok) setDivisionOptions(divData.division || []);
+        if (depRes.ok) setDepartmentOptions(depData.department || []);
+        if (posRes.ok) setPositionOptions(posData.position || []);
+      } catch (err) {
+        toast.error("Failed to load option list: " + err.message);
       }
     })();
   }, []);
-
-  const filteredDepartmentData = useMemo(() => {
-    if (!formData.perReqDivisionId) return [];
-    return departmentOptions.filter(
-      (dept) =>
-        Number(dept.departmentDivisionId) === Number(formData.perReqDivisionId)
-    );
-  }, [departmentOptions, formData.perReqDivisionId]);
-
-  const filteredPositionData = useMemo(() => {
-    const divId = Number(formData.perReqDivisionId);
-    const deptId = Number(formData.perReqDepartmentId);
-    if (!divId) return [];
-    return positionOptions.filter(
-      (pos) =>
-        Number(pos.positionDivisionId) === divId &&
-        (!deptId || Number(pos.positionDepartmentId) === deptId)
-    );
-  }, [positionOptions, formData.perReqDivisionId, formData.perReqDepartmentId]);
 
   useEffect(() => {
     if (!perReqId) return;
@@ -135,97 +92,121 @@ export default function perReqUpdate() {
         const res = await fetch(`/api/hr/perReq/${perReqId}`, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
-        const result = await res.json();
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "Load error");
+        const data = json.perReq[0];
 
-        if (res.ok && result.perReq?.length) {
-          const data = result.perReq[0];
-          const skills = data.perReqComputerSkills || [];
+        const skills = data.perReqComputerSkills || [];
+        const defaults = [
+          "MicrosoftOffice",
+          "MicrosoftProject",
+          "Revit",
+          "Autocad",
+          "Sketchup",
+          "Solidwork",
+          "Canva",
+          "Adobe",
+          "BPluse",
+        ];
+        const others = skills.filter(
+          (s) => s !== "Other" && !defaults.includes(s)
+        );
 
-          const defaultSkillSet = [
-            "MicrosoftOffice",
-            "MicrosoftProject",
-            "Revit",
-            "Autocad",
-            "Sketchup",
-            "Solidwork",
-            "Canva",
-            "Adobe",
-            "BPluse",
-          ];
-
-          const otherItems = skills.filter(
-            (s) => s !== "Other" && !defaultSkillSet.includes(s)
-          );
-
-          setFormData({
-            ...data,
-            perReqComputerSkillIsOther: skills.includes("Other")
-              ? otherItems.join(", ")
-              : "",
-          });
-        } else {
-          toast.error(result.error || "Failed to load perReq data.");
-        }
+        setFormData({
+          ...data,
+          perReqComputerSkillIsOther: skills.includes("Other")
+            ? others.join(", ")
+            : "",
+        });
       } catch (err) {
-        toast.error(`Failed to load data: ${err.message}`);
+        toast.error(err.message);
       }
     })();
   }, [perReqId]);
 
-  const handleChange = useCallback(
-    (field) => (e) => {
-      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-      setErrors((prev) => {
-        const { [field]: removed, ...rest } = prev;
-        return rest;
-      });
-    },
-    []
-  );
+  const allowApprove = useMemo(() => {
+    const isMgr =
+      roleName === "ผู้จัดการฝ่าย" &&
+      divisionName === formData?.PerReqDivisionId?.divisionName;
+    const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล";
 
-  const cancelRef = useRef(false);
+    return (
+      (formData.perReqStatus === "PendingManagerApprove" && isMgr) ||
+      (formData.perReqStatus === "PendingHrApprove" && isHrMgr)
+    );
+  }, [roleName, divisionName, formData]);
+
+  const filteredDept = useMemo(
+    () =>
+      departmentOptions.filter(
+        (d) =>
+          Number(d.departmentDivisionId) === Number(formData.perReqDivisionId)
+      ),
+    [departmentOptions, formData.perReqDivisionId]
+  );
+  const filteredPos = useMemo(() => {
+    const divId = Number(formData.perReqDivisionId);
+    const depId = Number(formData.perReqDepartmentId);
+    return positionOptions.filter(
+      (p) =>
+        Number(p.positionDivisionId) === divId &&
+        (!depId || Number(p.positionDepartmentId) === depId)
+    );
+  }, [positionOptions, formData.perReqDivisionId, formData.perReqDepartmentId]);
+
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      if (!perReqId || !formRef.current) return;
+      if (!formRef.current) return;
 
       const form = new FormData(formRef.current);
-      form.append("perReqUpdateBy", userId);
 
       form.append(
-        "perReqStatus",
-        cancelRef.current ? "Cancel" : "PendingManagerApprove"
+        "perReqComputerSkills",
+        JSON.stringify(formData.perReqComputerSkills || [])
       );
-
-      const skills = [...(formData.perReqComputerSkills || [])];
-      if (
-        skills.includes("Other") &&
-        formData.perReqComputerSkillIsOther?.trim()
-      ) {
-        const customSkills = formData.perReqComputerSkillIsOther
-          .split(",")
-          .map((s) => s.trim())
-          .filter((s) => s);
-
-        const mergedSkills = [...new Set([...skills, ...customSkills])];
-
-        form.append("perReqComputerSkills", JSON.stringify(mergedSkills));
-      } else {
-        form.append("perReqComputerSkills", JSON.stringify(skills));
-      }
-
       form.append(
         "perReqLanguageSkills",
-        JSON.stringify(formData.perReqLanguageSkills)
+        JSON.stringify(formData.perReqLanguageSkills || [])
       );
       form.append(
         "perReqDrivingLicenses",
-        JSON.stringify(formData.perReqDrivingLicenses)
+        JSON.stringify(formData.perReqDrivingLicenses || [])
       );
       form.append(
         "perReqProfessionalLicenses",
-        JSON.stringify(formData.perReqProfessionalLicenses)
+        JSON.stringify(formData.perReqProfessionalLicenses || [])
       );
+
+      if (actionRef.current === "save") {
+        form.append("perReqUpdateBy", userId);
+        form.append("perReqStatus", formData.perReqStatus);
+      }
+
+      if (actionRef.current === "approve") {
+        if (formData.perReqStatus === "PendingManagerApprove") {
+          form.append("perReqStatus", "PendingHrApprove");
+          form.append("perReqReasonManagerApproveBy", userId);
+        } else if (formData.perReqStatus === "PendingHrApprove") {
+          form.append("perReqStatus", "ApprovedSuccess");
+          form.append("perReqReasonHrApproveBy", userId);
+        }
+      }
+
+      if (actionRef.current === "reject") {
+        form.append("perReqStatus", "Cancel");
+        if (formData.perReqStatus === "PendingManagerApprove") {
+          form.append("perReqReasonManagerApproveBy", userId);
+        } else {
+          form.append("perReqReasonHrApproveBy", userId);
+        }
+      }
+
+      if (actionRef.current === "cancel") {
+        // ✅ ผู้สร้างเอกสารยกเลิกเอง
+        form.append("perReqStatus", "Cancel");
+        form.append("perReqUpdateBy", userId);
+      }
 
       try {
         const res = await fetch(`/api/hr/perReq/${perReqId}`, {
@@ -233,48 +214,54 @@ export default function perReqUpdate() {
           body: form,
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
+        const json = await res.json();
 
-        const result = await res.json();
-
-        if (res.ok) {
-          toast.success(result.message);
-          setTimeout(() => router.push("/perReq"), 2000);
-        } else {
-          if (result.details) {
-            const fieldErrors = Object.fromEntries(
-              result.details.map((d) => [d.field?.[0], d.message])
+        if (!res.ok) {
+          if (json.details) {
+            const errObj = Object.fromEntries(
+              json.details.map((d) => [d.field?.[0], d.message])
             );
-            setErrors(fieldErrors);
+            setErrors(errObj);
           }
-          toast.error(result.error || "Failed to update perReq.");
+          throw new Error(json.error || "Update failed");
         }
+
+        toast.success(json.message);
+        setTimeout(() => router.push("/perReq"), 1500);
       } catch (err) {
-        toast.error(`Failed to update perReq: ${err.message}`);
+        toast.error(err.message);
       } finally {
-        cancelRef.current = false;
+        actionRef.current = "save";
       }
     },
-    [userId, perReqId, router, formData]
+    [perReqId, userId, formData, router]
   );
 
   return (
     <>
       <Toaster position="top-right" />
       <UIPerReqForm
-        header="แก้ไข ขออัตรากำลังคน"
+        header="แก้ไข / อนุมัติ ใบขออัตรากำลังคน"
         formRef={formRef}
+        actionRef={actionRef}
         onSubmit={handleSubmit}
         errors={errors}
         formData={formData}
-        cancelRef={cancelRef}
-        handleInputChange={handleChange}
         setFormData={setFormData}
-        divisionOptions={divisionOptions}
-        departmentOptions={filteredDepartmentData}
-        positionOptions={filteredPositionData}
-        operatedBy={nameTH}
+        handleInputChange={(field) => (e) =>
+          setFormData((prev) => ({ ...prev, [field]: e.target.value })) &
+          setErrors((er) => {
+            const { [field]: removed, ...rest } = er;
+            return rest;
+          })}
         isUpdate
-        signature={signature}
+        allowApprove={allowApprove}
+        onApprove={() => (actionRef.current = "approve")}
+        onReject={() => (actionRef.current = "reject")}
+        divisionOptions={divisionOptions}
+        departmentOptions={filteredDept}
+        positionOptions={filteredPos}
+        operatedBy={nameTH}
       />
     </>
   );
