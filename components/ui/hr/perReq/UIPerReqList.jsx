@@ -2,6 +2,7 @@
 
 import UICustomTable from "@/components/other/UICustomTable";
 import UICustomPagination from "@/components/other/UICustomPagination";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -189,7 +190,7 @@ export default function UIPerReqList({
             (item.perReqStatus === "PendingManagerApprove" ||
               item.perReqStatus === "PendingHrApprove");
 
-          if (!canEdit && !canApprove) return null; // ❌ ไม่ให้เห็นปุ่มใดเลย
+          if (!canEdit && !canApprove) return null;
 
           return (
             <div className="flex items-center justify-center p-2 gap-2">
