@@ -17,7 +17,11 @@ const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 export default function perReqUpdate() {
   const { data: sessionData } = useSession();
-  const { id: userId = "", nameTH = "" } = sessionData?.user ?? {};
+  const {
+    id: userId = "",
+    nameTH = "",
+    signature = "",
+  } = sessionData?.user ?? {};
 
   const router = useRouter();
   const { perReqId } = useParams();
@@ -270,6 +274,7 @@ export default function perReqUpdate() {
         positionOptions={filteredPositionData}
         operatedBy={nameTH}
         isUpdate
+        signature={signature}
       />
     </>
   );
