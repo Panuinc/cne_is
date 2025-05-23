@@ -144,11 +144,14 @@ export default function perReqCreate() {
 
       const form = new FormData(formRef.current);
       form.append("perReqCreateBy", userId);
-
-      form.append(
-        "perReqComputerSkills",
-        JSON.stringify(formData.perReqComputerSkills || [])
-      );
+      const skills = [...(formData.perReqComputerSkills || [])];
+      if (
+        skills.includes("Other") &&
+        formData.perReqComputerSkillIsOther?.trim()
+      ) {
+        skills.push(formData.perReqComputerSkillIsOther.trim());
+      }
+      form.append("perReqComputerSkills", JSON.stringify(skills));
       form.append(
         "perReqLanguageSkills",
         JSON.stringify(formData.perReqLanguageSkills || [])

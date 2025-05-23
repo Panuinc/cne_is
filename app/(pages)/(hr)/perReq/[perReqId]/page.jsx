@@ -134,7 +134,31 @@ export default function perReqUpdate() {
         const result = await res.json();
 
         if (res.ok && result.perReq?.length) {
-          setFormData(result.perReq[0]);
+          const data = result.perReq[0];
+          const skills = data.perReqComputerSkills || [];
+
+          const defaultSkillSet = [
+            "MicrosoftOffice",
+            "MicrosoftProject",
+            "Revit",
+            "Autocad",
+            "Sketchup",
+            "Solidwork",
+            "Canva",
+            "Adobe",
+            "BPluse",
+          ];
+
+          const otherItems = skills.filter(
+            (s) => s !== "Other" && !defaultSkillSet.includes(s)
+          );
+
+          setFormData({
+            ...data,
+            perReqComputerSkillIsOther: skills.includes("Other")
+              ? otherItems.join(", ")
+              : "",
+          });
         } else {
           toast.error(result.error || "Failed to load perReq data.");
         }
@@ -169,10 +193,23 @@ export default function perReqUpdate() {
         cancelRef.current ? "Cancel" : "PendingManagerApprove"
       );
 
-      form.append(
-        "perReqComputerSkills",
-        JSON.stringify(formData.perReqComputerSkills)
-      );
+      const skills = [...(formData.perReqComputerSkills || [])];
+      if (
+        skills.includes("Other") &&
+        formData.perReqComputerSkillIsOther?.trim()
+      ) {
+        const customSkills = formData.perReqComputerSkillIsOther
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s);
+
+        const mergedSkills = [...new Set([...skills, ...customSkills])];
+
+        form.append("perReqComputerSkills", JSON.stringify(mergedSkills));
+      } else {
+        form.append("perReqComputerSkills", JSON.stringify(skills));
+      }
+
       form.append(
         "perReqLanguageSkills",
         JSON.stringify(formData.perReqLanguageSkills)
