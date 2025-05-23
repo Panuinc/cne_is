@@ -2,9 +2,9 @@
 
 import UIHeader from "@/components/other/UIHeader";
 
-import React from "react";
-import { Input, Button, Select, SelectItem, Checkbox } from "@heroui/react";
 import Image from "next/image";
+import React, { useCallback } from "react";
+import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 
 export default function UIPerReqForm({
   header,
@@ -14,6 +14,7 @@ export default function UIPerReqForm({
   errors,
   formData,
   handleInputChange,
+  setFormData,
   isUpdate,
   operatedBy,
   signature,
@@ -28,6 +29,53 @@ export default function UIPerReqForm({
     day: "numeric",
   });
 
+  const toggleArrayValue = useCallback(
+    (field, value) => {
+      if (!setFormData) return;
+      setFormData((prev) => {
+        const list = Array.isArray(prev[field]) ? prev[field] : [];
+        const exists = list.includes(value);
+        return {
+          ...prev,
+          [field]: exists ? list.filter((v) => v !== value) : [...list, value],
+        };
+      });
+    },
+    [setFormData]
+  );
+
+  const toggleProfessionalName = useCallback(
+    (name) => {
+      if (!setFormData) return;
+      setFormData((prev) => {
+        const list = prev.perReqProfessionalLicenses || [];
+        const exists = list.find((p) => p.name === name);
+        return {
+          ...prev,
+          perReqProfessionalLicenses: exists
+            ? list.filter((p) => p.name !== name)
+            : [...list, { name, level: null }],
+        };
+      });
+    },
+    [setFormData]
+  );
+
+  const setProfessionalLevel = useCallback(
+    (level) => {
+      if (!setFormData) return;
+      setFormData((prev) => {
+        const list = prev.perReqProfessionalLicenses || [];
+        const idx = list.findIndex((p) => p.name === "กว" || p.name === "กส");
+        if (idx === -1) return prev;
+        const next = [...list];
+        next[idx] = { ...next[idx], level };
+        return { ...prev, perReqProfessionalLicenses: next };
+      });
+    },
+    [setFormData]
+  );
+
   return (
     <>
       <UIHeader Header={header} />
@@ -36,6 +84,32 @@ export default function UIPerReqForm({
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark bg-white overflow-auto"
       >
+        <input
+          type="hidden"
+          name="perReqEmpEmploymentType"
+          value={formData.perReqEmpEmploymentType || ""}
+        />
+        <input
+          type="hidden"
+          name="perReqReasonForRequest"
+          value={formData.perReqReasonForRequest || ""}
+        />
+        <input
+          type="hidden"
+          name="perReqReasonGender"
+          value={formData.perReqReasonGender || ""}
+        />
+        <input
+          type="hidden"
+          name="perReqReasonEducation"
+          value={formData.perReqReasonEducation || ""}
+        />
+        <input
+          type="hidden"
+          name="perReqReasonExperience"
+          value={formData.perReqReasonExperience || ""}
+        />
+
         <div className="flex xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-3/12 h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
@@ -76,9 +150,8 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Input
                 name="perReqDesiredDate"
-                type="date"
-                aria-label="วันที่ต้องการ"
                 placeholder="Please Enter Data"
+                type="date"
                 size="md"
                 variant="bordered"
                 color="none"
@@ -99,7 +172,6 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Select
                 name="perReqDivisionId"
-                aria-label="ฝ่าย"
                 placeholder="Please Enter Data"
                 size="md"
                 variant="bordered"
@@ -132,7 +204,6 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Select
                 name="perReqDepartmentId"
-                aria-label="แผนก"
                 placeholder="Please Enter Data"
                 size="md"
                 variant="bordered"
@@ -166,7 +237,6 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Select
                 name="perReqPositionId"
-                aria-label="ตำแหน่ง"
                 placeholder="Please Enter Data"
                 size="md"
                 variant="bordered"
@@ -202,9 +272,8 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Input
                 name="perReqAmount"
-                type="number"
-                aria-label="จำนวน"
                 placeholder="Please Enter Data"
+                type="number"
                 size="md"
                 variant="bordered"
                 color="none"
@@ -213,7 +282,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqAmount")}
                 isInvalid={!!errors.perReqAmount}
                 errorMessage={errors.perReqAmount}
-              />
+              />{" "}
               คน
             </div>
           </div>
@@ -224,65 +293,44 @@ export default function UIPerReqForm({
               ประเภทการจ้างงาน
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="รายเดือน"
-                isSelected={formData.perReqEmpEmploymentType === "Monthly"}
-                onChange={() =>
-                  handleInputChange("perReqEmpEmploymentType")({
-                    target: { value: "Monthly" },
-                  })
-                }
-              >
-                รายเดือน
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="รายวัน"
-                isSelected={formData.perReqEmpEmploymentType === "Daily"}
-                onChange={() =>
-                  handleInputChange("perReqEmpEmploymentType")({
-                    target: { value: "Daily" },
-                  })
-                }
-              >
-                รายวัน
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ชั่วคราว/สัญญาจ้าง"
-                isSelected={formData.perReqEmpEmploymentType === "Contract"}
-                onChange={() =>
-                  handleInputChange("perReqEmpEmploymentType")({
-                    target: { value: "Contract" },
-                  })
-                }
-              >
-                ชั่วคราว/สัญญาจ้าง
-              </Checkbox>
+              {[
+                { val: "Monthly", label: "รายเดือน" },
+                { val: "Daily", label: "รายวัน" },
+                { val: "Contract", label: "ชั่วคราว/สัญญาจ้าง" },
+              ].map(({ val, label }) => (
+                <Checkbox
+                  key={val}
+                  size="md"
+                  color="none"
+                  aria-label={label}
+                  isSelected={formData.perReqEmpEmploymentType === val}
+                  onChange={() =>
+                    handleInputChange("perReqEmpEmploymentType")({
+                      target: { value: val },
+                    })
+                  }
+                >
+                  {label}
+                </Checkbox>
+              ))}
             </div>
           </div>
           {formData.perReqEmpEmploymentType === "Contract" && (
             <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  name="perReqEmpEmploymentTypeNote"
-                  type="number"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="bordered"
-                  color="none"
-                  radius="lg"
-                  value={formData.perReqEmpEmploymentTypeNote || ""}
-                  onChange={handleInputChange("perReqEmpEmploymentTypeNote")}
-                  isInvalid={!!errors.perReqEmpEmploymentTypeNote}
-                  errorMessage={errors.perReqEmpEmploymentTypeNote}
-                />
-                วัน
-              </div>
+              <Input
+                name="perReqEmpEmploymentTypeNote"
+                placeholder="Please Enter Data"
+                type="number"
+                size="md"
+                variant="bordered"
+                color="none"
+                radius="lg"
+                value={formData.perReqEmpEmploymentTypeNote || ""}
+                onChange={handleInputChange("perReqEmpEmploymentTypeNote")}
+                isInvalid={!!errors.perReqEmpEmploymentTypeNote}
+                errorMessage={errors.perReqEmpEmploymentTypeNote}
+              />{" "}
+              วัน
             </div>
           )}
         </div>
@@ -308,7 +356,7 @@ export default function UIPerReqForm({
               <Checkbox
                 size="md"
                 color="none"
-                aria-label="ทดแทน ชื่อ"
+                aria-label="ทดแทน"
                 isSelected={formData.perReqReasonForRequest === "Replace"}
                 onChange={() =>
                   handleInputChange("perReqReasonForRequest")({
@@ -322,21 +370,19 @@ export default function UIPerReqForm({
           </div>
           {formData.perReqReasonForRequest === "Replace" && (
             <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  name="perReqReasonForRequestNote"
-                  type="text"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="bordered"
-                  color="none"
-                  radius="lg"
-                  value={formData.perReqReasonForRequestNote || ""}
-                  onChange={handleInputChange("perReqReasonForRequestNote")}
-                  isInvalid={!!errors.perReqReasonForRequestNote}
-                  errorMessage={errors.perReqReasonForRequestNote}
-                />
-              </div>
+              <Input
+                name="perReqReasonForRequestNote"
+                placeholder="Please Enter Data"
+                type="text"
+                size="md"
+                variant="bordered"
+                color="none"
+                radius="lg"
+                value={formData.perReqReasonForRequestNote || ""}
+                onChange={handleInputChange("perReqReasonForRequestNote")}
+                isInvalid={!!errors.perReqReasonForRequestNote}
+                errorMessage={errors.perReqReasonForRequestNote}
+              />
             </div>
           )}
         </div>
@@ -348,9 +394,8 @@ export default function UIPerReqForm({
             <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
               <Input
                 name="perReqReasonAge"
-                type="text"
-                aria-label="วันที่ต้องการ"
                 placeholder="Please Enter Data"
+                type="text"
                 size="md"
                 variant="bordered"
                 color="none"
@@ -367,45 +412,26 @@ export default function UIPerReqForm({
               เพศ
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ชาย"
-                isSelected={formData.perReqReasonGender === "Male"}
-                onChange={() =>
-                  handleInputChange("perReqReasonGender")({
-                    target: { value: "Male" },
-                  })
-                }
-              >
-                ชาย
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="หญิง"
-                isSelected={formData.perReqReasonGender === "FeMale"}
-                onChange={() =>
-                  handleInputChange("perReqReasonGender")({
-                    target: { value: "FeMale" },
-                  })
-                }
-              >
-                หญิง
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ไม่ระบุ"
-                isSelected={formData.perReqReasonGender === "Other"}
-                onChange={() =>
-                  handleInputChange("perReqReasonGender")({
-                    target: { value: "Other" },
-                  })
-                }
-              >
-                ไม่ระบุ
-              </Checkbox>
+              {[
+                { val: "Male", label: "ชาย" },
+                { val: "FeMale", label: "หญิง" },
+                { val: "Other", label: "ไม่ระบุ" },
+              ].map(({ val, label }) => (
+                <Checkbox
+                  key={val}
+                  size="md"
+                  color="none"
+                  aria-label={label}
+                  isSelected={formData.perReqReasonGender === val}
+                  onChange={() =>
+                    handleInputChange("perReqReasonGender")({
+                      target: { value: val },
+                    })
+                  }
+                >
+                  {label}
+                </Checkbox>
+              ))}
             </div>
           </div>
         </div>
@@ -415,81 +441,28 @@ export default function UIPerReqForm({
               การศึกษา
             </div>
             <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ประถมศึกษา"
-                isSelected={
-                  formData.perReqReasonEducation === "PrimaryEducation"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonEducation")({
-                    target: { value: "PrimaryEducation" },
-                  })
-                }
-              >
-                ประถมศึกษา
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="มัธยมศึกษา"
-                isSelected={
-                  formData.perReqReasonEducation === "SecondaryEducation"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonEducation")({
-                    target: { value: "SecondaryEducation" },
-                  })
-                }
-              >
-                มัธยมศึกษา
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ปวช. สาขา"
-                isSelected={
-                  formData.perReqReasonEducation === "VocationalCertificate"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonEducation")({
-                    target: { value: "VocationalCertificate" },
-                  })
-                }
-              >
-                ปวช. สาขา
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ปวส. สาขา"
-                isSelected={
-                  formData.perReqReasonEducation === "HighVocationalCertificate"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonEducation")({
-                    target: { value: "HighVocationalCertificate" },
-                  })
-                }
-              >
-                ปวส. สาขา
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ปริญญาตรี / โท สาขา"
-                isSelected={
-                  formData.perReqReasonEducation === "BachelorMasterDegree"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonEducation")({
-                    target: { value: "BachelorMasterDegree" },
-                  })
-                }
-              >
-                ปริญญาตรี / โท สาขา
-              </Checkbox>
+              {[
+                { val: "PrimaryEducation", label: "ประถมศึกษา" },
+                { val: "SecondaryEducation", label: "มัธยมศึกษา" },
+                { val: "VocationalCertificate", label: "ปวช. สาขา" },
+                { val: "HighVocationalCertificate", label: "ปวส. สาขา" },
+                { val: "BachelorMasterDegree", label: "ปริญญาตรี / โท สาขา" },
+              ].map(({ val, label }) => (
+                <Checkbox
+                  key={val}
+                  size="md"
+                  color="none"
+                  aria-label={label}
+                  isSelected={formData.perReqReasonEducation === val}
+                  onChange={() =>
+                    handleInputChange("perReqReasonEducation")({
+                      target: { value: val },
+                    })
+                  }
+                >
+                  {label}
+                </Checkbox>
+              ))}
             </div>
           </div>
           {[
@@ -500,22 +473,20 @@ export default function UIPerReqForm({
             "BachelorMasterDegree",
           ].includes(formData.perReqReasonEducation) && (
             <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  name="perReqReasonEducationNote"
-                  type="text"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="bordered"
-                  color="none"
-                  radius="lg"
-                  required
-                  value={formData.perReqReasonEducationNote || ""}
-                  onChange={handleInputChange("perReqReasonEducationNote")}
-                  isInvalid={!!errors.perReqReasonEducationNote}
-                  errorMessage={errors.perReqReasonEducationNote}
-                />
-              </div>
+              <Input
+                name="perReqReasonEducationNote"
+                placeholder="Please Enter Data"
+                type="text"
+                size="md"
+                variant="bordered"
+                color="none"
+                radius="lg"
+                required
+                value={formData.perReqReasonEducationNote || ""}
+                onChange={handleInputChange("perReqReasonEducationNote")}
+                isInvalid={!!errors.perReqReasonEducationNote}
+                errorMessage={errors.perReqReasonEducationNote}
+              />
             </div>
           )}
         </div>
@@ -525,336 +496,157 @@ export default function UIPerReqForm({
               ประสบการณ์
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ไม่มีประสบการณ์"
-                isSelected={
-                  formData.perReqReasonExperience === "NoneExperience"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonExperience")({
-                    target: { value: "NoneExperience" },
-                  })
-                }
-              >
-                ไม่มีประสบการณ์
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ประสบการณ์ 1-4 ปี"
-                isSelected={
-                  formData.perReqReasonExperience === "Experience1To4Years"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonExperience")({
-                    target: { value: "Experience1To4Years" },
-                  })
-                }
-              >
-                ประสบการณ์ 1-4 ปี
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ประสบการณ์ 5 ปีขึ้นไป"
-                isSelected={
-                  formData.perReqReasonExperience === "Experience5YearsUp"
-                }
-                onChange={() =>
-                  handleInputChange("perReqReasonExperience")({
-                    target: { value: "Experience5YearsUp" },
-                  })
-                }
-              >
-                ประสบการณ์ 5 ปีขึ้นไป
-              </Checkbox>
+              {[
+                { val: "NoneExperience", label: "ไม่มีประสบการณ์" },
+                { val: "Experience1To4Years", label: "ประสบการณ์ 1-4 ปี" },
+                { val: "Experience5YearsUp", label: "ประสบการณ์ 5 ปีขึ้นไป" },
+              ].map(({ val, label }) => (
+                <Checkbox
+                  key={val}
+                  size="md"
+                  color="none"
+                  aria-label={label}
+                  isSelected={formData.perReqReasonExperience === val}
+                  onChange={() =>
+                    handleInputChange("perReqReasonExperience")({
+                      target: { value: val },
+                    })
+                  }
+                >
+                  {label}
+                </Checkbox>
+              ))}
             </div>
           </div>
         </div>
-        //
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
               ความสามารถด้านคอมพิวเตอร์
             </div>
             <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+              {[
+                "MicrosoftOffice",
+                "MicrosoftProject",
+                "Revit",
+                "Autocad",
+                "Sketchup",
+                "Solidwork",
+                "Canva",
+                "Adobe",
+                "BPluse",
+              ].map((skill) => (
+                <Checkbox
+                  key={skill}
+                  size="md"
+                  color="none"
+                  aria-label={skill}
+                  isSelected={(formData.perReqComputerSkills || []).includes(
+                    skill
+                  )}
+                  onChange={() =>
+                    toggleArrayValue("perReqComputerSkills", skill)
+                  }
+                >
+                  {skill === "BPluse" ? "B-Pluse" : skill}
+                </Checkbox>
+              ))}
               <Checkbox
                 size="md"
                 color="none"
-                aria-label="MicrosoftOffice"
-                isSelected={
-                  formData.perReqComputerSkillName === "MicrosoftOffice"
-                }
+                aria-label="Other"
+                isSelected={(formData.perReqComputerSkills || []).includes(
+                  "Other"
+                )}
                 onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "MicrosoftOffice" },
-                  })
-                }
-              >
-                Microsoft Office
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="MicrosoftProject"
-                isSelected={
-                  formData.perReqComputerSkillName === "MicrosoftProject"
-                }
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "MicrosoftProject" },
-                  })
-                }
-              >
-                Microsoft Project
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Revit"
-                isSelected={formData.perReqComputerSkillName === "Revit"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Revit" },
-                  })
-                }
-              >
-                Revit
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Autocad"
-                isSelected={formData.perReqComputerSkillName === "Autocad"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Autocad" },
-                  })
-                }
-              >
-                Autocad
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Sketchup"
-                isSelected={formData.perReqComputerSkillName === "Sketchup"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Sketchup" },
-                  })
-                }
-              >
-                Sketchup
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Solidwork"
-                isSelected={formData.perReqComputerSkillName === "Solidwork"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Solidwork" },
-                  })
-                }
-              >
-                Solidwork
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Canva"
-                isSelected={formData.perReqComputerSkillName === "Canva"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Canva" },
-                  })
-                }
-              >
-                Canva
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="Adobe"
-                isSelected={formData.perReqComputerSkillName === "Adobe"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Adobe" },
-                  })
-                }
-              >
-                Adobe
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="BPluse"
-                isSelected={formData.perReqComputerSkillName === "BPluse"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "BPluse" },
-                  })
-                }
-              >
-                B-Pluse
-              </Checkbox>
-
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="อื่นๆ"
-                isSelected={formData.perReqComputerSkillName === "Other"}
-                onChange={() =>
-                  handleInputChange("perReqComputerSkillName")({
-                    target: { value: "Other" },
-                  })
+                  toggleArrayValue("perReqComputerSkills", "Other")
                 }
               >
                 อื่นๆ
               </Checkbox>
             </div>
           </div>
-          {formData.perReqComputerSkillName === "Other" && (
+          {(formData.perReqComputerSkills || []).includes("Other") && (
             <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  name="perReqComputerSkillIsOther"
-                  type="text"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="bordered"
-                  color="none"
-                  radius="lg"
-                  value={formData.perReqComputerSkillIsOther || ""}
-                  onChange={handleInputChange("perReqComputerSkillIsOther")}
-                  isInvalid={!!errors.perReqComputerSkillIsOther}
-                  errorMessage={errors.perReqComputerSkillIsOther}
-                />
-              </div>
+              <Input
+                name="perReqComputerSkillIsOther"
+                placeholder="Please Enter Data"
+                type="text"
+                size="md"
+                variant="bordered"
+                color="none"
+                radius="lg"
+                value={formData.perReqComputerSkillIsOther || ""}
+                onChange={handleInputChange("perReqComputerSkillIsOther")}
+                isInvalid={!!errors.perReqComputerSkillIsOther}
+                errorMessage={errors.perReqComputerSkillIsOther}
+              />
             </div>
           )}
         </div>
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-              ความสามารถทางด้านภาษา
+              ความสามารถทางภาษา
             </div>
-            <div className="flex items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-                    ภาษา อังกฤษ
-                  </div>
-                  <div className="flex flex-col xl:flex-row items-start justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-                      <Checkbox
-                        size="lg"
-                        color="default"
-                        aria-label="พอใช้"
-                        isSelected={
-                          formData.perReqReasonEnglishSkill === "Basic"
-                        }
-                        onChange={() =>
-                          handleInputChange("perReqReasonEnglishSkill")({
-                            target: { value: "Basic" },
-                          })
-                        }
-                      >
-                        พอใช้
-                      </Checkbox>
-                      <Checkbox
-                        size="lg"
-                        color="default"
-                        aria-label="ดี"
-                        isSelected={
-                          formData.perReqReasonEnglishSkill === "Good"
-                        }
-                        onChange={() =>
-                          handleInputChange("perReqReasonEnglishSkill")({
-                            target: { value: "Good" },
-                          })
-                        }
-                      >
-                        ดี
-                      </Checkbox>
-                      <Checkbox
-                        size="lg"
-                        color="default"
-                        aria-label="ดีมาก"
-                        isSelected={
-                          formData.perReqReasonEnglishSkill === "Excellent"
-                        }
-                        onChange={() =>
-                          handleInputChange("perReqReasonEnglishSkill")({
-                            target: { value: "Excellent" },
-                          })
-                        }
-                      >
-                        ดีมาก
-                      </Checkbox>
+            <div className="flex flex-col gap-2 w-full xl:w-9/12">
+              {[
+                { lang: "English", label: "ภาษา อังกฤษ" },
+                { lang: "Chinese", label: "ภาษา จีน" },
+                { lang: "Thai", label: "ภาษา ไทย" },
+                { lang: "Japanese", label: "ภาษา ญี่ปุ่น" },
+              ].map(({ lang, label }) => {
+                const current = (formData.perReqLanguageSkills || []).find(
+                  (l) => l.language === lang
+                );
+                return (
+                  <div
+                    key={lang}
+                    className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark"
+                  >
+                    <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
+                      {label}
+                    </div>
+                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
+                      {[
+                        { level: "Basic", text: "พอใช้" },
+                        { level: "Good", text: "ดี" },
+                        { level: "Excellent", text: "ดีมาก" },
+                      ].map(({ level, text }) => (
+                        <Checkbox
+                          key={level}
+                          size="lg"
+                          color="none"
+                          aria-label={text}
+                          isSelected={current?.level === level}
+                          onChange={() => {
+                            if (!setFormData) return;
+                            setFormData((prev) => {
+                              const list = prev.perReqLanguageSkills || [];
+                              const idx = list.findIndex(
+                                (l) => l.language === lang
+                              );
+                              if (idx === -1)
+                                return {
+                                  ...prev,
+                                  perReqLanguageSkills: [
+                                    ...list,
+                                    { language: lang, level },
+                                  ],
+                                };
+                              const next = [...list];
+                              next[idx] = { language: lang, level };
+                              return { ...prev, perReqLanguageSkills: next };
+                            });
+                          }}
+                        >
+                          {text}
+                        </Checkbox>
+                      ))}
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <div className="flex items-center justify-start w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
-                    ภาษา จีน
-                  </div>
-                  <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-                    <Checkbox
-                      size="lg"
-                      color="default"
-                      aria-label="พอใช้"
-                      isSelected={formData.perReqReasonEnglishSkill === "Basic"}
-                      onChange={() =>
-                        handleInputChange("perReqReasonEnglishSkill")({
-                          target: { value: "Basic" },
-                        })
-                      }
-                    >
-                      พอใช้
-                    </Checkbox>
-                    <Checkbox
-                      size="lg"
-                      color="default"
-                      aria-label="ดี"
-                      isSelected={formData.perReqReasonEnglishSkill === "Good"}
-                      onChange={() =>
-                        handleInputChange("perReqReasonEnglishSkill")({
-                          target: { value: "Good" },
-                        })
-                      }
-                    >
-                      ดี
-                    </Checkbox>
-                    <Checkbox
-                      size="lg"
-                      color="default"
-                      aria-label="ดีมาก"
-                      isSelected={
-                        formData.perReqReasonEnglishSkill === "Excellent"
-                      }
-                      onChange={() =>
-                        handleInputChange("perReqReasonEnglishSkill")({
-                          target: { value: "Excellent" },
-                        })
-                      }
-                    >
-                      ดีมาก
-                    </Checkbox>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -864,123 +656,24 @@ export default function UIPerReqForm({
               ใบอนุญาตขับขี่
             </div>
             <div className="flex flex-wrap flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่บ.1"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.1"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่บ.1" },
-                  })
-                }
-              >
-                ใบขับขี่ บ.1
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่บ.2"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.2"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่บ.2" },
-                  })
-                }
-              >
-                ใบขับขี่ บ.2
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่บ.3"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.3"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่บ.3" },
-                  })
-                }
-              >
-                ใบขับขี่ บ.3
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่บ.4"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.4"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่บ.4" },
-                  })
-                }
-              >
-                ใบขับขี่ บ.4
-              </Checkbox>{" "}
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่บ.4"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่บ.4"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่บ.4" },
-                  })
-                }
-              >
-                ใบขับขี่ บ.4
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่ท.1"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.1"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่ท.1" },
-                  })
-                }
-              >
-                ใบขับขี่ ท.1
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่ท.2"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.2"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่ท.2" },
-                  })
-                }
-              >
-                ใบขับขี่ ท.2
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่ท.3"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.3"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่ท.3" },
-                  })
-                }
-              >
-                ใบขับขี่ ท.3
-              </Checkbox>
-              <Checkbox
-                size="md"
-                color="none"
-                aria-label="ใบขับขี่ท.4"
-                isSelected={formData.perReqReasonForRequest === "ใบขับขี่ท.4"}
-                onChange={() =>
-                  handleInputChange("perReqReasonForRequest")({
-                    target: { value: "ใบขับขี่ท.4" },
-                  })
-                }
-              >
-                ใบขับขี่ ท.4
-              </Checkbox>
+              {["บ.1", "บ.2", "บ.3", "บ.4", "ท.1", "ท.2", "ท.3", "ท.4"].map(
+                (lic) => (
+                  <Checkbox
+                    key={lic}
+                    size="md"
+                    color="none"
+                    aria-label={lic}
+                    isSelected={(formData.perReqDrivingLicenses || []).includes(
+                      lic
+                    )}
+                    onChange={() =>
+                      toggleArrayValue("perReqDrivingLicenses", lic)
+                    }
+                  >
+                    ใบขับขี่ {lic}
+                  </Checkbox>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -990,90 +683,89 @@ export default function UIPerReqForm({
               ใบอนุญาตประกอบวิชาชีพ
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-              <Checkbox
-                size="lg"
-                color="default"
-                aria-label="กส"
-                isSelected={formData.perReqProfessionalLicenseName === "กส"}
-                onChange={() =>
-                  handleInputChange("perReqProfessionalLicenseName")({
-                    target: { value: "กส" },
-                  })
-                }
-              >
-                กส
-              </Checkbox>
-              <Checkbox
-                size="lg"
-                color="default"
-                aria-label="กว"
-                isSelected={formData.perReqProfessionalLicenseName === "กว"}
-                onChange={() =>
-                  handleInputChange("perReqProfessionalLicenseName")({
-                    target: { value: "กว" },
-                  })
-                }
-              >
-                กว
-              </Checkbox>
+              {[
+                { name: "กส", label: "กส" },
+                { name: "กว", label: "กว" },
+              ].map(({ name, label }) => (
+                <Checkbox
+                  key={name}
+                  size="lg"
+                  color="none"
+                  aria-label={label}
+                  isSelected={(formData.perReqProfessionalLicenses || []).some(
+                    (p) => p.name === name
+                  )}
+                  onChange={() => toggleProfessionalName(name)}
+                >
+                  {label}
+                </Checkbox>
+              ))}
             </div>
           </div>
-          {["กว", "กส"].includes(formData.perReqProfessionalLicenseName) && (
+          {(formData.perReqProfessionalLicenses || []).some(
+            (p) => p.name === "กว" || p.name === "กส"
+          ) && (
             <div className="flex flex-col xl:flex-row items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-              <label className="w-full xl:w-3/12">
-                {formData.perReqProfessionalLicenseName === "กว"
-                  ? "ระดับ กว"
-                  : "ระดับ กส"}
-              </label>
+              <label className="w-full xl:w-3/12">เลือกระดับ</label>
               <div className="w-full xl:w-9/12">
                 <Select
                   name="perReqProfessionalLicenseLevel"
-                  aria-label={`ระดับ ${formData.perReqProfessionalLicenseName}`}
                   placeholder="-- เลือกระดับ --"
                   size="md"
                   variant="bordered"
                   color="none"
                   radius="lg"
-                  selectedKeys={
-                    formData.perReqProfessionalLicenseLevel
-                      ? [formData.perReqProfessionalLicenseLevel]
-                      : []
-                  }
-                  onChange={handleInputChange("perReqProfessionalLicenseLevel")}
+                  selectedKeys={(() => {
+                    const found = (
+                      formData.perReqProfessionalLicenses || []
+                    ).find((p) => p.name === "กว" || p.name === "กส");
+                    return found?.level ? [found.level] : [];
+                  })()}
+                  onChange={(e) => setProfessionalLevel(e.target.value)}
                   isInvalid={!!errors.perReqProfessionalLicenseLevel}
                   errorMessage={errors.perReqProfessionalLicenseLevel}
                 >
-                  {formData.perReqProfessionalLicenseName === "กว" ? (
-                    <>
-                      <SelectItem key="ภาคีวิศวกร" value="ภาคีวิศวกร">
-                        ภาคีวิศวกร
-                      </SelectItem>
-                      <SelectItem key="ภาคีวิศวกรพิเศษ" value="ภาคีวิศวกรพิเศษ">
-                        ภาคีวิศวกรพิเศษ
-                      </SelectItem>
-                      <SelectItem key="สามัญวิศวกร" value="สามัญวิศวกร">
-                        สามัญวิศวกร
-                      </SelectItem>
-                      <SelectItem key="วุฒิวิศวกร" value="วุฒิวิศวกร">
-                        วุฒิวิศวกร
-                      </SelectItem>
-                    </>
-                  ) : (
-                    <>
-                      <SelectItem key="สามัญสถาปนิก" value="สามัญสถาปนิก">
-                        สามัญสถาปนิก
-                      </SelectItem>
-                      <SelectItem key="วุฒิสถาปนิก" value="วุฒิสถาปนิก">
-                        วุฒิสถาปนิก
-                      </SelectItem>
-                    </>
-                  )}
+                  {(() => {
+                    const hasGv = (
+                      formData.perReqProfessionalLicenses || []
+                    ).some((p) => p.name === "กว");
+                    if (hasGv) {
+                      return (
+                        <>
+                          <SelectItem key="ภาคีวิศวกร" value="ภาคีวิศวกร">
+                            ภาคีวิศวกร
+                          </SelectItem>
+                          <SelectItem
+                            key="ภาคีวิศวกรพิเศษ"
+                            value="ภาคีวิศวกรพิเศษ"
+                          >
+                            ภาคีวิศวกรพิเศษ
+                          </SelectItem>
+                          <SelectItem key="สามัญวิศวกร" value="สามัญวิศวกร">
+                            สามัญวิศวกร
+                          </SelectItem>
+                          <SelectItem key="วุฒิวิศวกร" value="วุฒิวิศวกร">
+                            วุฒิวิศวกร
+                          </SelectItem>
+                        </>
+                      );
+                    }
+                    return (
+                      <>
+                        <SelectItem key="สามัญสถาปนิก" value="สามัญสถาปนิก">
+                          สามัญสถาปนิก
+                        </SelectItem>
+                        <SelectItem key="วุฒิสถาปนิก" value="วุฒิสถาปนิก">
+                          วุฒิสถาปนิก
+                        </SelectItem>
+                      </>
+                    );
+                  })()}
                 </Select>
               </div>
             </div>
           )}
         </div>
-        //
         <div className="flex flex-col xl:flex-row items-center justify-evenly w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
@@ -1094,24 +786,24 @@ export default function UIPerReqForm({
           </div>
           <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (รออนุมัติ)
             </div>
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (ผู้จัดการฝ่าย)
             </div>
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (รออนุมัติ)
             </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (รออนุมัติ)
             </div>
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (ผู้จัดการฝ่าย บุคคล)
             </div>
             <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              1
+              (รออนุมัติ)
             </div>
           </div>
         </div>
@@ -1123,9 +815,7 @@ export default function UIPerReqForm({
               radius="lg"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2 border-2 border-dark"
-              onPress={() => {
-                cancelRef.current = false;
-              }}
+              onPress={() => cancelRef && (cancelRef.current = false)}
             >
               บันทึก
             </Button>
@@ -1138,9 +828,7 @@ export default function UIPerReqForm({
                 radius="lg"
                 type="submit"
                 className="flex items-center justify-center w-2/12 h-full p-4 gap-2 border-2 border-dark"
-                onPress={() => {
-                  cancelRef.current = true;
-                }}
+                onPress={() => cancelRef && (cancelRef.current = true)}
               >
                 ยกเลิก
               </Button>
