@@ -104,7 +104,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
 };
 
 const topBar = (session, currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white border-1 border-default">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white border-b-1 border-default">
     <div
       className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
       onClick={() => setOpenMobile(true)}
@@ -273,7 +273,7 @@ export default function PagesLayout({ children }) {
           w-[90%]`}
         >
           <div
-            className={`flex flex-col items-center justify-between h-full bg-white border-1 border-default
+            className={`flex flex-col items-center justify-between h-full bg-white border-r-1 border-default
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
           >
@@ -310,7 +310,7 @@ export default function PagesLayout({ children }) {
           </div>
 
           <div
-            className={`flex flex-col items-center justify-between h-full bg-white border-1 border-default
+            className={`flex flex-col items-center justify-between h-full bg-white border-r-1 border-default
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
           >
@@ -355,7 +355,7 @@ export default function PagesLayout({ children }) {
           }`}
         >
           {topBar(session, currentTime, setOpenMobile)}
-          <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 overflow-auto">
+          <div className="flex flex-col items-center justify-start w-full flex-1 gap-2 overflow-auto">
             {children}
           </div>
         </div>
