@@ -452,7 +452,7 @@ export default function UIEmpList({ data = [], error = "" }) {
               >
                 {item.empStatus?.toLowerCase() === "inactive" && (
                   <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
-                    <span className="text-5xl font-bold text-danger/75 rotate-[-20deg]">
+                    <span className="text-5xl font-bold text-danger rotate-[-20deg]">
                       ลาออก
                     </span>
                   </div>
@@ -472,7 +472,7 @@ export default function UIEmpList({ data = [], error = "" }) {
                   />
                 )}
 
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-primary font-[600]">
                   {renderCell(item, idx, "empFirstNameTH")}{" "}
                   {renderCell(item, idx, "empLastNameTH")}
                 </div>
