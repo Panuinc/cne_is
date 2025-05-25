@@ -171,7 +171,7 @@ export default function UIAccount({ header, formData, operatedBy, exportPdf }) {
                 <div className="flex items-center justify-end w-full h-full p-2 gap-2">
                   <a
                     href="/changPassPin"
-                    className="text-sm text-primary font-[600] underline hover:text-danger transition"
+                    className="text-sm text-primary font-[600] underline hover:text-secondary transition"
                   >
                     เปลี่ยนรหัสผ่าน
                   </a>
