@@ -2,11 +2,12 @@
 
 import UICustomTable from "@/components/other/UICustomTable";
 import UICustomPagination from "@/components/other/UICustomPagination";
+import UIHeader from "@/components/other/UIHeader";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Search, Setting, Document } from "@/components/icons/icons";
+import { Folder, Setting, Document } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import {
@@ -55,7 +56,12 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIPositionList({ data = [], error = "", onExportPDF }) {
+export default function UIPositionList({
+  header,
+  data = [],
+  error = "",
+  onExportPDF,
+}) {
   const { data: session, status } = useSession();
 
   if (status === "loading") return null;
@@ -248,110 +254,113 @@ export default function UIPositionList({ data = [], error = "", onExportPDF }) {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
-      <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
-        <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
-          <Input
-            isClearable
-            label="ค้นหา"
-            placeholder="ค้นหาโดยข้อมูล ตำแหน่งงาน"
-            size="md"
-            variant="bordered"
-            color="none"
-            radius="lg"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-
-        <div className="flex items-center justify-center h-full p-2 gap-2">
-          {canManage && (
-            <Button
-              as={Link}
-              href="/position/create"
-              color="primary"
+    <>
+      <UIHeader Header={header} />
+      <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
+        <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
+            <Input
+              isClearable
+              label="ค้นหา"
+              placeholder="ค้นหาโดยข้อมูล ตำแหน่งงาน"
               size="md"
+              variant="bordered"
+              color="none"
               radius="lg"
-              className="flex items-center justify-center w-full h-full p-4 gap-2"
-              startContent={<Folder />}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className="flex items-center justify-center h-full p-2 gap-2">
+            {canManage && (
+              <Button
+                as={Link}
+                href="/position/create"
+                color="primary"
+                size="md"
+                radius="lg"
+                className="flex items-center justify-center w-full h-full p-4 gap-2"
+                startContent={<Folder />}
+              >
+                เพิ่มใหม่
+              </Button>
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+            <UISelectFilter
+              label="สถานะการใช้งาน"
+              selectedValue={statusFilter}
+              items={statusOptions}
+              onChange={setStatusFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+            <UISelectFilter
+              label="ฝ่าย"
+              selectedValue={divisionFilter}
+              items={divisionOptions}
+              onChange={setDivisionFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
+            <UISelectFilter
+              label="แผนก"
+              selectedValue={departmentFilter}
+              items={departmentOptions}
+              onChange={setDepartmentFilter}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-start w-full xl:w-10/12 h-full p-2 gap-2">
+            จำนวนข้อมูล
+          </div>
+          <div className="flex items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2">
+            <Select
+              label="จำนวนข้อมูล"
+              placeholder="จำนวนข้อมูล"
+              size="md"
+              variant="bordered"
+              color="none"
+              radius="lg"
+              selectedKeys={[String(rowsPerPage)]}
+              onChange={(e) => {
+                setRowsPerPage(Number(e.target.value));
+                setPageNumber(1);
+              }}
             >
-              เพิ่มใหม่
-            </Button>
-          )}
+              {rowsOptions.map((num) => (
+                <SelectItem key={num} value={String(num)}>
+                  {String(num)}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
-        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
-          <UISelectFilter
-            label="สถานะการใช้งาน"
-            selectedValue={statusFilter}
-            items={statusOptions}
-            onChange={setStatusFilter}
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
+          <UICustomTable
+            columns={columns}
+            data={filteredData}
+            pageNumber={pageNumber}
+            rowsPerPage={rowsPerPage}
+            error={error}
+            renderCell={renderCell}
           />
         </div>
-        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
-          <UISelectFilter
-            label="ฝ่าย"
-            selectedValue={divisionFilter}
-            items={divisionOptions}
-            onChange={setDivisionFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
-          <UISelectFilter
-            label="แผนก"
-            selectedValue={departmentFilter}
-            items={departmentOptions}
-            onChange={setDepartmentFilter}
-          />
-        </div>
-      </div>
 
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
-        <div className="flex items-center justify-start w-full xl:w-10/12 h-full p-2 gap-2">
-          จำนวนข้อมูล
-        </div>
-        <div className="flex items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2">
-          <Select
-            label="จำนวนข้อมูล"
-            placeholder="จำนวนข้อมูล"
-            size="md"
-            variant="bordered"
-            color="none"
-            radius="lg"
-            selectedKeys={[String(rowsPerPage)]}
-            onChange={(e) => {
-              setRowsPerPage(Number(e.target.value));
-              setPageNumber(1);
-            }}
-          >
-            {rowsOptions.map((num) => (
-              <SelectItem key={num} value={String(num)}>
-                {String(num)}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-      </div>
-
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
-        <UICustomTable
-          columns={columns}
-          data={filteredData}
-          pageNumber={pageNumber}
+        <UICustomPagination
+          page={pageNumber}
+          totalItems={filteredData.length}
           rowsPerPage={rowsPerPage}
-          error={error}
-          renderCell={renderCell}
+          onPageChange={setPageNumber}
         />
       </div>
-
-      <UICustomPagination
-        page={pageNumber}
-        totalItems={filteredData.length}
-        rowsPerPage={rowsPerPage}
-        onPageChange={setPageNumber}
-      />
-    </div>
+    </>
   );
 }

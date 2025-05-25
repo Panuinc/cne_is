@@ -1,11 +1,12 @@
 "use client";
 
 import UICustomPagination from "@/components/other/UICustomPagination";
+import UIHeader from "@/components/other/UIHeader";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Search, Setting, Trash } from "@/components/icons/icons";
+import { Folder, Setting, Trash } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import {
@@ -62,7 +63,7 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIEmpList({ data = [], error = "" }) {
+export default function UIEmpList({ header, data = [], error = "" }) {
   const { data: session, status } = useSession();
 
   if (status === "loading") return null;
@@ -313,180 +314,183 @@ export default function UIEmpList({ data = [], error = "" }) {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
-      <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
-        <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
-          <Input
-            isClearable
-            label="ค้นหา"
-            placeholder="ค้นหาโดยข้อมูล ชื่อ (TH)"
-            size="md"
-            variant="bordered"
-            color="none"
-            radius="lg"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+    <>
+      <UIHeader Header={header} />
+      <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
+        <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
+            <Input
+              isClearable
+              label="ค้นหา"
+              placeholder="ค้นหาโดยข้อมูล ชื่อ (TH)"
+              size="md"
+              variant="bordered"
+              color="none"
+              radius="lg"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className="flex items-center justify-center h-full p-2 gap-2">
+            {canManage && (
+              <Button
+                as={Link}
+                href="/emp/create"
+                color="primary"
+                size="md"
+                radius="lg"
+                className="flex items-center justify-center w-full h-full p-4 gap-2"
+                startContent={<Folder />}
+              >
+                เพิ่มใหม่
+              </Button>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center justify-center h-full p-2 gap-2">
-          {canManage && (
+        <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <UISelectFilter
+              label="สถานะพนักงาน"
+              selectedValue={statusFilter}
+              items={statusOptions}
+              onChange={setStatusFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <UISelectFilter
+              label="ประเภทพนักงาน"
+              selectedValue={empTypeFilter}
+              items={empTypeOptions}
+              onChange={setEmpTypeFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <UISelectFilter
+              label="ฝ่าย"
+              selectedValue={divisionFilter}
+              items={divisionOptions}
+              onChange={setDivisionFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <UISelectFilter
+              label="แผนก"
+              selectedValue={departmentFilter}
+              items={departmentOptions}
+              onChange={setDepartmentFilter}
+            />
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+            <UISelectFilter
+              label="ตำแหน่ง"
+              selectedValue={positionFilter}
+              items={positionOptions}
+              onChange={setPositionFilter}
+            />
+          </div>
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
             <Button
-              as={Link}
-              href="/emp/create"
-              color="primary"
+              color="secondary"
               size="md"
               radius="lg"
-              className="flex items-center justify-center w-full h-full p-4 gap-2"
-              startContent={<Folder />}
+              startContent={<Trash />}
+              className="min-w-12 min-h-12 p-2 gap-2"
+              onPress={() => {
+                setSearchTerm("");
+                setStatusFilter("all");
+                setEmpTypeFilter("all");
+                setGenderFilter("all");
+                setDivisionFilter("all");
+                setDepartmentFilter("all");
+                setPositionFilter("all");
+                setPageNumber(1);
+              }}
+            ></Button>
+          </div>
+        </div>
+
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
+          <div className="flex items-center justify-start w-full xl:w-10/12 h-full p-2 gap-2">
+            จำนวนข้อมูล
+          </div>
+          <div className="flex items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2">
+            <Select
+              label="จำนวนข้อมูล"
+              placeholder="จำนวนข้อมูล"
+              size="md"
+              variant="bordered"
+              color="none"
+              radius="lg"
+              selectedKeys={[String(rowsPerPage)]}
+              onChange={(e) => {
+                setRowsPerPage(Number(e.target.value));
+                setPageNumber(1);
+              }}
             >
-              เพิ่มใหม่
-            </Button>
-          )}
+              {rowsOptions.map((num) => (
+                <SelectItem key={num} value={String(num)}>
+                  {String(num)}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-start w-full p-2 gap-2">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
-            label="สถานะพนักงาน"
-            selectedValue={statusFilter}
-            items={statusOptions}
-            onChange={setStatusFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
-            label="ประเภทพนักงาน"
-            selectedValue={empTypeFilter}
-            items={empTypeOptions}
-            onChange={setEmpTypeFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
-            label="ฝ่าย"
-            selectedValue={divisionFilter}
-            items={divisionOptions}
-            onChange={setDivisionFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
-            label="แผนก"
-            selectedValue={departmentFilter}
-            items={departmentOptions}
-            onChange={setDepartmentFilter}
-          />
-        </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          <UISelectFilter
-            label="ตำแหน่ง"
-            selectedValue={positionFilter}
-            items={positionOptions}
-            onChange={setPositionFilter}
-          />
-        </div>
-        <div className="flex items-center justify-end w-full h-full p-2 gap-2">
-          <Button
-            color="secondary"
-            size="md"
-            radius="lg"
-            startContent={<Trash />}
-            className="min-w-12 min-h-12 p-2 gap-2"
-            onPress={() => {
-              setSearchTerm("");
-              setStatusFilter("all");
-              setEmpTypeFilter("all");
-              setGenderFilter("all");
-              setDivisionFilter("all");
-              setDepartmentFilter("all");
-              setPositionFilter("all");
-              setPageNumber(1);
-            }}
-          ></Button>
-        </div>
-      </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+          {filteredData
+            .slice((pageNumber - 1) * rowsPerPage, pageNumber * rowsPerPage)
+            .map((item, idx) => {
+              const pictureFile =
+                item.empEmpEmployment?.[0]?.empEmploymentPicture;
+              const imageUrl = pictureFile
+                ? `/empEmployment/userPicture/${pictureFile}`
+                : null;
 
-      <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
-        <div className="flex items-center justify-start w-full xl:w-10/12 h-full p-2 gap-2">
-          จำนวนข้อมูล
-        </div>
-        <div className="flex items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2">
-          <Select
-            label="จำนวนข้อมูล"
-            placeholder="จำนวนข้อมูล"
-            size="md"
-            variant="bordered"
-            color="none"
-            radius="lg"
-            selectedKeys={[String(rowsPerPage)]}
-            onChange={(e) => {
-              setRowsPerPage(Number(e.target.value));
-              setPageNumber(1);
-            }}
-          >
-            {rowsOptions.map((num) => (
-              <SelectItem key={num} value={String(num)}>
-                {String(num)}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-      </div>
+              return (
+                <div
+                  key={item.empId}
+                  className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-default border-1 border-default rounded-3xl"
+                >
+                  {item.empStatus?.toLowerCase() === "inactive" && (
+                    <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
+                      <span className="text-5xl font-bold text-danger rotate-[-20deg]">
+                        ลาออก
+                      </span>
+                    </div>
+                  )}
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
-        {filteredData
-          .slice((pageNumber - 1) * rowsPerPage, pageNumber * rowsPerPage)
-          .map((item, idx) => {
-            const pictureFile =
-              item.empEmpEmployment?.[0]?.empEmploymentPicture;
-            const imageUrl = pictureFile
-              ? `/empEmployment/userPicture/${pictureFile}`
-              : null;
+                  {canManage && (
+                    <div className="absolute top-2 right-2 z-50">
+                      {renderCell(item, idx, "actions")}
+                    </div>
+                  )}
 
-            return (
-              <div
-                key={item.empId}
-                className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-default border-1 border-default rounded-3xl"
-              >
-                {item.empStatus?.toLowerCase() === "inactive" && (
-                  <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
-                    <span className="text-5xl font-bold text-danger rotate-[-20deg]">
-                      ลาออก
-                    </span>
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt="รูปพนักงาน"
+                      className="w-40 h-40 object-contain rounded-full"
+                    />
+                  )}
+
+                  <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-primary font-[600]">
+                    {renderCell(item, idx, "empFirstNameTH")}{" "}
+                    {renderCell(item, idx, "empLastNameTH")}
                   </div>
-                )}
-
-                {canManage && (
-                  <div className="absolute top-2 right-2 z-50">
-                    {renderCell(item, idx, "actions")}
-                  </div>
-                )}
-
-                {imageUrl && (
-                  <img
-                    src={imageUrl}
-                    alt="รูปพนักงาน"
-                    className="w-40 h-40 object-contain rounded-full"
-                  />
-                )}
-
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-primary font-[600]">
-                  {renderCell(item, idx, "empFirstNameTH")}{" "}
-                  {renderCell(item, idx, "empLastNameTH")}
                 </div>
-              </div>
-            );
-          })}
-      </div>
+              );
+            })}
+        </div>
 
-      <UICustomPagination
-        page={pageNumber}
-        totalItems={filteredData.length}
-        rowsPerPage={rowsPerPage}
-        onPageChange={setPageNumber}
-      />
-    </div>
+        <UICustomPagination
+          page={pageNumber}
+          totalItems={filteredData.length}
+          rowsPerPage={rowsPerPage}
+          onPageChange={setPageNumber}
+        />
+      </div>
+    </>
   );
 }
