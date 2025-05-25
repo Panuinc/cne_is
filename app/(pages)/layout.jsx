@@ -273,7 +273,7 @@ export default function PagesLayout({ children }) {
           w-[90%]`}
         >
           <div
-            className={`flex flex-col items-center justify-between h-full bg-white border-r-1 border-default
+            className={`flex flex-col items-center justify-between h-full gap-2 bg-white border-r-1 border-default
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
           >
@@ -310,7 +310,7 @@ export default function PagesLayout({ children }) {
           </div>
 
           <div
-            className={`flex flex-col items-center justify-between h-full bg-white border-r-1 border-default
+            className={`flex flex-col items-center justify-between h-full gap-2 bg-white border-r-1 border-default
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
           >
@@ -350,7 +350,7 @@ export default function PagesLayout({ children }) {
         )}
 
         <div
-          className={`flex flex-col h-full flex-1 bg-white overflow-auto ${
+          className={`flex flex-col h-full flex-1 gap-2 bg-white overflow-auto ${
             collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
           }`}
         >
