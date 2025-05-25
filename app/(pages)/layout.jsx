@@ -104,7 +104,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
 };
 
 const topBar = (session, currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] gap-2 bg-white border-b-1 border-default">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] gap-2 bg-white">
     <div
       className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
       onClick={() => setOpenMobile(true)}
