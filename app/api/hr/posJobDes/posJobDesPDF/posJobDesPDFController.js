@@ -123,7 +123,7 @@ export class PosJobDesPDFController {
 </head>
 
 <body class="flex flex-col items-center justify-start w-full h-screen gap-2 border-1">
-    <div class="flex flex-row items-center justify-center w-full border-b-1">
+    <div class="flex flex-row items-center justify-center w-full border-b">
         <div class="flex flex-col items-center justify-center w-3/12 h-full p-1 gap-2 border-r font_bold">
             <img src="data:image/png;base64,${logoBase64}" class="w-24" />
             บริษัท ชาญนครวิศวกรรม
@@ -175,8 +175,8 @@ export class PosJobDesPDFController {
     </div>
 
     <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-1 border-b-1 font_bold">
-            คุณสมบัติ (Qualification)
+        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
+          คุณสมบัติ (Qualification)
         </div>
 
         <div class="flex flex-row items-center justify-center w-full gap-2">
@@ -239,7 +239,7 @@ export class PosJobDesPDFController {
     </div>
 
     <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t-1 border-b-1 font_bold">
+        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
             บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
         </div>
 
