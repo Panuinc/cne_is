@@ -40,7 +40,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
       className="flex flex-col items-center justify-center w-full gap-2"
     >
       <div
-        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
+        className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white cursor-pointer ${
           isSubActive ? "bg-primary text-white" : ""
         }`}
         onClick={() => toggleSubmenu(menu.key)}
@@ -65,7 +65,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
             <Link
               key={idx}
               href={sub.href}
-              className={`flex items-center justify-start w-full h-full px-2 py-3 gap-2 hover:bg-primary hover:text-white rounded-lg ${
+              className={`flex items-center justify-start w-full h-full px-2 py-3 gap-2 hover:bg-primary hover:text-white ${
                 pathname === sub.href || pathname.startsWith(sub.href)
                   ? "bg-primary text-white"
                   : ""
@@ -87,7 +87,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
     <Link
       key={index}
       href={tool.href}
-      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg ${
+      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white ${
         isActive ? "bg-primary text-white" : ""
       }`}
     >
@@ -104,7 +104,7 @@ const toolMenu = (tool, index, collapsed, pathname) => {
 };
 
 const topBar = (session, currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white border-b-1 border-default">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] gap-2 bg-white border-b-1 border-default">
     <div
       className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
       onClick={() => setOpenMobile(true)}
@@ -163,7 +163,7 @@ const mainMenuItem = (menu, pathname) => {
     <Link
       key={menu.href}
       href={menu.href}
-      className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg ${
+      className={`flex items-center justify-center w-full p-2 gap-2 hover:bg-primary hover:text-white ${
         isActive ? "bg-primary text-white" : ""
       }`}
     >
@@ -277,7 +277,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
             w-[70%]`}
           >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
+            <div className="flex items-center justify-center w-full min-h-[72px] gap-2">
               <Link
                 href="/home"
                 className="flex items-center justify-center w-full h-full p-2 gap-2 relative"
@@ -291,18 +291,18 @@ export default function PagesLayout({ children }) {
               </Link>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
+            <div className="flex flex-col items-center justify-start w-full h-full gap-2 overflow-auto">
               {mainMenus.map((menu) => mainMenuItem(menu, pathname))}
               {menuItems.map((menu) =>
                 submenus(menu, submenuOpen, toggleSubmenu, pathname)
               )}
             </div>
 
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
+            <div className="flex items-center justify-center w-full min-h-[72px] gap-2">
               <Link
                 href="/logout"
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white rounded-lg"
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white"
               >
                 <Logout /> ออกจากระบบ
               </Link>
@@ -314,21 +314,21 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
           >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
+            <div className="flex items-center justify-center w-full min-h-[72px] gap-2">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2">
                 {""}
               </div>
             </div>
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
+            <div className="flex flex-col items-center justify-start w-full h-full gap-2 overflow-auto">
               {toolMenus.map((tool, index) =>
                 toolMenu(tool, index, collapsed, pathname)
               )}
             </div>
             <div
-              className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2"
+              className="flex items-center justify-center w-full min-h-[72px] gap-2"
               onClick={() => setCollapsed(!collapsed)}
             >
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 rounded-lg cursor-pointer">
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 cursor-pointer">
                 <div className="flex items-center justify-center h-full p-2 gap-2">
                   <Left />
                 </div>
@@ -355,7 +355,7 @@ export default function PagesLayout({ children }) {
           }`}
         >
           {topBar(session, currentTime, setOpenMobile)}
-          <div className="flex flex-col items-center justify-start w-full flex-1 py-2 gap-2 overflow-auto">
+          <div className="flex flex-col items-center justify-start w-full flex-1 gap-2 overflow-auto">
             {children}
           </div>
         </div>
