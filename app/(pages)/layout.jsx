@@ -355,7 +355,7 @@ export default function PagesLayout({ children }) {
           }`}
         >
           {topBar(session, currentTime, setOpenMobile)}
-          <div className="flex flex-col items-center justify-start w-full flex-1 gap-2 overflow-auto">
+          <div className="flex flex-col items-center justify-start w-full flex-1 py-2 gap-2 overflow-auto">
             {children}
           </div>
         </div>
