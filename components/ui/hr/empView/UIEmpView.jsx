@@ -413,7 +413,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                 <div className="flex items-center justify-start w-full h-full p-2 gap-2">
                   <span className="font-[600]">ตำแหน่งงาน : </span>
                   {formData.empEmpEmployment?.[0]?.EmpEmploymentPositionId
-                    ?.positionName || "-"}
+                    ?.positionNameTH || "-"}
                 </div>
               </div>
 

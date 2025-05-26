@@ -316,7 +316,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
   return (
     <>
       <UIHeader Header={header} />
-      <div className="flex flex-col items-center justify-start w-full h-full p-2 bg-white overflow-auto">
+      <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto">
         <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
             <Input
@@ -438,7 +438,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
           </div>
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           {filteredData
             .slice((pageNumber - 1) * rowsPerPage, pageNumber * rowsPerPage)
             .map((item, idx) => {
@@ -451,7 +451,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
               return (
                 <div
                   key={item.empId}
-                  className="relative flex flex-col items-center justify-center min-w-60 p-4 gap-2 bg-default border-1 border-default rounded-3xl"
+                  className="relative flex flex-col items-center justify-evenly min-w-60 h-60 p-4 gap-2 bg-default rounded-3xl"
                 >
                   {item.empStatus?.toLowerCase() === "inactive" && (
                     <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
@@ -471,11 +471,11 @@ export default function UIEmpList({ header, data = [], error = "" }) {
                     <img
                       src={imageUrl}
                       alt="รูปพนักงาน"
-                      className="w-40 h-40 object-contain rounded-full"
+                      className="w-40 h-40 object-contain"
                     />
                   )}
 
-                  <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-primary font-[600]">
+                  <div className="flex items-end justify-center w-full h-full p-2 gap-2 text-primary font-[600]">
                     {renderCell(item, idx, "empFirstNameTH")}{" "}
                     {renderCell(item, idx, "empLastNameTH")}
                   </div>
