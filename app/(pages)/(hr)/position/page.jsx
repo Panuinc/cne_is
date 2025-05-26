@@ -32,19 +32,22 @@ export default function PositionList() {
     })();
   }, []);
 
-  const handleExportPDF = async (posJobDesId) => {
-    if (!posJobDesId) {
-      toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
-      return;
-    }
+const handleExportPDF = (posJobDesId) => {
+  if (!posJobDesId) {
+    toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
+    return;
+  }
 
+  (async () => {
     try {
       const url = `/api/hr/posJobDes/posJobDesPDF/${posJobDesId}`;
       const response = await fetch(url, {
         headers: { "secret-token": SECRET_TOKEN || "" },
       });
 
-      if (!response.ok) throw new Error("ไม่สามารถสร้าง PDF ได้");
+      if (!response.ok) {
+        throw new Error("ไม่สามารถสร้าง PDF ได้");
+      }
 
       const blob = await response.blob();
       const pdfUrl = URL.createObjectURL(blob);
@@ -52,7 +55,8 @@ export default function PositionList() {
     } catch (error) {
       toast.error(error.message || "เกิดข้อผิดพลาดในการส่งออก PDF");
     }
-  };
+  })();
+};
 
   return (
     <>
