@@ -22,29 +22,43 @@ export default function UIOrganize({
     return {
       name: "CHANNAKORN ENGINEER",
       type: "Company",
-      children: divisions.map((division) => ({
-        name: division.divisionName,
-        type: "ฝ่าย",
-        children: departments
+      children: divisions.map((division) => {
+        const relatedDepartments = departments
           .filter((dept) => dept.departmentDivisionId === division.divisionId)
           .map((dept) => ({
             name: dept.departmentName,
             type: "แผนก",
-          })),
-      })),
+            children: [],
+          }));
+
+        return {
+          name: division.divisionName,
+          type: "ฝ่าย",
+          children:
+            relatedDepartments.length > 0
+              ? relatedDepartments
+              : [
+                  {
+                    name: "ไม่มีแผนก",
+                    type: "แผนก",
+                    children: [],
+                  },
+                ],
+        };
+      }),
     };
   }, [divisions, departments]);
 
   const renderNode = (node) => (
     <TreeNode
       label={
-        <div className="rounded-xl bg-white border-1 border-default p-4 text-sm text-center">
+        <div className="rounded-xl bg-white border-1 border-dark p-4 text-sm text-center">
           <div className="font-[600]">{node.name}</div>
           <div className="text-xs text-dark/50">{node.type}</div>
         </div>
       }
     >
-      {node.children?.map((child, idx) => (
+      {(node.children || []).map((child, idx) => (
         <React.Fragment key={idx}>{renderNode(child)}</React.Fragment>
       ))}
     </TreeNode>
@@ -73,7 +87,7 @@ export default function UIOrganize({
             lineColor={"#00000050"}
             lineBorderRadius={"10px"}
             label={
-              <div className="p-4 text-sm text-center bg-white border-1 border-default rounded-xl">
+              <div className="p-4 text-sm text-center bg-white border-1 border-dark rounded-xl">
                 <div className="font-[600]">{treeData.name}</div>
                 <div className="text-xs text-dark/50">{treeData.type}</div>
               </div>
