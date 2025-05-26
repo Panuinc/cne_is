@@ -438,7 +438,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
           </div>
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+        <div className="flex flex-col xl:flex-row flex-wrap items-center justify-center w-full p-2 gap-2">
           {filteredData
             .slice((pageNumber - 1) * rowsPerPage, pageNumber * rowsPerPage)
             .map((item, idx) => {
@@ -451,7 +451,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
               return (
                 <div
                   key={item.empId}
-                  className="relative flex flex-col items-center justify-evenly min-w-60 h-60 p-4 gap-2 bg-default rounded-3xl"
+                  className="relative flex flex-col items-center justify-evenly w-60 h-60 p-4 gap-2 bg-default rounded-3xl"
                 >
                   {item.empStatus?.toLowerCase() === "inactive" && (
                     <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
