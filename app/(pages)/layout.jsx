@@ -319,7 +319,7 @@ export default function PagesLayout({ children }) {
             ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
             w-[30%]`}
           >
-            <div className="flex items-center justify-center w-full min-h-[72px] gap-2 border-b-1 border-default font-[600]">
+            <div className="flex items-center justify-center w-full min-h-[72px] gap-2 border-b-1 border-default text-primary font-[600]">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2">
                 {session?.user?.nameTH || session?.user?.nameEN || "ชื่อผู้ใช้"}
               </div>
