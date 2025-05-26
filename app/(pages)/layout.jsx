@@ -198,7 +198,7 @@ export default function PagesLayout({ children }) {
         { title: "แผนก", href: "/department" },
         { title: "ตำแหน่งงาน", href: "/position" },
         { title: "พนักงาน", href: "/emp" },
-        { title: "ขออัตรากำลังคน", href: "/perReq" },
+        // { title: "ขออัตรากำลังคน", href: "/perReq" },
       ],
     },
     // {
@@ -301,7 +301,12 @@ export default function PagesLayout({ children }) {
             <div className="flex items-center justify-center w-full min-h-[72px] gap-2">
               <Link
                 href="/logout"
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut({ redirect: false }).then(() => {
+                    window.location.href = "/";
+                  });
+                }}
                 className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white"
               >
                 <Logout /> ออกจากระบบ

@@ -50,7 +50,9 @@ export default function ChangePasswordPage() {
         toast.error(data.error || "Something went wrong");
       } else {
         toast.success("Update success. Please log in again.");
-        signOut({ callbackUrl: "/" });
+        signOut({ redirect: false }).then(() => {
+          window.location.href = "/";
+        });
       }
     } catch (err) {
       setError(err.message);
