@@ -74,186 +74,147 @@ export class PosJobDesPDFController {
         )
         .toString("base64");
 
+      const fontPath = path.join(
+        process.cwd(),
+        "public",
+        "fonts",
+        "THSarabunNew.ttf"
+      );
+      const fontBase64 = fs.readFileSync(fontPath).toString("base64");
+
       const html = `
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="UTF-8" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <style>
-        @font-face {
-            font-family: 'THSarabun';
-            src:url('${process.env.NEXT_PUBLIC_API_URL}
+  <meta charset="UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'THSarabun';
+      src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-                /fonts/THSarabunNew.ttf') format(' truetype');
+    body {
+      font-family: 'THSarabun', sans-serif;
+      font-size: 18px;
+      margin: 0;
+    }
 
-            }
+    .box {
+      border: 1px solid #d1d5db;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
 
-            body {
-                font-family: 'THSarabun', sans-serif;
-                font-size: 14px;
-                margin: 0
-            }
+    .bg-default {
+      background: rgb(239, 242, 240);
+    }
 
-            .box {
-                border: 1px solid #d1d5db;
-                padding: 8px 12px;
-                border-radius: 4px
-            }
+    table {
+      width: 100%;
+    }
 
-            .bg-default {
-                background: rgb(239, 242, 240)
-            }
+    th,
+    td {
+      padding: 4px 8px;
+      text-align: left;
+    }
 
-            table {
-                width: 100%
-            }
-
-            th,
-            td {
-                padding: 4px 8px;
-                text-align: left
-            }
-
-            .font_bold {
-                font-weight: 600;
-            }
-    </style>
+    .font_bold {
+      font-weight: 600;
+    }
+  </style>
 </head>
-
 <body class="flex flex-col items-center justify-start w-full h-screen gap-2 border-1">
-    <div class="flex flex-row items-center justify-center w-full border-b">
-        <div class="flex flex-col items-center justify-center w-3/12 h-full p-1 gap-2 border-r font_bold">
-            <img src="data:image/png;base64,${logoBase64}" class="w-24" />
-            บริษัท ชาญนครวิศวกรรม
-        </div>
+  <div class="flex flex-row items-center justify-center w-full border-b">
+    <div class="flex flex-col items-center justify-center w-3/12 h-full p-1 gap-2 border-r font_bold">
+      <img src="data:image/png;base64,${logoBase64}" class="w-24" />
+      บริษัท ชาญนครวิศวกรรม
+    </div>
+    <div class="flex items-center justify-center w-9/12 h-full p-1 gap-2 border-l-1 text-3xl font_bold">
+      ใบกำหนดลักษณะงาน (Job Description)
+    </div>
+  </div>
 
-        <div class="flex items-center justify-center w-9/12 h-full p-1 gap-2 border-l-1 text-3xl font_bold">
-            ใบกำหนดลักษณะงาน (Job Description)
-        </div>
+  <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
+    <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">ตำแหน่ง</div>
+    <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">${positionNameTH}</div>
+  </div>
+
+  <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
+    <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">สังกัดฝ่าย</div>
+    <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">${divisionName}</div>
+  </div>
+
+  <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
+    <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">สังกัดแผนก</div>
+    <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">${departmentName}</div>
+  </div>
+
+  <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
+    <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">ผู้บังคับบัญชา</div>
+    <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">
+      หัวหน้าแผนก/ผู้ช่วยผู้จัดการฝ่าย/ผู้จัดการฝ่าย ${divisionName}
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center w-full gap-2">
+    <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
+      คุณสมบัติ (Qualification)
+    </div>
+    <div class="flex flex-row items-center justify-center w-full gap-2">
+      <div class="flex flex-row items-center justify-center w-9/12 h-full p-1 gap-2">
+        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">อายุ</div>
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">${
+          posJobDesAge || "-"
+        }</div>
+      </div>
+      <div class="flex flex-row items-center justify-center w-9/12 h-full p-1 gap-2">
+        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">เพศ</div>
+        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b">${mapSexToThai(
+          posJobDesSex
+        )}</div>
+      </div>
     </div>
 
-    <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
-        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-            ตำแหน่ง
-        </div>
-
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
-            ${positionNameTH}
-        </div>
+    <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
+      <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">การศึกษา</div>
+      <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
+        <ol class="list-decimal pl-6 border-b">${toOrderedList(posJobDesEducations)}</ol>
+      </div>
     </div>
 
-    <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
-        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-            สังกัดฝ่าย
-        </div>
-
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
-            ${divisionName}
-        </div>
+    <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
+      <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">ทักษะ</div>
+      <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
+        <ol class="list-decimal pl-6 border-b">${toOrderedList(posJobDesSkill)}</ol>
+      </div>
     </div>
 
-    <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
-        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-            สังกัดแผนก
-        </div>
-
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
-            ${departmentName}
-        </div>
+    <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
+      <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">ประสบการณ์</div>
+      <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
+        <ol class="list-decimal pl-6 border-b">${toOrderedList(posJobDesExperience)}</ol>
+      </div>
     </div>
+  </div>
 
-    <div class="flex flex-row items-center justify-center w-full p-1 gap-2">
-        <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-            ผู้บังคับบัญชา
-        </div>
-
-        <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2 border-b-1">
-            หัวหน้าแผนก/ผู้ช่วยผู้จัดการฝ่าย/ผู้จัดการฝ่าย ${divisionName}
-        </div>
+  <div class="flex flex-col items-center justify-center w-full gap-2">
+    <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
+      บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
     </div>
-
-    <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
-          คุณสมบัติ (Qualification)
-        </div>
-
-        <div class="flex flex-row items-center justify-center w-full gap-2">
-            <div class="flex flex-row items-center justify-center w-9/12 h-full p-1 gap-2">
-                <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-                    อายุ
-                </div>
-
-                <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
-                    ${posJobDesAge || "-"}
-                </div>
-            </div>
-
-            <div class="flex flex-row items-center justify-center w-9/12 h-full p-1 gap-2">
-                <div class="flex items-center justify-start w-3/12 h-full p-1 gap-2">
-                    เพศ
-                </div>
-
-                <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
-                    ${mapSexToThai(posJobDesSex)}
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
-            <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">
-                การศึกษา
-            </div>
-
-            <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
-                <ol class="list-decimal pl-6">
-                    ${toOrderedList(posJobDesEducations)}
-                </ol>
-            </div>
-        </div>
-
-        <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
-            <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">
-                ทักษะ
-            </div>
-
-            <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
-                <ol class="list-decimal pl-6">
-                    ${toOrderedList(posJobDesSkill)}
-                </ol>
-            </div>
-        </div>
-
-        <div class="flex flex-row items-center justify-center w-full h-full p-1 gap-2">
-            <div class="flex items-start justify-start w-3/12 h-full p-1 gap-2">
-                ประสบการณ์
-            </div>
-
-            <div class="flex items-center justify-start w-9/12 h-full p-1 gap-2">
-                <ol class="list-decimal pl-6">
-                    ${toOrderedList(posJobDesExperience)}
-                </ol>
-            </div>
-        </div>
+    <div class="flex items-center justify-start w-full h-full p-1 gap-2">
+      <ol class="list-decimal pl-6 border-b">${toOrderedList(
+        posJobDesResponsibility
+      )}</ol>
     </div>
-
-    <div class="flex flex-col items-center justify-center w-full gap-2">
-        <div class="flex items-center justify-center w-full h-full p-3 gap-2 bg-default border-t border-b font_bold">
-            บทบาทและหน้าที่ความรับผิดชอบ (Responsibility)
-        </div>
-
-        <div class="flex items-center justify-start w-full h-full p-1 gap-2">
-            <ol class="list-decimal pl-6">
-                ${toOrderedList(posJobDesResponsibility)}
-            </ol>
-        </div>
-    </div>
-
+  </div>
 </body>
-
 </html>
 `;
+
       const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
       const page = await browser.newPage();
       await page.setContent(html, { waitUntil: "networkidle0" });
@@ -265,7 +226,7 @@ export class PosJobDesPDFController {
         displayHeaderFooter: true,
         headerTemplate: `<span></span>`,
         footerTemplate: `
-          <div style="width: 100%; font-size: 10px; font-family: 'THSarabunNew', sans-serif; -webkit-print-color-adjust: exact;">
+          <div style="width: 100%; font-size: 10px; font-family: 'THSarabun', sans-serif; -webkit-print-color-adjust: exact;">
             <div style="padding: 10px; display: flex; justify-content: flex-end; align-items: center; margin-right: 20px;">
               <div style="text-align: right;">
                 FM07-WP-HR1-01 / Rev.00 / 25-01-65
