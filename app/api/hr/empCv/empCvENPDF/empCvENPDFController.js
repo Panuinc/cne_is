@@ -248,14 +248,14 @@ export class EmpCvENController {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <style>
         @font-face {
-            font-family: 'ENSarabun';
+            font-family: 'THSarabun';
             src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         body {
-            font-family: 'ENSarabun', sans-serif;
+            font-family: 'THSarabun', sans-serif;
             font-size: 18px;
             margin: 0;
             padding: 0;
@@ -385,7 +385,7 @@ export class EmpCvENController {
         headerTemplate: `<div></div>`,
         footerTemplate: `
 <div
-    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'ENSarabun', sans-serif; -webkit-print-color-adjust: exact;">
+    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'THSarabun', sans-serif; -webkit-print-color-adjust: exact;">
     <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
         <div style="flex-grow: 1; margin-left: 30px;">
             50/1 Moo 20 Soi Ngamwongwan 57 Ngamwongwan Rd., Ladyao Chatuchak, Bangkok 10900 Tel 02-105-0999 TAX ID:
