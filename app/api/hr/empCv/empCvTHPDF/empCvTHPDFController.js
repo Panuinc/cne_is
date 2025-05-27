@@ -63,6 +63,12 @@ export class EmpCvTHController {
       );
       const fontBase64 = fs.readFileSync(fontPath).toString("base64");
 
+      const logoBase64 = fs
+        .readFileSync(
+          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
+        )
+        .toString("base64");
+
       const fullname = empCvTH.EmpCvEmpBy
         ? `${empCvTH.EmpCvEmpBy.empFirstNameTH} ${empCvTH.EmpCvEmpBy.empLastNameTH}`
         : "-";
@@ -216,12 +222,6 @@ export class EmpCvTHController {
           '<div class="text-gray-500">No language skills data</div>';
       }
 
-      const logoBase64 = fs
-        .readFileSync(
-          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
-        )
-        .toString("base64");
-
       const hrIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-width="1.5">
@@ -232,7 +232,6 @@ export class EmpCvTHController {
         <path stroke-linecap="round" d="M19 12h-4m4-3h-5m5 6h-3" />
     </g>
 </svg>`;
-
       const emailIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none">
@@ -247,6 +246,36 @@ export class EmpCvTHController {
       3.75 1.902 3.75 4.5zM7 6.75h11v-1.5H7zm2 14h6v-1.5H9z" />
     </g>
 </svg>`;
+
+      const footerTemplate = `
+<style>
+    @font-face {
+        font-family: 'THSarabun';
+        src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+<div style="
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 16px;
+            font-family: 'THSarabun', sans-serif;
+            -webkit-print-color-adjust: exact;
+          ">
+    <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
+        <div style="flex-grow: 1; margin-left: 30px;">
+            50/1 หมู่ 20 ซอยงามวงศ์วาน 57 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900 โทร 02-105-0999 (30 คู่สาย)
+            แฟกซ์ 02-580-1852
+        </div>
+        <div style="text-align: right;">
+            <span class="pageNumber"></span>/<span class="totalPages"></span>
+        </div>
+    </div>
+</div>
+`;
 
       const htmlContent = `
 <!DOCTYPE html>
@@ -331,7 +360,6 @@ export class EmpCvTHController {
     ">
         <img src="data:image/png;base64,${logoBase64}" style="width:60px;" alt="Logo" />
     </div>
-
     <div class="content-wrap">
         <div class="flex flex-row items-start justify-center w-full gap-1 p-1">
             <div class="sidebar flex flex-col w-4/12 gap-1 bg-default" style="min-height:calc(100vh - 80px);">
@@ -344,7 +372,6 @@ export class EmpCvTHController {
                 <div class="flex items-center p-2 gap-1 border-b">
                     <span class="text-green">${emailIcon}</span> ${employeeEmail}
                 </div>
-
                 <div class="flex flex-col p-1 gap-1 border-b">
                     <div class="flex justify-center text-success-header">การศึกษา</div>
                     ${educationHtml}
@@ -362,7 +389,6 @@ export class EmpCvTHController {
                     ${workExperienceSummaryHtml}
                 </div>
             </div>
-
             <div class="content flex flex-col w-8/12 gap-1">
                 <div class="flex justify-center p-2 text-blue mb-2">
                     ${fullname}
@@ -392,20 +418,7 @@ export class EmpCvTHController {
         margin: { top: "20px", bottom: "50px", left: "30px", right: "0px" },
         displayHeaderFooter: true,
         headerTemplate: `<div></div>`,
-        footerTemplate: `
-<div
-    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'THSarabun', sans-serif; -webkit-print-color-adjust: exact;">
-    <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
-        <div style="flex-grow: 1; margin-left: 30px;">
-            50/1 หมู่ 20 ซอยงามวงศ์วาน 57 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900 โทร 02-105-0999 (30 คู่สาย)
-            แฟกซ์ 02-580-1852
-        </div>
-        <div style="text-align: right;">
-            <span class="pageNumber"></span>/<span class="totalPages"></span>
-        </div>
-    </div>
-</div>
-`,
+        footerTemplate,
       });
 
       await browser.close();

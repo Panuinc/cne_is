@@ -63,6 +63,12 @@ export class EmpCvENController {
       );
       const fontBase64 = fs.readFileSync(fontPath).toString("base64");
 
+      const logoBase64 = fs
+        .readFileSync(
+          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
+        )
+        .toString("base64");
+
       const fullname = empCvEN.EmpCvEmpBy
         ? `${empCvEN.EmpCvEmpBy.empFirstNameEN} ${empCvEN.EmpCvEmpBy.empLastNameEN}`
         : "-";
@@ -103,9 +109,9 @@ export class EmpCvENController {
             (proj) => `
         <tr>
             <td class="align-top p-2">● ${proj.empCvProjectNameEN || "-"}</td>
-            <td class="align-top border-l-1 p-2">- ${
-              proj.empCvProjectDescriptionEN || "-"
-            }</td>
+            <td class="align-top border-l-1 p-2">
+                - ${proj.empCvProjectDescriptionEN || "-"}
+            </td>
         </tr>
         `
           )
@@ -216,13 +222,8 @@ export class EmpCvENController {
           '<div class="text-gray-500">No language skills data</div>';
       }
 
-      const logoBase64 = fs
-        .readFileSync(
-          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
-        )
-        .toString("base64");
-
-      const hrIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      const hrIcon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="9" cy="9" r="2" />
         <path d="M13 15c0 1.105 0 2-4 2s-4-.895-4-2s1.79-2 4-2s4 .895 4 2Z" />
@@ -231,13 +232,50 @@ export class EmpCvENController {
         <path stroke-linecap="round" d="M19 12h-4m4-3h-5m5 6h-3" />
     </g>
 </svg>`;
-      const emailIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      const emailIcon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none">
         <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M10.5 22v-2m4 2v-2" />
-        <path fill="currentColor"
-            d="M11 20v.75h.75V20zm3-.75a.75.75 0 0 0 0 1.5zm3.5-14a.75.75 0 0 0 0 1.5zM7 5.25a.75.75 0 0 0 0 1.5zm2 14a.75.75 0 0 0 0 1.5zm6 1.5a.75.75 0 0 0 0-1.5zm-4.75-9.5V20h1.5v-8.75zm.75 8H4.233v1.5H11zm-8.25-1.855V11.25h-1.5v6.145zm1.483 1.855c-.715 0-1.483-.718-1.483-1.855h-1.5c0 1.74 1.231 3.355 2.983 3.355zM6.5 6.75c1.967 0 3.75 1.902 3.75 4.5h1.5c0-3.201-2.246-6-5.25-6zm0-1.5c-3.004 0-5.25 2.799-5.25 6h1.5c0-2.598 1.783-4.5 3.75-4.5zm14.75 6v6.175h1.5V11.25zm-1.457 8H14v1.5h5.793zm1.457-1.825c0 1.12-.757 1.825-1.457 1.825v1.5c1.738 0 2.957-1.601 2.957-3.325zm1.5-6.175c0-3.201-2.246-6-5.25-6v1.5c1.967 0 3.75 1.902 3.75 4.5zM7 6.75h11v-1.5H7zm2 14h6v-1.5H9z" />
+        <path fill="currentColor" d="M11 20v.75h.75V20zm3-.75a.75.75 0 0 0 0 1.5zm3.5-14a.75.75 0 0 0 0 1.5zM7 5.25a.75.75
+      0 0 0 0 1.5zm2 14a.75.75 0 0 0 0 1.5zm6 1.5a.75.75 0 0 0 0-1.5zm-4.75-9.5V20h1.5v-8.75zm.75
+      8H4.233v1.5H11zm-8.25-1.855V11.25h-1.5v6.145zm1.483 1.855c-.715 0-1.483-.718-1.483-1.855h-1.5c0
+      1.74 1.231 3.355 2.983 3.355zM6.5 6.75c1.967 0 3.75 1.902 3.75 4.5h1.5c0-3.201-2.246-6-5.25-6zm0-1.5c-3.004
+      0-5.25 2.799-5.25 6h1.5c0-2.598 1.783-4.5 3.75-4.5zm14.75 6v6.175h1.5V11.25zm-1.457 8H14v1.5h5.793zm1.457-1.825c0
+      1.12-.757 1.825-1.457 1.825v1.5c1.738 0 2.957-1.601
+      2.957-3.325zm1.5-6.175c0-3.201-2.246-6-5.25-6v1.5c1.967 0
+      3.75 1.902 3.75 4.5zM7 6.75h11v-1.5H7zm2 14h6v-1.5H9z" />
     </g>
 </svg>`;
+
+      const footerTemplate = `
+<style>
+    @font-face {
+        font-family: 'THSarabun';
+        src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+<div style="
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 16px;
+            font-family: 'THSarabun', sans-serif;
+            -webkit-print-color-adjust: exact;
+          ">
+    <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
+        <div style="flex-grow: 1; margin-left: 30px;">
+            50/1 Moo 20 Soi Ngamwongwan 57 Ngamwongwan Rd., Ladyao Chatuchak, Bangkok 10900 Tel 02-105-0999 TAX ID:
+            0105519001145
+        </div>
+        <div style="text-align: right;">
+            <span class="pageNumber"></span>/<span class="totalPages"></span>
+        </div>
+    </div>
+</div>
+`;
 
       const htmlContent = `
 <!DOCTYPE html>
@@ -322,7 +360,6 @@ export class EmpCvENController {
     ">
         <img src="data:image/png;base64,${logoBase64}" style="width:60px;" alt="Logo" />
     </div>
-
     <div class="content-wrap">
         <div class="flex flex-row items-start justify-center w-full gap-1 p-1">
             <div class="sidebar flex flex-col w-4/12 gap-1 bg-default" style="min-height:calc(100vh - 80px);">
@@ -335,7 +372,6 @@ export class EmpCvENController {
                 <div class="flex items-center p-2 gap-1 border-b">
                     <span class="text-green">${emailIcon}</span> ${employeeEmail}
                 </div>
-
                 <div class="flex flex-col p-1 gap-1 border-b">
                     <div class="flex justify-center text-success-header">EDUCATIONS</div>
                     ${educationHtml}
@@ -353,7 +389,6 @@ export class EmpCvENController {
                     ${workExperienceSummaryHtml}
                 </div>
             </div>
-
             <div class="content flex flex-col w-8/12 gap-1">
                 <div class="flex justify-center p-2 text-blue mb-2">
                     ${fullname}
@@ -383,20 +418,7 @@ export class EmpCvENController {
         margin: { top: "20px", bottom: "50px", left: "30px", right: "0px" },
         displayHeaderFooter: true,
         headerTemplate: `<div></div>`,
-        footerTemplate: `
-<div
-    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'THSarabun', sans-serif; -webkit-print-color-adjust: exact;">
-    <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
-        <div style="flex-grow: 1; margin-left: 30px;">
-            50/1 Moo 20 Soi Ngamwongwan 57 Ngamwongwan Rd., Ladyao Chatuchak, Bangkok 10900 Tel 02-105-0999 TAX ID:
-            0105519001145
-        </div>
-        <div style="text-align: right;">
-            <span class="pageNumber"></span>/<span class="totalPages"></span>
-        </div>
-    </div>
-</div>
-`,
+        footerTemplate,
       });
 
       await browser.close();
