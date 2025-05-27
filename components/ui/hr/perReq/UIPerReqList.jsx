@@ -192,7 +192,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           return item.PerReqHrApproveBy
             ? `${item.PerReqHrApproveBy.empFirstNameTH} ${item.PerReqHrApproveBy.empLastNameTH}`
             : "-";
-        case "actions":
+        case "actions": {
           const isOwner = item.perReqCreateBy === currentUserId;
           const isManager =
             item.PerReqCreateBy?.empEmpEmployment?.[0]
@@ -200,12 +200,14 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           const isPendingManager =
             item.perReqStatus === "PendingManagerApprove";
           const isPendingHr = item.perReqStatus === "PendingHrApprove";
+          const isHR = divisionName === "บุคคล";
+          const isManagerHR = roleName === "ผู้จัดการฝ่าย" && isHR;
 
-          if (
-            roleName === "ผู้จัดการฝ่าย" &&
-            divisionName === "บุคคล" &&
-            isPendingHr
-          ) {
+          const canEdit =
+            (isManagerHR && isPendingHr) ||
+            ((isOwner || isManager) && isPendingManager);
+
+          if (canEdit) {
             return (
               <div className="flex items-center justify-center p-2 gap-2">
                 <Dropdown>
@@ -222,26 +224,10 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             );
           }
 
-          if (divisionName === "บุคคล") return null;
-
-          if ((isOwner || isManager) && isPendingManager) {
-            return (
-              <div className="flex items-center justify-center p-2 gap-2">
-                <Dropdown>
-                  <DropdownTrigger>
-                    <Button isIconOnly variant="none" className="text-primary">
-                      <Setting />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu onAction={(key) => handleAction(key, item)}>
-                    <DropdownItem key="edit">แก้ไข</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
-            );
-          }
+          if (isHR) return null;
 
           return null;
+        }
         default:
           return item[colKey] || "-";
       }
