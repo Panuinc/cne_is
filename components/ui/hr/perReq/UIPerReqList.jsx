@@ -102,6 +102,11 @@ export default function UIPerReqList({
 
   const filteredData = useMemo(() => {
     let result = data;
+
+    result = result.filter(
+      (perReq) => String(perReq.perReqCreateBy) === String(userId)
+    );
+
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
         perReq.perReqDocumentId
@@ -109,13 +114,15 @@ export default function UIPerReqList({
           .includes(searchTerm.toLowerCase())
       );
     }
+
     if (statusFilter !== "all") {
       result = result.filter(
         (perReq) => perReq.perReqStatus?.toLowerCase() === statusFilter
       );
     }
+
     return result;
-  }, [data, searchTerm, statusFilter]);
+  }, [data, searchTerm, statusFilter, userId]);
 
   useEffect(() => {
     setPageNumber(1);
