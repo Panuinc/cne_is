@@ -161,20 +161,26 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          return (
-            <div className="flex items-center justify-center p-2 gap-2">
-              <Dropdown>
-                <DropdownTrigger>
-                  <Button isIconOnly variant="none" className="text-primary">
-                    <Setting />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu onAction={(key) => handleAction(key, item)}>
-                  <DropdownItem key="edit">แก้ไข</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-          );
+          const isOwner = item.perReqCreateBy === Number(session.user.id);
+          const isPending = item.perReqStatus === "PendingManagerApprove";
+          if (isOwner && isPending) {
+            return (
+              <div className="flex items-center justify-center p-2 gap-2">
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button isIconOnly variant="none" className="text-primary">
+                      <Setting />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu onAction={(key) => handleAction(key, item)}>
+                    <DropdownItem key="edit">แก้ไข</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+            );
+          } else {
+            return null;
+          }
         default:
           return item[colKey] || "-";
       }
