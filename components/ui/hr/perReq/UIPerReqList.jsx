@@ -70,7 +70,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const columns = useMemo(() => {
-    const baseColumns = [
+    return [
       { name: "ลำดับ", uid: "perReqId" },
       { name: "ขออัตรากำลังคน", uid: "perReqDocumentId" },
       { name: "สถานะเอกสาร", uid: "perReqStatus" },
@@ -80,12 +80,17 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
       { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
       { name: "การจัดการ", uid: "actions" },
     ];
-
-    return baseColumns;
   }, []);
 
   const filteredData = useMemo(() => {
+    if (!session?.user?.id) return [];
+
     let result = data;
+
+    result = result.filter(
+      (perReq) => perReq.perReqCreateBy === Number(session.user.id)
+    );
+
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
         perReq.perReqDocumentId
@@ -93,11 +98,13 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           .includes(searchTerm.toLowerCase())
       );
     }
+
     if (statusFilter !== "all") {
       result = result.filter((perReq) => perReq.perReqStatus === statusFilter);
     }
+
     return result;
-  }, [data, searchTerm, statusFilter]);
+  }, [data, searchTerm, statusFilter, session?.user?.id]);
 
   useEffect(() => {
     setPageNumber(1);
@@ -193,7 +200,6 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
           <div className="flex items-center justify-center h-full p-2 gap-2">
             <Button
               as={Link}
