@@ -64,10 +64,13 @@ export class PerReqController {
 
       const data = perReqPostSchema.parse(raw);
       const perReqDocumentId = await PerReqService.generateDocumentId();
+      const localNow = getLocalNow();
+
       const perReq = await PerReqService.createPerReq({
         ...data,
         perReqDocumentId,
         perReqDesiredDate: data.perReqDesiredDate ?? null,
+        perReqCreateAt: localNow,
       });
 
       return NextResponse.json({ message: "Created", perReq }, { status: 201 });
