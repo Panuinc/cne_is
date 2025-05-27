@@ -4,7 +4,11 @@ import UIHeader from "@/components/other/UIHeader";
 
 import React, { useState, useEffect } from "react";
 import { Input, Button, Select, SelectItem } from "@heroui/react";
-import SignatureCanvas from "react-signature-canvas";
+import dynamic from "next/dynamic";
+
+const SignatureCanvas = dynamic(() => import("react-signature-canvas"), {
+  ssr: false,
+});
 
 export default function UIEmpEmploymentForm({
   header,
@@ -39,10 +43,16 @@ export default function UIEmpEmploymentForm({
   };
 
   const saveSignature = () => {
-    if (!signatureRef.current) return;
-    const canvas = signatureRef.current.getTrimmedCanvas();
+    const canvasObj = signatureRef.current;
+    if (!canvasObj || typeof canvasObj.getTrimmedCanvas !== "function") {
+      toast.error("Signature canvas is not ready.");
+      return;
+    }
+
+    const canvas = canvasObj.getTrimmedCanvas();
     canvas.toBlob((blob) => {
       if (!blob) return;
+
       const file = new File([blob], "signature.png", { type: "image/png" });
 
       handleInputChange("empEmploymentSignature")({
