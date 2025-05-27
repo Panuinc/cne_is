@@ -63,10 +63,6 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
   if (status === "loading") return null;
 
-  const roleName = session?.user?.roleName;
-  const divisionName = session?.user?.divisionName;
-  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "บุคคล";
-
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -82,14 +78,11 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
       { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
       { name: "แก้ไขโดย", uid: "updatedBy" },
       { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
+      { name: "การจัดการ", uid: "actions" },
     ];
 
-    if (canManage) {
-      baseColumns.push({ name: "การจัดการ", uid: "actions" });
-    }
-
     return baseColumns;
-  }, [canManage]);
+  }, []);
 
   const filteredData = useMemo(() => {
     let result = data;
@@ -161,7 +154,6 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          if (!canManage) return null;
           return (
             <div className="flex items-center justify-center p-2 gap-2">
               <Dropdown>
@@ -180,7 +172,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           return item[colKey] || "-";
       }
     },
-    [handleAction, pageNumber, rowsPerPage, canManage]
+    [handleAction, pageNumber, rowsPerPage]
   );
 
   return (
@@ -203,19 +195,17 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           </div>
 
           <div className="flex items-center justify-center h-full p-2 gap-2">
-            {canManage && (
-              <Button
-                as={Link}
-                href="/perReq/create"
-                color="primary"
-                size="md"
-                radius="lg"
-                className="flex items-center justify-center w-full h-full p-4 gap-2"
-                startContent={<Folder />}
-              >
-                เพิ่มใหม่
-              </Button>
-            )}
+            <Button
+              as={Link}
+              href="/perReq/create"
+              color="primary"
+              size="md"
+              radius="lg"
+              className="flex items-center justify-center w-full h-full p-4 gap-2"
+              startContent={<Folder />}
+            >
+              เพิ่มใหม่
+            </Button>
           </div>
         </div>
 
