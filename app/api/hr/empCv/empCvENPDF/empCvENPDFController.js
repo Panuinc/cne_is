@@ -28,9 +28,41 @@ export class EmpCvENController {
         );
       }
 
-      const empEmploymentPicture =
+      const empPicFilename =
         empCvEN.EmpCvEmpBy?.empEmpEmployment?.[0]?.empEmploymentPicture ||
         "default.png";
+      const empPicPath = path.join(
+        process.cwd(),
+        "public",
+        "empEmployment",
+        "userPicture",
+        empPicFilename
+      );
+      let empPicBase64 = "";
+      try {
+        empPicBase64 = fs.readFileSync(empPicPath).toString("base64");
+      } catch {
+        empPicBase64 = fs
+          .readFileSync(
+            path.join(
+              process.cwd(),
+              "public",
+              "empEmployment",
+              "userPicture",
+              "default.png"
+            )
+          )
+          .toString("base64");
+      }
+
+      const fontPath = path.join(
+        process.cwd(),
+        "public",
+        "fonts",
+        "THSarabunNew.ttf"
+      );
+      const fontBase64 = fs.readFileSync(fontPath).toString("base64");
+
       const fullname = empCvEN.EmpCvEmpBy
         ? `${empCvEN.EmpCvEmpBy.empFirstNameEN} ${empCvEN.EmpCvEmpBy.empLastNameEN}`
         : "-";
@@ -41,7 +73,7 @@ export class EmpCvENController {
 
       const formatDate = (dateInput) =>
         dateInput
-          ? new Date(dateInput).toLocaleDateString("th-EN", {
+          ? new Date(dateInput).toLocaleDateString("en-GB", {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",
@@ -71,9 +103,9 @@ export class EmpCvENController {
             (proj) => `
         <tr>
             <td class="align-top p-2">● ${proj.empCvProjectNameEN || "-"}</td>
-            <td class="align-top border-l-1 p-2">
-                - ${proj.empCvProjectDescriptionEN || "-"}
-            </td>
+            <td class="align-top border-l-1 p-2">- ${
+              proj.empCvProjectDescriptionEN || "-"
+            }</td>
         </tr>
         `
           )
@@ -88,7 +120,7 @@ export class EmpCvENController {
               wh.empCvWorkHistoryEndDate &&
               String(wh.empCvWorkHistoryEndDate).toUpperCase() !== "PRESENT"
                 ? formatDate(wh.empCvWorkHistoryEndDate)
-                : "ปัจจุบัน";
+                : "Present";
 
             return `
 <div class="flex flex-col items-start w-full p-1 gap-1">
@@ -121,7 +153,7 @@ export class EmpCvENController {
                 String(wh.empCvWorkHistoryEndDate).toUpperCase() === "PRESENT"
                   ? new Date()
                   : new Date(wh.empCvWorkHistoryEndDate);
-              years = `${endDate.getFullYear() - startDate.getFullYear()} ปี`;
+              years = `${endDate.getFullYear() - startDate.getFullYear()} yrs`;
             }
             return `<div>${wh.empCvWorkHistoryPositionEN} (${years})</div>`;
           })
@@ -147,8 +179,9 @@ export class EmpCvENController {
 `
           )
           .join("");
-      } else
+      } else {
         educationHtml = '<div class="text-gray-500">No Educations found</div>';
+      }
 
       let licenseHtml = "";
       if (empCvEN.empCvLicense?.length) {
@@ -156,13 +189,15 @@ export class EmpCvENController {
           .map(
             (lic) => `
 <div class="flex flex-row justify-between w-full">
-    <span>${lic.empCvLicenseNameEN || "-"} , </span>
+    <span>${lic.empCvLicenseNameEN || "-"}, </span>
     <span>${lic.empCvLicenseNumber || "-"}</span>
 </div>
 `
           )
           .join("");
-      } else licenseHtml = '<div class="text-gray-500">No License data</div>';
+      } else {
+        licenseHtml = '<div class="text-gray-500">No License data</div>';
+      }
 
       let languageSkillHtml = "";
       if (empCvEN.empCvLanguageSkill?.length) {
@@ -170,29 +205,24 @@ export class EmpCvENController {
           .map(
             (lang) => `
 <div class="flex flex-row justify-between w-full">
-    <span>${lang.empCvLanguageSkillNameEN || "-"} : </span>
+    <span>${lang.empCvLanguageSkillNameEN || "-"}: </span>
     <span>${lang.empCvLanguageSkillProficiency || "-"}</span>
 </div>
 `
           )
           .join("");
-      } else
+      } else {
         languageSkillHtml =
           '<div class="text-gray-500">No language skills data</div>';
+      }
 
       const logoBase64 = fs
         .readFileSync(
-          path.join(
-            process.cwd(),
-            "public",
-            "logoCompany",
-            "com-1.png"
-          )
+          path.join(process.cwd(), "public", "logoCompany", "com-1.png")
         )
         .toString("base64");
 
-      const hrIcon = `
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      const hrIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="9" cy="9" r="2" />
         <path d="M13 15c0 1.105 0 2-4 2s-4-.895-4-2s1.79-2 4-2s4 .895 4 2Z" />
@@ -201,9 +231,7 @@ export class EmpCvENController {
         <path stroke-linecap="round" d="M19 12h-4m4-3h-5m5 6h-3" />
     </g>
 </svg>`;
-
-      const emailIcon = `
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      const emailIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none">
         <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M10.5 22v-2m4 2v-2" />
         <path fill="currentColor"
@@ -212,19 +240,23 @@ export class EmpCvENController {
 </svg>`;
 
       const htmlContent = `
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <style>
         @font-face {
             font-family: 'ENSarabun';
-            src:url('${process.env.NEXT_PUBLIC_API_URL}/fonts/THSarabunNew.ttf') format('truetype');
+            src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         body {
             font-family: 'ENSarabun', sans-serif;
-            font-size: 14px;
+            font-size: 18px;
             margin: 0;
             padding: 0;
         }
@@ -281,13 +313,13 @@ export class EmpCvENController {
 
 <body>
     <div style="
-              position:fixed;top:0;left:0;right:0;
-              height:60px;
-              display:flex;align-items:center;
-              background:white;
-              -webkit-print-color-adjust:exact;
-              z-index:1000;
-            ">
+      position:fixed;top:0;left:0;right:0;
+      height:60px;
+      display:flex;align-items:center;
+      background:white;
+      -webkit-print-color-adjust:exact;
+      z-index:1000;
+    ">
         <img src="data:image/png;base64,${logoBase64}" style="width:60px;" alt="Logo" />
     </div>
 
@@ -295,8 +327,7 @@ export class EmpCvENController {
         <div class="flex flex-row items-start justify-center w-full gap-1 p-1">
             <div class="sidebar flex flex-col w-4/12 gap-1 bg-default" style="min-height:calc(100vh - 80px);">
                 <div class="flex justify-center p-2">
-                    <img src="${process.env.NEXT_PUBLIC_API_URL}/empEmployment/userPicture/${empEmploymentPicture}"
-                        class="w-44 mx-auto" />
+                    <img src="data:image/png;base64,${empPicBase64}" class="w-44 mx-auto" alt="Emp Picture" />
                 </div>
                 <div class="flex items-center p-2 gap-1">
                     <span class="text-green">${hrIcon}</span> ${formattedBirthday}
@@ -309,17 +340,14 @@ export class EmpCvENController {
                     <div class="flex justify-center text-success-header">EDUCATIONS</div>
                     ${educationHtml}
                 </div>
-
                 <div class="flex flex-col p-1 gap-1 border-b">
                     <div class="flex justify-center text-success-header">LICENSE NO</div>
                     ${licenseHtml}
                 </div>
-
                 <div class="flex flex-col p-1 gap-1 border-b">
                     <div class="flex justify-center text-success-header">LANGUAGE SKILLS</div>
                     ${languageSkillHtml}
                 </div>
-
                 <div class="flex flex-col p-1 gap-1 border-b">
                     <div class="flex justify-center text-success-header">WORK EXPERIENCE SUMMARY</div>
                     ${workExperienceSummaryHtml}
@@ -354,16 +382,13 @@ export class EmpCvENController {
         printBackground: true,
         margin: { top: "20px", bottom: "50px", left: "30px", right: "0px" },
         displayHeaderFooter: true,
-        headerTemplate: `
-<div>
-</div>
-`,
+        headerTemplate: `<div></div>`,
         footerTemplate: `
 <div
-    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'THSarabunNew', sans-serif; -webkit-print-color-adjust: exact;">
+    style="position: fixed; bottom: 0; left: 0; right: 0; font-size: 10px; font-family: 'ENSarabun', sans-serif; -webkit-print-color-adjust: exact;">
     <div style="background-color: rgb(3, 153, 76); color: white; padding: 11.5px; display: flex; align-items: center;">
         <div style="flex-grow: 1; margin-left: 30px;">
-            50/1 Moo 20 Soi Ngamwongwan 57 Ngamwongwan Rd., Ladyao Chatuchak, bangkok 10900 Tel 02-105-0999 TAX ID :
+            50/1 Moo 20 Soi Ngamwongwan 57 Ngamwongwan Rd., Ladyao Chatuchak, Bangkok 10900 Tel 02-105-0999 TAX ID:
             0105519001145
         </div>
         <div style="text-align: right;">
