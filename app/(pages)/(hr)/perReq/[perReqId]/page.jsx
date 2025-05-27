@@ -125,11 +125,12 @@ export default function perReqUpdate() {
     })();
   }, [perReqId]);
 
+  const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล";
+
   const allowApprove = useMemo(() => {
     const isMgr =
       roleName === "ผู้จัดการฝ่าย" &&
       divisionName === formData?.PerReqDivisionId?.divisionName;
-    const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล";
     return (
       (formData.perReqStatus === "PendingManagerApprove" && isMgr) ||
       (formData.perReqStatus === "PendingHrApprove" && isHrMgr)
@@ -141,6 +142,8 @@ export default function perReqUpdate() {
       formData?.PerReqCreateBy?.empEmpEmployment?.[0]?.empEmploymentParentId;
     return Number(userId) === Number(parentId);
   }, [userId, formData]);
+
+  const isOnlyApprove = isHrMgr || isParentApprover;
 
   const filteredDept = useMemo(
     () =>
@@ -272,8 +275,8 @@ export default function perReqUpdate() {
             return rest;
           })}
         isUpdate
-        allowApprove={allowApprove || isParentApprover}
-        isReadOnly={isParentApprover}
+        allowApprove={allowApprove || isOnlyApprove}
+        isReadOnly={isOnlyApprove}
         divisionOptions={divisionOptions}
         departmentOptions={filteredDept}
         positionOptions={filteredPos}

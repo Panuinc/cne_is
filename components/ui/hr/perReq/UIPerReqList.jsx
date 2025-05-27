@@ -77,6 +77,17 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
       { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
       { name: "แก้ไขโดย", uid: "updatedBy" },
       { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
+      { name: "ผู้จัดการฝ่ายอนุมัติ", uid: "perReqReasonManagerApproveBy" },
+      {
+        name: "ผู้จัดการฝ่ายอนุมัติวันที่",
+        uid: "perReqReasonManagerApproveAt",
+      },
+      { name: "ผู้จัดการฝ่ายบุคคลอนุมัติ", uid: "perReqReasonHrApproveBy" },
+      {
+        name: "ผู้จัดการฝ่ายบุคคลอนุมัติวันนที่",
+        uid: "perReqReasonHrApproveAt",
+      },
+
       { name: "การจัดการ", uid: "actions" },
     ],
     []
@@ -172,6 +183,14 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
         case "updatedBy":
           return item.PerReqUpdateBy
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
+            : "-";
+        case "perReqReasonManagerApproveBy":
+          return item.PerReqManagerApproveBy
+            ? `${item.PerReqManagerApproveBy.empFirstNameTH} ${item.PerReqManagerApproveBy.empLastNameTH}`
+            : "-";
+        case "perReqReasonHrApproveBy":
+          return item.PerReqHrApproveBy
+            ? `${item.PerReqHrApproveBy.empFirstNameTH} ${item.PerReqHrApproveBy.empLastNameTH}`
             : "-";
         case "actions":
           const isOwner = item.perReqCreateBy === currentUserId;
