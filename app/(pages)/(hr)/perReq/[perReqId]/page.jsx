@@ -168,7 +168,6 @@ export default function perReqUpdate() {
 
       const form = new FormData(formRef.current);
 
-      // Merge Other skills into perReqComputerSkills
       const otherSkillsRaw = formData.perReqComputerSkillIsOther || "";
       const otherSkills = otherSkillsRaw
         .split(",")

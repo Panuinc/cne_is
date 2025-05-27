@@ -467,6 +467,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqReasonForRequestNote")}
                 isInvalid={!!errors.perReqReasonForRequestNote}
                 errorMessage={errors.perReqReasonForRequestNote}
+                 {...applyDisableProps({})}
               />
             </div>
           )}
@@ -657,6 +658,7 @@ export default function UIPerReqForm({
                 onChange={() =>
                   toggleArrayValue("perReqComputerSkills", "Other")
                 }
+                 {...applyDisableProps({})}
               >
                 อื่นๆ
               </Checkbox>
