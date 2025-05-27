@@ -47,6 +47,7 @@ export default function perReqUpdate() {
     perReqReasonEducationNote: "",
     perReqReasonExperience: "",
     perReqComputerSkills: [],
+    perReqComputerSkillIsOther: "",
     perReqLanguageSkills: [],
     perReqDrivingLicenses: [],
     perReqProfessionalLicenses: [],
@@ -167,10 +168,20 @@ export default function perReqUpdate() {
 
       const form = new FormData(formRef.current);
 
-      form.append(
-        "perReqComputerSkills",
-        JSON.stringify(formData.perReqComputerSkills || [])
-      );
+      // Merge Other skills into perReqComputerSkills
+      const otherSkillsRaw = formData.perReqComputerSkillIsOther || "";
+      const otherSkills = otherSkillsRaw
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s !== "");
+
+      let computerSkills = formData.perReqComputerSkills || [];
+      if (computerSkills.includes("Other")) {
+        computerSkills = computerSkills.filter((s) => s !== "Other");
+        computerSkills = [...computerSkills, ...otherSkills, "Other"];
+      }
+
+      form.append("perReqComputerSkills", JSON.stringify(computerSkills));
       form.append(
         "perReqLanguageSkills",
         JSON.stringify(formData.perReqLanguageSkills || [])
@@ -191,7 +202,6 @@ export default function perReqUpdate() {
 
       if (actionRef.current === "approve") {
         form.append("perReqUpdateBy", userId);
-
         if (formData.perReqStatus === "PendingManagerApprove") {
           form.append("perReqStatus", "PendingHrApprove");
           form.append("perReqReasonManagerApproveBy", userId);
