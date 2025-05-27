@@ -15,17 +15,12 @@ import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
-export default function perReqUpdate() {
+export default function PerReqUpdate() {
   const { data: sessionData } = useSession();
   const router = useRouter();
   const { perReqId } = useParams();
 
-  const {
-    id: userId = "",
-    roleName,
-    divisionName,
-    nameTH = "",
-  } = sessionData?.user ?? {};
+  const { id: userId = "", roleName, divisionName } = sessionData?.user ?? {};
 
   const formRef = useRef(null);
   const actionRef = useRef("save");
@@ -135,7 +130,7 @@ export default function perReqUpdate() {
       (formData.perReqStatus === "PendingManagerApprove" && isMgr) ||
       (formData.perReqStatus === "PendingHrApprove" && isHrMgr)
     );
-  }, [roleName, divisionName, formData]);
+  }, [roleName, divisionName, formData, isHrMgr]);
 
   const isParentApprover = useMemo(() => {
     const parentId =
@@ -175,8 +170,7 @@ export default function perReqUpdate() {
       const otherSkills = otherSkillsRaw
         .split(",")
         .map((s) => s.trim())
-        .filter((s) => s !== "");
-
+        .filter((s) => s);
       let computerSkills = formData.perReqComputerSkills || [];
       if (computerSkills.includes("Other")) {
         computerSkills = computerSkills.filter((s) => s !== "Other");
@@ -280,7 +274,6 @@ export default function perReqUpdate() {
         divisionOptions={divisionOptions}
         departmentOptions={filteredDept}
         positionOptions={filteredPos}
-        operatedBy={nameTH}
         onApprove={() => {
           actionRef.current = "approve";
         }}
