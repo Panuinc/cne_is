@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Folder, Setting } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import toast from "react-hot-toast";
+
 import {
   Input,
   Button,
@@ -23,8 +23,8 @@ import {
 
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
-  { name: "รอผู้จัดการฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  { name: "รอหัวหน้าอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
+  { name: "รอฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
   { name: "อนุมัติแล้ว", uniqueIdentifier: "ApprovedSuccess" },
   { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
@@ -58,55 +58,43 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIPerReqList({
-  header,
-  data = [],
-  error = "",
-  onApprove,
-  onReject,
-}) {
-  const { data: sessionData, status } = useSession();
+export default function UIPerReqList({ header, data = [], error = "" }) {
+  const { data: session, status } = useSession();
+
   if (status === "loading") return null;
 
-  const router = useRouter();
-  const { id: userId } = sessionData?.user || {};
+  const roleName = session?.user?.roleName;
+  const divisionName = session?.user?.divisionName;
+  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "บุคคล";
 
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const columns = useMemo(
-    () => [
+  const columns = useMemo(() => {
+    const baseColumns = [
       { name: "ลำดับ", uid: "perReqId" },
-      { name: "เลขที่รหัสใบร้องขอ", uid: "perReqDocumentId" },
-      { name: "สถานะการใช้งาน", uid: "perReqStatus" },
-      { name: "ผู้ร้องขอ", uid: "createdBy" },
-      { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
-      { name: "แก้ไขโดย", uid: "updatedBy" },
-      { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
-      {
-        name: "อนุมัติโดย : ผู้จัดการฝ่าย",
-        uid: "perReqReasonManagerApproveBy",
-      },
-      { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonManagerApproveAt" },
-      {
-        name: "อนุมัติโดย : ผู้จัดการฝ่ายบุคคล",
-        uid: "perReqReasonHrApproveBy",
-      },
-      { name: "อนุมัติเมื่อวันที่", uid: "perReqReasonHrApproveAt" },
-      { name: "การจัดการ", uid: "actions" },
-    ],
-    []
-  );
+      { name: "ขออัตรากำลังคน", uid: "perReqDocumentId" },
+      { name: "สถานะเอกสาร", uid: "perReqStatus" },
+    ];
+
+    if (canManage) {
+      baseColumns.push(
+        { name: "สร้างโดย", uid: "createdBy" },
+        { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
+        { name: "แก้ไขโดย", uid: "updatedBy" },
+        { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
+        { name: "การจัดการ", uid: "actions" }
+      );
+    }
+
+    return baseColumns;
+  }, [canManage]);
 
   const filteredData = useMemo(() => {
     let result = data;
-
-    result = result.filter(
-      (perReq) => String(perReq.perReqCreateBy) === String(userId)
-    );
-
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
         perReq.perReqDocumentId
@@ -114,43 +102,23 @@ export default function UIPerReqList({
           .includes(searchTerm.toLowerCase())
       );
     }
-
     if (statusFilter !== "all") {
-      result = result.filter(
-        (perReq) => perReq.perReqStatus?.toLowerCase() === statusFilter
-      );
+      result = result.filter((perReq) => perReq.perReqStatus === statusFilter);
     }
-
     return result;
-  }, [data, searchTerm, statusFilter, userId]);
+  }, [data, searchTerm, statusFilter]);
 
   useEffect(() => {
     setPageNumber(1);
   }, [searchTerm, statusFilter]);
 
-  const nextStatus = (item) =>
-    item.perReqStatus === "PendingManagerApprove"
-      ? "PendingHrApprove"
-      : "ApprovedSuccess";
-
   const handleAction = useCallback(
-    async (action, item) => {
-      const mgrStage = item.perReqStatus === "PendingManagerApprove";
-
+    (action, item) => {
       if (action === "edit") {
-        return router.push(`/perReq/${item.perReqId}`);
+        router.push(`/perReq/${item.perReqId}`);
       }
-
-      const newStatus = action === "approve" ? nextStatus(item) : "Cancel";
-      const response =
-        action === "approve"
-          ? await onApprove(item, newStatus, userId, mgrStage)
-          : await onReject(item, newStatus, userId, mgrStage);
-
-      if (response.success) toast.success(response.message);
-      else toast.error(response.message);
     },
-    [router, userId, onApprove, onReject]
+    [router]
   );
 
   const renderCell = useCallback(
@@ -159,27 +127,31 @@ export default function UIPerReqList({
         case "perReqId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
         case "perReqStatus":
-          const statusColorMap = {
-            PendingManagerApprove: "secondary",
-            PendingHrApprove: "secondary",
-            ApprovedSuccess: "primary",
-            Cancel: "danger",
+          const status = item.perReqStatus;
+          const statusMap = {
+            PendingManagerApprove: {
+              label: "รอหัวหน้าอนุมัติ",
+              color: "warning",
+            },
+            PendingHrApprove: {
+              label: "รอฝ่ายบุคคลอนุมัติ",
+              color: "secondary",
+            },
+            ApprovedSuccess: { label: "อนุมัติแล้ว", color: "success" },
+            Cancel: { label: "ยกเลิก", color: "danger" },
           };
-          const statusLabelMap = {
-            PendingManagerApprove: "รอผู้จัดการฝ่ายอนุมัติ",
-            PendingHrApprove: "รอผู้จัดการฝ่ายบุคคลอนุมัติ",
-            ApprovedSuccess: "อนุมัติแล้ว",
-            Cancel: "ยกเลิก",
+          const { label, color } = statusMap[status] || {
+            label: status,
+            color: "default",
           };
-          const statusKey = item.perReqStatus || "Cancel";
           return (
             <Button
               size="sm"
-              color={statusColorMap[statusKey] || "default"}
+              color={color}
               radius="lg"
-              className="text-white"
+              className="min-w-10 min-h-10 text-dark"
             >
-              {statusLabelMap[statusKey] || "-"}
+              {label}
             </Button>
           );
         case "createdBy":
@@ -191,16 +163,7 @@ export default function UIPerReqList({
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          const isOwner = String(item.perReqCreateBy) === String(userId);
-          const canEdit =
-            isOwner && item.perReqStatus === "PendingManagerApprove";
-          const canApprove =
-            !isOwner &&
-            (item.perReqStatus === "PendingManagerApprove" ||
-              item.perReqStatus === "PendingHrApprove");
-
-          if (!canEdit && !canApprove) return null;
-
+          if (!canManage) return null;
           return (
             <div className="flex items-center justify-center p-2 gap-2">
               <Dropdown>
@@ -210,13 +173,7 @@ export default function UIPerReqList({
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu onAction={(key) => handleAction(key, item)}>
-                  {canEdit && <DropdownItem key="edit">แก้ไข</DropdownItem>}
-                  {canApprove && (
-                    <>
-                      <DropdownItem key="approve">อนุมัติ</DropdownItem>
-                      <DropdownItem key="reject">ปฏิเสธ</DropdownItem>
-                    </>
-                  )}
+                  <DropdownItem key="edit">แก้ไข</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -225,7 +182,7 @@ export default function UIPerReqList({
           return item[colKey] || "-";
       }
     },
-    [handleAction, pageNumber, rowsPerPage, userId]
+    [handleAction, pageNumber, rowsPerPage, canManage]
   );
 
   return (
@@ -246,25 +203,28 @@ export default function UIPerReqList({
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
+
           <div className="flex items-center justify-center h-full p-2 gap-2">
-            <Button
-              as={Link}
-              href="/perReq/create"
-              color="primary"
-              size="md"
-              radius="lg"
-              className="flex items-center justify-center w-full h-full p-4 gap-2"
-              startContent={<Folder />}
-            >
-              เพิ่มใหม่
-            </Button>
+            {canManage && (
+              <Button
+                as={Link}
+                href="/perReq/create"
+                color="primary"
+                size="md"
+                radius="lg"
+                className="flex items-center justify-center w-full h-full p-4 gap-2"
+                startContent={<Folder />}
+              >
+                เพิ่มใหม่
+              </Button>
+            )}
           </div>
         </div>
 
         <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
             <UISelectFilter
-              label="สถานะการอนุมัติ"
+              label="สถานะเอกสาร"
               selectedValue={statusFilter}
               items={statusOptions}
               onChange={setStatusFilter}
