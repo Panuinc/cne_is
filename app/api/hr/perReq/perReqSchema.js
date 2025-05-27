@@ -47,7 +47,7 @@ export const perReqPostSchema = z.object({
 
   perReqReasonAge: preprocessString("Please provide the age reason."),
   perReqReasonGender: preprocessEnum(
-    ["Male", "Female", "Other"],
+    ["Male", "FeMale", "Other"],
     "Please select a gender."
   ),
 
@@ -114,7 +114,7 @@ export const perReqPutSchema = z
 
         perReqReasonAge: preprocessString().optional(),
         perReqReasonGender: preprocessEnum(
-          ["Male", "Female", "Other"],
+          ["Male", "FeMale", "Other"],
           ""
         ).optional(),
 

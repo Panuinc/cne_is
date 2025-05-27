@@ -24,6 +24,7 @@ export default function UIPerReqForm({
   allowApprove = false,
   onApprove = () => {},
   onReject = () => {},
+  isReadOnly = false,
 }) {
   const today = new Date();
   const formattedDate = today.toLocaleDateString("th-TH", {
@@ -68,6 +69,12 @@ export default function UIPerReqForm({
       </div>
     );
   };
+
+  const applyDisableProps = (props) => ({
+    ...props,
+    disabled: isReadOnly,
+    isDisabled: isReadOnly,
+  });
 
   const toggleArrayValue = useCallback(
     (field, value) => {
@@ -229,6 +236,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqDesiredDate")}
                 isInvalid={!!errors.perReqDesiredDate}
                 errorMessage={errors.perReqDesiredDate}
+                {...applyDisableProps({})}
               />
             </div>
           </div>
@@ -254,6 +262,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqDivisionId")}
                 isInvalid={!!errors.perReqDivisionId}
                 errorMessage={errors.perReqDivisionId}
+                {...applyDisableProps({})}
               >
                 {divisionOptions.map((div) => (
                   <SelectItem
@@ -287,6 +296,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqDepartmentId")}
                 isInvalid={!!errors.perReqDepartmentId}
                 errorMessage={errors.perReqDepartmentId}
+                {...applyDisableProps({})}
               >
                 {departmentOptions.map((dept) => (
                   <SelectItem
@@ -322,6 +332,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqPositionId")}
                 isInvalid={!!errors.perReqPositionId}
                 errorMessage={errors.perReqPositionId}
+                {...applyDisableProps({})}
               >
                 {positionOptions.map((pos) => (
                   <SelectItem
@@ -351,6 +362,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqAmount")}
                 isInvalid={!!errors.perReqAmount}
                 errorMessage={errors.perReqAmount}
+                {...applyDisableProps({})}
               />{" "}
               คน
             </div>
@@ -378,6 +390,7 @@ export default function UIPerReqForm({
                       target: { value: val },
                     })
                   }
+                  {...applyDisableProps({})}
                 >
                   {label}
                 </Checkbox>
@@ -398,6 +411,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqEmpEmploymentTypeNote")}
                 isInvalid={!!errors.perReqEmpEmploymentTypeNote}
                 errorMessage={errors.perReqEmpEmploymentTypeNote}
+                {...applyDisableProps({})}
               />{" "}
               วัน
             </div>
@@ -419,6 +433,7 @@ export default function UIPerReqForm({
                     target: { value: "New" },
                   })
                 }
+                {...applyDisableProps({})}
               >
                 เพิ่มอัตรากำลังพล
               </Checkbox>
@@ -432,6 +447,7 @@ export default function UIPerReqForm({
                     target: { value: "Replace" },
                   })
                 }
+                {...applyDisableProps({})}
               >
                 ทดแทน ชื่อ
               </Checkbox>
@@ -478,6 +494,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqReasonAge")}
                 isInvalid={!!errors.perReqReasonAge}
                 errorMessage={errors.perReqReasonAge}
+                {...applyDisableProps({})}
               />
             </div>
           </div>
@@ -502,6 +519,7 @@ export default function UIPerReqForm({
                       target: { value: val },
                     })
                   }
+                  {...applyDisableProps({})}
                 >
                   {label}
                 </Checkbox>
@@ -533,6 +551,7 @@ export default function UIPerReqForm({
                       target: { value: val },
                     })
                   }
+                  {...applyDisableProps({})}
                 >
                   {label}
                 </Checkbox>
@@ -559,6 +578,7 @@ export default function UIPerReqForm({
                 value={formData.perReqReasonEducationNote || ""}
                 onChange={handleInputChange("perReqReasonEducationNote")}
                 isInvalid={!!errors.perReqReasonEducationNote}
+                {...applyDisableProps({})}
                 errorMessage={errors.perReqReasonEducationNote}
               />
             </div>
@@ -586,6 +606,7 @@ export default function UIPerReqForm({
                       target: { value: val },
                     })
                   }
+                  {...applyDisableProps({})}
                 >
                   {label}
                 </Checkbox>
@@ -621,6 +642,7 @@ export default function UIPerReqForm({
                   onChange={() =>
                     toggleArrayValue("perReqComputerSkills", skill)
                   }
+                  {...applyDisableProps({})}
                 >
                   {skill === "BPluse" ? "B-Pluse" : skill}
                 </Checkbox>
@@ -654,6 +676,7 @@ export default function UIPerReqForm({
                 onChange={handleInputChange("perReqComputerSkillIsOther")}
                 isInvalid={!!errors.perReqComputerSkillIsOther}
                 errorMessage={errors.perReqComputerSkillIsOther}
+                {...applyDisableProps({})}
               />
             </div>
           )}
@@ -694,6 +717,7 @@ export default function UIPerReqForm({
                           aria-label={text}
                           isSelected={current?.level === level}
                           onChange={() => toggleLanguageLevel(lang, level)}
+                          {...applyDisableProps({})}
                         >
                           {text}
                         </Checkbox>
@@ -724,6 +748,7 @@ export default function UIPerReqForm({
                     onChange={() =>
                       toggleArrayValue("perReqDrivingLicenses", lic)
                     }
+                    {...applyDisableProps({})}
                   >
                     ใบขับขี่ {lic}
                   </Checkbox>
@@ -751,6 +776,7 @@ export default function UIPerReqForm({
                     (p) => p.name === name
                   )}
                   onChange={() => toggleProfessionalName(name)}
+                  {...applyDisableProps({})}
                 >
                   {label}
                 </Checkbox>
@@ -779,6 +805,7 @@ export default function UIPerReqForm({
                   onChange={(e) => setProfessionalLevel(e.target.value)}
                   isInvalid={!!errors.perReqProfessionalLicenseLevel}
                   errorMessage={errors.perReqProfessionalLicenseLevel}
+                  {...applyDisableProps({})}
                 >
                   {(() => {
                     const hasGv = (
@@ -886,12 +913,12 @@ export default function UIPerReqForm({
                 type="submit"
                 onPress={onReject}
               >
-                ยกเลิก
+                ไม่อนุมัติ
               </Button>
             </>
           ) : (
             <>
-              {(isUpdate || isCreate) && (
+              {(isUpdate || isCreate) && !isReadOnly && (
                 <Button
                   color="warning"
                   radius="lg"
@@ -903,7 +930,7 @@ export default function UIPerReqForm({
                   บันทึก
                 </Button>
               )}
-              {isUpdate && (
+              {isUpdate && !isReadOnly && (
                 <Button
                   color="danger"
                   radius="lg"

@@ -129,12 +129,17 @@ export default function perReqUpdate() {
       roleName === "ผู้จัดการฝ่าย" &&
       divisionName === formData?.PerReqDivisionId?.divisionName;
     const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล";
-
     return (
       (formData.perReqStatus === "PendingManagerApprove" && isMgr) ||
       (formData.perReqStatus === "PendingHrApprove" && isHrMgr)
     );
   }, [roleName, divisionName, formData]);
+
+  const isParentApprover = useMemo(() => {
+    const parentId =
+      formData?.PerReqCreateBy?.empEmpEmployment?.[0]?.empEmploymentParentId;
+    return Number(userId) === Number(parentId);
+  }, [userId, formData]);
 
   const filteredDept = useMemo(
     () =>
@@ -144,6 +149,7 @@ export default function perReqUpdate() {
       ),
     [departmentOptions, formData.perReqDivisionId]
   );
+
   const filteredPos = useMemo(() => {
     const divId = Number(formData.perReqDivisionId);
     const depId = Number(formData.perReqDepartmentId);
@@ -184,6 +190,8 @@ export default function perReqUpdate() {
       }
 
       if (actionRef.current === "approve") {
+        form.append("perReqUpdateBy", userId); // ✅
+
         if (formData.perReqStatus === "PendingManagerApprove") {
           form.append("perReqStatus", "PendingHrApprove");
           form.append("perReqReasonManagerApproveBy", userId);
@@ -194,6 +202,7 @@ export default function perReqUpdate() {
       }
 
       if (actionRef.current === "reject") {
+        form.append("perReqUpdateBy", userId); // ✅
         form.append("perReqStatus", "Cancel");
         if (formData.perReqStatus === "PendingManagerApprove") {
           form.append("perReqReasonManagerApproveBy", userId);
@@ -203,9 +212,8 @@ export default function perReqUpdate() {
       }
 
       if (actionRef.current === "cancel") {
-        // ✅ ผู้สร้างเอกสารยกเลิกเอง
-        form.append("perReqStatus", "Cancel");
         form.append("perReqUpdateBy", userId);
+        form.append("perReqStatus", "Cancel");
       }
 
       try {
@@ -255,13 +263,18 @@ export default function perReqUpdate() {
             return rest;
           })}
         isUpdate
-        allowApprove={allowApprove}
-        onApprove={() => (actionRef.current = "approve")}
-        onReject={() => (actionRef.current = "reject")}
+        allowApprove={allowApprove || isParentApprover}
+        isReadOnly={isParentApprover}
         divisionOptions={divisionOptions}
         departmentOptions={filteredDept}
         positionOptions={filteredPos}
         operatedBy={nameTH}
+        onApprove={() => {
+          actionRef.current = "approve";
+        }}
+        onReject={() => {
+          actionRef.current = "reject";
+        }}
       />
     </>
   );
