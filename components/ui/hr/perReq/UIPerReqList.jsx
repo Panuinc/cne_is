@@ -60,7 +60,6 @@ const UISelectFilter = ({
 
 export default function UIPerReqList({ header, data = [], error = "" }) {
   const { data: session, status } = useSession();
-
   if (status === "loading") return null;
 
   const router = useRouter();
@@ -69,8 +68,8 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const columns = useMemo(() => {
-    return [
+  const columns = useMemo(
+    () => [
       { name: "ลำดับ", uid: "perReqId" },
       { name: "ขออัตรากำลังคน", uid: "perReqDocumentId" },
       { name: "สถานะเอกสาร", uid: "perReqStatus" },
@@ -79,15 +78,20 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
       { name: "แก้ไขโดย", uid: "updatedBy" },
       { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
       { name: "การจัดการ", uid: "actions" },
-    ];
-  }, []);
+    ],
+    []
+  );
 
   const filteredData = useMemo(() => {
     if (!session?.user?.id) return [];
 
     const currentUserId = Number(session.user.id);
+    const roleName = session?.user?.roleName;
+    const divisionName = session?.user?.divisionName;
 
     let result = data.filter((perReq) => {
+      if (roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล") return true;
+      if (divisionName === "บุคคล") return true;
       if (perReq.perReqCreateBy === currentUserId) return true;
 
       const empEmployment = perReq.PerReqCreateBy?.empEmpEmployment?.[0];
@@ -109,7 +113,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
     }
 
     return result;
-  }, [data, searchTerm, statusFilter, session?.user?.id]);
+  }, [data, searchTerm, statusFilter, session?.user]);
 
   useEffect(() => {
     setPageNumber(1);
@@ -126,6 +130,10 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
   const renderCell = useCallback(
     (item, idx, colKey) => {
+      const currentUserId = Number(session.user.id);
+      const roleName = session?.user?.roleName;
+      const divisionName = session?.user?.divisionName;
+
       switch (colKey) {
         case "perReqId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
@@ -166,14 +174,19 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          const currentUserId = Number(session.user.id);
           const isOwner = item.perReqCreateBy === currentUserId;
           const isManager =
             item.PerReqCreateBy?.empEmpEmployment?.[0]
               ?.empEmploymentParentId === currentUserId;
-          const isPending = item.perReqStatus === "PendingManagerApprove";
+          const isPendingManager =
+            item.perReqStatus === "PendingManagerApprove";
+          const isPendingHr = item.perReqStatus === "PendingHrApprove";
 
-          if ((isOwner || isManager) && isPending) {
+          if (
+            roleName === "ผู้จัดการฝ่าย" &&
+            divisionName === "บุคคล" &&
+            isPendingHr
+          ) {
             return (
               <div className="flex items-center justify-center p-2 gap-2">
                 <Dropdown>
@@ -188,14 +201,33 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
                 </Dropdown>
               </div>
             );
-          } else {
-            return null;
           }
+
+          if (divisionName === "บุคคล") return null;
+
+          if ((isOwner || isManager) && isPendingManager) {
+            return (
+              <div className="flex items-center justify-center p-2 gap-2">
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button isIconOnly variant="none" className="text-primary">
+                      <Setting />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu onAction={(key) => handleAction(key, item)}>
+                    <DropdownItem key="edit">แก้ไข</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+            );
+          }
+
+          return null;
         default:
           return item[colKey] || "-";
       }
     },
-    [handleAction, pageNumber, rowsPerPage]
+    [handleAction, pageNumber, rowsPerPage, session?.user]
   );
 
   return (
