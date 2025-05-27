@@ -23,8 +23,8 @@ import {
 
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "รอหัวหน้าอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
-  { name: "รอฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
+  { name: "รอผู้จัดการฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
   { name: "อนุมัติแล้ว", uniqueIdentifier: "ApprovedSuccess" },
   { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
@@ -78,16 +78,14 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
       { name: "ลำดับ", uid: "perReqId" },
       { name: "ขออัตรากำลังคน", uid: "perReqDocumentId" },
       { name: "สถานะเอกสาร", uid: "perReqStatus" },
+      { name: "สร้างโดย", uid: "createdBy" },
+      { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
+      { name: "แก้ไขโดย", uid: "updatedBy" },
+      { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
     ];
 
     if (canManage) {
-      baseColumns.push(
-        { name: "สร้างโดย", uid: "createdBy" },
-        { name: "สร้างเมื่อวันที่", uid: "perReqCreateAt" },
-        { name: "แก้ไขโดย", uid: "updatedBy" },
-        { name: "แก้ไขเมื่อวันที่", uid: "perReqUpdateAt" },
-        { name: "การจัดการ", uid: "actions" }
-      );
+      baseColumns.push({ name: "การจัดการ", uid: "actions" });
     }
 
     return baseColumns;
@@ -130,11 +128,11 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           const status = item.perReqStatus;
           const statusMap = {
             PendingManagerApprove: {
-              label: "รอหัวหน้าอนุมัติ",
+              label: "รอผู้จัดการฝ่ายอนุมัติ",
               color: "warning",
             },
             PendingHrApprove: {
-              label: "รอฝ่ายบุคคลอนุมัติ",
+              label: "รอผู้จัดการฝ่ายบุคคลอนุมัติ",
               color: "secondary",
             },
             ApprovedSuccess: { label: "อนุมัติแล้ว", color: "success" },
