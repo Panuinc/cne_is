@@ -85,11 +85,16 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
   const filteredData = useMemo(() => {
     if (!session?.user?.id) return [];
 
-    let result = data;
+    const currentUserId = Number(session.user.id);
 
-    result = result.filter(
-      (perReq) => perReq.perReqCreateBy === Number(session.user.id)
-    );
+    let result = data.filter((perReq) => {
+      if (perReq.perReqCreateBy === currentUserId) return true;
+
+      const empEmployment = perReq.PerReqCreateBy?.empEmpEmployment?.[0];
+      if (empEmployment?.empEmploymentParentId === currentUserId) return true;
+
+      return false;
+    });
 
     if (searchTerm.trim()) {
       result = result.filter((perReq) =>
@@ -161,9 +166,14 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             ? `${item.PerReqUpdateBy.empFirstNameTH} ${item.PerReqUpdateBy.empLastNameTH}`
             : "-";
         case "actions":
-          const isOwner = item.perReqCreateBy === Number(session.user.id);
+          const currentUserId = Number(session.user.id);
+          const isOwner = item.perReqCreateBy === currentUserId;
+          const isManager =
+            item.PerReqCreateBy?.empEmpEmployment?.[0]
+              ?.empEmploymentParentId === currentUserId;
           const isPending = item.perReqStatus === "PendingManagerApprove";
-          if (isOwner && isPending) {
+
+          if ((isOwner || isManager) && isPending) {
             return (
               <div className="flex items-center justify-center p-2 gap-2">
                 <Dropdown>

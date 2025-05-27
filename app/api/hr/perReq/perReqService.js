@@ -22,6 +22,17 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                empEmploymentParentId: true,
+                EmpEmploymentParentBy: {
+                  select: {
+                    empId: true,
+                    empFirstNameTH: true,
+                    empLastNameTH: true,
+                    empEmail: true,
+                    empTel: true,
+                    empIdCard: true,
+                  },
+                },
               },
             },
           },
@@ -85,10 +96,22 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                empEmploymentParentId: true,
+                EmpEmploymentParentBy: {
+                  select: {
+                    empId: true,
+                    empFirstNameTH: true,
+                    empLastNameTH: true,
+                    empEmail: true,
+                    empTel: true,
+                    empIdCard: true,
+                  },
+                },
               },
             },
           },
         },
+
         PerReqUpdateBy: {
           select: {
             empFirstNameTH: true,
