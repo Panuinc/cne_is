@@ -201,11 +201,13 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             item.perReqStatus === "PendingManagerApprove";
           const isPendingHr = item.perReqStatus === "PendingHrApprove";
 
-          if (
-            roleName === "ผู้จัดการฝ่าย" &&
-            divisionName === "บุคคล" &&
-            isPendingHr
-          ) {
+          const canEdit =
+            (roleName === "ผู้จัดการฝ่าย" &&
+              divisionName === "บุคคล" &&
+              isPendingHr) ||
+            ((isOwner || isManager) && isPendingManager);
+
+          if (canEdit) {
             return (
               <div className="flex items-center justify-center p-2 gap-2">
                 <Dropdown>
@@ -224,24 +226,8 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
           if (divisionName === "บุคคล") return null;
 
-          if ((isOwner || isManager) && isPendingManager) {
-            return (
-              <div className="flex items-center justify-center p-2 gap-2">
-                <Dropdown>
-                  <DropdownTrigger>
-                    <Button isIconOnly variant="none" className="text-primary">
-                      <Setting />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu onAction={(key) => handleAction(key, item)}>
-                    <DropdownItem key="edit">แก้ไข</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
-            );
-          }
-
           return null;
+
         default:
           return item[colKey] || "-";
       }
