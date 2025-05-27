@@ -190,7 +190,7 @@ export default function perReqUpdate() {
       }
 
       if (actionRef.current === "approve") {
-        form.append("perReqUpdateBy", userId); // ✅
+        form.append("perReqUpdateBy", userId);
 
         if (formData.perReqStatus === "PendingManagerApprove") {
           form.append("perReqStatus", "PendingHrApprove");
@@ -202,7 +202,7 @@ export default function perReqUpdate() {
       }
 
       if (actionRef.current === "reject") {
-        form.append("perReqUpdateBy", userId); // ✅
+        form.append("perReqUpdateBy", userId);
         form.append("perReqStatus", "Cancel");
         if (formData.perReqStatus === "PendingManagerApprove") {
           form.append("perReqReasonManagerApproveBy", userId);
