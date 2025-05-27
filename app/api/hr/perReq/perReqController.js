@@ -89,6 +89,7 @@ export class PerReqController {
 
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
+
       raw.perReqComputerSkills = JSON.parse(raw.perReqComputerSkills || "[]");
       raw.perReqLanguageSkills = JSON.parse(raw.perReqLanguageSkills || "[]");
       raw.perReqDrivingLicenses = JSON.parse(raw.perReqDrivingLicenses || "[]");
@@ -106,9 +107,16 @@ export class PerReqController {
         (data.perReqReasonManagerApproveBy || data.perReqReasonHrApproveBy);
 
       if (approveFlow) {
+        const existing = await PerReqService.getPerReqById(id);
+
         const payload = {
           perReqStatus: data.perReqStatus,
           perReqUpdateAt: localNow,
+
+          perReqComputerSkills: existing.perReqComputerSkills || [],
+          perReqLanguageSkills: existing.perReqLanguageSkills || [],
+          perReqDrivingLicenses: existing.perReqDrivingLicenses || [],
+          perReqProfessionalLicenses: existing.perReqProfessionalLicenses || [],
         };
 
         if (data.perReqReasonManagerApproveBy) {
@@ -117,6 +125,7 @@ export class PerReqController {
           );
           payload.perReqReasonManagerApproveAt = localNow;
         }
+
         if (data.perReqReasonHrApproveBy) {
           payload.perReqReasonHrApproveBy = Number(
             data.perReqReasonHrApproveBy
