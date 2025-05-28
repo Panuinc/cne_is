@@ -149,7 +149,7 @@ export class PerReqPDFController {
         ]
           .map(
             ({ label, val }) => `
-        <div class="flex flex-row w-full border-b border-default">
+        <div class="flex flex-row w-full">
             <div class="flex items-center w-3/12 p-1 font-semibold">${label}</div>
             <div class="flex items-center w-9/12 p-1 border-b border-default">${val}</div>
         </div>`
@@ -170,7 +170,7 @@ export class PerReqPDFController {
         ]
           .map(
             ({ label, val }) => `
-        <div class="flex flex-row w-full border-b border-default">
+        <div class="flex flex-row w-full">
             <div class="flex items-center w-3/12 p-1 font-semibold">${label}</div>
             <div class="flex items-center w-9/12 p-1 border-b border-default">${
               val || "-"
@@ -181,7 +181,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- EMPLOYMENT TYPE -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ประเภทการจ้างงาน</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${Object.entries(empType)
@@ -203,7 +203,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- REASON -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">เหตุผลในการขอรับ</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${[
@@ -240,7 +240,7 @@ export class PerReqPDFController {
         ]
           .map(
             ({ label, val }) => `
-        <div class="flex flex-row w-full border-b border-default">
+        <div class="flex flex-row w-full">
             <div class="flex items-center w-3/12 p-1 font-semibold">${label}</div>
             <div class="flex items-center w-9/12 p-1 border-b border-default">${
               val || "-"
@@ -251,7 +251,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- EDUCATION -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">การศึกษา</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${[
@@ -279,7 +279,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- EXPERIENCE -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ประสบการณ์</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${[
@@ -298,7 +298,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- COMPUTER SKILLS -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ความสามารถด้านคอมพิวเตอร์</div>
 
         <div class="flex flex-col gap-2 w-9/12 p-1">
@@ -328,7 +328,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- LANGUAGE SKILLS -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ความสามารถทางภาษา</div>
         <div class="flex flex-col w-9/12 p-1 gap-2">
             ${["Thai", "English", "Chinese", "Japanese"]
@@ -366,7 +366,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- DRIVING LICENSES -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ใบอนุญาตขับขี่</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${["บ.1", "บ.2", "บ.3", "บ.4", "ท.1", "ท.2", "ท.3", "ท.4"]
@@ -381,7 +381,7 @@ export class PerReqPDFController {
     </div>
 
     <!-- PROFESSIONAL LICENSES -->
-    <div class="flex flex-row w-full border-b border-default">
+    <div class="flex flex-row w-full">
         <div class="flex items-center w-3/12 p-1 font-semibold">ใบอนุญาตประกอบวิชาชีพ</div>
         <div class="flex flex-wrap items-center w-9/12 p-1 gap-2">
             ${["กส", "กว"]
