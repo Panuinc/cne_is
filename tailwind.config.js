@@ -17,9 +17,9 @@ module.exports = {
         default: "#ECECEC",
         primary: "#00963F",
         secondary: "#D78C27",
-        warning: "#E3C04850",
-        danger: "#D78C2750",
-        success: "#00963F50",
+        warning: "#E3C048",
+        danger: "#D78C27",
+        success: "#00963F",
       },
       fontFamily: {
         kanit: ["var(--kanit)"],

@@ -915,6 +915,7 @@ export default function UIPerReqForm({
             <>
               <Button
                 color="success"
+                size="md"
                 radius="lg"
                 type="submit"
                 onPress={onApprove}
@@ -923,6 +924,7 @@ export default function UIPerReqForm({
               </Button>
               <Button
                 color="danger"
+                size="md"
                 radius="lg"
                 type="submit"
                 onPress={onReject}
@@ -934,7 +936,8 @@ export default function UIPerReqForm({
             <>
               {(isUpdate || isCreate) && !isReadOnly && (
                 <Button
-                  color="warning"
+                  color="success"
+                  size="md"
                   radius="lg"
                   type="submit"
                   onPress={() => {
@@ -947,6 +950,7 @@ export default function UIPerReqForm({
               {isUpdate && !isReadOnly && (
                 <Button
                   color="danger"
+                  size="md"
                   radius="lg"
                   type="submit"
                   onPress={() => {
