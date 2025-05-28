@@ -118,7 +118,21 @@ export class PerReqService {
         },
         PerReqDivisionId: { select: { divisionName: true } },
         PerReqDepartmentId: { select: { departmentName: true } },
-        PerReqPositionId: { select: { positionNameTH: true } },
+        PerReqPositionId: {
+          select: {
+            positionNameTH: true,
+            positionIdPosJobDes: {
+              select: {
+                posJobDesAge: true,
+                posJobDesSex: true,
+                posJobDesEducations: true,
+                posJobDesSkill: true,
+                posJobDesExperience: true,
+                posJobDesResponsibility: true,
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -232,7 +246,21 @@ export class PerReqService {
         },
         PerReqDivisionId: { select: { divisionName: true } },
         PerReqDepartmentId: { select: { departmentName: true } },
-        PerReqPositionId: { select: { positionNameTH: true } },
+        PerReqPositionId: {
+          select: {
+            positionNameTH: true,
+            positionIdPosJobDes: {
+              select: {
+                posJobDesAge: true,
+                posJobDesSex: true,
+                posJobDesEducations: true,
+                posJobDesSkill: true,
+                posJobDesExperience: true,
+                posJobDesResponsibility: true,
+              },
+            },
+          },
+        },
       },
     });
   }
