@@ -7,7 +7,7 @@ import UIHeader from "@/components/other/UIHeader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Setting } from "@/components/icons/icons";
+import { Folder, Setting, Document } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import {
@@ -24,7 +24,10 @@ import {
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
   { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
-  { name: "รอผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  {
+    name: "รอผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ",
+    uniqueIdentifier: "PendingHrApprove",
+  },
   { name: "อนุมัติแล้ว", uniqueIdentifier: "ApprovedSuccess" },
   { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
@@ -58,7 +61,12 @@ const UISelectFilter = ({
   </Select>
 );
 
-export default function UIPerReqList({ header, data = [], error = "" }) {
+export default function UIPerReqList({
+  header,
+  data = [],
+  error = "",
+  onExportPDF,
+}) {
   const { data: session, status } = useSession();
   if (status === "loading") return null;
 
@@ -82,12 +90,15 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
         name: "ผู้จัดการฝ่ายอนุมัติวันที่",
         uid: "perReqReasonManagerApproveAt",
       },
-      { name: "ผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ", uid: "perReqReasonHrApproveBy" },
+      {
+        name: "ผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ",
+        uid: "perReqReasonHrApproveBy",
+      },
       {
         name: "ผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติวันนที่",
         uid: "perReqReasonHrApproveAt",
       },
-
+      { name: "ใบขออัตรากำลังคน", uid: "perReqPdf" },
       { name: "การจัดการ", uid: "actions" },
     ],
     []
@@ -102,7 +113,8 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
     let result = data.filter((perReq) => {
       if (roleName === "ผู้ดูแลระบบ") return true;
-      if (roleName === "ผู้จัดการฝ่าย" && divisionName === "ทรัพยากรบุคคล") return true;
+      if (roleName === "ผู้จัดการฝ่าย" && divisionName === "ทรัพยากรบุคคล")
+        return true;
       if (divisionName === "ทรัพยากรบุคคล") return true;
       if (perReq.perReqCreateBy === currentUserId) return true;
 
@@ -193,6 +205,24 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           return item.PerReqHrApproveBy
             ? `${item.PerReqHrApproveBy.empFirstNameTH} ${item.PerReqHrApproveBy.empLastNameTH}`
             : "-";
+        case "perReqPdf": {
+          const perReqId = item.perReqId;
+          const isApproved = item.perReqStatus === "ApprovedSuccess";
+
+          if (!isApproved || !perReqId) return "ยังไม่สามารถดาวน์โหลดได้";
+
+          return (
+            <Button
+              size="lg"
+              color="none"
+              radius="lg"
+              className="text-primary"
+              onPress={() => onExportPDF?.(perReqId)}
+            >
+              <Document />
+            </Button>
+          );
+        }
         case "actions":
           const isOwner = item.perReqCreateBy === currentUserId;
           const isManager =
@@ -233,7 +263,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
           return item[colKey] || "-";
       }
     },
-    [handleAction, pageNumber, rowsPerPage, session?.user]
+    [handleAction, onExportPDF, pageNumber, rowsPerPage, session?.user]
   );
 
   return (

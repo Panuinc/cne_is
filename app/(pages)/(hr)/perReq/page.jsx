@@ -3,6 +3,7 @@
 import UIPerReqList from "@/components/ui/hr/perReq/UIPerReqList";
 
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
@@ -30,15 +31,15 @@ export default function PerReqList() {
     })();
   }, []);
 
-  const handleExportPDF = (posJobDesId) => {
-    if (!posJobDesId) {
-      toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
+  const handleExportPDF = (perReqId) => {
+    if (!perReqId) {
+      toast.error("ไม่พบข้อมูลใบขออัตรากำลังคน");
       return;
     }
 
     (async () => {
       try {
-        const url = `/api/hr/posJobDes/posJobDesPDF/${posJobDesId}`;
+        const url = `/api/hr/perReq/perReqPDF/${perReqId}`;
         const response = await fetch(url, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
@@ -57,11 +58,14 @@ export default function PerReqList() {
   };
 
   return (
-    <UIPerReqList
-      header="ขออัตรากำลังคน"
-      data={perReqDataList}
-      error={errorMessage}
-      onExportPDF={handleExportPDF}
-    />
+    <>
+      <Toaster position="top-right" />
+      <UIPerReqList
+        header="ขออัตรากำลังคน"
+        data={perReqDataList}
+        error={errorMessage}
+        onExportPDF={handleExportPDF}
+      />
+    </>
   );
 }
