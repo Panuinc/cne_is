@@ -6,25 +6,25 @@ import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 
-/* ───────────── helper ───────────── */
-const safeImg = (rel) => {
-  try {
-    return fs
-      .readFileSync(path.join(process.cwd(), "public", rel))
-      .toString("base64");
-  } catch {
-    return "";
-  }
-};
-const cb = (c) => (c ? "☑" : "☐");
-const mapSexTH = { Male: "ชาย", FeMale: "หญิง", Other: "ไม่ระบุ" };
-const mapLangLevel = { Basic: "พอใช้", Good: "ดี", Excellent: "ดีมาก" };
-
-/* ───────────── controller ───────────── */
 export class PerReqPDFController {
+  /* ----- helpers ------------------------------------------------------- */
+  /** checkbox renderer (filled = ☑, empty = ☐) */
+  static cb = (on) => (on ? "☑" : "☐");
+
+  /** read a file and return base64, or empty string if not found */
+  static readBase64 = (p) => {
+    try {
+      return fs.readFileSync(p).toString("base64");
+    } catch {
+      return "";
+    }
+  };
+
+  /* --------------------------------------------------------------------- */
   static async getPerReqPdf(request, perReqId) {
     let ip = "";
     try {
+      /* ----- auth / fetch ------------------------------------------------ */
       ip = await validateRequest(request);
       const id = Number(perReqId);
       if (Number.isNaN(id))
@@ -33,345 +33,442 @@ export class PerReqPDFController {
           { status: 400 }
         );
 
-      /* ── load DB ── */
-      const perReq = await PerReqService.getPerReqById(id, {
-        include: {
-          PerReqCreateBy: {
-            include: {
-              empEmpEmployment: {
-                include: {
-                  EmpEmploymentRoleId: true,
-                  EmpEmploymentDivisionId: true,
-                },
-              },
-            },
-          },
-          PerReqManagerApproveBy: {
-            include: {
-              empEmpEmployment: {
-                include: {
-                  EmpEmploymentRoleId: true,
-                  EmpEmploymentDivisionId: true,
-                },
-              },
-            },
-          },
-          PerReqHrApproveBy: {
-            include: {
-              empEmpEmployment: {
-                include: {
-                  EmpEmploymentRoleId: true,
-                  EmpEmploymentDivisionId: true,
-                },
-              },
-            },
-          },
-          PerReqPositionId: {
-            include: { PositionDivisionId: true, PositionDepartmentId: true },
-          },
-        },
-      });
+      const perReq = await PerReqService.getPerReqById(id);
       if (!perReq)
         return NextResponse.json(
           { error: "ไม่พบข้อมูล PerReq" },
           { status: 404 }
         );
 
-      /* ── common data ── */
-      const pos = perReq.PerReqPositionId ?? {};
-      const div = pos.PositionDivisionId ?? {};
-      const dept = pos.PositionDepartmentId ?? {};
-      const divisionName = div.divisionName ?? "-";
-      const departmentName = dept.departmentName ?? "-";
-      const positionNameTH = pos.positionNameTH ?? "-";
-
-      const logo64 = safeImg("logoCompany/com-1.png");
-      const font64 = safeImg("fonts/THSarabunNew.ttf");
-
-      /* signature helper */
-      const sigBlock = (title, empObj, sig64, dateRaw, isRequester = false) => {
-        const name = empObj
-          ? `(${empObj.empFirstNameTH} ${empObj.empLastNameTH})`
-          : isRequester
-          ? "ผู้ร้องขอ"
-          : "(รออนุมัติ)";
-        const dateTH = dateRaw
-          ? new Date(dateRaw).toLocaleDateString("th-TH", {
+      /* ----- common formatters ------------------------------------------ */
+      const fTH = (d) =>
+        d
+          ? new Date(d).toLocaleDateString("th-TH", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })
-          : isRequester
-          ? "ผู้ร้องขอ"
-          : "(รออนุมัติ)";
-        const role =
-          empObj?.empEmpEmployment?.[0]?.EmpEmploymentRoleId?.roleName ??
-          (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)");
-        const divName =
-          empObj?.empEmpEmployment?.[0]?.EmpEmploymentDivisionId
-            ?.divisionName ?? (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)");
-        return `
-          <div class="flex flex-col items-center w-full xl:w-1/3 p-2 gap-1 border-2 border-gray-300 rounded-xl">
-            <div class="font-bold">${title}</div>
-            <div class="h-24 flex items-center justify-center w-full">
-              ${
-                sig64
-                  ? `<img src="data:image/png;base64,${sig64}" class="h-20" />`
-                  : isRequester
-                  ? "ผู้ร้องขอ"
-                  : "(รออนุมัติ)"
-              }
-            </div>
-            <div>ลงชื่อ : ${name}</div>
-            <div>วันที่ : ${dateTH}</div>
-            <div class="font-bold">${role} ${divName}</div>
-          </div>`;
+          : "-";
+
+      const img64 = (file) =>
+        file
+          ? `data:image/png;base64,${this.readBase64(
+              path.join(
+                process.cwd(),
+                "public",
+                "empEmployment",
+                "signature",
+                file
+              )
+            )}`
+          : "";
+
+      /* ----- enums / constant maps -------------------------------------- */
+      const mapSex = {
+        Male: "ชาย",
+        FeMale: "หญิง",
+        Other: "ไม่ระบุ",
+        "Male/FeMale": "ชาย/หญิง",
+      };
+      const empType = {
+        Monthly: "รายเดือน",
+        Daily: "รายวัน",
+        Contract: "ชั่วคราว/สัญญาจ้าง",
       };
 
-      /* convert arrays */
-      const compSkills = perReq.perReqComputerSkills ?? [];
-      const langSkills = perReq.perReqLanguageSkills ?? [];
-      const drvLic = perReq.perReqDrivingLicenses ?? [];
-      const profLic = perReq.perReqProfessionalLicenses ?? [];
+      /* ----- computer-skill helpers ------------------------------------- */
+      const defaultSkills = [
+        "MicrosoftOffice",
+        "MicrosoftProject",
+        "Revit",
+        "Autocad",
+        "Sketchup",
+        "Solidwork",
+        "Canva",
+        "Adobe",
+        "BPluse",
+        "Other",
+      ];
 
-      /* ───────────── HTML ───────────── */
-      const html = /*html*/ `
-<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+      // extra skills that userกรอกเพิ่ม (ไม่ซ้ำ ไม่ใช่ default / Other)
+      const extraSkills = [
+        ...new Set(
+          (perReq.perReqComputerSkills || []).filter(
+            (s) => !defaultSkills.includes(s) && s !== "Other"
+          )
+        ),
+      ];
+
+      /* ----- pdf assets -------------------------------------------------- */
+      const logoBase64 = this.readBase64(
+        path.join(process.cwd(), "public", "logoCompany", "com-1.png")
+      );
+      const fontBase64 = this.readBase64(
+        path.join(process.cwd(), "public", "fonts", "THSarabunNew.ttf")
+      );
+
+      /* ----- html -------------------------------------------------------- */
+      const html = /* html */ `
+<!DOCTYPE html><html lang="th"><head>
+<meta charset="UTF-8" />
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 <style>
- @font-face{font-family:'THSarabun';src:url(data:font/ttf;base64,${font64}) format('truetype');}
- body{font-family:'THSarabun',sans-serif;font-size:18px;margin:0;padding:8px}
- .bg-def{background:#eff2f0}
-</style></head><body class="flex flex-col gap-2">
+@font-face{font-family:'THSarabun';src:url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');}
+body{font-family:'THSarabun',sans-serif;font-size:18px;margin:0}
+.border-default{border-color:#d1d5db}
+.cb{font-size:20px;line-height:1}
+</style>
+</head><body class="flex flex-col items-center w-full p-2 gap-2">
 
-<!-- header -->
-<div class="flex border-b-2 border-gray-300">
-  <div class="w-1/4 flex flex-col items-center p-2 gap-1 border-r-2 border-gray-300">
-    <img src="data:image/png;base64,${logo64}" class="w-24"/>
-    <span class="font-bold">CHANNAKORN</span>
+<!-- HEADER -->
+<div class="flex flex-row items-center w-full border-b border-default">
+  <div class="flex flex-col items-center w-3/12 p-2 gap-2 border-r border-default">
+     <img src="data:image/png;base64,${logoBase64}" class="w-24" />
+     <span class="hidden xl:block font-semibold">CHANNAKORN</span>
   </div>
-  <div class="flex-1 flex flex-col items-center justify-center p-2 gap-1">
-    <span class="text-3xl font-bold">ใบขออนุมัติอัตรากำลังคน</span>
-    <span class="text-xl font-bold">(Personnel Request)</span>
+  <div class="flex flex-col items-center w-9/12 p-2 gap-1">
+     <span class="text-3xl font-semibold">ใบขออนุมัติอัตรากำลังคน</span>
+     <span class="text-xl font-semibold">(Personnel Request)</span>
   </div>
 </div>
 
-<!-- dates & basic info -->
-<div class="grid grid-cols-1 xl:grid-cols-2 gap-2">
-  <div class="flex"><span class="w-1/3 font-bold">วันที่ร้องขอ</span><span class="flex-1 border-b">${new Date().toLocaleDateString(
-    "th-TH",
-    { year: "numeric", month: "long", day: "numeric" }
-  )}</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">วันที่ต้องการ</span><span class="flex-1 border-b">${
-    perReq.perReqDesiredDate ?? "-"
-  }</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">ฝ่าย</span><span class="flex-1 border-b">${divisionName}</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">แผนก</span><span class="flex-1 border-b">${departmentName}</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">ตำแหน่ง</span><span class="flex-1 border-b">${positionNameTH}</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">จำนวน</span><span class="flex-1 border-b">${
-    perReq.perReqAmount ?? "-"
-  } คน</span></div>
+<!-- ROW 1 : DATES -->
+<div class="flex flex-col xl:flex-row w-full">
+  ${[
+    { label: "วันที่ร้องขอ", val: fTH(perReq.perReqCreateAt) },
+    { label: "วันที่ต้องการ", val: fTH(perReq.perReqDesiredDate) },
+  ]
+    .map(
+      ({ label, val }) => `
+  <div class="flex flex-col xl:flex-row w-full border-b border-default">
+    <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">${label}</div>
+    <div class="flex items-center w-full xl:w-9/12 p-2 border-b border-default">${val}</div>
+  </div>`
+    )
+    .join("")}
 </div>
 
-<!-- employment type -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ประเภทการจ้างงาน</span>
-  <div class="flex flex-col gap-1">
-    <span>${cb(perReq.perReqEmpEmploymentType === "Monthly")} รายเดือน</span>
-    <span>${cb(perReq.perReqEmpEmploymentType === "Daily")} รายวัน</span>
-    <span>${cb(
+<!-- ROW 2 : DIV / DEPT / POS / AMOUNT -->
+<div class="flex flex-col xl:flex-row w-full">
+  ${[
+    { label: "ฝ่าย", val: perReq.PerReqDivisionId?.divisionName },
+    { label: "แผนก", val: perReq.PerReqDepartmentId?.departmentName },
+    { label: "ตำแหน่ง", val: perReq.PerReqPositionId?.positionNameTH },
+    {
+      label: "จำนวน",
+      val: perReq.perReqAmount ? perReq.perReqAmount + " คน" : "-",
+    },
+  ]
+    .map(
+      ({ label, val }) => `
+  <div class="flex flex-col xl:flex-row w-full border-b border-default">
+    <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">${label}</div>
+    <div class="flex items-center w-full xl:w-9/12 p-2 border-b border-default">${
+      val || "-"
+    }</div>
+  </div>`
+    )
+    .join("")}
+</div>
+
+<!-- EMPLOYMENT TYPE -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ประเภทการจ้างงาน</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
+    ${Object.entries(empType)
+      .map(
+        ([k, l]) =>
+          `<span class="cb">${this.cb(
+            perReq.perReqEmpEmploymentType === k
+          )}</span> ${l}`
+      )
+      .join("")}
+    ${
       perReq.perReqEmpEmploymentType === "Contract"
-    )} ชั่วคราว/สัญญาจ้าง ${
-        perReq.perReqEmpEmploymentTypeNote
-          ? `(${perReq.perReqEmpEmploymentTypeNote} วัน)`
-          : ""
-      }</span>
+        ? `<span>( ${perReq.perReqEmpEmploymentTypeNote || "-"} วัน )</span>`
+        : ""
+    }
   </div>
 </div>
 
-<!-- reason -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">เหตุผลในการขอรับ</span>
-  <div class="flex flex-col gap-1">
-    <span>${cb(
-      perReq.perReqReasonForRequest === "New"
-    )} เพิ่มอัตรากำลังพล</span>
-    <span>${cb(perReq.perReqReasonForRequest === "Replace")} ทดแทน ${
-        perReq.perReqReasonForRequestNote ?? ""
-      }</span>
+<!-- REASON -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">เหตุผลในการขอรับ</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
+    ${[
+      { k: "New", l: "เพิ่มอัตรากำลังพล" },
+      { k: "Replace", l: "ทดแทน" },
+    ]
+      .map(
+        ({ k, l }) =>
+          `<span class="cb">${this.cb(
+            perReq.perReqReasonForRequest === k
+          )}</span> ${l}`
+      )
+      .join("")}
+    ${
+      perReq.perReqReasonForRequest === "Replace"
+        ? `<span>ชื่อ : ${perReq.perReqReasonForRequestNote || "-"}</span>`
+        : ""
+    }
   </div>
 </div>
 
-<!-- qualification header -->
-<div class="bg-def text-center font-bold py-1 rounded">คุณสมบัติทั่วไป</div>
-
-<!-- age & sex -->
-<div class="grid grid-cols-1 xl:grid-cols-2 gap-2">
-  <div class="flex"><span class="w-1/3 font-bold">อายุ</span><span class="flex-1 border-b">${
-    perReq.perReqReasonAge ?? "-"
-  }</span></div>
-  <div class="flex"><span class="w-1/3 font-bold">เพศ</span><span class="flex-1 border-b">${
-    mapSexTH[perReq.perReqReasonGender] ?? "-"
-  }</span></div>
+<!-- SECTION TITLE -->
+<div class="w-full p-2 bg-gray-100 border-t border-b border-default font-semibold text-center">
+  คุณสมบัติทั่วไป
 </div>
 
-<!-- education -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">การศึกษา</span>
-  <div class="flex flex-col gap-1">
+<!-- AGE / SEX -->
+<div class="flex flex-col xl:flex-row w-full">
+  ${[
+    { label: "อายุ", val: perReq.perReqReasonAge },
+    { label: "เพศ", val: mapSex[perReq.perReqReasonGender] || "-" },
+  ]
+    .map(
+      ({ label, val }) => `
+  <div class="flex flex-col xl:flex-row w-full border-b border-default">
+    <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">${label}</div>
+    <div class="flex items-center w-full xl:w-9/12 p-2 border-b border-default">${
+      val || "-"
+    }</div>
+  </div>`
+    )
+    .join("")}
+</div>
+
+<!-- EDUCATION -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">การศึกษา</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
     ${[
       ["PrimaryEducation", "ประถมศึกษา"],
       ["SecondaryEducation", "มัธยมศึกษา"],
-      ["VocationalCertificate", "ปวช."],
-      ["HighVocationalCertificate", "ปวส."],
-      ["BachelorMasterDegree", "ปริญญาตรี / โท"],
+      ["VocationalCertificate", "ปวช. สาขา"],
+      ["HighVocationalCertificate", "ปวส. สาขา"],
+      ["BachelorMasterDegree", "ปริญญาตรี / โท สาขา"],
     ]
       .map(
-        ([v, l]) =>
-          `<span>${cb(perReq.perReqReasonEducation === v)} ${l}</span>`
+        ([k, l]) =>
+          `<span class="cb">${this.cb(
+            perReq.perReqReasonEducation === k
+          )}</span> ${l}`
       )
       .join("")}
     ${
-      perReq.perReqReasonEducationNote
-        ? `<span class="pl-6">สาขา ${perReq.perReqReasonEducationNote}</span>`
+      perReq.perReqReasonEducation
+        ? `<span>สาขา : ${perReq.perReqReasonEducationNote || "-"}</span>`
         : ""
     }
   </div>
 </div>
 
-<!-- experience -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ประสบการณ์</span>
-  <div class="flex flex-col gap-1">
+<!-- EXPERIENCE -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ประสบการณ์</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
     ${[
       ["NoneExperience", "ไม่มีประสบการณ์"],
-      ["Experience1To4Years", "1-4 ปี"],
-      ["Experience5YearsUp", "5 ปีขึ้นไป"],
+      ["Experience1To4Years", "ประสบการณ์ 1-4 ปี"],
+      ["Experience5YearsUp", "ประสบการณ์ 5 ปีขึ้นไป"],
     ]
       .map(
-        ([v, l]) =>
-          `<span>${cb(perReq.perReqReasonExperience === v)} ${l}</span>`
+        ([k, l]) =>
+          `<span class="cb">${this.cb(
+            perReq.perReqReasonExperience === k
+          )}</span> ${l}`
       )
       .join("")}
   </div>
 </div>
 
-<!-- computer skill -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ความสามารถด้านคอมพิวเตอร์</span>
-  <div class="flex flex-wrap gap-2">
-    ${[
-      "MicrosoftOffice",
-      "MicrosoftProject",
-      "Revit",
-      "Autocad",
-      "Sketchup",
-      "Solidwork",
-      "Canva",
-      "Adobe",
-      "BPluse",
-      "Other",
-    ]
-      .map(
-        (s) =>
-          `<span>${cb(compSkills.includes(s))} ${
-            s === "BPluse" ? "B-Pluse" : s
-          }</span>`
-      )
-      .join("")}
+<!-- COMPUTER SKILLS -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ความสามารถด้านคอมพิวเตอร์</div>
+
+  <div class="flex flex-col gap-2 w-full xl:w-9/12 p-2">
+    <!-- กล่อง default 10 ค่า -->
+    <div class="flex flex-wrap items-center gap-6">
+      ${defaultSkills
+        .map(
+          (s) => `
+        <span class="cb">${this.cb(
+          (perReq.perReqComputerSkills || []).includes(s)
+        )}</span> ${s === "BPluse" ? "B-Pluse" : s === "Other" ? "อื่นๆ" : s}`
+        )
+        .join("")}
+    </div>
+
+    <!-- skill อื่น ๆ ที่ user กรอก -->
     ${
-      perReq.perReqComputerSkillIsOther
-        ? `<span class="pl-6">อื่นๆ : ${perReq.perReqComputerSkillIsOther}</span>`
+      extraSkills.length
+        ? `<div class="flex flex-wrap gap-4 pl-8">
+            ${extraSkills.map((e) => `<span>• ${e}</span>`).join("")}
+          </div>`
         : ""
     }
   </div>
 </div>
 
-<!-- language -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ความสามารถทางภาษา</span>
-  <div class="flex flex-col gap-1">
+<!-- LANGUAGE SKILLS -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ความสามารถทางภาษา</div>
+  <div class="flex flex-col w-full xl:w-9/12 p-2 gap-2">
     ${["Thai", "English", "Chinese", "Japanese"]
       .map((lang) => {
-        const obj = langSkills.find((l) => l.language === lang);
-        return `<span>${lang} : ${obj ? mapLangLevel[obj.level] : "-"}</span>`;
+        const cur = (perReq.perReqLanguageSkills || []).find(
+          (l) => l.language === lang
+        );
+        const label =
+          lang === "Thai"
+            ? "ภาษา ไทย"
+            : lang === "English"
+            ? "ภาษา อังกฤษ"
+            : lang === "Chinese"
+            ? "ภาษา จีน"
+            : "ภาษา ญี่ปุ่น";
+        return `
+      <div class="flex flex-wrap gap-6">
+        <span class="w-28">${label}</span>
+        ${[
+          ["Basic", "พอใช้"],
+          ["Good", "ดี"],
+          ["Excellent", "ดีมาก"],
+        ]
+          .map(
+            ([lv, txt]) =>
+              `<span class="cb">${this.cb(cur?.level === lv)}</span> ${txt}`
+          )
+          .join("")}
+      </div>`;
       })
       .join("")}
   </div>
 </div>
 
-<!-- driving licence -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ใบอนุญาตขับขี่</span>
-  <div class="flex flex-wrap gap-2">
+<!-- DRIVING LICENSES -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ใบอนุญาตขับขี่</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
     ${["บ.1", "บ.2", "บ.3", "บ.4", "ท.1", "ท.2", "ท.3", "ท.4"]
-      .map((lic) => `<span>${cb(drvLic.includes(lic))} ${lic}</span>`)
+      .map(
+        (l) =>
+          `<span class="cb">${this.cb(
+            (perReq.perReqDrivingLicenses || []).includes(l)
+          )}</span> ใบขับขี่ ${l}`
+      )
       .join("")}
   </div>
 </div>
 
-<!-- professional licence -->
-<div class="flex items-start gap-4">
-  <span class="w-1/3 font-bold">ใบอนุญาตประกอบวิชาชีพ</span>
-  <div class="flex flex-col gap-1">
-    ${["กว", "กส"]
-      .map((n) => {
-        const found = profLic.find((p) => p.name === n);
-        return `<span>${cb(!!found)} ${n} ${found?.level ?? ""}</span>`;
-      })
+<!-- PROFESSIONAL LICENSES -->
+<div class="flex flex-col xl:flex-row w-full border-b border-default">
+  <div class="flex items-center w-full xl:w-3/12 p-2 font-semibold">ใบอนุญาตประกอบวิชาชีพ</div>
+  <div class="flex flex-wrap items-center w-full xl:w-9/12 p-2 gap-6">
+    ${["กส", "กว"]
+      .map(
+        (l) =>
+          `<span class="cb">${this.cb(
+            (perReq.perReqProfessionalLicenses || []).some((p) => p.name === l)
+          )}</span> ${l}`
+      )
       .join("")}
+    ${
+      (perReq.perReqProfessionalLicenses || []).some((p) => p.level)
+        ? `<span>ระดับ : ${
+            (perReq.perReqProfessionalLicenses || []).find((p) => p.level)
+              ?.level || "-"
+          }</span>`
+        : ""
+    }
   </div>
 </div>
 
-<!-- signatures -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4">
-  ${sigBlock(
-    "ผู้ร้องขอ",
-    perReq.PerReqCreateBy,
-    safeImg(
-      perReq.PerReqCreateBy?.empEmpEmployment?.[0]?.empEmploymentSignature ?? ""
-    ),
-    perReq.perReqCreateAt,
-    true
-  )}
-  ${sigBlock(
-    "ผู้อนุมัติ",
-    perReq.PerReqManagerApproveBy,
-    safeImg(
-      perReq.PerReqManagerApproveBy?.empEmpEmployment?.[0]
-        ?.empEmploymentSignature ?? ""
-    ),
-    perReq.perReqReasonManagerApproveAt
-  )}
-  ${sigBlock(
-    "ผู้รับทราบ",
-    perReq.PerReqHrApproveBy,
-    safeImg(
-      perReq.PerReqHrApproveBy?.empEmpEmployment?.[0]?.empEmploymentSignature ??
-        ""
-    ),
-    perReq.perReqReasonHrApproveAt
-  )}
+<!-- SIGNATURES -->
+<div class="flex flex-col xl:flex-row items-stretch w-full gap-3 mt-4">
+  ${[
+    {
+      title: "ผู้ร้องขอ",
+      obj: perReq.PerReqCreateBy,
+      sig: perReq.PerReqCreateBy?.empEmpEmployment?.[0]?.empEmploymentSignature,
+      date: fTH(perReq.perReqCreateAt),
+    },
+    {
+      title: "ผู้อนุมัติ",
+      obj: perReq.PerReqManagerApproveBy,
+      sig: perReq.PerReqManagerApproveBy?.empEmpEmployment?.[0]
+        ?.empEmploymentSignature,
+      date: fTH(perReq.perReqReasonManagerApproveAt),
+    },
+    {
+      title: "ผู้รับทราบ",
+      obj: perReq.PerReqHrApproveBy,
+      sig: perReq.PerReqHrApproveBy?.empEmpEmployment?.[0]
+        ?.empEmploymentSignature,
+      date: fTH(perReq.perReqReasonHrApproveAt),
+    },
+  ]
+    .map(
+      ({ title, obj, sig, date }) => `
+  <div class="flex flex-col items-center w-full xl:w-4/12 p-2 border-2 border-default rounded-xl">
+    <div class="font-semibold">${title}</div>
+    <div class="h-16 flex items-center justify-center">
+      ${
+        sig
+          ? `<img src="${img64(sig)}" class="h-16" />`
+          : title === "ผู้ร้องขอ"
+          ? "ผู้ร้องขอ"
+          : "(รออนุมัติ)"
+      }
+    </div>
+    <div>ลงชื่อ : ${
+      obj
+        ? `(${obj.empFirstNameTH} ${obj.empLastNameTH})`
+        : title === "ผู้ร้องขอ"
+        ? "ผู้ร้องขอ"
+        : "(รออนุมัติ)"
+    }</div>
+    <div>วันที่ : ${date}</div>
+    <div class="font-semibold">
+      ${
+        obj?.empEmpEmployment?.[0]?.EmpEmploymentRoleId?.roleName ||
+        (title === "ผู้ร้องขอ" ? "ผู้ร้องขอ" : "(รออนุมัติ)")
+      }
+      ${obj?.empEmpEmployment?.[0]?.EmpEmploymentDivisionId?.divisionName || ""}
+    </div>
+  </div>`
+    )
+    .join("")}
 </div>
 
-</body></html>`;
+</body></html>
+`;
 
-      /* ───────────── puppeteer ───────────── */
+      /* ----- generate PDF ------------------------------------------------ */
       const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
       const page = await browser.newPage();
       await page.setContent(html, { waitUntil: "networkidle0" });
 
-      const buffer = await page.pdf({
+      const pdfBuffer = await page.pdf({
         format: "A4",
-        margin: { top: "20px", bottom: "50px", left: "20px", right: "20px" },
         printBackground: true,
         displayHeaderFooter: true,
-        headerTemplate: "<span></span>",
-        footerTemplate: `<div style="font-family:'THSarabun';font-size:10px;width:100%;padding:6px 16px;display:flex;justify-content:flex-end;">FM07-WP-HR1-01 / Rev.00 / 25-01-65</div>`,
+        margin: {
+          top: "20px",
+          bottom: "60px", // เพิ่ม bottom margin เผื่อ footer
+          left: "20px",
+          right: "20px",
+        },
+        footerTemplate: `
+    <div style="font-family:'THSarabun',sans-serif;font-size:10px;width:100%;padding:0 40px;text-align:right;">
+      FM07-WP-HR1-01 / Rev.00 / 25-01-65
+    </div>`,
+        headerTemplate: `<div></div>`, // ซ่อนหัวกระดาษ
       });
+
       await browser.close();
 
-      return new NextResponse(buffer, {
+      return new NextResponse(pdfBuffer, {
         status: 200,
         headers: {
           "Content-Type": "application/pdf",
