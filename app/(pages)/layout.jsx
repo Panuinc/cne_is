@@ -135,13 +135,13 @@ const topBar = (session, currentTime, setOpenMobile) => (
     <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 hover:text-primary">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 bg-primary text-white rounded-tl-full rounded-tr-full">
+    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2">
       <Search />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 bg-primary text-white rounded-tl-full rounded-tr-full">
+    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 bg-primary text-white rounded-tl-full rounded-tr-full relative">
+    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 relative">
       <Image
         src={
           session.user?.picture
