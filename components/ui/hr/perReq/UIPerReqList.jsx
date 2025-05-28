@@ -67,6 +67,7 @@ export default function UIPerReqList({
   error = "",
   onExportPDF,
   onExportImages,
+  onExportImagesAll,
 }) {
   const { data: session, status } = useSession();
   if (status === "loading") return null;
@@ -357,6 +358,18 @@ export default function UIPerReqList({
               ))}
             </Select>
           </div>
+        </div>
+
+        <div className="flex w-full justify-end p-2">
+          <Button
+            color="primary"
+            size="md"
+            radius="lg"
+            onPress={onExportImagesAll}
+            className="text-white"
+          >
+            ส่งออกรูปภาพทั้งหมด (ที่อนุมัติแล้ว)
+          </Button>
         </div>
 
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2">

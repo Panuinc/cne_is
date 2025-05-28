@@ -91,6 +91,18 @@ export default function PerReqList() {
     })();
   };
 
+  const handleExportAllImages = () => {
+  const approvedList = perReqDataList.filter(item => item.perReqStatus === "ApprovedSuccess");
+  if (approvedList.length === 0) {
+    toast.error("ไม่มีรายการที่อนุมัติแล้วสำหรับส่งออกรูปภาพ");
+    return;
+  }
+
+  approvedList.forEach(item => {
+    handleExportImages(item.perReqId);
+  });
+};
+
   return (
     <>
       <Toaster position="top-right" />
@@ -100,6 +112,7 @@ export default function PerReqList() {
         error={errorMessage}
         onExportPDF={handleExportPDF}
         onExportImages={handleExportImages}
+        onExportImagesAll={handleExportAllImages}
       />
     </>
   );
