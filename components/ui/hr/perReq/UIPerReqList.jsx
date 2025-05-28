@@ -101,6 +101,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
     const divisionName = session?.user?.divisionName;
 
     let result = data.filter((perReq) => {
+      if (roleName === "ผู้ดูแลระบบ") return true;
       if (roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล") return true;
       if (divisionName === "บุคคล") return true;
       if (perReq.perReqCreateBy === currentUserId) return true;
