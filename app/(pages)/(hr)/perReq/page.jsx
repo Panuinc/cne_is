@@ -4,6 +4,7 @@ import UIPerReqList from "@/components/ui/hr/perReq/UIPerReqList";
 
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import JSZip from "jszip";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
@@ -91,17 +92,60 @@ export default function PerReqList() {
     })();
   };
 
-  const handleExportAllImages = () => {
-  const approvedList = perReqDataList.filter(item => item.perReqStatus === "ApprovedSuccess");
-  if (approvedList.length === 0) {
-    toast.error("ไม่มีรายการที่อนุมัติแล้วสำหรับส่งออกรูปภาพ");
-    return;
-  }
+  const handleExportAllImagesAsAlbum = async () => {
+    const approvedList = perReqDataList.filter(
+      (item) => item.perReqStatus === "ApprovedSuccess"
+    );
 
-  approvedList.forEach(item => {
-    handleExportImages(item.perReqId);
-  });
-};
+    if (approvedList.length === 0) {
+      toast.error("ไม่มีรายการที่อนุมัติแล้วสำหรับสร้างอัลบั้ม");
+      return;
+    }
+
+    try {
+      const zip = new JSZip();
+
+      const frontPageResp = await fetch("/perReqImages/frontPage.jpg");
+      const frontBlob = await frontPageResp.blob();
+      zip.file("frontPage.jpg", frontBlob);
+
+      for (const item of approvedList) {
+        const perReqId = item.perReqId;
+        const imageResp = await fetch(
+          `/api/hr/perReq/perReqImages/${perReqId}`,
+          {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }
+        );
+
+        if (imageResp.ok) {
+          const imageBlob = await imageResp.blob();
+          zip.file(`perReq_${perReqId}.png`, imageBlob);
+        } else {
+          console.warn(`รูปภาพของ perReqId ${perReqId} ไม่สามารถโหลดได้`);
+        }
+      }
+
+      const backPageResp = await fetch("/perReqImages/backPage.jpg");
+      const backBlob = await backPageResp.blob();
+      zip.file("backPage.jpg", backBlob);
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      const zipUrl = URL.createObjectURL(zipBlob);
+
+      const link = document.createElement("a");
+      link.href = zipUrl;
+      link.download = "perReqAlbum.zip";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(zipUrl);
+    } catch (error) {
+      console.error("Error exporting album:", error);
+      toast.error("เกิดข้อผิดพลาดในการสร้างอัลบั้ม");
+    }
+  };
 
   return (
     <>
@@ -112,7 +156,7 @@ export default function PerReqList() {
         error={errorMessage}
         onExportPDF={handleExportPDF}
         onExportImages={handleExportImages}
-        onExportImagesAll={handleExportAllImages}
+        onExportImagesAll={handleExportAllImagesAsAlbum}
       />
     </>
   );
