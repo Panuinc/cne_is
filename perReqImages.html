@@ -23,32 +23,43 @@ return NextResponse.json(
 );
 }
 
-const jobDes = perReq.PerReqPositionId?.positionIdPosJobDes;
+const jobDes = perReq.PerReqPositionId?.positionIdPosJobDes?.[0];
 
 function readBase64(filePath) {
 const fileData = fs.readFileSync(filePath);
 return fileData.toString("base64");
 }
+
+function formatText(text) {
+return (text || "-").replace(/\r?\n/g, "<br />");
+}
+
+function translateSex(sexText) {
+const normalized = sexText?.trim().toLowerCase();
+const map = {
+"male": "ชาย",
+"female": "หญิง",
+"male/female": "ชาย/หญิง",
+"female/male": "ชาย/หญิง"
+};
+return map[normalized] || sexText || "-";
+}
+
 const headerBase64 = readBase64(
 path.join(process.cwd(), "public", "perReqImages", "images-1.jpg")
 );
-
 const logoBase64 = readBase64(
 path.join(process.cwd(), "public", "perReqImages", "images-2.jpg")
 );
-
 const footerBase64 = readBase64(
 path.join(process.cwd(), "public", "perReqImages", "images-3.jpg")
 );
-
 const bgSecBase64 = readBase64(
 path.join(process.cwd(), "public", "perReqImages", "images-4.jpg")
 );
-
 const bgPriBase64 = readBase64(
 path.join(process.cwd(), "public", "perReqImages", "images-5.jpg")
 );
-
 const fontBase64 = fs
 .readFileSync(
 path.join(process.cwd(), "public", "fonts", "DBHelvethaicaMonXBd.ttf")
@@ -62,7 +73,6 @@ const html = `
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-
     <style>
         @font-face {
             font-family: 'DBHelvethaicaMonXBd';
@@ -73,14 +83,9 @@ const html = `
         body {
             margin: 0;
             padding: 0;
-            width: 1200px;
-            height: 1200px;
             background: white;
             font-family: 'DBHelvethaicaMonXBd', sans-serif;
             font-size: 22px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .bg-green {
@@ -92,16 +97,6 @@ const html = `
 
         .bg-white {
             background: rgba(255, 255, 255, 0.8);
-        }
-
-        .border-default {
-            border-color: #d1d5db
-        }
-
-        .label {
-            font-weight: bold;
-            display: inline-block;
-            width: 220px;
         }
 
         .text-green-header {
@@ -120,84 +115,105 @@ const html = `
     </style>
 </head>
 
-<body class="flex items-center justify-center w-full p-2 gap-2"
+<body class="flex items-center justify-center w-full p-2 gap-2 border border-default"
     style="background-image: url('data:image/png;base64,${bgPriBase64}'); background-size: cover; background-position: center;">
     <div class="flex flex-col items-center justify-between w-full h-full rounded-3xl"
         style="background-image: url('data:image/png;base64,${bgSecBase64}'); background-size: cover; background-position: center;">
-        <div class="flex flex-row items-start justify-center w-full p-2 gap-2">
-            <div class="flex items-center justify-start w-full p-2 gap-2">
+
+        <div class="flex flex-row items-start justify-center w-full p-2 gap-2 border border-default">
+            <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
                 <img src="data:image/png;base64,${headerBase64}" class="w-40" />
             </div>
-            <div class="flex items-center justify-end w-full p-2 gap-2">
+            <div class="flex items-center justify-end w-full p-2 gap-2 border border-default">
                 <img src="data:image/png;base64,${logoBase64}" class="w-20" />
             </div>
         </div>
-        <div class="flex flex-col items-center justify-start w-full h-full p-2 gap-2">
-            <div class="flex items-center justify-start w-80 p-2 gap-2 text-green-header">
+
+        <div class="flex flex-col items-center justify-start w-full p-2 gap-2 border border-default">
+            <div class="flex items-center justify-start w-80 p-2 gap-2 border border-default text-green-header">
                 เปิดรับสมัคตำแหน่ง
             </div>
-            <div class="flex items-center justify-center w-80 px-10 py-2 gap-2 text-green-detail">
+            <div class="flex items-center justify-center w-80 px-10 py-2 gap-2 border border-default text-green-detail">
                 ${perReq.PerReqPositionId?.positionNameTH || "-"}
             </div>
         </div>
-        <div class="flex flex-col items-start justify-start w-full h-full p-2 gap-2 bg-white">
-            <div
-                class="flex items-center justify-start w-40 p-2 gap-2 bg-green rounded-tr-xl rounded-br-xl">
+
+        <div class="flex flex-col items-start justify-start w-full p-2 gap-2 border border-default bg-white">
+            <div class="flex items-center justify-start w-40 p-2 gap-2 border border-default bg-green rounded-tr-xl rounded-br-xl">
                 หน้าที่ความรับผิดชอบ
             </div>
-            <div class="flex items-center justify-start w-full p-2 gap-2">
-                ${jobDes?.posJobDesResponsibility || "-"}
+            <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                ${formatText(jobDes?.posJobDesResponsibility)}
             </div>
         </div>
-        <div class="flex flex-row items-end justify-start w-full h-full p-2 gap-2 bg-white rounded-bl-3xl rounded-br-3xl">
-            <div class="flex flex-col items-start justify-center w-9/12 p-2 gap-2">
-                <div
-                    class="flex items-center justify-start w-40 p-2 gap-2 bg-green rounded-tr-xl rounded-br-xl">
+
+        <div class="flex flex-row items-end justify-start w-full gap-2 border border-default bg-white rounded-bl-3xl rounded-br-3xl">
+            <div class="flex flex-col items-start justify-center w-9/12 p-2 gap-2 border border-default">
+                <div class="flex items-center justify-start w-40 p-2 gap-2 border border-default bg-green rounded-tr-xl rounded-br-xl">
                     คุณสมบัติ
                 </div>
-                <div class="flex flex-col items-center justify-center w-full p-2 gap-2">
-                    <div class="flex items-center justify-start w-full p-2 gap-2">
-                        ${jobDes?.posJobDesSkill || "-"}
+                <div class="flex flex-col items-center justify-center w-full border border-default">
+                    <div class="flex flex-col items-start justify-start w-full">
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            การศึกษา
+                        </div>
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            ${formatText(jobDes?.posJobDesEducations)}
+                        </div>
                     </div>
-
-                    <div class="flex items-center justify-start w-full p-2 gap-2">
-                        ${jobDes?.posJobDesExperience || "-"}
+                    <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                        อายุ : ${formatText(jobDes?.posJobDesAge)}
                     </div>
-
-                    <div class="flex items-center justify-start w-full p-2 gap-2">
-                        ${jobDes?.posJobDesEducations || "-"}
+                    <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                        เพศ : ${translateSex(jobDes?.posJobDesSex)}
                     </div>
-
-                    <div class="flex items-center justify-start w-full p-2 gap-2">
-                        ${jobDes?.posJobDesSex || "-"}
+                    <div class="flex flex-col items-start justify-start w-full">
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            ทักษะ
+                        </div>
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            ${formatText(jobDes?.posJobDesSkill)}
+                        </div>
                     </div>
-
-                    <div class="flex items-center justify-start w-full p-2 gap-2">
-                        ${jobDes?.posJobDesAge || "-"}
+                    <div class="flex flex-col items-start justify-start w-full">
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            ประสบการณ์
+                        </div>
+                        <div class="flex items-center justify-start w-full p-2 gap-2 border border-default">
+                            ${formatText(jobDes?.posJobDesExperience)}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-row items-center justify-center w-3/12 p-2 gap-2">
+            <div class="flex flex-row items-center justify-center w-3/12 p-2 gap-2 border border-default">
                 <img src="data:image/png;base64,${footerBase64}" class="w-full" />
             </div>
         </div>
     </div>
-
 </body>
 
-</html>`;
+</html>
+`;
 
 const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 const page = await browser.newPage();
 
-await page.setViewport({ width: 1200, height: 1200 });
 await page.setContent(html, { waitUntil: "networkidle0" });
+
+const bodyHandle = await page.$("body");
+const boundingBox = await bodyHandle.boundingBox();
 
 const imageBuffer = await page.screenshot({
 type: "png",
-clip: { x: 0, y: 0, width: 1200, height: 1200 },
+clip: {
+x: boundingBox.x,
+y: boundingBox.y,
+width: boundingBox.width,
+height: boundingBox.height,
+},
 });
 
+await bodyHandle.dispose();
 await browser.close();
 
 return new NextResponse(imageBuffer, {
