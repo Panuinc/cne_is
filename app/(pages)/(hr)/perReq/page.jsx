@@ -30,11 +30,38 @@ export default function PerReqList() {
     })();
   }, []);
 
+  const handleExportPDF = (posJobDesId) => {
+    if (!posJobDesId) {
+      toast.error("ไม่พบข้อมูลใบกำหนดลักษณะงาน");
+      return;
+    }
+
+    (async () => {
+      try {
+        const url = `/api/hr/posJobDes/posJobDesPDF/${posJobDesId}`;
+        const response = await fetch(url, {
+          headers: { "secret-token": SECRET_TOKEN || "" },
+        });
+
+        if (!response.ok) {
+          throw new Error("ไม่สามารถสร้าง PDF ได้");
+        }
+
+        const blob = await response.blob();
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, "_blank");
+      } catch (error) {
+        toast.error(error.message || "เกิดข้อผิดพลาดในการส่งออก PDF");
+      }
+    })();
+  };
+
   return (
     <UIPerReqList
       header="ขออัตรากำลังคน"
       data={perReqDataList}
       error={errorMessage}
+      onExportPDF={handleExportPDF}
     />
   );
 }
