@@ -16,7 +16,7 @@ export async function middleware(request) {
   const divisionName = token?.user?.divisionName;
 
   const isAdmin = roleName === "ผู้ดูแลระบบ";
-  const isHR = divisionName === "บุคคล";
+  const isHR = divisionName === "ทรัพยากรบุคคล";
 
   if (isAdmin || isHR) {
     return NextResponse.next();

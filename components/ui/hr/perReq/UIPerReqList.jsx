@@ -24,7 +24,7 @@ import {
 const statusOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
   { name: "รอผู้จัดการฝ่ายอนุมัติ", uniqueIdentifier: "PendingManagerApprove" },
-  { name: "รอผู้จัดการฝ่ายบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
+  { name: "รอผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ", uniqueIdentifier: "PendingHrApprove" },
   { name: "อนุมัติแล้ว", uniqueIdentifier: "ApprovedSuccess" },
   { name: "ยกเลิก", uniqueIdentifier: "Cancel" },
 ];
@@ -82,9 +82,9 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
         name: "ผู้จัดการฝ่ายอนุมัติวันที่",
         uid: "perReqReasonManagerApproveAt",
       },
-      { name: "ผู้จัดการฝ่ายบุคคลอนุมัติ", uid: "perReqReasonHrApproveBy" },
+      { name: "ผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ", uid: "perReqReasonHrApproveBy" },
       {
-        name: "ผู้จัดการฝ่ายบุคคลอนุมัติวันนที่",
+        name: "ผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติวันนที่",
         uid: "perReqReasonHrApproveAt",
       },
 
@@ -102,8 +102,8 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
     let result = data.filter((perReq) => {
       if (roleName === "ผู้ดูแลระบบ") return true;
-      if (roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล") return true;
-      if (divisionName === "บุคคล") return true;
+      if (roleName === "ผู้จัดการฝ่าย" && divisionName === "ทรัพยากรบุคคล") return true;
+      if (divisionName === "ทรัพยากรบุคคล") return true;
       if (perReq.perReqCreateBy === currentUserId) return true;
 
       const empEmployment = perReq.PerReqCreateBy?.empEmpEmployment?.[0];
@@ -157,7 +157,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
               color: "warning",
             },
             PendingHrApprove: {
-              label: "รอผู้จัดการฝ่ายบุคคลอนุมัติ",
+              label: "รอผู้จัดการฝ่ายทรัพยากรบุคคลอนุมัติ",
               color: "secondary",
             },
             ApprovedSuccess: { label: "อนุมัติแล้ว", color: "success" },
@@ -204,7 +204,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
 
           const canEdit =
             (roleName === "ผู้จัดการฝ่าย" &&
-              divisionName === "บุคคล" &&
+              divisionName === "ทรัพยากรบุคคล" &&
               isPendingHr) ||
             ((isOwner || isManager) && isPendingManager);
 
@@ -225,7 +225,7 @@ export default function UIPerReqList({ header, data = [], error = "" }) {
             );
           }
 
-          if (divisionName === "บุคคล") return null;
+          if (divisionName === "ทรัพยากรบุคคล") return null;
 
           return null;
 

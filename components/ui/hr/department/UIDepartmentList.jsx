@@ -64,7 +64,7 @@ export default function UIDepartmentList({ header, data = [], error = "" }) {
   const roleName = session?.user?.roleName;
   const divisionName = session?.user?.divisionName;
 
-  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "บุคคล";
+  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "ทรัพยากรบุคคล";
 
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");

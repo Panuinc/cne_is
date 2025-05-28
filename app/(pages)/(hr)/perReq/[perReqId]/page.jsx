@@ -120,7 +120,7 @@ export default function PerReqUpdate() {
     })();
   }, [perReqId]);
 
-  const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "บุคคล";
+  const isHrMgr = roleName === "ผู้จัดการฝ่าย" && divisionName === "ทรัพยากรบุคคล";
 
   const allowApprove = useMemo(() => {
     const isMgr =
