@@ -39,7 +39,7 @@ export default function PerReqList() {
 
     (async () => {
       try {
-        const url = `/api/hr/perReq/perReqPDF/${perReqId}`;
+        const url = `/api/hr/perReq/perReqImages/${perReqId}`;
         const response = await fetch(url, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
@@ -57,6 +57,40 @@ export default function PerReqList() {
     })();
   };
 
+  const handleExportImages = (perReqId) => {
+    if (!perReqId) {
+      toast.error("ไม่พบข้อมูลรูปสมัคงาน");
+      return;
+    }
+
+    (async () => {
+      try {
+        const url = `/api/hr/perReq/perReqImages/${perReqId}`;
+        const response = await fetch(url, {
+          headers: { "secret-token": SECRET_TOKEN || "" },
+        });
+
+        if (!response.ok) {
+          throw new Error("ไม่สามารถสร้างรูปภาพได้");
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = `perReq_${perReqId}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(imageUrl);
+      } catch (error) {
+        toast.error(error.message || "เกิดข้อผิดพลาดในการดาวน์โหลดรูปภาพ");
+      }
+    })();
+  };
+
   return (
     <>
       <Toaster position="top-right" />
@@ -65,6 +99,7 @@ export default function PerReqList() {
         data={perReqDataList}
         error={errorMessage}
         onExportPDF={handleExportPDF}
+        onExportImages={handleExportImages}
       />
     </>
   );

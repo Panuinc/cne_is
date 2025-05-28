@@ -7,7 +7,7 @@ import UIHeader from "@/components/other/UIHeader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Setting, Document } from "@/components/icons/icons";
+import { Folder, Setting, Document, Picture } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import {
@@ -66,6 +66,7 @@ export default function UIPerReqList({
   data = [],
   error = "",
   onExportPDF,
+  onExportImages,
 }) {
   const { data: session, status } = useSession();
   if (status === "loading") return null;
@@ -99,6 +100,7 @@ export default function UIPerReqList({
         uid: "perReqReasonHrApproveAt",
       },
       { name: "ใบขออัตรากำลังคน", uid: "perReqPdf" },
+      { name: "รูปใบรับประกาศสมัคงาน", uid: "perReqImages" },
       { name: "การจัดการ", uid: "actions" },
     ],
     []
@@ -223,6 +225,26 @@ export default function UIPerReqList({
             </Button>
           );
         }
+
+        case "perReqImages": {
+          const perReqId = item.perReqId;
+          const isApproved = item.perReqStatus === "ApprovedSuccess";
+
+          if (!isApproved || !perReqId) return "ยังไม่สามารถดาวน์โหลดได้";
+
+          return (
+            <Button
+              size="lg"
+              color="none"
+              radius="lg"
+              className="text-primary"
+              onPress={() => onExportImages?.(perReqId)}
+            >
+              <Picture />
+            </Button>
+          );
+        }
+
         case "actions":
           const isOwner = item.perReqCreateBy === currentUserId;
           const isManager =
