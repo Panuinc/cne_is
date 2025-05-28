@@ -33,6 +33,16 @@ export class PerReqService {
                     empIdCard: true,
                   },
                 },
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -46,6 +56,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -59,6 +79,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -72,6 +102,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -107,11 +147,20 @@ export class PerReqService {
                     empIdCard: true,
                   },
                 },
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
         },
-
         PerReqUpdateBy: {
           select: {
             empFirstNameTH: true,
@@ -121,6 +170,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -134,6 +193,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },
@@ -147,6 +216,16 @@ export class PerReqService {
               take: 1,
               select: {
                 empEmploymentSignature: true,
+                EmpEmploymentRoleId: {
+                  select: {
+                    roleName: true,
+                  },
+                },
+                EmpEmploymentDivisionId: {
+                  select: {
+                    divisionName: true,
+                  },
+                },
               },
             },
           },

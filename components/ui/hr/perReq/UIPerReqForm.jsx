@@ -36,8 +36,19 @@ export default function UIPerReqForm({
   const getSignatureBlock = (title, nameObj, sigFile, date) => {
     const isRequester = title === "ผู้ร้องขอ";
 
+    const roleName =
+      nameObj?.empEmpEmployment?.[0]?.EmpEmploymentRoleId?.roleName ||
+      (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)");
+
+    const divisionName =
+      nameObj?.empEmpEmployment?.[0]?.EmpEmploymentDivisionId?.divisionName ||
+      (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)");
+
     return (
       <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+        <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
+          {title}
+        </div>
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           {sigFile ? (
             <Image
@@ -54,6 +65,7 @@ export default function UIPerReqForm({
           )}
         </div>
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+          ลงชื่อ :{" "}
           {nameObj
             ? `(${nameObj.empFirstNameTH} ${nameObj.empLastNameTH})`
             : isRequester
@@ -61,10 +73,10 @@ export default function UIPerReqForm({
             : "(รออนุมัติ)"}
         </div>
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-          {date || (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)")}
+          วันที่ : {date || (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)")}
         </div>
         <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
-          {title}
+          {roleName} {divisionName}
         </div>
       </div>
     );
