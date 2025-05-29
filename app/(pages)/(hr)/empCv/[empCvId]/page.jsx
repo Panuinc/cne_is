@@ -18,6 +18,8 @@ export default function EmpCvUpdate() {
   const formRef = useRef(null);
 
   const [errorMessages, setErrorMessages] = useState({});
+  const [empPictureUrl, setEmpPictureUrl] = useState(null);
+  const [empFullData, setEmpFullData] = useState(null);
   const [empCvFormData, setEmpCvFormData] = useState({
     empCvName: "",
     empCvStatus: "",
@@ -29,14 +31,17 @@ export default function EmpCvUpdate() {
 
   useEffect(() => {
     if (!empCvId) return;
+
     (async () => {
       try {
         const res = await fetch(`/api/hr/empCv/${empCvId}`, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
         const json = await res.json();
+
         if (res.ok && json.empCv?.length) {
           const cv = json.empCv[0];
+
           setEmpCvFormData({
             empCvName: cv.empCvName || "",
             empCvStatus: cv.empCvStatus || "",
@@ -49,6 +54,20 @@ export default function EmpCvUpdate() {
               })) ?? [],
             empCvLanguageSkills: cv.empCvLanguageSkill ?? [],
           });
+
+          const empId = cv.empCvEmpId;
+          const empRes = await fetch(`/api/hr/empMain/${empId}`, {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          });
+          const empJson = await empRes.json();
+          if (empRes.ok && empJson.emp?.length) {
+            const emp = empJson.emp[0];
+            setEmpFullData(emp);
+            const pictureFile = emp.empEmpEmployment?.[0]?.empEmploymentPicture;
+            if (pictureFile) {
+              setEmpPictureUrl(`/empEmployment/userPicture/${pictureFile}`);
+            }
+          }
         } else {
           toast.error(json.error || "Error fetching CV data");
         }
@@ -229,6 +248,8 @@ export default function EmpCvUpdate() {
         handleRemoveProject={handleRemoveProject}
         operatedBy={nameTH}
         exportPdf={exportPdf}
+        empPictureUrl={empPictureUrl}
+        empFullData={empFullData}
       />
     </>
   );
