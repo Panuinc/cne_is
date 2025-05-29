@@ -6,7 +6,7 @@ import { Tree, TreeNode } from "react-organizational-chart";
 
 function StatBox({ label, value }) {
   return (
-    <div className="flex flex-col items-center justify-evenly w-full h-full p-4 bg-primary text-white rounded-xl">
+    <div className="flex flex-col items-center justify-evenly w-full h-full p-4 bg-primary text-white shadow-md rounded-xl">
       <div className="font-[600]">{label}</div>
       <div className="text-xl font-[600]">{value}</div>
     </div>
@@ -52,7 +52,7 @@ export default function UIOrganize({
   const renderNode = (node) => (
     <TreeNode
       label={
-        <div className="rounded-xl bg-white border-1 border-dark p-4 text-sm text-center">
+        <div className="bg-white shadow-md rounded-xl p-4 text-sm text-center">
           <div className="font-[600]">{node.name}</div>
           <div className="text-xs text-dark/50">{node.type}</div>
         </div>
@@ -67,8 +67,8 @@ export default function UIOrganize({
   return (
     <>
       <UIHeader Header="แผนผังองค์กร" />
-      <div className="flex flex-col items-center justify-start w-full h-full p-4 gap-4 bg-white overflow-auto">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-60 p-2 gap-4 bg-white">
+      <div className="flex flex-col items-center justify-start w-full h-full gap-6 bg-default overflow-auto">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-60 p-2 gap-4 bg-white shadow-md rounded-xl">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
             <div className="text-xl font-[600]">STRUCTURE</div>
             <div className="text-lg font-[600]">CHANNAKORN ENGINEER</div>
@@ -87,7 +87,7 @@ export default function UIOrganize({
             lineColor={"#00000050"}
             lineBorderRadius={"10px"}
             label={
-              <div className="p-4 text-sm text-center bg-white border-1 border-dark rounded-xl">
+              <div className="p-4 text-sm text-center bg-white shadow-md rounded-xl">
                 <div className="font-[600]">{treeData.name}</div>
                 <div className="text-xs text-dark/50">{treeData.type}</div>
               </div>
