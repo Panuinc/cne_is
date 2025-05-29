@@ -187,7 +187,7 @@ export default function UIPerReqList({
               size="sm"
               color={color}
               radius="full"
-              className="min-w-10 min-h-10 text-dark"
+              className="min-w-10 min-h-10 text-white"
             >
               {label}
             </Button>
