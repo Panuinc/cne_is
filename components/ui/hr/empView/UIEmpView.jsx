@@ -77,7 +77,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
   return (
     <>
       <UIHeader Header={header} />
-      <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto">
+      <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto">
         <div className="relative w-full">
           <div
             className="w-full h-72"
