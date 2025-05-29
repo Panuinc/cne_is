@@ -103,7 +103,7 @@ export default function UIEmpEmploymentForm({
                   label="รูปพนักงาน"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   accept="image/*"
@@ -135,7 +135,7 @@ export default function UIEmpEmploymentForm({
               label="รหัสพนักงาน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empEmploymentNumber || ""}
@@ -151,7 +151,7 @@ export default function UIEmpEmploymentForm({
               label="เลขบัตรพนักงาน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empEmploymentCardNumber || ""}
@@ -169,7 +169,7 @@ export default function UIEmpEmploymentForm({
               label="ประเภทพนักงาน"
               placeholder="Please Select Data"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               selectedKeys={
@@ -196,7 +196,7 @@ export default function UIEmpEmploymentForm({
               label="ฝ่าย"
               placeholder="เลือกฝ่าย"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               selectedKeys={
@@ -224,7 +224,7 @@ export default function UIEmpEmploymentForm({
               label="แผนก"
               placeholder="เลือกแผนก"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={!formData.empEmploymentDivisionId}
@@ -253,7 +253,7 @@ export default function UIEmpEmploymentForm({
               label="ตำแหน่ง"
               placeholder="เลือกตำแหน่ง"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={
@@ -285,7 +285,7 @@ export default function UIEmpEmploymentForm({
               label="บทบาทหน้าที่"
               placeholder="เลือกบทบาทหน้าที่"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               selectedKeys={
@@ -310,7 +310,7 @@ export default function UIEmpEmploymentForm({
               label="ผู้บังคับบัญชา"
               placeholder="เลือกผู้บังคับบัญชา"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={!formData.empEmploymentDivisionId}
@@ -340,7 +340,7 @@ export default function UIEmpEmploymentForm({
               label="วันที่เริ่มงาน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empEmploymentStartWork || ""}
@@ -437,7 +437,7 @@ export default function UIEmpEmploymentForm({
                     label="ประเภทของพนักงาน"
                     placeholder="Please Select Data"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentEnterType || ""}
@@ -511,7 +511,7 @@ export default function UIEmpEmploymentForm({
                     label="เลขที่ Passport NO"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentPassportNumber}
@@ -529,7 +529,7 @@ export default function UIEmpEmploymentForm({
                     label="วันที่ออกหน้า Passport"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentPassportStartDate}
@@ -547,7 +547,7 @@ export default function UIEmpEmploymentForm({
                     label="วันที่หมดหน้า Passport"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentPassportEndDate}
@@ -565,7 +565,7 @@ export default function UIEmpEmploymentForm({
                     label="ออกให้โดย"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentPassportIssuedBy}
@@ -583,7 +583,7 @@ export default function UIEmpEmploymentForm({
                     label="สถานที่เกิด"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentPlaceOfBirth}
@@ -601,7 +601,7 @@ export default function UIEmpEmploymentForm({
                     label="เข้ามาทางด่าน"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentEnterCheckPoint}
@@ -617,7 +617,7 @@ export default function UIEmpEmploymentForm({
                     label="วันที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentEnterDate}
@@ -635,7 +635,7 @@ export default function UIEmpEmploymentForm({
                     label="ตม ๖. ลำดับที่ "
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentImmigration}
@@ -651,7 +651,7 @@ export default function UIEmpEmploymentForm({
                     label="ตรวจลงตราประเภท"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentTypeOfVisa}
@@ -669,7 +669,7 @@ export default function UIEmpEmploymentForm({
                     label="เลขที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentVisaNumber}
@@ -685,7 +685,7 @@ export default function UIEmpEmploymentForm({
                     label="ออกให้ที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentVisaIssuedBy}
@@ -703,7 +703,7 @@ export default function UIEmpEmploymentForm({
                     label="ใบอนุญาตทำงานปัจจุบัน เลขที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentWorkPermitNumber}
@@ -721,7 +721,7 @@ export default function UIEmpEmploymentForm({
                     label="ออกให้วันที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentWorkPermitStartDate}
@@ -741,7 +741,7 @@ export default function UIEmpEmploymentForm({
                     label="ใช้ได้ถึงวันที่"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentWorkPermitEndDate}
@@ -759,7 +759,7 @@ export default function UIEmpEmploymentForm({
                     label="ออกให้ที่จังหวัด"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentWorkPermitIssuedBy}
@@ -779,7 +779,7 @@ export default function UIEmpEmploymentForm({
                     label="เลขที่ประกันสังคม"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentSsoNumber}
@@ -795,7 +795,7 @@ export default function UIEmpEmploymentForm({
                     label="ชื่อสถานรักษาพยาบาล"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData.empEmploymentSsoHospital}
@@ -815,7 +815,7 @@ export default function UIEmpEmploymentForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

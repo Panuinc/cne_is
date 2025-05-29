@@ -61,7 +61,7 @@ export default function UIIndex(props) {
                 label="ชื่อบัญชีผู้ใช้"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={empUserUsername}
@@ -75,7 +75,7 @@ export default function UIIndex(props) {
                 label="รหัสผ่าน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={empUserCredential}

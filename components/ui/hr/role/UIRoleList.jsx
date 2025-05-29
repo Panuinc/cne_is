@@ -39,7 +39,7 @@ const UISelectFilter = ({
   <Select
     label={label}
     size="md"
-    variant="bordered"
+    variant="underlined"
     color="none"
     radius="lg"
     isDisabled={isDisabled}
@@ -183,7 +183,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
               label="ค้นหา"
               placeholder="ค้นหาโดยข้อมูล ระดับตำแหน่ง"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={searchTerm}
@@ -228,7 +228,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
               label="จำนวนข้อมูล"
               placeholder="จำนวนข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               selectedKeys={[String(rowsPerPage)]}

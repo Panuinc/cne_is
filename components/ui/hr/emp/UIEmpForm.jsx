@@ -30,7 +30,7 @@ export default function UIRoleForm({
               label="คำนำหน้าชื่อ"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empTitle || ""}
@@ -60,7 +60,7 @@ export default function UIRoleForm({
               label="ชื่อพนักงาน (TH)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empFirstNameTH}
@@ -76,7 +76,7 @@ export default function UIRoleForm({
               label="นามสกุลพนักงาน (TH)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empLastNameTH}
@@ -95,7 +95,7 @@ export default function UIRoleForm({
               label="ชื่อพนักงาน (EN)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empFirstNameEN}
@@ -111,7 +111,7 @@ export default function UIRoleForm({
               label="นามสกุลพนักงาน (EN)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empLastNameEN}
@@ -130,7 +130,7 @@ export default function UIRoleForm({
               label="อีเมลล์"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empEmail}
@@ -146,7 +146,7 @@ export default function UIRoleForm({
               label="เบอร์โทรศัพท์"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empTel}
@@ -165,7 +165,7 @@ export default function UIRoleForm({
               label="เลขบัตรประชาชน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empIdCard}
@@ -181,7 +181,7 @@ export default function UIRoleForm({
               label="วันเกิด"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empBirthday}
@@ -199,7 +199,7 @@ export default function UIRoleForm({
               label="สัญชาติ"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empCitizen || ""}
@@ -231,7 +231,7 @@ export default function UIRoleForm({
               label="เพศ"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empGender || ""}
@@ -258,7 +258,7 @@ export default function UIRoleForm({
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empStatus || ""}
@@ -285,7 +285,7 @@ export default function UIRoleForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

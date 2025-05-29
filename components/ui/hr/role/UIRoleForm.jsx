@@ -31,7 +31,7 @@ export default function UIRoleForm({
               label="ระดับตำแหน่ง"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.roleName || ""}
@@ -50,7 +50,7 @@ export default function UIRoleForm({
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.roleStatus || ""}
@@ -77,7 +77,7 @@ export default function UIRoleForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

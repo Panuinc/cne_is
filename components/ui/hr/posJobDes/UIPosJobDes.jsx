@@ -91,7 +91,7 @@ export default function UIPosJobDes({
                   label="อายุ"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   value={formData.posJobDesAge || ""}
@@ -112,7 +112,7 @@ export default function UIPosJobDes({
                   label="เพศ"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   selectedKeys={
@@ -155,7 +155,7 @@ export default function UIPosJobDes({
                   }`}
                   placeholder={`1. ...\n2. ...\n3. ...`}
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   minRows={4}
@@ -219,7 +219,7 @@ export default function UIPosJobDes({
               name="posJobDesResponsibility"
               placeholder={`1. ...\n2. ...\n3. ...`}
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               minRows={4}
@@ -238,7 +238,7 @@ export default function UIPosJobDes({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

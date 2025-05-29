@@ -33,7 +33,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารบัตรประชาชน"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentIdCardFile || ""}
@@ -59,7 +59,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารทะเบียนบ้าน"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentHomeFile || ""}
@@ -86,7 +86,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารใบประกอบวิชาชีพ"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentProfessionalCertificateFile || ""}
@@ -114,7 +114,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารวุฒิการศึกษา"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentEducationsFile || ""}
@@ -151,7 +151,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารพาสปอร์ต"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentPassportFile || ""}
@@ -178,7 +178,7 @@ export default function UIEmpDocumentForm({
                 label="เอกสารตรวจคนเข้าเมือง"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentImmigrationFile || ""}
@@ -205,7 +205,7 @@ export default function UIEmpDocumentForm({
                 label="ใบแจ้งออกจากที่เก่า"
                 placeholder="https://example.com"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.empDocumentOldPlaceFile || ""}
@@ -238,7 +238,7 @@ export default function UIEmpDocumentForm({
                     label={`VISA ปีที่ ${year}`}
                     placeholder="https://example.com"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData[name] || ""}
@@ -273,7 +273,7 @@ export default function UIEmpDocumentForm({
                     label={`ใบอนุญาตทำงาน ปีที่ ${year}`}
                     placeholder="https://example.com"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData[name] || ""}
@@ -308,7 +308,7 @@ export default function UIEmpDocumentForm({
                     label={`ใบเปลี่ยนนายจ้าง ${year}`}
                     placeholder="https://example.com"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={formData[name] || ""}
@@ -339,7 +339,7 @@ export default function UIEmpDocumentForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

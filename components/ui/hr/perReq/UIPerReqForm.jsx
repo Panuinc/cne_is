@@ -241,7 +241,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="date"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqDesiredDate || ""}
@@ -263,7 +263,7 @@ export default function UIPerReqForm({
                 name="perReqDivisionId"
                 placeholder="Please Enter Data"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 selectedKeys={
@@ -296,7 +296,7 @@ export default function UIPerReqForm({
                 name="perReqDepartmentId"
                 placeholder="Please Enter Data"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 isDisabled={!formData.perReqDivisionId}
@@ -330,7 +330,7 @@ export default function UIPerReqForm({
                 name="perReqPositionId"
                 placeholder="Please Enter Data"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 isDisabled={
@@ -367,7 +367,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="number"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqAmount || ""}
@@ -416,7 +416,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="number"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqEmpEmploymentTypeNote || ""}
@@ -472,7 +472,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="text"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqReasonForRequestNote || ""}
@@ -500,7 +500,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="text"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqReasonAge || ""}
@@ -584,7 +584,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="text"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 required
@@ -683,7 +683,7 @@ export default function UIPerReqForm({
                 placeholder="Please Enter Data"
                 type="text"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.perReqComputerSkillIsOther || ""}
@@ -807,7 +807,7 @@ export default function UIPerReqForm({
                   name="perReqProfessionalLicenseLevel"
                   placeholder="-- เลือกระดับ --"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="none"
                   radius="lg"
                   selectedKeys={(() => {

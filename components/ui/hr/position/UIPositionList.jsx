@@ -39,7 +39,7 @@ const UISelectFilter = ({
   <Select
     label={label}
     size="md"
-    variant="bordered"
+    variant="underlined"
     color="none"
     radius="lg"
     isDisabled={isDisabled}
@@ -264,7 +264,7 @@ export default function UIPositionList({
               label="ค้นหา"
               placeholder="ค้นหาโดยข้อมูล ตำแหน่งงาน"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={searchTerm}
@@ -325,7 +325,7 @@ export default function UIPositionList({
               label="จำนวนข้อมูล"
               placeholder="จำนวนข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               selectedKeys={[String(rowsPerPage)]}

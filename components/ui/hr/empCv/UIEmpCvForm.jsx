@@ -47,7 +47,7 @@ export default function UIEmpCvForm({
                     label="ระดับการศึกษา (TH)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationDegreeTH || ""}
@@ -67,7 +67,7 @@ export default function UIEmpCvForm({
                     label="ระดับการศึกษา (EN)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationDegreeEN || ""}
@@ -87,7 +87,7 @@ export default function UIEmpCvForm({
                     label="สถาบันการศึกษา (TH)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationInstitutionTH || ""}
@@ -104,7 +104,7 @@ export default function UIEmpCvForm({
                     label="สถาบันการศึกษา (EN)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationInstitutionEN || ""}
@@ -125,7 +125,7 @@ export default function UIEmpCvForm({
                     label="วันที่เริ่ม"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationStartDate?.slice(0, 10) || ""}
@@ -146,7 +146,7 @@ export default function UIEmpCvForm({
                     label="วันที่สิ้นสุด"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={edu.empCvEducationEndDate?.slice(0, 10) || ""}
@@ -209,7 +209,7 @@ export default function UIEmpCvForm({
                     label="ชื่อใบอนุญาตประกอบวิชาชีพ (TH)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={lic.empCvLicenseNameTH || ""}
@@ -226,7 +226,7 @@ export default function UIEmpCvForm({
                     label="ชื่อใบอนุญาตประกอบวิชาชีพ (EN)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={lic.empCvLicenseNameEN || ""}
@@ -246,7 +246,7 @@ export default function UIEmpCvForm({
                     label="หมายเลขใบอนุญาตประกอบวิชาชีพ"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={lic.empCvLicenseNumber || ""}
@@ -264,7 +264,7 @@ export default function UIEmpCvForm({
                     label="วันที่เริ่ม"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={lic.empCvLicenseStartDate?.slice(0, 10) || ""}
@@ -282,7 +282,7 @@ export default function UIEmpCvForm({
                     label="วันที่สิ้นสุด"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={lic.empCvLicenseEndDate?.slice(0, 10) || ""}
@@ -345,7 +345,7 @@ export default function UIEmpCvForm({
                     label="ชื่อบริษัท (TH)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryCompanyNameTH || ""}
@@ -362,7 +362,7 @@ export default function UIEmpCvForm({
                     label="ชื่อบริษัท (EN)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryCompanyNameEN || ""}
@@ -382,7 +382,7 @@ export default function UIEmpCvForm({
                     label="ตำแหน่งงาน (TH)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryPositionTH || ""}
@@ -399,7 +399,7 @@ export default function UIEmpCvForm({
                     label="ตำแหน่งงาน (EN)"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryPositionEN || ""}
@@ -420,7 +420,7 @@ export default function UIEmpCvForm({
                     label="วันที่เริ่ม"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryStartDate?.slice(0, 10) || ""}
@@ -438,7 +438,7 @@ export default function UIEmpCvForm({
                     label="วันที่สิ้นสุด"
                     placeholder="กรุณากรอกข้อมูล"
                     size="md"
-                    variant="bordered"
+                    variant="underlined"
                     color="primary"
                     radius="lg"
                     value={wh.empCvWorkHistoryEndDate?.slice(0, 10) || ""}
@@ -470,7 +470,7 @@ export default function UIEmpCvForm({
                           label="ชื่อโปรเจค (TH)"
                           placeholder="กรุณากรอกข้อมูล"
                           size="md"
-                          variant="bordered"
+                          variant="underlined"
                           color="primary"
                           radius="lg"
                           value={proj.empCvProjectNameTH || ""}
@@ -487,7 +487,7 @@ export default function UIEmpCvForm({
                           label="ชื่อโปรเจค (EN)"
                           placeholder="กรุณากรอกข้อมูล"
                           size="md"
-                          variant="bordered"
+                          variant="underlined"
                           color="primary"
                           radius="lg"
                           value={proj.empCvProjectNameEN || ""}
@@ -507,7 +507,7 @@ export default function UIEmpCvForm({
                           label="รายละเอียดโปรเจค (TH)"
                           placeholder="กรุณากรอกข้อมูล"
                           size="md"
-                          variant="bordered"
+                          variant="underlined"
                           color="primary"
                           radius="lg"
                           value={proj.empCvProjectDescriptionTH || ""}
@@ -524,7 +524,7 @@ export default function UIEmpCvForm({
                           label="รายละเอียดโปรเจค (EN)"
                           placeholder="กรุณากรอกข้อมูล"
                           size="md"
-                          variant="bordered"
+                          variant="underlined"
                           color="primary"
                           radius="lg"
                           value={proj.empCvProjectDescriptionEN || ""}
@@ -619,7 +619,7 @@ export default function UIEmpCvForm({
                   label="ความสามารถทางภาษา (TH)"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   value={lang.empCvLanguageSkillNameTH || ""}
@@ -636,7 +636,7 @@ export default function UIEmpCvForm({
                   label="ความสามารถทางภาษา (EN)"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   value={lang.empCvLanguageSkillNameEN || ""}
@@ -653,7 +653,7 @@ export default function UIEmpCvForm({
                   label="ระดับคะแนน"
                   placeholder="กรุณากรอกข้อมูล"
                   size="md"
-                  variant="bordered"
+                  variant="underlined"
                   color="primary"
                   radius="lg"
                   selectedKeys={
@@ -712,7 +712,7 @@ export default function UIEmpCvForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

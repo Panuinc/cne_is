@@ -31,7 +31,7 @@ export default function UIDivisionForm({
               label="ฝ่าย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.divisionName || ""}
@@ -47,7 +47,7 @@ export default function UIDivisionForm({
               label="ตัวย่อฝ่าย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.divisionNameShot || ""}
@@ -66,7 +66,7 @@ export default function UIDivisionForm({
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.divisionStatus || ""}
@@ -95,7 +95,7 @@ export default function UIDivisionForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

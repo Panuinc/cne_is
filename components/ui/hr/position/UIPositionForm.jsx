@@ -32,7 +32,7 @@ export default function UIPositionForm({
               label="ฝ่าย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={isUpdate}
@@ -58,7 +58,7 @@ export default function UIPositionForm({
               label="แผนก"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={!formData.positionDivisionId || isUpdate}
@@ -91,7 +91,7 @@ export default function UIPositionForm({
               label="ตำแหน่งงาน (TH)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.positionNameTH || ""}
@@ -107,7 +107,7 @@ export default function UIPositionForm({
               label="ตำแหน่งงาน (EN)"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.positionNameEN || ""}
@@ -126,7 +126,7 @@ export default function UIPositionForm({
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.positionStatus || ""}
@@ -155,7 +155,7 @@ export default function UIPositionForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

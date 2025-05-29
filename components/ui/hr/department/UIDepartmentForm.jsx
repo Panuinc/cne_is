@@ -31,7 +31,7 @@ export default function UIDepartmentForm({
               label="ฝ่าย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               isDisabled={isUpdate}
@@ -58,7 +58,7 @@ export default function UIDepartmentForm({
               label="แผนก"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.departmentName || ""}
@@ -77,7 +77,7 @@ export default function UIDepartmentForm({
                 label="สถานะการใช้งาน"
                 placeholder="กรุณากรอกข้อมูล"
                 size="md"
-                variant="bordered"
+                variant="underlined"
                 color="none"
                 radius="lg"
                 value={formData.departmentStatus || ""}
@@ -106,7 +106,7 @@ export default function UIDepartmentForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}

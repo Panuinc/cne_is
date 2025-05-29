@@ -45,7 +45,7 @@ export default function UIChangePassword({
             label="รหัสผ่านใหม่"
             placeholder="กรุณากรอกข้อมูล"
             size="md"
-            variant="bordered"
+            variant="underlined"
             color="primary"
             radius="lg"
             value={newPassword}
@@ -60,7 +60,7 @@ export default function UIChangePassword({
             label="ยืนยันรหัสผ่าน"
             placeholder="กรุณากรอกข้อมูล"
             size="md"
-            variant="bordered"
+            variant="underlined"
             color="primary"
             radius="lg"
             value={confirmPassword}

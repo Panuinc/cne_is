@@ -31,7 +31,7 @@ export default function UIEmpUserForm({
               label="ชื่อบัญชี"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empUserUsername || ""}
@@ -47,7 +47,7 @@ export default function UIEmpUserForm({
               label="รหัสผ่าน"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={formData.empUserPassword || ""}
@@ -65,7 +65,7 @@ export default function UIEmpUserForm({
               label="ดำเนินการโดย"
               placeholder="กรุณากรอกข้อมูล"
               size="md"
-              variant="bordered"
+              variant="underlined"
               color="none"
               radius="lg"
               value={operatedBy}
