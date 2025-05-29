@@ -101,7 +101,7 @@ export default function UIPerReqList({
         uid: "perReqReasonHrApproveAt",
       },
       { name: "ใบขออัตรากำลังคน", uid: "perReqPdf" },
-      { name: "รูปใบรับประกาศสมัคงาน", uid: "perReqImages" },
+      { name: "รูปใบรับประกาศสมัครงาน", uid: "perReqImages" },
       { name: "การจัดการ", uid: "actions" },
     ],
     []

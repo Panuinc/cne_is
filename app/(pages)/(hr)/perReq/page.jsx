@@ -60,7 +60,7 @@ export default function PerReqList() {
 
   const handleExportImages = (perReqId) => {
     if (!perReqId) {
-      toast.error("ไม่พบข้อมูลรูปสมัคงาน");
+      toast.error("ไม่พบข้อมูลรูปสมัครงาน");
       return;
     }
 
