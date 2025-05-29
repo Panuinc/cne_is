@@ -6,8 +6,8 @@ body {
   font-family: var(--nunito), var(--kanit);
   font-weight: 300;
   font-size: 0.85rem;
-  color: #232323;
-  background-color: #ECECEC;
+  color: #1F2A3D;
+  background-color: #F4F7FB;
 }
 
 [lang|="th"] {
@@ -21,15 +21,15 @@ body {
 
 .bg-content1 {
   background-color: #FFFFFF;
-  color: #232323;
+  color: #1F2A3D;
 }
 
 .bg-default-100 {
   background-color: #FFFFFF;
-  color: #232323;
+  color: #1F2A3D;
 }
 
 /* .border-default-200 {
     border-color: #FFFFFF;
-    box-shadow: 0 1px 2px 0 #232323;
+    box-shadow: 0 1px 2px 0 #1F2A3D;
 } */
