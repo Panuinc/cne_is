@@ -102,7 +102,7 @@ export default function UIIndex(props) {
                   ref={(el) => {
                     inputRefs.current[index] = el;
                   }}
-                  className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-gradient-to-br from-primary/70 to-info rounded-full"
+                  className="flex items-center justify-center w-12 h-12 p-2 gap-2 text-white text-center bg-cool-gradient rounded-full"
                 />
               ))}
             </div>
@@ -143,7 +143,7 @@ export default function UIIndex(props) {
           )}
         </div>
       </div>
-      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-gradient-to-br from-primary/70 to-info rounded-tr-3xl rounded-br-3xl">
+      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-cool-gradient rounded-tr-3xl rounded-br-3xl">
         <div className="flex items-center justify-center w-full min-h-[600px] p-2 gap-2 relative">
           <Image
             src="/mascot/mascot-1.png"

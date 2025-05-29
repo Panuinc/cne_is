@@ -29,7 +29,7 @@ export default function UINotFound() {
         </div>
       </div>
 
-      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-gradient-to-br from-primary/70 to-info rounded-tr-3xl rounded-br-3xl">
+      <div className="xl:flex hidden flex-col items-center justify-center w-full h-full p-2 gap-2 bg-cool-gradient rounded-tr-3xl rounded-br-3xl">
         <div className="flex items-center justify-center w-full min-h-[600px] p-2 gap-2 relative">
           <Image
             src="/mascot/mascot-2.png"

@@ -22,6 +22,10 @@ module.exports = {
         danger: "#FF6692",
         success: "#2EA95C",
       },
+      backgroundImage: {
+        "cool-gradient":
+          "linear-gradient(to bottom right, rgba(22, 205, 199, 0.7), #46CAEB)",
+      },
       fontFamily: {
         kanit: ["var(--kanit)"],
         nunito: ["var(--nunito)"],

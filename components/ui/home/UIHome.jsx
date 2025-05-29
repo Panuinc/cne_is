@@ -27,7 +27,7 @@ export default function UIHome() {
     <>
       <UIHeader Header="หน้าหลัก" />
       <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-6 overflow-auto">
-        <div className="flex flex-col xl:flex-row items-center justify-between w-full p-8 bg-gradient-to-br from-primary/70 to-info text-white rounded-3xl shadow-md">
+        <div className="flex flex-col xl:flex-row items-center justify-between w-full p-8 bg-cool-gradient text-white rounded-3xl shadow-md">
           <div className="flex flex-col gap-2 text-center xl:text-left">
             <h2 className="text-xl sm:text-2xl font-semibold opacity-90">
               👷‍♂️ Welcome to
