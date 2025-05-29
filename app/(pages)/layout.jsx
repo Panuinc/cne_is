@@ -96,7 +96,9 @@ const toolMenu = (tool, index, pathname) => {
       <Link
         href={tool.href}
         className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 rounded-xl ${
-          isActive ? "bg-primary text-white" : "hover:bg-primary/25 hover:text-primary"
+          isActive
+            ? "bg-primary text-white"
+            : "hover:bg-primary/25 hover:text-primary"
         }`}
       >
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -168,7 +170,9 @@ const mainMenuItem = (menu, pathname) => {
       key={menu.href}
       href={menu.href}
       className={`flex items-center justify-center w-full p-2 gap-2 cursor-pointer ${
-        isActive ? "bg-primary text-white shadow-md rounded-xl" : "hover:text-primary"
+        isActive
+          ? "bg-primary text-white shadow-md rounded-xl"
+          : "hover:text-primary"
       }`}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
