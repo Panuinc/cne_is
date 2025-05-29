@@ -138,7 +138,7 @@ const topBar = (session, currentTime, setOpenMobile) => (
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 bg-primary/50 rounded-xl border-1 border-primary text-white shadow-md">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 text-primary">
       <Clock /> {currentTime}
     </div>
     <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2">
