@@ -71,7 +71,8 @@ export default function UIEmpList({ header, data = [], error = "" }) {
   const roleName = session?.user?.roleName;
   const divisionName = session?.user?.divisionName;
 
-  const canManage = roleName === "ผู้ดูแลระบบ" || divisionName === "ทรัพยากรบุคคล";
+  const canManage =
+    roleName === "ผู้ดูแลระบบ" || divisionName === "ทรัพยากรบุคคล";
 
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
@@ -218,34 +219,34 @@ export default function UIEmpList({ header, data = [], error = "" }) {
         if (empUserId) {
           router.push(`/empUser/${empUserId}`);
         } else {
-          alert("Emp User information for this employee was not found");
+          toast.error("ไม่พบข้อมูลบัญชีผู้ใช้งานของพนักงานคนนี้");
         }
       } else if (action === "empEmployment") {
         const empEmploymentId = item.empEmpEmployment?.[0]?.empEmploymentId;
         if (empEmploymentId) {
           router.push(`/empEmployment/${empEmploymentId}`);
         } else {
-          alert("Emp Employment information for this employee was not found");
+          toast.error("ไม่พบข้อมูลการจ้างงานของพนักงานคนนี้");
         }
       } else if (action === "empCv") {
         const empCvId = item.empEmpCv?.[0]?.empCvId;
         if (empCvId) {
           router.push(`/empCv/${empCvId}`);
         } else {
-          alert("Emp Cv information for this employee was not found");
+          toast.error("ไม่พบเรซูเม่ของพนักงานคนนี้");
         }
       } else if (action === "empDocument") {
         const empDocumentId = item.empEmpDocument?.[0]?.empDocumentId;
         if (empDocumentId) {
           router.push(`/empDocument/${empDocumentId}`);
         } else {
-          alert("Emp Document information for this employee was not found");
+          toast.error("ไม่พบเอกสารของพนักงานคนนี้");
         }
       }
     },
     [router]
   );
-
+  
   const renderCell = useCallback(
     (item, idx, colKey) => {
       switch (colKey) {

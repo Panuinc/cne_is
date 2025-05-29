@@ -3,6 +3,7 @@
 import UIEmpList from "@/components/ui/hr/emp/UIEmpList";
 
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
@@ -31,10 +32,9 @@ export default function EmpList() {
   }, []);
 
   return (
-    <UIEmpList
-      header="พนักงาน"
-      data={empDataList}
-      error={errorMessage}
-    />
+    <>
+      <Toaster position="top-right" />
+      <UIEmpList header="พนักงาน" data={empDataList} error={errorMessage} />
+    </>
   );
 }
