@@ -383,7 +383,7 @@ export default function UIEmpEmploymentForm({
                   ref={signatureRef}
                   penColor="black"
                   canvasProps={{
-                    className: "w-full signature-canvas border rounded-md",
+                    className: "w-full signature-canvas border rounded-xl",
                   }}
                 />
                 <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
