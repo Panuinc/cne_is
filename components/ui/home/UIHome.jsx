@@ -39,7 +39,7 @@ export default function UIHome() {
               ระบบบริหารงานภายในองค์กร
             </p>
           </div>
-          <div className="mt-6 xl:mt-0 xl:ml-8 flex items-center justify-center w-48 h-48 xl:w-52 xl:h-52 rounded-xl overflow-hidden shadow-inner bg-white/10">
+          <div className="mt-6 xl:mt-0 xl:ml-8 flex items-center justify-center w-48 h-48 xl:w-52 xl:h-52 rounded-3xl overflow-hidden shadow-inner bg-white/10">
             <img
               src="/mascot/mascot-1.png"
               alt="Welcome Illustration"
