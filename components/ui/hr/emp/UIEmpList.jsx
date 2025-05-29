@@ -392,7 +392,7 @@ export default function UIEmpList({ header, data = [], error = "" }) {
           </div>
           <div className="flex items-center justify-end w-full h-full p-2 gap-2">
             <Button
-              color="secondary"
+              color="danger"
               size="md"
               radius="lg"
               startContent={<Trash />}
