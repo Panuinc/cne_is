@@ -283,7 +283,7 @@ export default function UIPositionList({
                 className="flex items-center justify-center w-full h-full p-4 gap-2"
                 startContent={<Folder />}
               >
-                เพิ่มใหม่
+                เพิ่ม
               </Button>
             )}
           </div>
