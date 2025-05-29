@@ -6,7 +6,7 @@ body {
   font-family: var(--nunito), var(--kanit);
   font-weight: 300;
   font-size: 0.85rem;
-  color: #1F2A3D;
+  color: #6b7280;
   background-color: #F4F7FB;
 }
 
@@ -21,15 +21,15 @@ body {
 
 .bg-content1 {
   background-color: #FFFFFF;
-  color: #1F2A3D;
+  color: #6b7280;
 }
 
 .bg-default-100 {
   background-color: #FFFFFF;
-  color: #1F2A3D;
+  color: #6b7280;
 }
 
 /* .border-default-200 {
     border-color: #FFFFFF;
-    box-shadow: 0 1px 2px 0 #1F2A3D;
+    box-shadow: 0 1px 2px 0 #6b7280;
 } */

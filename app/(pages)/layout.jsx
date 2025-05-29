@@ -9,7 +9,6 @@ import Link from "next/link";
 import {
   Bell,
   Hamburger,
-  Left,
   Search,
   CneSystem,
   CneCloud,
@@ -37,22 +36,22 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
   return (
     <div
       key={menu.key}
-      className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark"
+      className="flex flex-col items-center justify-center w-full p-2 gap-2"
     >
       <div
-        className={`flex items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-primary hover:text-white cursor-pointer ${
-          isSubActive ? "bg-primary text-white" : ""
+        className={`flex items-center justify-center w-full p-2 gap-2 hover:text-primary cursor-pointer ${
+          isSubActive ? "text-primary" : ""
         }`}
         onClick={() => toggleSubmenu(menu.key)}
       >
-        <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center h-full p-2 gap-2">
           {menu.icon}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2">
           {menu.title}
         </div>
         <div
-          className={`flex items-center justify-center h-full p-2 gap-2 border-2 border-dark transform transition-transform duration-300 ${
+          className={`flex items-center justify-center h-full p-2 gap-2 transform transition-transform duration-300 ${
             submenuOpen[menu.key] ? "-rotate-180" : "rotate-0"
           }`}
         >
@@ -60,14 +59,14 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
         </div>
       </div>
       {submenuOpen[menu.key] && (
-        <div className="flex flex-col w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col w-full h-full p-2 gap-2">
           {menu.submenus.map((sub, idx) => (
             <Link
               key={idx}
               href={sub.href}
-              className={`flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark hover:bg-primary hover:text-white ${
+              className={`flex items-center justify-start w-full h-full p-4 gap-2 hover:text-primary cursor-pointer ${
                 pathname === sub.href || pathname.startsWith(sub.href)
-                  ? "bg-primary text-white"
+                  ? "bg-primary text-white shadow-md rounded-xl"
                   : ""
               }`}
             >
@@ -80,33 +79,28 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
   );
 };
 
-const toolMenu = (tool, index, collapsed, pathname) => {
+const toolMenu = (tool, index, pathname) => {
   const isActive = pathname === tool.href || pathname.startsWith(tool.href);
 
   return (
     <Link
       key={index}
       href={tool.href}
-      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-primary hover:text-white ${
+      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary/25 hover:text-primary rounded-xl ${
         isActive ? "bg-primary text-white" : ""
       }`}
     >
-      <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         {tool.icon}
       </div>
-      {!collapsed && (
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-          {tool.label}
-        </div>
-      )}
     </Link>
   );
 };
 
 const topBar = (session, currentTime, setOpenMobile) => (
-  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 border-2 border-dark bg-white">
+  <div className="flex flex-row items-center justify-evenly w-full min-h-[72px] p-2 gap-2 bg-white">
     <div
-      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 border-2 border-dark hover:text-primary"
+      className="flex xl:hidden items-center justify-center min-w-[56px] xl:w-full h-full p-2 gap-2 hover:text-primary"
       onClick={() => setOpenMobile(true)}
     >
       <Hamburger />
@@ -114,34 +108,34 @@ const topBar = (session, currentTime, setOpenMobile) => (
     <Link
       href="http://49.0.66.19:8023/Main/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark hover:text-primary"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneSystem /> Cne System
     </Link>
     <Link
       href="http://cnecloud01.myqnapcloud.com:8011/cgi-bin/"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark hover:text-primary"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneCloud /> Cne Cloud
     </Link>
     <Link
       href="http://49.0.64.242:8088/LoginERS/login.aspx"
       target="_blank"
-      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark hover:text-primary"
+      className="xl:flex hidden items-center justify-start w-full h-full p-2 gap-2 hover:text-primary"
     >
       <CneLeave /> ระบบลางาน
     </Link>
-    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 border-2 border-dark hover:text-primary">
+    <div className="xl:flex hidden items-center justify-center min-w-60 h-full p-2 gap-2 bg-primary/50 rounded-xl border-1 border-primary text-white shadow-md">
       <Clock /> {currentTime}
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 border-2 border-dark">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2">
       <Search />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 border-2 border-dark">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2">
       <Bell />
     </div>
-    <div className="flex items-center justify-center min-w-[56px] min-h-[56px] p-2 gap-2 border-2 border-dark relative">
+    <div className="flex items-center justify-center min-w-[56px] h-full p-2 gap-2 relative">
       <Image
         src={
           session.user?.picture
@@ -163,14 +157,14 @@ const mainMenuItem = (menu, pathname) => {
     <Link
       key={menu.href}
       href={menu.href}
-      className={`flex items-center justify-center w-full p-2 gap-2 border-2 border-dark hover:bg-primary hover:text-white ${
-        isActive ? "bg-primary text-white" : ""
+      className={`flex items-center justify-center w-full p-2 gap-2 hover:text-primary cursor-pointer ${
+        isActive ? "bg-primary text-white shadow-md rounded-xl" : ""
       }`}
     >
-      <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center h-full p-2 gap-2">
         {menu.icon}
       </div>
-      <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-start w-full h-full p-2 gap-2">
         {menu.label}
       </div>
     </Link>
@@ -178,7 +172,6 @@ const mainMenuItem = (menu, pathname) => {
 };
 
 export default function PagesLayout({ children }) {
-  const [collapsed, setCollapsed] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState({});
@@ -214,8 +207,8 @@ export default function PagesLayout({ children }) {
   ];
 
   const toolMenus = [
-    { label: "โปรไฟล์", icon: <Account />, href: "/account" },
-    // { label: "ตั้งค่า", icon: <Setting />, href: "/setting" },
+    { icon: <Account />, href: "/account" },
+    { icon: <Setting />, href: "/setting" },
   ];
 
   const mainMenus = [
@@ -264,72 +257,42 @@ export default function PagesLayout({ children }) {
 
   return (
     <UILogoutProvider>
-      <div className="flex flex-row w-full h-screen overflow-hidden p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-row w-full h-screen overflow-hidden">
         <div
-          className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out p-2 gap-2 border-2 border-dark
+          className={`fixed inset-y-0 left-0 z-40 flex transition-transform duration-300 ease-in-out
           ${openMobile ? "translate-x-0" : "-translate-x-full"}
           xl:static xl:translate-x-0
-          ${collapsed ? "xl:w-[24%]" : "xl:w-[25%]"}
-          w-[90%]`}
+          xl:w-[25%] w-[90%]`}
         >
-          <div
-            className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark bg-white
-            ${collapsed ? "xl:w-[30%]" : "xl:w-[40%]"}
-            w-[30%]`}
-          >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-2 border-dark text-primary font-[600]">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                {session?.user?.nameTH || session?.user?.nameEN || "ชื่อผู้ใช้"}
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
-              {toolMenus.map((tool, index) =>
-                toolMenu(tool, index, collapsed, pathname)
-              )}
-            </div>
-            <div
-              className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-2 border-dark"
-              onClick={() => setCollapsed(!collapsed)}
-            >
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark cursor-pointer">
-                <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
-                  <Left />
-                </div>
-                {!collapsed && (
-                  <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-                    ย่อแถบ
-                  </div>
-                )}
-              </div>
+          <div className="flex flex-col items-center justify-between h-full bg-default w-[20%]">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
+              {toolMenus.map((tool, index) => toolMenu(tool, index, pathname))}
             </div>
           </div>
-          <div
-            className={`flex flex-col items-center justify-between h-full p-2 gap-2 border-2 border-dark bg-white
-            ${collapsed ? "xl:w-[70%]" : "xl:w-[60%]"}
-            w-[70%]`}
-          >
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-2 border-dark">
-              <Link
-                href="/home"
-                className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark relative"
-              >
-                <Image
-                  src="/logoCompany/com-2.png"
-                  alt="logo"
-                  fill
-                  style={{ objectFit: "contain", objectPosition: "center" }}
-                />
-              </Link>
+          <div className="flex flex-col items-center justify-between h-full gap-2 bg-white w-[80%]">
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2">
+              <div className="flex items-center gap-3 w-full px-4 py-2 text-primary font-semibold">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+                  👋
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500">Welcome</span>
+                  <span className="text-lg font-semibold text-primary">
+                    {session?.user?.nameTH ||
+                      session?.user?.nameEN ||
+                      "ชื่อผู้ใช้"}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark overflow-auto">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 overflow-auto">
               {mainMenus.map((menu) => mainMenuItem(menu, pathname))}
               {menuItems.map((menu) =>
                 submenus(menu, submenuOpen, toggleSubmenu, pathname)
               )}
             </div>
-
-            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full min-h-[72px] p-2 gap-2">
               <Link
                 href="/logout"
                 onClick={(e) => {
@@ -338,28 +301,22 @@ export default function PagesLayout({ children }) {
                     window.location.href = "/";
                   });
                 }}
-                className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark hover:bg-primary hover:text-white"
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white"
               >
                 <Logout /> ออกจากระบบ
               </Link>
             </div>
           </div>
         </div>
-
         {openMobile && (
           <div
-            className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2 border-2 border-dark "
+            className="fixed inset-0 z-30 bg-dark/50 xl:hidden p-2 gap-2"
             onClick={() => setOpenMobile(false)}
           />
         )}
-
-        <div
-          className={`flex flex-col h-full flex-1 p-2 gap-2 border-2 border-dark bg-white overflow-auto ${
-            collapsed ? "xl:w-[80%]" : "xl:w-[75%]"
-          }`}
-        >
+        <div className="flex flex-col items-center h-full flex-1 px-2 py-0 gap-2 bg-white overflow-auto xl:w-[75%]">
           {topBar(session, currentTime, setOpenMobile)}
-          <div className="flex flex-col items-center justify-start w-full flex-1 p-2 gap-2 border-2 border-dark overflow-auto">
+          <div className="flex flex-col items-center justify-start w-full flex-1 p-2 xl:px-8 xl:py-4 gap-6 bg-default rounded-2xl overflow-auto">
             {children}
           </div>
         </div>
@@ -367,85 +324,3 @@ export default function PagesLayout({ children }) {
     </UILogoutProvider>
   );
 }
-
-// ✅ แนวทางที่เหมาะสม:
-// ใช้ระบบ "เงื่อนไขย่อย" เพื่อเลือก submenu เฉพาะ จากกลุ่ม ทรัพยากรบุคคล โดยดูจาก roleName และ divisionName
-
-// ✅ ตัวอย่างโค้ด menuItems ใหม่ (แบบยืดหยุ่น):
-// js
-// คัดลอก
-// แก้ไข
-// const roleName = session?.user?.roleName;
-// const divisionName = session?.user?.divisionName;
-
-// let menuItems = [];
-
-// const hrSubmenus = [
-//   { title: "ระดับตำแหน่ง", href: "/role" },
-//   { title: "ฝ่าย", href: "/division" },
-//   { title: "แผนก", href: "/department" },
-//   { title: "ตำแหน่งงาน", href: "/position" },
-//   { title: "พนักงาน", href: "/emp" },
-// ];
-
-// // 🟢 กำหนดว่าใครเข้าได้บ้าง
-// if (roleName === "ผู้ดูแลระบบ") {
-//   // 🔓 ผู้ดูแลระบบเห็นทุกเมนู
-//   menuItems = [
-//     {
-//       title: "ทรัพยากรบุคคล",
-//       icon: <Hr />,
-//       key: "ทรัพยากรบุคคล",
-//       submenus: hrSubmenus,
-//     },
-//     {
-//       title: "สารสนเทศ",
-//       icon: <It />,
-//       key: "สารสนเทศ",
-//       submenus: [
-//         { title: "ใบแจ้งซ่อม", href: "/tech/repair" },
-//         { title: "ใบเบิกคอม", href: "/tech/request" },
-//         { title: "แบ็คอัพข้อมูล", href: "/tech/backup" },
-//       ],
-//     },
-//   ];
-// } else {
-//   // 🔐 สิทธิ์กลุ่ม "ทรัพยากรบุคคล"
-//   if (divisionName === "ทรัพยากรบุคคล") {
-//     menuItems.push({
-//       title: "ทรัพยากรบุคคล",
-//       icon: <Hr />,
-//       key: "ทรัพยากรบุคคล",
-//       submenus: hrSubmenus,
-//     });
-//   }
-
-//   // 🔐 ฝ่ายอื่น เช่น "เทคโนโลยีสารสนเทศ" ได้สิทธิ์เฉพาะดูพนักงาน
-//   if (divisionName === "เทคโนโลยีสารสนเทศ") {
-//     menuItems.push({
-//       title: "ทรัพยากรบุคคล",
-//       icon: <Hr />,
-//       key: "ทรัพยากรบุคคล",
-//       submenus: [
-//         { title: "พนักงาน", href: "/emp" },
-//       ],
-//     });
-//   }
-// }
-// ✅ เพิ่มเติม (แนะนำ):
-// ถ้าในอนาคตต้องกำหนดสิทธิ์ได้ละเอียด เช่น จาก backend หรือเป็น array ยืดหยุ่น คุณอาจย้าย logic นี้ออกมาเป็นฟังก์ชัน:
-
-// js
-// คัดลอก
-// แก้ไข
-// function getMenuItems(roleName, divisionName) {
-//   ...
-//   return menuItems;
-// }
-// แล้วใช้:
-
-// js
-// คัดลอก
-// แก้ไข
-// const menuItems = getMenuItems(roleName, divisionName);
-// ถ้าต้องการเพิ่ม whitelist เฉพาะเมนูแบบ config-driven (เช่น map division → allowed menus) ก็บอกได้นะครับ ผมเขียนให้ได้แบบ maintain ง่ายมาก 💡
