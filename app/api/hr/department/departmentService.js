@@ -17,8 +17,16 @@ export class DepartmentService {
     });
   }
 
-  static async getDepartmentByName(departmentName) {
-    return prisma.department.findFirst({ where: { departmentName } });
+  static async getDepartmentByNameAndDivision(
+    departmentName,
+    departmentDivisionId
+  ) {
+    return prisma.department.findFirst({
+      where: {
+        departmentName,
+        departmentDivisionId,
+      },
+    });
   }
 
   static async createDepartment(data) {

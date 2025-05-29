@@ -17,7 +17,10 @@ export class DepartmentController {
 
       const department = await DepartmentService.getAllDepartment();
       if (!department?.length) {
-        return NextResponse.json({ error: "No department found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "No department found" },
+          { status: 404 }
+        );
       }
 
       const formattedDepartments = formatDepartmentData(department);
@@ -43,11 +46,21 @@ export class DepartmentController {
 
       const parsedData = departmentPostSchema.parse(data);
 
-      const existingDepartment = await DepartmentService.getDepartmentByName(parsedData.departmentName);
+      const departmentDivisionId = parseInt(
+        parsedData.departmentDivisionId,
+        10
+      );
+
+      const existingDepartment =
+        await DepartmentService.getDepartmentByNameAndDivision(
+          parsedData.departmentName,
+          departmentDivisionId
+        );
+
       if (existingDepartment) {
         return NextResponse.json(
           {
-            error: `Department name '${parsedData.departmentName}' already exists`,
+            error: `Department '${parsedData.departmentName}' already exists in this division`,
           },
           { status: 400 }
         );
@@ -56,11 +69,15 @@ export class DepartmentController {
       const localNow = getLocalNow();
       const newDepartment = await DepartmentService.createDepartment({
         ...parsedData,
+        departmentDivisionId,
         departmentCreateAt: localNow,
       });
 
       return NextResponse.json(
-        { message: "Department created successfully", department: newDepartment },
+        {
+          message: "Department created successfully",
+          department: newDepartment,
+        },
         { status: 201 }
       );
     } catch (error) {
@@ -75,12 +92,20 @@ export class DepartmentController {
 
       const parsedDepartmentId = parseInt(departmentId, 10);
       if (isNaN(parsedDepartmentId)) {
-        return NextResponse.json({ error: "Invalid department ID" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Invalid department ID" },
+          { status: 400 }
+        );
       }
 
-      const department = await DepartmentService.getDepartmentById(parsedDepartmentId);
+      const department = await DepartmentService.getDepartmentById(
+        parsedDepartmentId
+      );
       if (!department) {
-        return NextResponse.json({ error: "Department not found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "Department not found" },
+          { status: 404 }
+        );
       }
 
       const formattedDepartment = formatDepartmentData([department]);
@@ -103,7 +128,10 @@ export class DepartmentController {
 
       const parsedDepartmentId = parseInt(departmentId, 10);
       if (isNaN(parsedDepartmentId)) {
-        return NextResponse.json({ error: "Invalid department ID" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Invalid department ID" },
+          { status: 400 }
+        );
       }
 
       const formData = await request.formData();
@@ -115,10 +143,13 @@ export class DepartmentController {
       });
 
       const localNow = getLocalNow();
-      const updatedDepartment = await DepartmentService.updateDepartment(parsedDepartmentId, {
-        ...parsedData,
-        departmentUpdateAt: localNow,
-      });
+      const updatedDepartment = await DepartmentService.updateDepartment(
+        parsedDepartmentId,
+        {
+          ...parsedData,
+          departmentUpdateAt: localNow,
+        }
+      );
 
       return NextResponse.json(
         {
