@@ -4,8 +4,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import UILogoutProvider from "@/components/other/UILogoutProvider";
 import Loading from "@/components/other/UILoading";
+import { Tooltip } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   Bell,
   Hamburger,
@@ -83,17 +85,25 @@ const toolMenu = (tool, index, pathname) => {
   const isActive = pathname === tool.href || pathname.startsWith(tool.href);
 
   return (
-    <Link
-      key={index}
-      href={tool.href}
-      className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary/25 hover:text-primary rounded-xl ${
-        isActive ? "bg-primary text-white" : ""
-      }`}
+    <Tooltip
+      key={tool.href}
+      showArrow
+      color="primary"
+      content={tool.label}
+      placement="bottom"
+      delay={100}
     >
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-        {tool.icon}
-      </div>
-    </Link>
+      <Link
+        href={tool.href}
+        className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary/25 hover:text-primary rounded-xl ${
+          isActive ? "bg-primary text-white" : ""
+        }`}
+      >
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
+          {tool.icon}
+        </div>
+      </Link>
+    </Tooltip>
   );
 };
 
@@ -207,8 +217,8 @@ export default function PagesLayout({ children }) {
   ];
 
   const toolMenus = [
-    { icon: <Account />, href: "/account" },
-    { icon: <Setting />, href: "/setting" },
+    { icon: <Account />, href: "/account", label: "บัญชีผู้ใช้" },
+    { icon: <Setting />, href: "/setting", label: "ตั้งค่า" },
   ];
 
   const mainMenus = [
@@ -301,7 +311,7 @@ export default function PagesLayout({ children }) {
                     window.location.href = "/";
                   });
                 }}
-                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white"
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white hover:shadow-md hover:rounded-xl"
               >
                 <Logout /> ออกจากระบบ
               </Link>
