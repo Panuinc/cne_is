@@ -69,7 +69,7 @@ export default function UIEmpEmploymentForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
         encType="multipart/form-data"
       >
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
@@ -87,7 +87,7 @@ export default function UIEmpEmploymentForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-2/12 h-full p-3 gap-2"
                     onPress={() => setIsEditingPicture(true)}
                   >
@@ -105,7 +105,7 @@ export default function UIEmpEmploymentForm({
                   size="md"
                   variant="underlined"
                   color="primary"
-                  radius="lg"
+                  radius="full"
                   accept="image/*"
                   onChange={handleInputChange("empEmploymentPicture")}
                   isInvalid={!!errors.empEmploymentPicture}
@@ -115,7 +115,7 @@ export default function UIEmpEmploymentForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-2/12 h-full p-3 gap-2"
                     onPress={() => setIsEditingPicture(false)}
                   >
@@ -137,7 +137,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empEmploymentNumber || ""}
               onChange={handleInputChange("empEmploymentNumber")}
               isInvalid={!!errors.empEmploymentNumber}
@@ -153,7 +153,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empEmploymentCardNumber || ""}
               onChange={handleInputChange("empEmploymentCardNumber")}
               isInvalid={!!errors.empEmploymentCardNumber}
@@ -171,7 +171,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               selectedKeys={
                 formData.empEmploymentType ? [formData.empEmploymentType] : []
               }
@@ -198,7 +198,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               selectedKeys={
                 formData.empEmploymentDivisionId
                   ? [String(formData.empEmploymentDivisionId)]
@@ -226,7 +226,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               isDisabled={!formData.empEmploymentDivisionId}
               selectedKeys={
                 formData.empEmploymentDepartmentId
@@ -255,7 +255,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               isDisabled={
                 !formData.empEmploymentDivisionId ||
                 !formData.empEmploymentDepartmentId
@@ -287,7 +287,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               selectedKeys={
                 formData.empEmploymentRoleId
                   ? [String(formData.empEmploymentRoleId)]
@@ -312,7 +312,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               isDisabled={!formData.empEmploymentDivisionId}
               selectedKeys={
                 formData.empEmploymentParentId
@@ -342,7 +342,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empEmploymentStartWork || ""}
               onChange={handleInputChange("empEmploymentStartWork")}
               isInvalid={!!errors.empEmploymentStartWork}
@@ -369,7 +369,7 @@ export default function UIEmpEmploymentForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-2/12 h-full p-3 gap-2"
                     onPress={() => setIsEditingSignature(true)}
                   >
@@ -383,14 +383,14 @@ export default function UIEmpEmploymentForm({
                   ref={signatureRef}
                   penColor="black"
                   canvasProps={{
-                    className: "w-full signature-canvas border rounded-xl",
+                    className: "w-full signature-canvas border rounded-3xl",
                   }}
                 />
                 <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2">
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-2/12 h-full p-3 gap-2"
                     onPress={saveSignature}
                   >
@@ -399,7 +399,7 @@ export default function UIEmpEmploymentForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                     onPress={clearSignature}
                   >
@@ -409,7 +409,7 @@ export default function UIEmpEmploymentForm({
                     <Button
                       color="primary"
                       size="md"
-                      radius="lg"
+                      radius="full"
                       className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
                       onPress={() => setIsEditingSignature(false)}
                     >
@@ -439,7 +439,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentEnterType || ""}
                     selectedKeys={[formData.empEmploymentEnterType] || ""}
                     onChange={handleInputChange("empEmploymentEnterType")}
@@ -513,7 +513,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentPassportNumber}
                     onChange={handleInputChange("empEmploymentPassportNumber")}
                     isInvalid={!!errors.empEmploymentPassportNumber}
@@ -531,7 +531,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentPassportStartDate}
                     onChange={handleInputChange(
                       "empEmploymentPassportStartDate"
@@ -549,7 +549,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentPassportEndDate}
                     onChange={handleInputChange("empEmploymentPassportEndDate")}
                     isInvalid={!!errors.empEmploymentPassportEndDate}
@@ -567,7 +567,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentPassportIssuedBy}
                     onChange={handleInputChange(
                       "empEmploymentPassportIssuedBy"
@@ -585,7 +585,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentPlaceOfBirth}
                     onChange={handleInputChange("empEmploymentPlaceOfBirth")}
                     isInvalid={!!errors.empEmploymentPlaceOfBirth}
@@ -603,7 +603,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentEnterCheckPoint}
                     onChange={handleInputChange("empEmploymentEnterCheckPoint")}
                     isInvalid={!!errors.empEmploymentEnterCheckPoint}
@@ -619,7 +619,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentEnterDate}
                     onChange={handleInputChange("empEmploymentEnterDate")}
                     isInvalid={!!errors.empEmploymentEnterDate}
@@ -637,7 +637,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentImmigration}
                     onChange={handleInputChange("empEmploymentImmigration")}
                     isInvalid={!!errors.empEmploymentImmigration}
@@ -653,7 +653,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentTypeOfVisa}
                     onChange={handleInputChange("empEmploymentTypeOfVisa")}
                     isInvalid={!!errors.empEmploymentTypeOfVisa}
@@ -671,7 +671,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentVisaNumber}
                     onChange={handleInputChange("empEmploymentVisaNumber")}
                     isInvalid={!!errors.empEmploymentVisaNumber}
@@ -687,7 +687,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentVisaIssuedBy}
                     onChange={handleInputChange("empEmploymentVisaIssuedBy")}
                     isInvalid={!!errors.empEmploymentVisaIssuedBy}
@@ -705,7 +705,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentWorkPermitNumber}
                     onChange={handleInputChange(
                       "empEmploymentWorkPermitNumber"
@@ -723,7 +723,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentWorkPermitStartDate}
                     onChange={handleInputChange(
                       "empEmploymentWorkPermitStartDate"
@@ -743,7 +743,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentWorkPermitEndDate}
                     onChange={handleInputChange(
                       "empEmploymentWorkPermitEndDate"
@@ -761,7 +761,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentWorkPermitIssuedBy}
                     onChange={handleInputChange(
                       "empEmploymentWorkPermitIssuedBy"
@@ -781,7 +781,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentSsoNumber}
                     onChange={handleInputChange("empEmploymentSsoNumber")}
                     isInvalid={!!errors.empEmploymentSsoNumber}
@@ -797,7 +797,7 @@ export default function UIEmpEmploymentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData.empEmploymentSsoHospital}
                     onChange={handleInputChange("empEmploymentSsoHospital")}
                     isInvalid={!!errors.empEmploymentSsoHospital}
@@ -817,7 +817,7 @@ export default function UIEmpEmploymentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -829,7 +829,7 @@ export default function UIEmpEmploymentForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >

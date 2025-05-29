@@ -30,10 +30,10 @@ export default function UIEmpCvForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <div className="flex flex-col xl:flex-row items-start justify-center w-full p-2 gap-2">
-          <div className="flex flex-col items-center justify-center w-full xl:w-4/12 h-full p-2 gap-2 bg-default rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full xl:w-4/12 h-full p-2 gap-2 bg-default rounded-3xl">
             <div className="flex items-center justify-center w-full h-full p-2 gap-2">
               {empPictureUrl ? (
                 <Image
@@ -68,7 +68,7 @@ export default function UIEmpCvForm({
               {formData.empCvEducations.map((edu, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-xl"
+                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-3xl"
                 >
                   <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -79,7 +79,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationDegreeTH || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -101,7 +101,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationDegreeEN || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -121,7 +121,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationInstitutionTH || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -138,7 +138,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationInstitutionEN || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -159,7 +159,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationStartDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -182,7 +182,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={edu.empCvEducationEndDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvEducations",
@@ -198,7 +198,7 @@ export default function UIEmpCvForm({
                       <Button
                         color="danger"
                         size="md"
-                        radius="lg"
+                        radius="full"
                         className="flex items-center justify-center h-full p-4 gap-2"
                         onPress={handleRemoveSection("empCvEducations", i)}
                       >
@@ -214,7 +214,7 @@ export default function UIEmpCvForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-full h-full p-4 gap-2"
                     onPress={handleAddSection("empCvEducations", {})}
                   >
@@ -231,7 +231,7 @@ export default function UIEmpCvForm({
               {formData.empCvLicenses.map((lic, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-xl"
+                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-3xl"
                 >
                   <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -242,7 +242,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={lic.empCvLicenseNameTH || ""}
                         onChange={handleInputChange(
                           "empCvLicenses",
@@ -259,7 +259,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={lic.empCvLicenseNameEN || ""}
                         onChange={handleInputChange(
                           "empCvLicenses",
@@ -279,7 +279,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={lic.empCvLicenseNumber || ""}
                         onChange={handleInputChange(
                           "empCvLicenses",
@@ -297,7 +297,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={lic.empCvLicenseStartDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvLicenses",
@@ -315,7 +315,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={lic.empCvLicenseEndDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvLicenses",
@@ -331,7 +331,7 @@ export default function UIEmpCvForm({
                       <Button
                         color="danger"
                         size="md"
-                        radius="lg"
+                        radius="full"
                         className="flex items-center justify-center h-full p-4 gap-2"
                         onPress={handleRemoveSection("empCvLicenses", i)}
                       >
@@ -347,7 +347,7 @@ export default function UIEmpCvForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-full h-full p-4 gap-2"
                     onPress={handleAddSection("empCvLicenses", {})}
                   >
@@ -364,7 +364,7 @@ export default function UIEmpCvForm({
               {formData.empCvLanguageSkills.map((lang, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-xl"
+                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-3xl"
                 >
                   <div className="flex items-center justify-center w-full h-full p-2 gap-2">
                     <Input
@@ -374,7 +374,7 @@ export default function UIEmpCvForm({
                       size="md"
                       variant="underlined"
                       color="primary"
-                      radius="lg"
+                      radius="full"
                       value={lang.empCvLanguageSkillNameTH || ""}
                       onChange={handleInputChange(
                         "empCvLanguageSkills",
@@ -391,7 +391,7 @@ export default function UIEmpCvForm({
                       size="md"
                       variant="underlined"
                       color="primary"
-                      radius="lg"
+                      radius="full"
                       value={lang.empCvLanguageSkillNameEN || ""}
                       onChange={handleInputChange(
                         "empCvLanguageSkills",
@@ -408,7 +408,7 @@ export default function UIEmpCvForm({
                       size="md"
                       variant="underlined"
                       color="primary"
-                      radius="lg"
+                      radius="full"
                       selectedKeys={
                         lang.empCvLanguageSkillProficiency
                           ? [lang.empCvLanguageSkillProficiency]
@@ -432,7 +432,7 @@ export default function UIEmpCvForm({
                       <Button
                         color="danger"
                         size="md"
-                        radius="lg"
+                        radius="full"
                         className="flex items-center justify-center h-full p-4 gap-2"
                         onPress={handleRemoveSection("empCvLanguageSkills", i)}
                       >
@@ -448,7 +448,7 @@ export default function UIEmpCvForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-full h-full p-4 gap-2"
                     onPress={handleAddSection("empCvLanguageSkills", {})}
                   >
@@ -477,7 +477,7 @@ export default function UIEmpCvForm({
               {formData.empCvWorkHistories.map((wh, wi) => (
                 <div
                   key={wi}
-                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-xl"
+                  className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-3xl"
                 >
                   <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
                     <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -488,7 +488,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryCompanyNameTH || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -505,7 +505,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryCompanyNameEN || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -525,7 +525,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryPositionTH || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -542,7 +542,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryPositionEN || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -563,7 +563,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryStartDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -581,7 +581,7 @@ export default function UIEmpCvForm({
                         size="md"
                         variant="underlined"
                         color="primary"
-                        radius="lg"
+                        radius="full"
                         value={wh.empCvWorkHistoryEndDate?.slice(0, 10) || ""}
                         onChange={handleInputChange(
                           "empCvWorkHistories",
@@ -602,7 +602,7 @@ export default function UIEmpCvForm({
                     {(wh.empCvProjects || []).map((proj, pi) => (
                       <div
                         key={pi}
-                        className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-xl"
+                        className="flex flex-col items-center justify-center w-full gap-2 border-1 border-dark rounded-3xl"
                       >
                         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
                           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -613,7 +613,7 @@ export default function UIEmpCvForm({
                               size="md"
                               variant="underlined"
                               color="primary"
-                              radius="lg"
+                              radius="full"
                               value={proj.empCvProjectNameTH || ""}
                               onChange={handleProjectFieldChange(
                                 wi,
@@ -630,7 +630,7 @@ export default function UIEmpCvForm({
                               size="md"
                               variant="underlined"
                               color="primary"
-                              radius="lg"
+                              radius="full"
                               value={proj.empCvProjectNameEN || ""}
                               onChange={handleProjectFieldChange(
                                 wi,
@@ -650,7 +650,7 @@ export default function UIEmpCvForm({
                               size="md"
                               variant="underlined"
                               color="primary"
-                              radius="lg"
+                              radius="full"
                               value={proj.empCvProjectDescriptionTH || ""}
                               onChange={handleProjectFieldChange(
                                 wi,
@@ -667,7 +667,7 @@ export default function UIEmpCvForm({
                               size="md"
                               variant="underlined"
                               color="primary"
-                              radius="lg"
+                              radius="full"
                               value={proj.empCvProjectDescriptionEN || ""}
                               onChange={handleProjectFieldChange(
                                 wi,
@@ -683,7 +683,7 @@ export default function UIEmpCvForm({
                             <Button
                               color="danger"
                               size="md"
-                              radius="lg"
+                              radius="full"
                               className="flex items-center justify-center h-full p-4 gap-2"
                               onPress={handleRemoveProject(wi, pi)}
                             >
@@ -699,7 +699,7 @@ export default function UIEmpCvForm({
                         <Button
                           color="primary"
                           size="md"
-                          radius="lg"
+                          radius="full"
                           className="flex items-center justify-center w-full h-full p-4 gap-2"
                           onPress={handleAddProject(wi)}
                         >
@@ -714,7 +714,7 @@ export default function UIEmpCvForm({
                       <Button
                         color="danger"
                         size="md"
-                        radius="lg"
+                        radius="full"
                         className="flex items-center justify-center h-full p-4 gap-2"
                         onPress={handleRemoveSection("empCvWorkHistories", wi)}
                       >
@@ -730,7 +730,7 @@ export default function UIEmpCvForm({
                   <Button
                     color="primary"
                     size="md"
-                    radius="lg"
+                    radius="full"
                     className="flex items-center justify-center w-full h-full p-4 gap-2"
                     onPress={handleAddSection("empCvWorkHistories", {
                       empCvProjects: [],
@@ -753,7 +753,7 @@ export default function UIEmpCvForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -765,7 +765,7 @@ export default function UIEmpCvForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center h-full p-4 w-2/12 gap-2"
             >

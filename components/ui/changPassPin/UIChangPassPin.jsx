@@ -47,7 +47,7 @@ export default function UIChangePassword({
             size="md"
             variant="underlined"
             color="primary"
-            radius="lg"
+            radius="full"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             isRequired
@@ -62,7 +62,7 @@ export default function UIChangePassword({
             size="md"
             variant="underlined"
             color="primary"
-            radius="lg"
+            radius="full"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             isRequired
@@ -95,7 +95,7 @@ export default function UIChangePassword({
           <Button
             color="primary"
             size="md"
-            radius="lg"
+            radius="full"
             type="submit"
             className="flex items-center justify-center w-6/12 h-full p-4 gap-2"
           >

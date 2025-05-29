@@ -68,7 +68,7 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
               href={sub.href}
               className={`flex items-center justify-start w-full h-full p-4 gap-2 cursor-pointer ${
                 pathname === sub.href || pathname.startsWith(sub.href)
-                  ? "bg-primary text-white shadow-md rounded-xl"
+                  ? "bg-primary text-white shadow-md rounded-3xl"
                   : "hover:text-primary"
               }`}
             >
@@ -95,7 +95,7 @@ const toolMenu = (tool, index, pathname) => {
     >
       <Link
         href={tool.href}
-        className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 rounded-xl ${
+        className={`flex flex-col xl:flex-row items-center justify-center w-14 h-14 p-2 gap-2 rounded-xl ${
           isActive
             ? "bg-primary text-white"
             : "hover:bg-primary/25 hover:text-primary"
@@ -171,7 +171,7 @@ const mainMenuItem = (menu, pathname) => {
       href={menu.href}
       className={`flex items-center justify-center w-full p-2 gap-2 cursor-pointer ${
         isActive
-          ? "bg-primary text-white shadow-md rounded-xl"
+          ? "bg-primary text-white shadow-md rounded-3xl"
           : "hover:text-primary"
       }`}
     >
@@ -315,7 +315,7 @@ export default function PagesLayout({ children }) {
                     window.location.href = "/";
                   });
                 }}
-                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white hover:shadow-md hover:rounded-xl"
+                className="flex items-center justify-start w-full h-full p-2 gap-2 hover:bg-primary hover:text-white hover:shadow-md hover:rounded-3xl"
               >
                 <Logout /> ออกจากระบบ
               </Link>

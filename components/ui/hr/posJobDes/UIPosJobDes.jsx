@@ -21,7 +21,7 @@ export default function UIPosJobDes({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-b-1 border-default">
           <div className="flex flex-col items-center justify-center w-3/12 h-full p-2 gap-2">
@@ -93,7 +93,7 @@ export default function UIPosJobDes({
                   size="md"
                   variant="underlined"
                   color="primary"
-                  radius="lg"
+                  radius="full"
                   value={formData.posJobDesAge || ""}
                   onChange={handleInputChange("posJobDesAge")}
                   isInvalid={!!errors.posJobDesAge}
@@ -114,7 +114,7 @@ export default function UIPosJobDes({
                   size="md"
                   variant="underlined"
                   color="primary"
-                  radius="lg"
+                  radius="full"
                   selectedKeys={
                     formData.posJobDesSex ? [formData.posJobDesSex] : []
                   }
@@ -157,7 +157,7 @@ export default function UIPosJobDes({
                   size="md"
                   variant="underlined"
                   color="primary"
-                  radius="lg"
+                  radius="full"
                   minRows={4}
                   value={
                     formData[
@@ -221,7 +221,7 @@ export default function UIPosJobDes({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               minRows={4}
               value={formData.posJobDesResponsibility || ""}
               onChange={handleInputChange("posJobDesResponsibility")}
@@ -240,7 +240,7 @@ export default function UIPosJobDes({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -252,7 +252,7 @@ export default function UIPosJobDes({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >

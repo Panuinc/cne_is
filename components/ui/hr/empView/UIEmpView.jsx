@@ -78,7 +78,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
     <>
       <UIHeader Header={header} />
       <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-6 overflow-auto">
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 bg-white shadow-md rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 bg-white shadow-md rounded-3xl">
           <div className="relative w-full">
             <div
               className="w-full h-72"
@@ -119,7 +119,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
         <div className="flex flex-col items-center justify-center w-full gap-6">
           <div className="flex flex-col xl:flex-row items-start justify-center w-full gap-6">
             <div className="flex flex-col items-start justify-center w-full gap-6">
-              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-xl">
+              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-3xl">
                 <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-1 border-default text-primary font-[600]">
                   ข้อมูลพนักงาน
                 </div>
@@ -165,7 +165,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-xl">
+              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-3xl">
                 <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-1 border-default text-primary font-[600]">
                   ข้อมูลบัญชีการใช้งาน
                 </div>
@@ -185,7 +185,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-xl">
+              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-3xl">
                 <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-1 border-default text-primary font-[600]">
                   ข้อมูลเอกสาร
                 </div>
@@ -389,7 +389,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
             </div>
 
             <div className="flex flex-col items-start justify-center w-full gap-6">
-              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-xl">
+              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-3xl">
                 <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-1 border-default text-primary font-[600]">
                   ข้อมูลการจ้างงาน
                 </div>
@@ -607,7 +607,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                 )}
               </div>
 
-              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-xl">
+              <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-1 border-default bg-white shadow-md rounded-3xl">
                 <div className="flex items-center justify-start w-full h-full p-3 gap-2 border-b-1 border-default text-primary font-[600]">
                   ข้อมูลเรซูเม่
                 </div>
@@ -618,7 +618,7 @@ export default function UIEmpView({ header, formData, operatedBy, exportPdf }) {
                         key={lng}
                         color="primary"
                         size="lg"
-                        radius="lg"
+                        radius="full"
                         type="button"
                         className="flex items-center justify-center w-full h-full p-3 gap-2"
                         onPress={() => exportPdf(lng)}

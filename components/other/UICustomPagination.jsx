@@ -24,7 +24,7 @@ export default function UICustomPagination({
           showControls
           showShadow
           size="md"
-          radius="lg"
+          radius="full"
           color="primary"
           variant="light"
           page={page}

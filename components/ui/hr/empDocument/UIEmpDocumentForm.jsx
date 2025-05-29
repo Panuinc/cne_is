@@ -22,7 +22,7 @@ export default function UIEmpDocumentForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         {formData.EmpDocumentEmpBy?.empCitizen === "Thai" && (
           <>
@@ -35,7 +35,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentIdCardFile || ""}
                 onChange={handleInputChange("empDocumentIdCardFile")}
                 isInvalid={!!errors.empDocumentIdCardFile}
@@ -61,7 +61,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentHomeFile || ""}
                 onChange={handleInputChange("empDocumentHomeFile")}
                 isInvalid={!!errors.empDocumentHomeFile}
@@ -88,7 +88,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentProfessionalCertificateFile || ""}
                 onChange={handleInputChange(
                   "empDocumentProfessionalCertificateFile"
@@ -116,7 +116,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentEducationsFile || ""}
                 onChange={handleInputChange("empDocumentEducationsFile")}
                 isInvalid={!!errors.empDocumentEducationsFile}
@@ -153,7 +153,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentPassportFile || ""}
                 onChange={handleInputChange("empDocumentPassportFile")}
                 isInvalid={!!errors.empDocumentPassportFile}
@@ -180,7 +180,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentImmigrationFile || ""}
                 onChange={handleInputChange("empDocumentImmigrationFile")}
                 isInvalid={!!errors.empDocumentImmigrationFile}
@@ -207,7 +207,7 @@ export default function UIEmpDocumentForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empDocumentOldPlaceFile || ""}
                 onChange={handleInputChange("empDocumentOldPlaceFile")}
                 isInvalid={!!errors.empDocumentOldPlaceFile}
@@ -240,7 +240,7 @@ export default function UIEmpDocumentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData[name] || ""}
                     onChange={handleInputChange(name)}
                     isInvalid={!!errors[name]}
@@ -275,7 +275,7 @@ export default function UIEmpDocumentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData[name] || ""}
                     onChange={handleInputChange(name)}
                     isInvalid={!!errors[name]}
@@ -310,7 +310,7 @@ export default function UIEmpDocumentForm({
                     size="md"
                     variant="underlined"
                     color="primary"
-                    radius="lg"
+                    radius="full"
                     value={formData[name] || ""}
                     onChange={handleInputChange(name)}
                     isInvalid={!!errors[name]}
@@ -341,7 +341,7 @@ export default function UIEmpDocumentForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -353,7 +353,7 @@ export default function UIEmpDocumentForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >

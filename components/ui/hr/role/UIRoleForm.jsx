@@ -21,7 +21,7 @@ export default function UIRoleForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -33,7 +33,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.roleName || ""}
               onChange={handleInputChange("roleName")}
               isInvalid={!!errors.roleName}
@@ -52,7 +52,7 @@ export default function UIRoleForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.roleStatus || ""}
                 selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
                 onChange={handleInputChange("roleStatus")}
@@ -79,7 +79,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -91,7 +91,7 @@ export default function UIRoleForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >

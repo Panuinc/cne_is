@@ -63,7 +63,7 @@ export default function UIIndex(props) {
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={empUserUsername}
                 onChange={(e) => setEmpUserUsername(e.target.value)}
                 isRequired
@@ -77,7 +77,7 @@ export default function UIIndex(props) {
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={empUserCredential}
                 onChange={(e) => setEmpUserCredential(e.target.value)}
                 isRequired
@@ -113,7 +113,7 @@ export default function UIIndex(props) {
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-6/12 h-full p-4 gap-2"
             >

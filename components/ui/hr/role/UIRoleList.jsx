@@ -41,7 +41,7 @@ const UISelectFilter = ({
     size="md"
     variant="underlined"
     color="none"
-    radius="lg"
+    radius="full"
     isDisabled={isDisabled}
     selectedKeys={[selectedValue]}
     onChange={(e) => onChange(e.target.value)}
@@ -133,7 +133,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
                   ? "primary"
                   : "danger"
               }
-              radius="lg"
+              radius="full"
               className="min-w-10 min-h-10 text-white"
             >
               {item.roleStatus?.toLowerCase() === "active"
@@ -175,7 +175,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
   return (
     <>
       <UIHeader Header={header} />
-      <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto">
+      <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto">
         <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
             <Input
@@ -185,7 +185,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -198,7 +198,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
                 href="/role/create"
                 color="primary"
                 size="md"
-                radius="lg"
+                radius="full"
                 className="flex items-center justify-center w-full h-full p-4 gap-2"
                 startContent={<Folder />}
               >
@@ -230,7 +230,7 @@ export default function UIRoleList({ header, data = [], error = "" }) {
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               selectedKeys={[String(rowsPerPage)]}
               onChange={(e) => {
                 setRowsPerPage(Number(e.target.value));

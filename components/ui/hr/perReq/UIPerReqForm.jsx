@@ -45,7 +45,7 @@ export default function UIPerReqForm({
       (isRequester ? "ผู้ร้องขอ" : "(รออนุมัติ)");
 
     return (
-      <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-xl">
+      <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-default rounded-3xl">
         <div className="flex items-center justify-center w-full h-full p-2 font-[600]">
           {title}
         </div>
@@ -171,7 +171,7 @@ export default function UIPerReqForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <input
           type="hidden"
@@ -243,7 +243,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqDesiredDate || ""}
                 onChange={handleInputChange("perReqDesiredDate")}
                 isInvalid={!!errors.perReqDesiredDate}
@@ -265,7 +265,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 selectedKeys={
                   formData.perReqDivisionId
                     ? [String(formData.perReqDivisionId)]
@@ -298,7 +298,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 isDisabled={!formData.perReqDivisionId}
                 selectedKeys={
                   formData.perReqDepartmentId
@@ -332,7 +332,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 isDisabled={
                   !formData.perReqDivisionId || !formData.perReqDepartmentId
                 }
@@ -369,7 +369,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqAmount || ""}
                 onChange={handleInputChange("perReqAmount")}
                 isInvalid={!!errors.perReqAmount}
@@ -418,7 +418,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqEmpEmploymentTypeNote || ""}
                 onChange={handleInputChange("perReqEmpEmploymentTypeNote")}
                 isInvalid={!!errors.perReqEmpEmploymentTypeNote}
@@ -474,7 +474,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqReasonForRequestNote || ""}
                 onChange={handleInputChange("perReqReasonForRequestNote")}
                 isInvalid={!!errors.perReqReasonForRequestNote}
@@ -502,7 +502,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqReasonAge || ""}
                 onChange={handleInputChange("perReqReasonAge")}
                 isInvalid={!!errors.perReqReasonAge}
@@ -586,7 +586,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 required
                 value={formData.perReqReasonEducationNote || ""}
                 onChange={handleInputChange("perReqReasonEducationNote")}
@@ -685,7 +685,7 @@ export default function UIPerReqForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.perReqComputerSkillIsOther || ""}
                 onChange={handleInputChange("perReqComputerSkillIsOther")}
                 isInvalid={!!errors.perReqComputerSkillIsOther}
@@ -809,7 +809,7 @@ export default function UIPerReqForm({
                   size="md"
                   variant="underlined"
                   color="none"
-                  radius="lg"
+                  radius="full"
                   selectedKeys={(() => {
                     const found = (
                       formData.perReqProfessionalLicenses || []
@@ -916,7 +916,7 @@ export default function UIPerReqForm({
               <Button
                 color="success"
                 size="md"
-                radius="lg"
+                radius="full"
                 type="submit"
                 onPress={onApprove}
               >
@@ -925,7 +925,7 @@ export default function UIPerReqForm({
               <Button
                 color="danger"
                 size="md"
-                radius="lg"
+                radius="full"
                 type="submit"
                 onPress={onReject}
               >
@@ -938,7 +938,7 @@ export default function UIPerReqForm({
                 <Button
                   color="success"
                   size="md"
-                  radius="lg"
+                  radius="full"
                   type="submit"
                   onPress={() => {
                     cancelRef && (cancelRef.current = false);
@@ -951,7 +951,7 @@ export default function UIPerReqForm({
                 <Button
                   color="danger"
                   size="md"
-                  radius="lg"
+                  radius="full"
                   type="submit"
                   onPress={() => {
                     actionRef.current = "cancel";

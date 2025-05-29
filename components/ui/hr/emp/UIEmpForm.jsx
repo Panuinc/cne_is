@@ -21,7 +21,7 @@ export default function UIRoleForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -32,7 +32,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empTitle || ""}
               selectedKeys={formData.empTitle ? [formData.empTitle] : []}
               onChange={handleInputChange("empTitle")}
@@ -62,7 +62,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empFirstNameTH}
               onChange={handleInputChange("empFirstNameTH")}
               isInvalid={!!errors.empFirstNameTH}
@@ -78,7 +78,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empLastNameTH}
               onChange={handleInputChange("empLastNameTH")}
               isInvalid={!!errors.empLastNameTH}
@@ -97,7 +97,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empFirstNameEN}
               onChange={handleInputChange("empFirstNameEN")}
               isInvalid={!!errors.empFirstNameEN}
@@ -113,7 +113,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empLastNameEN}
               onChange={handleInputChange("empLastNameEN")}
               isInvalid={!!errors.empLastNameEN}
@@ -132,7 +132,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empEmail}
               onChange={handleInputChange("empEmail")}
               isInvalid={!!errors.empEmail}
@@ -148,7 +148,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empTel}
               onChange={handleInputChange("empTel")}
               isInvalid={!!errors.empTel}
@@ -167,7 +167,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empIdCard}
               onChange={handleInputChange("empIdCard")}
               isInvalid={!!errors.empIdCard}
@@ -183,7 +183,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empBirthday}
               onChange={handleInputChange("empBirthday")}
               isInvalid={!!errors.empBirthday}
@@ -201,7 +201,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empCitizen || ""}
               selectedKeys={formData.empCitizen ? [formData.empCitizen] : []}
               onChange={handleInputChange("empCitizen")}
@@ -233,7 +233,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empGender || ""}
               selectedKeys={formData.empGender ? [formData.empGender] : []}
               onChange={handleInputChange("empGender")}
@@ -260,7 +260,7 @@ export default function UIRoleForm({
                 size="md"
                 variant="underlined"
                 color="none"
-                radius="lg"
+                radius="full"
                 value={formData.empStatus || ""}
                 selectedKeys={formData.empStatus ? [formData.empStatus] : []}
                 onChange={handleInputChange("empStatus")}
@@ -287,7 +287,7 @@ export default function UIRoleForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -299,7 +299,7 @@ export default function UIRoleForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >

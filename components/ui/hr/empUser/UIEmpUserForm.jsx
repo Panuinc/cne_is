@@ -21,7 +21,7 @@ export default function UIEmpUserForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
       >
         <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -33,7 +33,7 @@ export default function UIEmpUserForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empUserUsername || ""}
               onChange={handleInputChange("empUserUsername")}
               isInvalid={!!errors.empUserUsername}
@@ -49,7 +49,7 @@ export default function UIEmpUserForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={formData.empUserPassword || ""}
               onChange={handleInputChange("empUserPassword")}
               isInvalid={!!errors.empUserPassword}
@@ -67,7 +67,7 @@ export default function UIEmpUserForm({
               size="md"
               variant="underlined"
               color="none"
-              radius="lg"
+              radius="full"
               value={operatedBy}
               readOnly
             />
@@ -79,7 +79,7 @@ export default function UIEmpUserForm({
             <Button
               color="primary"
               size="md"
-              radius="lg"
+              radius="full"
               type="submit"
               className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
             >
