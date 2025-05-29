@@ -21,8 +21,18 @@ export class PositionService {
     });
   }
 
-  static async getPositionByName(positionNameTH) {
-    return prisma.position.findFirst({ where: { positionNameTH } });
+  static async getPositionByNameAndDivisionAndDepartment(
+    positionNameTH,
+    positionDivisionId,
+    positionDepartmentId
+  ) {
+    return prisma.position.findFirst({
+      where: {
+        positionNameTH,
+        positionDivisionId,
+        positionDepartmentId,
+      },
+    });
   }
 
   static async createPosition(data) {

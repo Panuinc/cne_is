@@ -17,7 +17,10 @@ export class PositionController {
 
       const position = await PositionService.getAllPosition();
       if (!position?.length) {
-        return NextResponse.json({ error: "No position found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "No position found" },
+          { status: 404 }
+        );
       }
 
       const formattedPositions = formatPositionData(position);
@@ -43,11 +46,23 @@ export class PositionController {
 
       const parsedData = positionPostSchema.parse(data);
 
-      const existingPosition = await PositionService.getPositionByName(parsedData.positionNameTH);
+      const positionDivisionId = parseInt(parsedData.positionDivisionId, 10);
+      const positionDepartmentId = parseInt(
+        parsedData.positionDepartmentId,
+        10
+      );
+
+      const existingPosition =
+        await PositionService.getPositionByNameAndDivisionAndDepartment(
+          parsedData.positionNameTH,
+          positionDivisionId,
+          positionDepartmentId
+        );
+
       if (existingPosition) {
         return NextResponse.json(
           {
-            error: `Position name '${parsedData.positionNameTH}' already exists`,
+            error: `Position '${parsedData.positionNameTH}' already exists in this division and department`,
           },
           { status: 400 }
         );
@@ -56,6 +71,8 @@ export class PositionController {
       const localNow = getLocalNow();
       const newPosition = await PositionService.createPosition({
         ...parsedData,
+        positionDivisionId,
+        positionDepartmentId,
         positionCreateAt: localNow,
       });
 
@@ -75,12 +92,18 @@ export class PositionController {
 
       const parsedPositionId = parseInt(positionId, 10);
       if (isNaN(parsedPositionId)) {
-        return NextResponse.json({ error: "Invalid position ID" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Invalid position ID" },
+          { status: 400 }
+        );
       }
 
       const position = await PositionService.getPositionById(parsedPositionId);
       if (!position) {
-        return NextResponse.json({ error: "Position not found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "Position not found" },
+          { status: 404 }
+        );
       }
 
       const formattedPosition = formatPositionData([position]);
@@ -103,7 +126,10 @@ export class PositionController {
 
       const parsedPositionId = parseInt(positionId, 10);
       if (isNaN(parsedPositionId)) {
-        return NextResponse.json({ error: "Invalid position ID" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Invalid position ID" },
+          { status: 400 }
+        );
       }
 
       const formData = await request.formData();
@@ -115,10 +141,13 @@ export class PositionController {
       });
 
       const localNow = getLocalNow();
-      const updatedPosition = await PositionService.updatePosition(parsedPositionId, {
-        ...parsedData,
-        positionUpdateAt: localNow,
-      });
+      const updatedPosition = await PositionService.updatePosition(
+        parsedPositionId,
+        {
+          ...parsedData,
+          positionUpdateAt: localNow,
+        }
+      );
 
       return NextResponse.json(
         {
