@@ -41,8 +41,8 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
       className="flex flex-col items-center justify-center w-full p-2 gap-2"
     >
       <div
-        className={`flex items-center justify-center w-full p-2 gap-2 hover:text-primary cursor-pointer ${
-          isSubActive ? "text-primary" : ""
+        className={`flex items-center justify-center w-full p-2 gap-2 cursor-pointer ${
+          isSubActive ? "text-primary" : "hover:text-primary"
         }`}
         onClick={() => toggleSubmenu(menu.key)}
       >
@@ -66,10 +66,10 @@ const submenus = (menu, submenuOpen, toggleSubmenu, pathname) => {
             <Link
               key={idx}
               href={sub.href}
-              className={`flex items-center justify-start w-full h-full p-4 gap-2 hover:text-primary cursor-pointer ${
+              className={`flex items-center justify-start w-full h-full p-4 gap-2 cursor-pointer ${
                 pathname === sub.href || pathname.startsWith(sub.href)
                   ? "bg-primary text-white shadow-md rounded-xl"
-                  : ""
+                  : "hover:text-primary"
               }`}
             >
               {sub.title}
@@ -95,8 +95,8 @@ const toolMenu = (tool, index, pathname) => {
     >
       <Link
         href={tool.href}
-        className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 hover:bg-primary/25 hover:text-primary rounded-xl ${
-          isActive ? "bg-primary text-white" : ""
+        className={`flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 rounded-xl ${
+          isActive ? "bg-primary text-white" : "hover:bg-primary/25 hover:text-primary"
         }`}
       >
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
@@ -167,8 +167,8 @@ const mainMenuItem = (menu, pathname) => {
     <Link
       key={menu.href}
       href={menu.href}
-      className={`flex items-center justify-center w-full p-2 gap-2 hover:text-primary cursor-pointer ${
-        isActive ? "bg-primary text-white shadow-md rounded-xl" : ""
+      className={`flex items-center justify-center w-full p-2 gap-2 cursor-pointer ${
+        isActive ? "bg-primary text-white shadow-md rounded-xl" : "hover:text-primary"
       }`}
     >
       <div className="flex items-center justify-center h-full p-2 gap-2">
