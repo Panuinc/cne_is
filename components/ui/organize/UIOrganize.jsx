@@ -52,7 +52,7 @@ export default function UIOrganize({
   const renderNode = (node) => (
     <TreeNode
       label={
-        <div className="bg-white shadow-md rounded-3xl p-4 text-sm text-center">
+        <div className="bg-white shadow-md min-w-60 rounded-3xl p-4 text-sm text-center">
           <div className="font-[600]">{node.name}</div>
           <div className="text-xs text-dark/50">{node.type}</div>
         </div>
