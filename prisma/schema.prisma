@@ -599,92 +599,95 @@ model PerReq {
 }
 
 model Apps {
-  appId                    Int                      @id @default(autoincrement())
-  appPerReqId              Int
-  appSalary                Int
-  appFullNameTH            String                   @db.VarChar(255)
-  appFullNameEN            String                   @db.VarChar(255)
-  appNickName              String                   @db.VarChar(255)
-  appBirthDay              DateTime
-  appGender                Gender
-  appAge                   Int
-  appNationality           String                   @db.VarChar(255)
-  appReligion              String                   @db.VarChar(255)
-  appWright                Int
-  appHeight                Int
-  appBloodGroup            AppBloodGroup
-  appIdCardNumber          String                   @db.VarChar(20)
-  appIdCardIssuedAt        String                   @db.VarChar(255)
-  appIdCardIssuedDate      DateTime
-  appIdCardEndDate         DateTime
-  appPhone                 String                   @db.VarChar(20)
-  appEmail                 String                   @db.VarChar(255)
-  appLine                  String                   @db.VarChar(255)
-  appPresentAddress        String                   @db.VarChar(255)
-  appRegisteredAddress     String                   @db.VarChar(255)
-  appMaritalStatus         AppMaritalStatus
-  appSpouseEarnIncome      AppSpouseEarnIncome?
-  appSpouseIncomeAmount    Int?
-  appNumberOfChildren      Int?
-  appMilitaryServiceStatus AppMilitaryServiceStatus
-  appOwnCar                VehiclePossession
-  appOwnMotorcycle         VehiclePossession
-  appHaveCarLicense        VehiclePossession
-  appHaveMotorcycleLicense VehiclePossession
+  appId         Int       @id @default(autoincrement())
+  appPerReqId   Int
+  appFullNameTh String    @db.VarChar(255)
+  appFullNameEn String    @db.VarChar(255)
+  appNickName   String    @db.VarChar(255)
+  appStatus     AppStatus @default(Pending)
+  appCreatedAt  DateTime  @default(now())
+  appUpdateBy   Int?
+  appUpdatedAt  DateTime? @updatedAt
 
-  appAllowReferenceCheck       Boolean
-  appAllowReferenceCheckReason String? @db.VarChar(255)
-  appEverFired                 Boolean
-  appEverFiredReason           String? @db.VarChar(255)
-  appSevereIllnessHistory      Boolean
-  appSevereIllnessDetail       String? @db.VarChar(255)
-  appCriminalRecord            Boolean
-  appCriminalRecordDetail      String? @db.VarChar(255)
-  appIsPregnant                Boolean
-  appPregnancyDetail           String? @db.VarChar(255)
-  appHasFriendInCompany        Boolean
-  appFriendInCompanyName       String? @db.VarChar(255)
+  appDetail AppDetail?
 
-  appRef1Name       String @db.VarChar(255)
-  appRef1Address    String @db.VarChar(255)
-  appRef1Phone      String @db.VarChar(20)
-  appRef1Occupation String @db.VarChar(255)
-  appRef2Name       String @db.VarChar(255)
-  appRef2Address    String @db.VarChar(255)
-  appRef2Phone      String @db.VarChar(20)
-  appRef2Occupation String @db.VarChar(255)
+  appPerReq PerReq @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
 
-  appSelfIntro  String? @db.Text
-  appHomeMapUrl String? @db.VarChar(500)
-
-  appAttachIdCard      String? @db.VarChar(500)
-  appAttachHouseReg    String? @db.VarChar(500)
-  appAttachEducation   String? @db.VarChar(500)
-  appAttachMedicalCert String? @db.VarChar(500)
-  appAttachMilitaryDoc String? @db.VarChar(500)
-
-  appConsentGeneral   Boolean
-  appConsentSensitive Boolean
-
-  appSignatureImage String? @db.VarChar(500)
-
-  appStatus    AppStatus @default(Pending)
-  appCreatedAt DateTime  @default(now()) @db.Timestamp()
-  appUpdateBy  Int?
-  appUpdatedAt DateTime? @updatedAt
-
-  AppPerReqId                 PerReq                   @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
-  AppFamilyMemberAppId        AppFamilyMember[]        @relation("AppFamilyMemberAppId")
-  AppEmergencyContactAppId    AppEmergencyContact[]    @relation("AppEmergencyContactAppId")
-  AppEducationAppId           AppEducation[]           @relation("AppEducationAppId")
-  AppProfessionalLicenseAppId AppProfessionalLicense[] @relation("AppProfessionalLicenseAppId")
-  AppLanguageSkillId          AppLanguageSkill[]       @relation("AppLanguageSkillId")
-  AppOtherSkillAppId          AppOtherSkill[]          @relation("AppOtherSkillAppId")
-  AppSpecialAbilityAppId      AppSpecialAbility[]      @relation("AppSpecialAbilityAppId")
-  AppEnglishScoreAppId        AppEnglishScore[]        @relation("AppEnglishScoreAppId")
-  AppWorkExperienceAppId      AppWorkExperience[]      @relation("AppWorkExperienceAppId")
+  appFamilyMembers        AppFamilyMember[]        @relation("AppFamilyMemberAppId")
+  appEmergencyContacts    AppEmergencyContact[]    @relation("AppEmergencyContactAppId")
+  appEducations           AppEducation[]           @relation("AppEducationAppId")
+  appProfessionalLicenses AppProfessionalLicense[] @relation("AppProfessionalLicenseAppId")
+  appLanguageSkills       AppLanguageSkill[]       @relation("AppLanguageSkillId")
+  appOtherSkills          AppOtherSkill[]          @relation("AppOtherSkillAppId")
+  appSpecialAbilities     AppSpecialAbility[]      @relation("AppSpecialAbilityAppId")
+  appEnglishScores        AppEnglishScore[]        @relation("AppEnglishScoreAppId")
+  appWorkExperiences      AppWorkExperience[]      @relation("AppWorkExperienceAppId")
 
   @@index([appPerReqId])
+}
+
+model AppDetail {
+  appDetailId                        Int                      @id @default(autoincrement())
+  appDetailAppId                     Int                      @unique
+  appDetailSalary                    Int
+  appDetailBirthDay                  DateTime
+  appDetailGender                    Gender
+  appDetailAge                       Int
+  appDetailNationality               String                   @db.VarChar(255)
+  appDetailReligion                  String                   @db.VarChar(255)
+  appDetailWright                    Int
+  appDetailHeight                    Int
+  appDetailBloodGroup                AppBloodGroup
+  appDetailIdCardNumber              String                   @db.VarChar(20)
+  appDetailIdCardIssuedAt            String                   @db.VarChar(255)
+  appDetailIdCardIssuedDate          DateTime
+  appDetailIdCardEndDate             DateTime
+  appDetailPhone                     String                   @db.VarChar(20)
+  appDetailEmail                     String                   @db.VarChar(255)
+  appDetailLine                      String                   @db.VarChar(255)
+  appDetailPresentAddress            String                   @db.VarChar(255)
+  appDetailRegisteredAddress         String                   @db.VarChar(255)
+  appDetailMaritalStatus             AppMaritalStatus
+  appDetailSpouseEarnIncome          AppSpouseEarnIncome?
+  appDetailSpouseIncomeAmount        Int?
+  appDetailNumberOfChildren          Int?
+  appDetailMilitaryStatus            AppMilitaryServiceStatus
+  appDetailOwnCar                    VehiclePossession
+  appDetailOwnMotorcycle             VehiclePossession
+  appDetailHaveCarLicense            VehiclePossession
+  appDetailHaveMotorcycleLicense     VehiclePossession
+  appDetailAllowReferenceCheck       Boolean
+  appDetailAllowReferenceCheckReason String?                  @db.VarChar(255)
+  appDetailEverFired                 Boolean
+  appDetailEverFiredReason           String?                  @db.VarChar(255)
+  appDetailSevereIllnessHistory      Boolean
+  appDetailSevereIllnessDetail       String?                  @db.VarChar(255)
+  appDetailCriminalRecord            Boolean
+  appDetailCriminalRecordDetail      String?                  @db.VarChar(255)
+  appDetailIsPregnant                Boolean
+  appDetailPregnancyDetail           String?                  @db.VarChar(255)
+  appDetailHasFriendInCompany        Boolean
+  appDetailFriendInCompanyName       String?                  @db.VarChar(255)
+  appDetailRef1Name                  String                   @db.VarChar(255)
+  appDetailRef1Address               String                   @db.VarChar(255)
+  appDetailRef1Phone                 String                   @db.VarChar(20)
+  appDetailRef1Occupation            String                   @db.VarChar(255)
+  appDetailRef2Name                  String                   @db.VarChar(255)
+  appDetailRef2Address               String                   @db.VarChar(255)
+  appDetailRef2Phone                 String                   @db.VarChar(20)
+  appDetailRef2Occupation            String                   @db.VarChar(255)
+  appDetailSelfIntro                 String?                  @db.Text
+  appDetailHomeMapUrl                String?                  @db.VarChar(500)
+  appDetailAttachIdCard              String?                  @db.VarChar(500)
+  appDetailAttachHouseReg            String?                  @db.VarChar(500)
+  appDetailAttachEducation           String?                  @db.VarChar(500)
+  appDetailAttachMedicalCert         String?                  @db.VarChar(500)
+  appDetailAttachMilitaryDoc         String?                  @db.VarChar(500)
+  appDetailConsentGeneral            Boolean
+  appDetailConsentSensitive          Boolean
+  appDetailSignatureImage            String?                  @db.VarChar(500)
+
+  appDetailApp Apps @relation(fields: [appDetailAppId], references: [appId])
 }
 
 model AppFamilyMember {
