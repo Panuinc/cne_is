@@ -76,6 +76,14 @@ enum perReqEducation {
   BachelorMasterDegree
 }
 
+enum ApplicationStatus {
+  Pending // ยังไม่ส่งใบสมัคร
+  Submitted // ส่งใบสมัครแล้ว
+  Interviewing // นัดสัมภาษณ์
+  Rejected // ไม่ผ่าน
+  Hired // ได้รับเลือก
+}
+
 model Emp {
   empId          Int       @id @default(autoincrement())
   empTitle       Title
@@ -494,6 +502,8 @@ model PerReq {
   PerReqDepartmentId Department? @relation("PerReqDepartmentId", fields: [perReqDepartmentId], references: [departmentId])
   PerReqPositionId   Position?   @relation("PerReqPositionId", fields: [perReqPositionId], references: [positionId])
 
+  perReqApplication Applications[] @relation("ApplicationPerReqId")
+
   @@index([perReqCreateBy])
   @@index([perReqUpdateBy])
   @@index([perReqReasonManagerApproveBy])
@@ -501,4 +511,23 @@ model PerReq {
   @@index([perReqDivisionId])
   @@index([perReqDepartmentId])
   @@index([perReqPositionId])
+}
+
+model Applications {
+  applicationId       Int    @id @default(autoincrement())
+  applicationPerReqId Int
+  applicationSalary   Int
+  applicationAge      Int
+  applicationWright   Int
+  applicationHeight   Int
+  applicationFullName String @db.VarChar(255)
+
+  applicationStatus    ApplicationStatus @default(Pending)
+  applicationCreatedAt DateTime          @default(now()) @db.Timestamp()
+  applicationUpdateBy  Int?
+  applicationUpdatedAt DateTime?
+
+  ApplicationPerReqId PerReq @relation("ApplicationPerReqId", fields: [applicationPerReqId], references: [perReqId])
+
+  @@index([applicationPerReqId])
 }
