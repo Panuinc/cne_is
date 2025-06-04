@@ -572,11 +572,11 @@ model Apps {
   appWright                Int
   appHeight                Int
   appBloodGroup            AppBloodGroup
-  appIdCardNumber          Int
+  appIdCardNumber          String
   appIdCardIssuedAt        String
   appIdCardIssuedDate      DateTime
   appIdCardEndDate         DateTime
-  appPhone                 Int
+  appPhone                 String
   appEmail                 String
   appLine                  String
   appPresentAddress        String                   @db.Char(255)
@@ -586,15 +586,15 @@ model Apps {
   appSpouseIncomeAmount    Int?
   appNumberOfChildren      Int?
   appMilitaryServiceStatus AppMilitaryServiceStatus
-  
-  appStatus                AppStatus                @default(Pending)
-  appCreatedAt             DateTime                 @default(now()) @db.Timestamp()
-  appUpdateBy              Int?
-  appUpdatedAt             DateTime?
 
-  AppPerReqId         PerReq                @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
-  AppFamilyMember     AppFamilyMember[]
-  AppEmergencyContact AppEmergencyContact[]
+  appStatus    AppStatus @default(Pending)
+  appCreatedAt DateTime  @default(now()) @db.Timestamp()
+  appUpdateBy  Int?
+  appUpdatedAt DateTime?
+
+  AppPerReqId              PerReq                @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
+  AppFamilyMemberAppId     AppFamilyMember[]     @relation("AppFamilyMemberAppId")
+  AppEmergencyContactAppId AppEmergencyContact[] @relation("AppEmergencyContactAppId")
 
   @@index([appPerReqId])
 }
@@ -609,7 +609,7 @@ model AppFamilyMember {
   appFamilyMemberWorkplace  String?           @db.VarChar(255)
   appFamilyMemberPhone      String?           @db.VarChar(20)
 
-  app Apps @relation(fields: [appFamilyMemberAppId], references: [appId])
+  appFamilyMemberApp Apps @relation("AppFamilyMemberAppId", fields: [appFamilyMemberAppId], references: [appId])
 
   @@index([appFamilyMemberAppId])
 }
@@ -622,7 +622,7 @@ model AppEmergencyContact {
   appEmergencyContactPhone    String               @db.VarChar(20)
   appEmergencyContactAddress  String?              @db.VarChar(255)
 
-  app Apps @relation(fields: [appEmergencyContactAppId], references: [appId])
+  appEmergencyContactApp Apps @relation("AppEmergencyContactAppId", fields: [appEmergencyContactAppId], references: [appId])
 
   @@index([appEmergencyContactAppId])
 }
