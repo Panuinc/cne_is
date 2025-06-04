@@ -128,6 +128,47 @@ enum AppEmergencyRelation {
   Other
 }
 
+enum EducationLevel {
+  Primary // ประถมศึกษา
+  LowerSecondary // มัธยมศึกษาตอนต้น
+  UpperSecondary // มัธยมศึกษาตอนปลาย
+  Vocational // ปวช.
+  HighVocational // ปวส.
+  Bachelor // ปริญญาตรี
+  Master // ปริญญาโท
+  Doctorate // ปริญญาเอก
+}
+
+enum SkillLevel {
+  Excellent
+  Good
+  Fair
+}
+
+enum OtherSkillType {
+  Computer
+  Sport
+  OtherLanguageScore
+}
+
+enum EnglishTestType {
+  TOEIC
+  TOEFL
+  IELTS
+  OTHER
+}
+
+enum VehiclePossession {
+  Yes
+  No
+}
+
+enum EmploymentType {
+  FullTime // ประจำ
+  PartTime // ชั่วคราว
+  Internship // ฝึกงาน
+}
+
 model Emp {
   empId          Int       @id @default(autoincrement())
   empTitle       Title
@@ -563,38 +604,48 @@ model Apps {
   appSalary                Int
   appFullNameTH            String                   @db.VarChar(255)
   appFullNameEN            String                   @db.VarChar(255)
-  appNickName              String                   @db.Char(255)
+  appNickName              String                   @db.VarChar(255)
   appBirthDay              DateTime
   appGender                Gender
   appAge                   Int
-  appNationality           String
-  appReligion              String
+  appNationality           String                   @db.VarChar(255)
+  appReligion              String                   @db.VarChar(255)
   appWright                Int
   appHeight                Int
   appBloodGroup            AppBloodGroup
-  appIdCardNumber          String
-  appIdCardIssuedAt        String
+  appIdCardNumber          String                   @db.VarChar(20)
+  appIdCardIssuedAt        String                   @db.VarChar(255)
   appIdCardIssuedDate      DateTime
   appIdCardEndDate         DateTime
-  appPhone                 String
-  appEmail                 String
-  appLine                  String
-  appPresentAddress        String                   @db.Char(255)
-  appRegisteredAddress     String                   @db.Char(255)
+  appPhone                 String                   @db.VarChar(20)
+  appEmail                 String                   @db.VarChar(255)
+  appLine                  String                   @db.VarChar(255)
+  appPresentAddress        String                   @db.VarChar(255)
+  appRegisteredAddress     String                   @db.VarChar(255)
   appMaritalStatus         AppMaritalStatus
   appSpouseEarnIncome      AppSpouseEarnIncome?
   appSpouseIncomeAmount    Int?
   appNumberOfChildren      Int?
   appMilitaryServiceStatus AppMilitaryServiceStatus
+  appOwnCar                VehiclePossession
+  appOwnMotorcycle         VehiclePossession
+  appHaveCarLicense        VehiclePossession
+  appHaveMotorcycleLicense VehiclePossession
+  appStatus                AppStatus                @default(Pending)
+  appCreatedAt             DateTime                 @default(now()) @db.Timestamp()
+  appUpdateBy              Int?
+  appUpdatedAt             DateTime?                @updatedAt
 
-  appStatus    AppStatus @default(Pending)
-  appCreatedAt DateTime  @default(now()) @db.Timestamp()
-  appUpdateBy  Int?
-  appUpdatedAt DateTime?
-
-  AppPerReqId              PerReq                @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
-  AppFamilyMemberAppId     AppFamilyMember[]     @relation("AppFamilyMemberAppId")
-  AppEmergencyContactAppId AppEmergencyContact[] @relation("AppEmergencyContactAppId")
+  AppPerReqId              PerReq                   @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
+  AppFamilyMemberAppId     AppFamilyMember[]        @relation("AppFamilyMemberAppId")
+  AppEmergencyContactAppId AppEmergencyContact[]    @relation("AppEmergencyContactAppId")
+  AppEducation             AppEducation[]           @relation("AppEducationApp")
+  AppProfessionalLicense   AppProfessionalLicense[] @relation("AppProfessionalLicenseApp")
+  AppLanguageSkill         AppLanguageSkill[]       @relation("AppLanguageSkillApp")
+  AppOtherSkill            AppOtherSkill[]          @relation("AppOtherSkillApp")
+  AppSpecialAbility        AppSpecialAbility[]      @relation("AppSpecialAbilityApp")
+  AppEnglishScore          AppEnglishScore[]        @relation("AppEnglishScoreApp")
+  AppWorkExperience        AppWorkExperience[]      @relation("AppWorkExperienceApp")
 
   @@index([appPerReqId])
 }
@@ -625,4 +676,97 @@ model AppEmergencyContact {
   appEmergencyContactApp Apps @relation("AppEmergencyContactAppId", fields: [appEmergencyContactAppId], references: [appId])
 
   @@index([appEmergencyContactAppId])
+}
+
+model AppEducation {
+  appEducationId       Int            @id @default(autoincrement())
+  appEducationAppId    Int
+  appEducationLevel    EducationLevel
+  appEducationFromDate DateTime
+  appEducationToDate   DateTime
+  appEducationSchool   String         @db.VarChar(255)
+  appEducationDegree   String         @db.VarChar(255)
+  appEducationMajor    String?        @db.VarChar(255)
+  appEducationGPA      Float?
+
+  appEducationApp Apps @relation("AppEducationApp", fields: [appEducationAppId], references: [appId])
+
+  @@index([appEducationAppId])
+}
+
+model AppProfessionalLicense {
+  appLicenseId     Int     @id @default(autoincrement())
+  appLicenseAppId  Int
+  appLicenseName   String  @db.VarChar(255)
+  appLicenseNumber String? @db.VarChar(100)
+
+  appLicenseApp Apps @relation("AppProfessionalLicenseApp", fields: [appLicenseAppId], references: [appId])
+
+  @@index([appLicenseAppId])
+}
+
+model AppLanguageSkill {
+  appLanguageSkillId     Int        @id @default(autoincrement())
+  appLanguageSkillAppId  Int
+  appLanguageName        String     @db.VarChar(100)
+  appLanguageListenLevel SkillLevel
+  appLanguageSpeakLevel  SkillLevel
+  appLanguageReadLevel   SkillLevel
+  appLanguageWriteLevel  SkillLevel
+
+  appLanguageSkillApp Apps @relation("AppLanguageSkillApp", fields: [appLanguageSkillAppId], references: [appId])
+
+  @@index([appLanguageSkillAppId])
+}
+
+model AppOtherSkill {
+  appOtherSkillId    Int            @id @default(autoincrement())
+  appOtherSkillAppId Int
+  appOtherSkillType  OtherSkillType
+  appOtherSkillName  String         @db.VarChar(100)
+  appOtherSkillScore Float?
+
+  appOtherSkillApp Apps @relation("AppOtherSkillApp", fields: [appOtherSkillAppId], references: [appId])
+
+  @@index([appOtherSkillAppId])
+}
+
+model AppSpecialAbility {
+  appSpecialAbilityId    Int    @id @default(autoincrement())
+  appSpecialAbilityAppId Int
+  appSpecialAbilityName  String @db.VarChar(255)
+
+  appSpecialAbilityApp Apps @relation("AppSpecialAbilityApp", fields: [appSpecialAbilityAppId], references: [appId])
+
+  @@index([appSpecialAbilityAppId])
+}
+
+model AppEnglishScore {
+  appEnglishScoreId     Int             @id @default(autoincrement())
+  appEnglishScoreAppId  Int
+  appEnglishScoreType   EnglishTestType
+  appEnglishScoreValue  Float?
+  appEnglishScoreDetail String?         @db.VarChar(255)
+
+  appEnglishScoreApp Apps @relation("AppEnglishScoreApp", fields: [appEnglishScoreAppId], references: [appId])
+
+  @@index([appEnglishScoreAppId])
+}
+
+model AppWorkExperience {
+  appWorkExpId        Int            @id @default(autoincrement())
+  appWorkExpAppId     Int
+  appWorkplaceName    String         @db.VarChar(255)
+  appWorkPosition     String         @db.VarChar(255)
+  appEmploymentType   EmploymentType
+  appStartDate        DateTime
+  appEndDate          DateTime?
+  appSalary           Int?
+  appExtraIncome      Int?
+  appReasonForLeaving String?        @db.VarChar(255)
+  appJobDescription   Json
+
+  appWorkExpApp Apps @relation("AppWorkExperienceApp", fields: [appWorkExpAppId], references: [appId])
+
+  @@index([appWorkExpAppId])
 }
