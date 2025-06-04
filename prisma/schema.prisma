@@ -76,7 +76,7 @@ enum perReqEducation {
   BachelorMasterDegree
 }
 
-enum AppStatus {
+enum RecruitStatus {
   Pending // ยังไม่ส่งใบสมัคร
   Submitted // ส่งใบสมัครแล้ว
   Interviewing // นัดสัมภาษณ์
@@ -84,14 +84,14 @@ enum AppStatus {
   Hired // ได้รับเลือก
 }
 
-enum AppMaritalStatus {
+enum RecruitMaritalStatus {
   Single // โสด
   Married // สมรส
   Divorced // หย่าร้าง
   Widowed // หม้าย
 }
 
-enum AppMilitaryServiceStatus {
+enum RecruitMilitaryServiceStatus {
   Exempted // ได้รับการยกเว้น
   Completed // ผ่านการเกณฑ์แล้ว
   NotYetServed // ยังไม่เกณฑ์
@@ -99,14 +99,14 @@ enum AppMilitaryServiceStatus {
   NotRequired // ไม่ต้องเข้ารับการเกณฑ์ (เช่น ผู้หญิง)
 }
 
-enum AppFamilyRelation {
+enum RecruitFamilyRelation {
   Father
   Mother
   OlderSibling
   YoungerSibling
 }
 
-enum AppBloodGroup {
+enum RecruitBloodGroup {
   A
   B
   AB
@@ -114,12 +114,12 @@ enum AppBloodGroup {
   Unknown
 }
 
-enum AppSpouseEarnIncome {
+enum RecruitSpouseEarnIncome {
   Yes
   No
 }
 
-enum AppEmergencyRelation {
+enum RecruitEmergencyRelation {
   Father
   Mother
   Sibling
@@ -587,7 +587,7 @@ model PerReq {
   PerReqDepartmentId Department? @relation("PerReqDepartmentId", fields: [perReqDepartmentId], references: [departmentId])
   PerReqPositionId   Position?   @relation("PerReqPositionId", fields: [perReqPositionId], references: [positionId])
 
-  perReqApp App[] @relation("AppPerReqId")
+  perReqRecruit Recruit[] @relation("RecruitPerReqId")
 
   @@index([perReqCreateBy])
   @@index([perReqUpdateBy])
@@ -598,215 +598,215 @@ model PerReq {
   @@index([perReqPositionId])
 }
 
-model App {
-  appId         Int       @id @default(autoincrement())
-  appPerReqId   Int
-  appFullNameTh String    @db.VarChar(255)
-  appFullNameEn String    @db.VarChar(255)
-  appNickName   String    @db.VarChar(255)
-  appStatus     AppStatus @default(Pending)
-  appCreatedAt  DateTime  @default(now())
-  appUpdateBy   Int?
-  appUpdatedAt  DateTime? @updatedAt
+model Recruit {
+  recruitId         Int           @id @default(autoincrement())
+  recruitPerReqId   Int
+  recruitFullNameTh String        @db.VarChar(255)
+  recruitFullNameEn String        @db.VarChar(255)
+  recruitNickName   String        @db.VarChar(255)
+  recruitStatus     RecruitStatus @default(Pending)
+  recruitCreatedAt  DateTime      @default(now())
+  recruitUpdateBy   Int?
+  recruitUpdatedAt  DateTime?     @updatedAt
 
-  appDetail AppDetail?
+  recruitDetail RecruitDetail?
 
-  appPerReq PerReq @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
+  recruitPerReq PerReq @relation("RecruitPerReqId", fields: [recruitPerReqId], references: [perReqId])
 
-  appFamilyMembers        AppFamilyMember[]        @relation("AppFamilyMemberAppId")
-  appEmergencyContacts    AppEmergencyContact[]    @relation("AppEmergencyContactAppId")
-  appEducations           AppEducation[]           @relation("AppEducationAppId")
-  appProfessionalLicenses AppProfessionalLicense[] @relation("AppProfessionalLicenseAppId")
-  appLanguageSkills       AppLanguageSkill[]       @relation("AppLanguageSkillId")
-  appOtherSkills          AppOtherSkill[]          @relation("AppOtherSkillAppId")
-  appSpecialAbilities     AppSpecialAbility[]      @relation("AppSpecialAbilityAppId")
-  appEnglishScores        AppEnglishScore[]        @relation("AppEnglishScoreAppId")
-  appWorkExperiences      AppWorkExperience[]      @relation("AppWorkExperienceAppId")
+  recruitFamilyMembers        RecruitFamilyMember[]        @relation("RecruitFamilyMemberRecruitId")
+  recruitEmergencyContacts    RecruitEmergencyContact[]    @relation("RecruitEmergencyContactRecruitId")
+  recruitEducations           RecruitEducation[]           @relation("RecruitEducationRecruitId")
+  recruitProfessionalLicenses RecruitProfessionalLicense[] @relation("RecruitProfessionalLicenseRecruitId")
+  recruitLanguageSkills       RecruitLanguageSkill[]       @relation("RecruitLanguageSkillId")
+  recruitOtherSkills          RecruitOtherSkill[]          @relation("RecruitOtherSkillRecruitId")
+  recruitSpecialAbilities     RecruitSpecialAbility[]      @relation("RecruitSpecialAbilityRecruitId")
+  recruitEnglishScores        RecruitEnglishScore[]        @relation("RecruitEnglishScoreRecruitId")
+  recruitWorkExperiences      RecruitWorkExperience[]      @relation("RecruitWorkExperienceRecruitId")
 
-  @@index([appPerReqId])
+  @@index([recruitPerReqId])
 }
 
-model AppDetail {
-  appDetailId                        Int                      @id @default(autoincrement())
-  appDetailAppId                     Int                      @unique
-  appDetailSalary                    Int
-  appDetailBirthDay                  DateTime
-  appDetailGender                    Gender
-  appDetailAge                       Int
-  appDetailNationality               String                   @db.VarChar(255)
-  appDetailReligion                  String                   @db.VarChar(255)
-  appDetailWright                    Int
-  appDetailHeight                    Int
-  appDetailBloodGroup                AppBloodGroup
-  appDetailIdCardNumber              String                   @db.VarChar(20)
-  appDetailIdCardIssuedAt            String                   @db.VarChar(255)
-  appDetailIdCardIssuedDate          DateTime
-  appDetailIdCardEndDate             DateTime
-  appDetailPhone                     String                   @db.VarChar(20)
-  appDetailEmail                     String                   @db.VarChar(255)
-  appDetailLine                      String                   @db.VarChar(255)
-  appDetailPresentAddress            String                   @db.VarChar(255)
-  appDetailRegisteredAddress         String                   @db.VarChar(255)
-  appDetailMaritalStatus             AppMaritalStatus
-  appDetailSpouseEarnIncome          AppSpouseEarnIncome?
-  appDetailSpouseIncomeAmount        Int?
-  appDetailNumberOfChildren          Int?
-  appDetailMilitaryStatus            AppMilitaryServiceStatus
-  appDetailOwnCar                    VehiclePossession
-  appDetailOwnMotorcycle             VehiclePossession
-  appDetailHaveCarLicense            VehiclePossession
-  appDetailHaveMotorcycleLicense     VehiclePossession
-  appDetailAllowReferenceCheck       Boolean
-  appDetailAllowReferenceCheckReason String?                  @db.VarChar(255)
-  appDetailEverFired                 Boolean
-  appDetailEverFiredReason           String?                  @db.VarChar(255)
-  appDetailSevereIllnessHistory      Boolean
-  appDetailSevereIllnessDetail       String?                  @db.VarChar(255)
-  appDetailCriminalRecord            Boolean
-  appDetailCriminalRecordDetail      String?                  @db.VarChar(255)
-  appDetailIsPregnant                Boolean
-  appDetailPregnancyDetail           String?                  @db.VarChar(255)
-  appDetailHasFriendInCompany        Boolean
-  appDetailFriendInCompanyName       String?                  @db.VarChar(255)
-  appDetailRef1Name                  String                   @db.VarChar(255)
-  appDetailRef1Address               String                   @db.VarChar(255)
-  appDetailRef1Phone                 String                   @db.VarChar(20)
-  appDetailRef1Occupation            String                   @db.VarChar(255)
-  appDetailRef2Name                  String                   @db.VarChar(255)
-  appDetailRef2Address               String                   @db.VarChar(255)
-  appDetailRef2Phone                 String                   @db.VarChar(20)
-  appDetailRef2Occupation            String                   @db.VarChar(255)
-  appDetailSelfIntro                 String?                  @db.Text
-  appDetailHomeMapUrl                String?                  @db.VarChar(500)
-  appDetailAttachIdCard              String?                  @db.VarChar(500)
-  appDetailAttachHouseReg            String?                  @db.VarChar(500)
-  appDetailAttachEducation           String?                  @db.VarChar(500)
-  appDetailAttachMedicalCert         String?                  @db.VarChar(500)
-  appDetailAttachMilitaryDoc         String?                  @db.VarChar(500)
-  appDetailConsentGeneral            Boolean
-  appDetailConsentSensitive          Boolean
-  appDetailSignatureImage            String?                  @db.VarChar(500)
+model RecruitDetail {
+  recruitDetailId                        Int                          @id @default(autoincrement())
+  recruitDetailRecruitId                 Int                          @unique
+  recruitDetailSalary                    Int
+  recruitDetailBirthDay                  DateTime
+  recruitDetailGender                    Gender
+  recruitDetailAge                       Int
+  recruitDetailNationality               String                       @db.VarChar(255)
+  recruitDetailReligion                  String                       @db.VarChar(255)
+  recruitDetailWright                    Int
+  recruitDetailHeight                    Int
+  recruitDetailBloodGroup                RecruitBloodGroup
+  recruitDetailIdCardNumber              String                       @db.VarChar(20)
+  recruitDetailIdCardIssuedAt            String                       @db.VarChar(255)
+  recruitDetailIdCardIssuedDate          DateTime
+  recruitDetailIdCardEndDate             DateTime
+  recruitDetailPhone                     String                       @db.VarChar(20)
+  recruitDetailEmail                     String                       @db.VarChar(255)
+  recruitDetailLine                      String                       @db.VarChar(255)
+  recruitDetailPresentAddress            String                       @db.VarChar(255)
+  recruitDetailRegisteredAddress         String                       @db.VarChar(255)
+  recruitDetailMaritalStatus             RecruitMaritalStatus
+  recruitDetailSpouseEarnIncome          RecruitSpouseEarnIncome?
+  recruitDetailSpouseIncomeAmount        Int?
+  recruitDetailNumberOfChildren          Int?
+  recruitDetailMilitaryStatus            RecruitMilitaryServiceStatus
+  recruitDetailOwnCar                    VehiclePossession
+  recruitDetailOwnMotorcycle             VehiclePossession
+  recruitDetailHaveCarLicense            VehiclePossession
+  recruitDetailHaveMotorcycleLicense     VehiclePossession
+  recruitDetailAllowReferenceCheck       Boolean
+  recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
+  recruitDetailEverFired                 Boolean
+  recruitDetailEverFiredReason           String?                      @db.VarChar(255)
+  recruitDetailSevereIllnessHistory      Boolean
+  recruitDetailSevereIllnessDetail       String?                      @db.VarChar(255)
+  recruitDetailCriminalRecord            Boolean
+  recruitDetailCriminalRecordDetail      String?                      @db.VarChar(255)
+  recruitDetailIsPregnant                Boolean
+  recruitDetailPregnancyDetail           String?                      @db.VarChar(255)
+  recruitDetailHasFriendInCompany        Boolean
+  recruitDetailFriendInCompanyName       String?                      @db.VarChar(255)
+  recruitDetailRef1Name                  String                       @db.VarChar(255)
+  recruitDetailRef1Address               String                       @db.VarChar(255)
+  recruitDetailRef1Phone                 String                       @db.VarChar(20)
+  recruitDetailRef1Occupation            String                       @db.VarChar(255)
+  recruitDetailRef2Name                  String                       @db.VarChar(255)
+  recruitDetailRef2Address               String                       @db.VarChar(255)
+  recruitDetailRef2Phone                 String                       @db.VarChar(20)
+  recruitDetailRef2Occupation            String                       @db.VarChar(255)
+  recruitDetailSelfIntro                 String?                      @db.Text
+  recruitDetailHomeMapUrl                String?                      @db.VarChar(500)
+  recruitDetailAttachIdCard              String?                      @db.VarChar(500)
+  recruitDetailAttachHouseReg            String?                      @db.VarChar(500)
+  recruitDetailAttachEducation           String?                      @db.VarChar(500)
+  recruitDetailAttachMedicalCert         String?                      @db.VarChar(500)
+  recruitDetailAttachMilitaryDoc         String?                      @db.VarChar(500)
+  recruitDetailConsentGeneral            Boolean
+  recruitDetailConsentSensitive          Boolean
+  recruitDetailSignatureImage            String?                      @db.VarChar(500)
 
-  appDetailApp App @relation(fields: [appDetailAppId], references: [appId])
+  recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
 
-model AppFamilyMember {
-  appFamilyMemberId         Int               @id @default(autoincrement())
-  appFamilyMemberAppId      Int
-  appFamilyMemberRelation   AppFamilyRelation
-  appFamilyMemberFullName   String            @db.VarChar(255)
-  appFamilyMemberAge        Int?
-  appFamilyMemberOccupation String?           @db.VarChar(255)
-  appFamilyMemberWorkplace  String?           @db.VarChar(255)
-  appFamilyMemberPhone      String?           @db.VarChar(20)
+model RecruitFamilyMember {
+  recruitFamilyMemberId         Int                   @id @default(autoincrement())
+  recruitFamilyMemberRecruitId  Int
+  recruitFamilyMemberRelation   RecruitFamilyRelation
+  recruitFamilyMemberFullName   String                @db.VarChar(255)
+  recruitFamilyMemberAge        Int?
+  recruitFamilyMemberOccupation String?               @db.VarChar(255)
+  recruitFamilyMemberWorkplace  String?               @db.VarChar(255)
+  recruitFamilyMemberPhone      String?               @db.VarChar(20)
 
-  AppFamilyMemberAppId App @relation("AppFamilyMemberAppId", fields: [appFamilyMemberAppId], references: [appId])
+  RecruitFamilyMemberRecruitId Recruit @relation("RecruitFamilyMemberRecruitId", fields: [recruitFamilyMemberRecruitId], references: [recruitId])
 
-  @@index([appFamilyMemberAppId])
+  @@index([recruitFamilyMemberRecruitId])
 }
 
-model AppEmergencyContact {
-  appEmergencyContactId       Int                  @id @default(autoincrement())
-  appEmergencyContactAppId    Int
-  appEmergencyContactName     String               @db.VarChar(255)
-  appEmergencyContactRelation AppEmergencyRelation
-  appEmergencyContactPhone    String               @db.VarChar(20)
-  appEmergencyContactAddress  String?              @db.VarChar(255)
+model RecruitEmergencyContact {
+  recruitEmergencyContactId        Int                      @id @default(autoincrement())
+  recruitEmergencyContactRecruitId Int
+  recruitEmergencyContactName      String                   @db.VarChar(255)
+  recruitEmergencyContactRelation  RecruitEmergencyRelation
+  recruitEmergencyContactPhone     String                   @db.VarChar(20)
+  recruitEmergencyContactAddress   String?                  @db.VarChar(255)
 
-  AppEmergencyContactAppId App @relation("AppEmergencyContactAppId", fields: [appEmergencyContactAppId], references: [appId])
+  RecruitEmergencyContactRecruitId Recruit @relation("RecruitEmergencyContactRecruitId", fields: [recruitEmergencyContactRecruitId], references: [recruitId])
 
-  @@index([appEmergencyContactAppId])
+  @@index([recruitEmergencyContactRecruitId])
 }
 
-model AppEducation {
-  appEducationId       Int            @id @default(autoincrement())
-  appEducationAppId    Int
-  appEducationLevel    EducationLevel
-  appEducationFromDate DateTime
-  appEducationToDate   DateTime
-  appEducationSchool   String         @db.VarChar(255)
-  appEducationDegree   String         @db.VarChar(255)
-  appEducationMajor    String?        @db.VarChar(255)
-  appEducationGPA      Float?
+model RecruitEducation {
+  recruitEducationId        Int            @id @default(autoincrement())
+  recruitEducationRecruitId Int
+  recruitEducationLevel     EducationLevel
+  recruitEducationFromDate  DateTime
+  recruitEducationToDate    DateTime
+  recruitEducationSchool    String         @db.VarChar(255)
+  recruitEducationDegree    String         @db.VarChar(255)
+  recruitEducationMajor     String?        @db.VarChar(255)
+  recruitEducationGPA       Float?
 
-  AppEducationAppId App @relation("AppEducationAppId", fields: [appEducationAppId], references: [appId])
+  RecruitEducationRecruitId Recruit @relation("RecruitEducationRecruitId", fields: [recruitEducationRecruitId], references: [recruitId])
 
-  @@index([appEducationAppId])
+  @@index([recruitEducationRecruitId])
 }
 
-model AppProfessionalLicense {
-  appLicenseId     Int     @id @default(autoincrement())
-  appLicenseAppId  Int
-  appLicenseName   String  @db.VarChar(255)
-  appLicenseNumber String? @db.VarChar(100)
+model RecruitProfessionalLicense {
+  recruitLicenseId        Int     @id @default(autoincrement())
+  recruitLicenseRecruitId Int
+  recruitLicenseName      String  @db.VarChar(255)
+  recruitLicenseNumber    String? @db.VarChar(100)
 
-  AppProfessionalLicenseAppId App @relation("AppProfessionalLicenseAppId", fields: [appLicenseAppId], references: [appId])
+  RecruitProfessionalLicenseRecruitId Recruit @relation("RecruitProfessionalLicenseRecruitId", fields: [recruitLicenseRecruitId], references: [recruitId])
 
-  @@index([appLicenseAppId])
+  @@index([recruitLicenseRecruitId])
 }
 
-model AppLanguageSkill {
-  appLanguageSkillId     Int        @id @default(autoincrement())
-  appLanguageSkillAppId  Int
-  appLanguageName        String     @db.VarChar(100)
-  appLanguageListenLevel SkillLevel
-  appLanguageSpeakLevel  SkillLevel
-  appLanguageReadLevel   SkillLevel
-  appLanguageWriteLevel  SkillLevel
+model RecruitLanguageSkill {
+  recruitLanguageSkillId        Int        @id @default(autoincrement())
+  recruitLanguageSkillRecruitId Int
+  recruitLanguageName           String     @db.VarChar(100)
+  recruitLanguageListenLevel    SkillLevel
+  recruitLanguageSpeakLevel     SkillLevel
+  recruitLanguageReadLevel      SkillLevel
+  recruitLanguageWriteLevel     SkillLevel
 
-  AppLanguageSkillId App @relation("AppLanguageSkillId", fields: [appLanguageSkillAppId], references: [appId])
+  RecruitLanguageSkillId Recruit @relation("RecruitLanguageSkillId", fields: [recruitLanguageSkillRecruitId], references: [recruitId])
 
-  @@index([appLanguageSkillAppId])
+  @@index([recruitLanguageSkillRecruitId])
 }
 
-model AppOtherSkill {
-  appOtherSkillId    Int            @id @default(autoincrement())
-  appOtherSkillAppId Int
-  appOtherSkillType  OtherSkillType
-  appOtherSkillName  String         @db.VarChar(100)
-  appOtherSkillScore Float?
+model RecruitOtherSkill {
+  recruitOtherSkillId        Int            @id @default(autoincrement())
+  recruitOtherSkillRecruitId Int
+  recruitOtherSkillType      OtherSkillType
+  recruitOtherSkillName      String         @db.VarChar(100)
+  recruitOtherSkillScore     Float?
 
-  AppOtherSkillAppId App @relation("AppOtherSkillAppId", fields: [appOtherSkillAppId], references: [appId])
+  RecruitOtherSkillRecruitId Recruit @relation("RecruitOtherSkillRecruitId", fields: [recruitOtherSkillRecruitId], references: [recruitId])
 
-  @@index([appOtherSkillAppId])
+  @@index([recruitOtherSkillRecruitId])
 }
 
-model AppSpecialAbility {
-  appSpecialAbilityId    Int    @id @default(autoincrement())
-  appSpecialAbilityAppId Int
-  appSpecialAbilityName  String @db.VarChar(255)
+model RecruitSpecialAbility {
+  recruitSpecialAbilityId        Int    @id @default(autoincrement())
+  recruitSpecialAbilityRecruitId Int
+  recruitSpecialAbilityName      String @db.VarChar(255)
 
-  AppSpecialAbilityAppId App @relation("AppSpecialAbilityAppId", fields: [appSpecialAbilityAppId], references: [appId])
+  RecruitSpecialAbilityRecruitId Recruit @relation("RecruitSpecialAbilityRecruitId", fields: [recruitSpecialAbilityRecruitId], references: [recruitId])
 
-  @@index([appSpecialAbilityAppId])
+  @@index([recruitSpecialAbilityRecruitId])
 }
 
-model AppEnglishScore {
-  appEnglishScoreId     Int             @id @default(autoincrement())
-  appEnglishScoreAppId  Int
-  appEnglishScoreType   EnglishTestType
-  appEnglishScoreValue  Float?
-  appEnglishScoreDetail String?         @db.VarChar(255)
+model RecruitEnglishScore {
+  recruitEnglishScoreId        Int             @id @default(autoincrement())
+  recruitEnglishScoreRecruitId Int
+  recruitEnglishScoreType      EnglishTestType
+  recruitEnglishScoreValue     Float?
+  recruitEnglishScoreDetail    String?         @db.VarChar(255)
 
-  AppEnglishScoreAppId App @relation("AppEnglishScoreAppId", fields: [appEnglishScoreAppId], references: [appId])
+  RecruitEnglishScoreRecruitId Recruit @relation("RecruitEnglishScoreRecruitId", fields: [recruitEnglishScoreRecruitId], references: [recruitId])
 
-  @@index([appEnglishScoreAppId])
+  @@index([recruitEnglishScoreRecruitId])
 }
 
-model AppWorkExperience {
-  appWorkExpId        Int            @id @default(autoincrement())
-  appWorkExpAppId     Int
-  appWorkplaceName    String         @db.VarChar(255)
-  appWorkPosition     String         @db.VarChar(255)
-  appEmploymentType   EmploymentType
-  appStartDate        DateTime
-  appEndDate          DateTime?
-  appSalary           Int?
-  appExtraIncome      Int?
-  appReasonForLeaving String?        @db.VarChar(255)
-  appJobDescription   Json
+model RecruitWorkExperience {
+  recruitWorkExpId        Int            @id @default(autoincrement())
+  recruitWorkExpRecruitId Int
+  recruitWorkplaceName    String         @db.VarChar(255)
+  recruitWorkPosition     String         @db.VarChar(255)
+  recruitEmploymentType   EmploymentType
+  recruitStartDate        DateTime
+  recruitEndDate          DateTime?
+  recruitSalary           Int?
+  recruitExtraIncome      Int?
+  recruitReasonForLeaving String?        @db.VarChar(255)
+  recruitJobDescription   Json
 
-  AppWorkExperienceAppId App @relation("AppWorkExperienceAppId", fields: [appWorkExpAppId], references: [appId])
+  RecruitWorkExperienceRecruitId Recruit @relation("RecruitWorkExperienceRecruitId", fields: [recruitWorkExpRecruitId], references: [recruitId])
 
-  @@index([appWorkExpAppId])
+  @@index([recruitWorkExpRecruitId])
 }
