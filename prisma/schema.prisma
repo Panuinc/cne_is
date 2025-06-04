@@ -631,10 +631,47 @@ model Apps {
   appOwnMotorcycle         VehiclePossession
   appHaveCarLicense        VehiclePossession
   appHaveMotorcycleLicense VehiclePossession
-  appStatus                AppStatus                @default(Pending)
-  appCreatedAt             DateTime                 @default(now()) @db.Timestamp()
-  appUpdateBy              Int?
-  appUpdatedAt             DateTime?                @updatedAt
+
+  appAllowReferenceCheck       Boolean
+  appAllowReferenceCheckReason String? @db.VarChar(255)
+  appEverFired                 Boolean
+  appEverFiredReason           String? @db.VarChar(255)
+  appSevereIllnessHistory      Boolean
+  appSevereIllnessDetail       String? @db.VarChar(255)
+  appCriminalRecord            Boolean
+  appCriminalRecordDetail      String? @db.VarChar(255)
+  appIsPregnant                Boolean
+  appPregnancyDetail           String? @db.VarChar(255)
+  appHasFriendInCompany        Boolean
+  appFriendInCompanyName       String? @db.VarChar(255)
+
+  appRef1Name       String @db.VarChar(255)
+  appRef1Address    String @db.VarChar(255)
+  appRef1Phone      String @db.VarChar(20)
+  appRef1Occupation String @db.VarChar(255)
+  appRef2Name       String @db.VarChar(255)
+  appRef2Address    String @db.VarChar(255)
+  appRef2Phone      String @db.VarChar(20)
+  appRef2Occupation String @db.VarChar(255)
+
+  appSelfIntro  String? @db.Text
+  appHomeMapUrl String? @db.VarChar(500)
+
+  appAttachIdCard      String? @db.VarChar(500)
+  appAttachHouseReg    String? @db.VarChar(500)
+  appAttachEducation   String? @db.VarChar(500)
+  appAttachMedicalCert String? @db.VarChar(500)
+  appAttachMilitaryDoc String? @db.VarChar(500)
+
+  appConsentGeneral   Boolean
+  appConsentSensitive Boolean
+
+  appSignatureImage String? @db.VarChar(500)
+
+  appStatus    AppStatus @default(Pending)
+  appCreatedAt DateTime  @default(now()) @db.Timestamp()
+  appUpdateBy  Int?
+  appUpdatedAt DateTime? @updatedAt
 
   AppPerReqId              PerReq                   @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
   AppFamilyMemberAppId     AppFamilyMember[]        @relation("AppFamilyMemberAppId")
