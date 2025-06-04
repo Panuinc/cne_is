@@ -18,7 +18,7 @@ export default function recruitCreate() {
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    recruitName: "",
+    recruitFullNameTh: "",
     recruitNameShot: "",
   });
 

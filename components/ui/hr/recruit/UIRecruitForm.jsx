@@ -1,9 +1,10 @@
 "use client";
 
 import UIHeader from "@/components/other/UIHeader";
-
-import React from "react";
-import { Input, Button, Select, SelectItem } from "@heroui/react";
+import UIRecruitStep1 from "./components/UIRecruitStep1";
+import UIRecruitStep2 from "./components/UIRecruitStep2";
+import React, { useState } from "react";
+import { Button } from "@heroui/react";
 
 export default function UIRecruitForm({
   header,
@@ -15,97 +16,66 @@ export default function UIRecruitForm({
   isUpdate,
   operatedBy,
 }) {
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    if (step === 1 && !formData.recruitFullNameTh) {
+      return;
+    }
+    setStep((prev) => prev + 1);
+  };
+
+  const handleBack = () => {
+    setStep((prev) => prev - 1);
+  };
+
   return (
     <>
       <UIHeader Header={header} />
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white overflow-auto border-2 border-dark"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <Input
-              name="recruitFullNameTh"
-              type="text"
-              label="ใบสมัคงาน"
-              placeholder="กรุณากรอกข้อมูล"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={formData.recruitFullNameTh || ""}
-              onChange={handleInputChange("recruitFullNameTh")}
-              isInvalid={!!errors.recruitFullNameTh}
-              errorMessage={errors.recruitFullNameTh}
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <Input
-              name="recruitNameShot"
-              type="text"
-              label="ตัวย่อใบสมัคงาน"
-              placeholder="กรุณากรอกข้อมูล"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={formData.recruitNameShot || ""}
-              onChange={handleInputChange("recruitNameShot")}
-              isInvalid={!!errors.recruitNameShot}
-              errorMessage={errors.recruitNameShot}
-            />
-          </div>
-        </div>
-
-        {isUpdate && (
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-              <Select
-                name="recruitStatus"
-                label="สถานะการใช้งาน"
-                placeholder="กรุณากรอกข้อมูล"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                value={formData.recruitStatus || ""}
-                selectedKeys={
-                  formData.recruitStatus ? [formData.recruitStatus] : []
-                }
-                onChange={handleInputChange("recruitStatus")}
-                isInvalid={!!errors.recruitStatus}
-                errorMessage={errors.recruitStatus}
-              >
-                <SelectItem key="Active" value="Active">
-                  เปิดใช้งาน
-                </SelectItem>
-                <SelectItem key="InActive" value="InActive">
-                  ปิดใช้งาน
-                </SelectItem>
-              </Select>
-            </div>
-          </div>
+        {step === 1 && (
+          <UIRecruitStep1
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
+        {step === 2 && (
+          <UIRecruitStep2
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
         )}
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2">
-            <Input
-              type="text"
-              label="ดำเนินการโดย"
-              placeholder="กรุณากรอกข้อมูล"
+        <div className="flex flex-row items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+          {step > 1 && (
+            <Button
+              color="primary"
               size="md"
-              variant="underlined"
-              color="none"
               radius="full"
-              value={operatedBy}
-              readOnly
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
+              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
+              onPress={handleBack}
+            >
+              ย้อนกลับ
+            </Button>
+          )}
+          {step < 2 && (
+            <Button
+              color="primary"
+              size="md"
+              radius="full"
+              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
+              onPress={handleNext}
+            >
+              ถัดไป
+            </Button>
+          )}
+          {step === 2 && (
             <Button
               color="primary"
               size="md"
@@ -115,7 +85,7 @@ export default function UIRecruitForm({
             >
               บันทึก
             </Button>
-          </div>
+          )}
         </div>
       </form>
     </>

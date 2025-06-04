@@ -76,8 +76,8 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
   const columns = useMemo(() => {
     const baseColumns = [
       { name: "ลำดับ", uid: "recruitId" },
-      { name: "ใบสมัคงาน", uid: "recruitFullNameTh" },
-      { name: "ตัวย่อใบสมัคงาน", uid: "recruitNameShot" },
+      { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
+      { name: "ตัวย่อใบสมัครงาน", uid: "recruitNameShot" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
     ];
 
