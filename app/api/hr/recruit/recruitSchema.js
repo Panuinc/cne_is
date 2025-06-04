@@ -178,4 +178,5 @@ export const recruitPutSchema = z.object({
     ["Pending", "Submitted", "Interviewing", "Rejected", "Hired"],
     "Please provide a valid status"
   ),
+  recruitUpdateBy: preprocessInt("Please provide the updater's user ID"),
 });

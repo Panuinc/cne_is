@@ -1,7 +1,5 @@
-// app/api/hr/recruit/recruitController.js
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-
 import { RecruitService } from "./recruitService";
 import {
   recruitPostSchema,
@@ -13,8 +11,16 @@ import { validateRequest } from "@/lib/validateRequest";
 import { getLocalNow } from "@/lib/getLocalNow";
 import { handleErrors, handleGetErrors } from "@/lib/errorHandler";
 
+const formatDateOnly = (dateInput) => {
+  if (!dateInput) return null;
+  const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}T00:00:00.000Z`;
+};
+
 export class RecruitController {
-  /* ─────────── /api/hr/recruit (GET) ─────────── */
   static async getAllRecruit(request) {
     let ip = "";
     try {
@@ -40,16 +46,13 @@ export class RecruitController {
     }
   }
 
-  /* ─────────── /api/hr/recruit (POST) ─────────── */
   static async createRecruit(request) {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
 
-      // parse JSON-string → object/array
       [
         "recruitFamilyMembers",
         "recruitEmergencyContacts",
@@ -61,11 +64,22 @@ export class RecruitController {
         "recruitEnglishScores",
         "recruitWorkExperiences",
       ].forEach((k) => (raw[k] = JSON.parse(raw[k] || "[]")));
-
       if (raw.recruitDetail) raw.recruitDetail = JSON.parse(raw.recruitDetail);
 
       const data = recruitPostSchema.parse(raw);
       const localNow = getLocalNow();
+
+      if (data.recruitDetail) {
+        data.recruitDetail.recruitDetailBirthDay = formatDateOnly(
+          data.recruitDetail.recruitDetailBirthDay
+        );
+        data.recruitDetail.recruitDetailIdCardIssuedDate = formatDateOnly(
+          data.recruitDetail.recruitDetailIdCardIssuedDate
+        );
+        data.recruitDetail.recruitDetailIdCardEndDate = formatDateOnly(
+          data.recruitDetail.recruitDetailIdCardEndDate
+        );
+      }
 
       const recruit = await RecruitService.createRecruit({
         ...data,
@@ -81,12 +95,10 @@ export class RecruitController {
     }
   }
 
-  /* ─────── /api/hr/recruit/[recruitId] (GET) ─────── */
   static async getRecruitById(request, recruitId) {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const id = Number(recruitId);
       if (Number.isNaN(id)) {
         return NextResponse.json(
@@ -115,12 +127,10 @@ export class RecruitController {
     }
   }
 
-  /* ─────── /api/hr/recruit/[recruitId] (PUT) ─────── */
   static async updateRecruit(request, recruitId) {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const id = Number(recruitId);
       if (Number.isNaN(id)) {
         return NextResponse.json(
@@ -131,26 +141,12 @@ export class RecruitController {
 
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
-
-      [
-        "recruitFamilyMembers",
-        "recruitEmergencyContacts",
-        "recruitEducations",
-        "recruitProfessionalLicenses",
-        "recruitLanguageSkills",
-        "recruitOtherSkills",
-        "recruitSpecialAbilities",
-        "recruitEnglishScores",
-        "recruitWorkExperiences",
-      ].forEach((k) => (raw[k] = JSON.parse(raw[k] || "[]")));
-
-      if (raw.recruitDetail) raw.recruitDetail = JSON.parse(raw.recruitDetail);
-
       const data = recruitPutSchema.parse({ ...raw, recruitId: id });
       const localNow = getLocalNow();
 
       const recruit = await RecruitService.updateRecruit(id, {
-        ...data,
+        recruitStatus: data.recruitStatus,
+        recruitUpdateBy: data.recruitUpdateBy,
         recruitUpdatedAt: localNow,
       });
 
@@ -163,12 +159,10 @@ export class RecruitController {
     }
   }
 
-  /* ─── /api/hr/recruit/link/[perReqId] (GET) ─── */
   static async getApplyLink(request, perReqId) {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const id = Number(perReqId);
       if (Number.isNaN(id)) {
         return NextResponse.json(
@@ -177,7 +171,6 @@ export class RecruitController {
         );
       }
 
-      // ถ้า perReq นี้ยังไม่มี recruit (Pending) ⇒ สร้างใหม่
       let recruit = await prisma.recruit.findFirst({
         where: { recruitPerReqId: id, recruitStatus: "Pending" },
       });
@@ -193,7 +186,6 @@ export class RecruitController {
         });
       }
 
-      // gen slug ถ้ายังไม่มี
       let slug = recruit.applySlug;
       if (!slug) slug = await RecruitService.generateSlug(recruit.recruitId);
 
