@@ -587,7 +587,7 @@ model PerReq {
   PerReqDepartmentId Department? @relation("PerReqDepartmentId", fields: [perReqDepartmentId], references: [departmentId])
   PerReqPositionId   Position?   @relation("PerReqPositionId", fields: [perReqPositionId], references: [positionId])
 
-  perReqApp Apps[] @relation("AppPerReqId")
+  perReqApp App[] @relation("AppPerReqId")
 
   @@index([perReqCreateBy])
   @@index([perReqUpdateBy])
@@ -598,7 +598,7 @@ model PerReq {
   @@index([perReqPositionId])
 }
 
-model Apps {
+model App {
   appId         Int       @id @default(autoincrement())
   appPerReqId   Int
   appFullNameTh String    @db.VarChar(255)
@@ -687,7 +687,7 @@ model AppDetail {
   appDetailConsentSensitive          Boolean
   appDetailSignatureImage            String?                  @db.VarChar(500)
 
-  appDetailApp Apps @relation(fields: [appDetailAppId], references: [appId])
+  appDetailApp App @relation(fields: [appDetailAppId], references: [appId])
 }
 
 model AppFamilyMember {
@@ -700,7 +700,7 @@ model AppFamilyMember {
   appFamilyMemberWorkplace  String?           @db.VarChar(255)
   appFamilyMemberPhone      String?           @db.VarChar(20)
 
-  AppFamilyMemberAppId Apps @relation("AppFamilyMemberAppId", fields: [appFamilyMemberAppId], references: [appId])
+  AppFamilyMemberAppId App @relation("AppFamilyMemberAppId", fields: [appFamilyMemberAppId], references: [appId])
 
   @@index([appFamilyMemberAppId])
 }
@@ -713,7 +713,7 @@ model AppEmergencyContact {
   appEmergencyContactPhone    String               @db.VarChar(20)
   appEmergencyContactAddress  String?              @db.VarChar(255)
 
-  AppEmergencyContactAppId Apps @relation("AppEmergencyContactAppId", fields: [appEmergencyContactAppId], references: [appId])
+  AppEmergencyContactAppId App @relation("AppEmergencyContactAppId", fields: [appEmergencyContactAppId], references: [appId])
 
   @@index([appEmergencyContactAppId])
 }
@@ -729,7 +729,7 @@ model AppEducation {
   appEducationMajor    String?        @db.VarChar(255)
   appEducationGPA      Float?
 
-  AppEducationAppId Apps @relation("AppEducationAppId", fields: [appEducationAppId], references: [appId])
+  AppEducationAppId App @relation("AppEducationAppId", fields: [appEducationAppId], references: [appId])
 
   @@index([appEducationAppId])
 }
@@ -740,7 +740,7 @@ model AppProfessionalLicense {
   appLicenseName   String  @db.VarChar(255)
   appLicenseNumber String? @db.VarChar(100)
 
-  AppProfessionalLicenseAppId Apps @relation("AppProfessionalLicenseAppId", fields: [appLicenseAppId], references: [appId])
+  AppProfessionalLicenseAppId App @relation("AppProfessionalLicenseAppId", fields: [appLicenseAppId], references: [appId])
 
   @@index([appLicenseAppId])
 }
@@ -754,7 +754,7 @@ model AppLanguageSkill {
   appLanguageReadLevel   SkillLevel
   appLanguageWriteLevel  SkillLevel
 
-  AppLanguageSkillId Apps @relation("AppLanguageSkillId", fields: [appLanguageSkillAppId], references: [appId])
+  AppLanguageSkillId App @relation("AppLanguageSkillId", fields: [appLanguageSkillAppId], references: [appId])
 
   @@index([appLanguageSkillAppId])
 }
@@ -766,7 +766,7 @@ model AppOtherSkill {
   appOtherSkillName  String         @db.VarChar(100)
   appOtherSkillScore Float?
 
-  AppOtherSkillAppId Apps @relation("AppOtherSkillAppId", fields: [appOtherSkillAppId], references: [appId])
+  AppOtherSkillAppId App @relation("AppOtherSkillAppId", fields: [appOtherSkillAppId], references: [appId])
 
   @@index([appOtherSkillAppId])
 }
@@ -776,7 +776,7 @@ model AppSpecialAbility {
   appSpecialAbilityAppId Int
   appSpecialAbilityName  String @db.VarChar(255)
 
-  AppSpecialAbilityAppId Apps @relation("AppSpecialAbilityAppId", fields: [appSpecialAbilityAppId], references: [appId])
+  AppSpecialAbilityAppId App @relation("AppSpecialAbilityAppId", fields: [appSpecialAbilityAppId], references: [appId])
 
   @@index([appSpecialAbilityAppId])
 }
@@ -788,7 +788,7 @@ model AppEnglishScore {
   appEnglishScoreValue  Float?
   appEnglishScoreDetail String?         @db.VarChar(255)
 
-  AppEnglishScoreAppId Apps @relation("AppEnglishScoreAppId", fields: [appEnglishScoreAppId], references: [appId])
+  AppEnglishScoreAppId App @relation("AppEnglishScoreAppId", fields: [appEnglishScoreAppId], references: [appId])
 
   @@index([appEnglishScoreAppId])
 }
@@ -806,7 +806,7 @@ model AppWorkExperience {
   appReasonForLeaving String?        @db.VarChar(255)
   appJobDescription   Json
 
-  AppWorkExperienceAppId Apps @relation("AppWorkExperienceAppId", fields: [appWorkExpAppId], references: [appId])
+  AppWorkExperienceAppId App @relation("AppWorkExperienceAppId", fields: [appWorkExpAppId], references: [appId])
 
   @@index([appWorkExpAppId])
 }
