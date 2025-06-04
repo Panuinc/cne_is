@@ -76,12 +76,56 @@ enum perReqEducation {
   BachelorMasterDegree
 }
 
-enum ApplicationStatus {
+enum AppStatus {
   Pending // ยังไม่ส่งใบสมัคร
   Submitted // ส่งใบสมัครแล้ว
   Interviewing // นัดสัมภาษณ์
   Rejected // ไม่ผ่าน
   Hired // ได้รับเลือก
+}
+
+enum AppMaritalStatus {
+  Single // โสด
+  Married // สมรส
+  Divorced // หย่าร้าง
+  Widowed // หม้าย
+}
+
+enum AppMilitaryServiceStatus {
+  Exempted // ได้รับการยกเว้น
+  Completed // ผ่านการเกณฑ์แล้ว
+  NotYetServed // ยังไม่เกณฑ์
+  InProgress // กำลังอยู่ระหว่างการเกณฑ์
+  NotRequired // ไม่ต้องเข้ารับการเกณฑ์ (เช่น ผู้หญิง)
+}
+
+enum AppFamilyRelation {
+  Father
+  Mother
+  OlderSibling
+  YoungerSibling
+}
+
+enum AppBloodGroup {
+  A
+  B
+  AB
+  O
+  Unknown
+}
+
+enum AppSpouseEarnIncome {
+  Yes
+  No
+}
+
+enum AppEmergencyRelation {
+  Father
+  Mother
+  Sibling
+  Friend
+  Manager
+  Other
 }
 
 model Emp {
@@ -502,7 +546,7 @@ model PerReq {
   PerReqDepartmentId Department? @relation("PerReqDepartmentId", fields: [perReqDepartmentId], references: [departmentId])
   PerReqPositionId   Position?   @relation("PerReqPositionId", fields: [perReqPositionId], references: [positionId])
 
-  perReqApplication Applications[] @relation("ApplicationPerReqId")
+  perReqApp Apps[] @relation("AppPerReqId")
 
   @@index([perReqCreateBy])
   @@index([perReqUpdateBy])
@@ -513,21 +557,72 @@ model PerReq {
   @@index([perReqPositionId])
 }
 
-model Applications {
-  applicationId       Int    @id @default(autoincrement())
-  applicationPerReqId Int
-  applicationSalary   Int
-  applicationAge      Int
-  applicationWright   Int
-  applicationHeight   Int
-  applicationFullName String @db.VarChar(255)
+model Apps {
+  appId                    Int                      @id @default(autoincrement())
+  appPerReqId              Int
+  appSalary                Int
+  appFullNameTH            String                   @db.VarChar(255)
+  appFullNameEN            String                   @db.VarChar(255)
+  appNickName              String                   @db.Char(255)
+  appBirthDay              DateTime
+  appGender                Gender
+  appAge                   Int
+  appNationality           String
+  appReligion              String
+  appWright                Int
+  appHeight                Int
+  appBloodGroup            AppBloodGroup
+  appIdCardNumber          Int
+  appIdCardIssuedAt        String
+  appIdCardIssuedDate      DateTime
+  appIdCardEndDate         DateTime
+  appPhone                 Int
+  appEmail                 String
+  appLine                  String
+  appPresentAddress        String                   @db.Char(255)
+  appRegisteredAddress     String                   @db.Char(255)
+  appMaritalStatus         AppMaritalStatus
+  appSpouseEarnIncome      AppSpouseEarnIncome?
+  appSpouseIncomeAmount    Int?
+  appNumberOfChildren      Int?
+  appMilitaryServiceStatus AppMilitaryServiceStatus
+  
+  appStatus                AppStatus                @default(Pending)
+  appCreatedAt             DateTime                 @default(now()) @db.Timestamp()
+  appUpdateBy              Int?
+  appUpdatedAt             DateTime?
 
-  applicationStatus    ApplicationStatus @default(Pending)
-  applicationCreatedAt DateTime          @default(now()) @db.Timestamp()
-  applicationUpdateBy  Int?
-  applicationUpdatedAt DateTime?
+  AppPerReqId         PerReq                @relation("AppPerReqId", fields: [appPerReqId], references: [perReqId])
+  AppFamilyMember     AppFamilyMember[]
+  AppEmergencyContact AppEmergencyContact[]
 
-  ApplicationPerReqId PerReq @relation("ApplicationPerReqId", fields: [applicationPerReqId], references: [perReqId])
+  @@index([appPerReqId])
+}
 
-  @@index([applicationPerReqId])
+model AppFamilyMember {
+  appFamilyMemberId         Int               @id @default(autoincrement())
+  appFamilyMemberAppId      Int
+  appFamilyMemberRelation   AppFamilyRelation
+  appFamilyMemberFullName   String            @db.VarChar(255)
+  appFamilyMemberAge        Int?
+  appFamilyMemberOccupation String?           @db.VarChar(255)
+  appFamilyMemberWorkplace  String?           @db.VarChar(255)
+  appFamilyMemberPhone      String?           @db.VarChar(20)
+
+  app Apps @relation(fields: [appFamilyMemberAppId], references: [appId])
+
+  @@index([appFamilyMemberAppId])
+}
+
+model AppEmergencyContact {
+  appEmergencyContactId       Int                  @id @default(autoincrement())
+  appEmergencyContactAppId    Int
+  appEmergencyContactName     String               @db.VarChar(255)
+  appEmergencyContactRelation AppEmergencyRelation
+  appEmergencyContactPhone    String               @db.VarChar(20)
+  appEmergencyContactAddress  String?              @db.VarChar(255)
+
+  app Apps @relation(fields: [appEmergencyContactAppId], references: [appId])
+
+  @@index([appEmergencyContactAppId])
 }
