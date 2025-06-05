@@ -3,13 +3,11 @@
 import UICustomPagination from "@/components/other/UICustomPagination";
 import UICustomTable from "@/components/other/UICustomTable";
 import UIHeader from "@/components/other/UIHeader";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Folder, Setting } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-
 import {
   Input,
   Button,
@@ -21,10 +19,10 @@ import {
   DropdownItem,
 } from "@heroui/react";
 
-const statusOptions = [
+const completionOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "เปิดใช้งาน", uniqueIdentifier: "active" },
-  { name: "ปิดใช้งาน", uniqueIdentifier: "inactive" },
+  { name: "กรอกแล้ว", uniqueIdentifier: "filled" },
+  { name: "ยังไม่กรอก", uniqueIdentifier: "empty" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -58,18 +56,16 @@ const UISelectFilter = ({
 
 export default function UIRecruitList({ header, data = [], error = "" }) {
   const { data: session, status } = useSession();
-
   if (status === "loading") return null;
 
   const roleName = session?.user?.roleName;
   const divisionName = session?.user?.divisionName;
-
   const canManage =
     roleName === "ผู้ดูแลระบบ" || divisionName === "ทรัพยากรบุคคล";
 
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [completionFilter, setCompletionFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -79,7 +75,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
       { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
     ];
-
     if (canManage) {
       baseColumns.push(
         { name: "สร้างโดย", uid: "createdBy" },
@@ -89,28 +84,32 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
         { name: "การจัดการ", uid: "actions" }
       );
     }
-
     return baseColumns;
   }, [canManage]);
 
   const filteredData = useMemo(() => {
     let result = data;
+
     if (searchTerm.trim()) {
       result = result.filter((recruit) =>
-        recruit.recruitFullNameTh?.toLowerCase().includes(searchTerm.toLowerCase())
+        recruit.recruitFullNameTh
+          ?.toLowerCase()
+          .includes(searchTerm.toLowerCase())
       );
     }
-    if (statusFilter !== "all") {
-      result = result.filter(
-        (recruit) => recruit.recruitStatus?.toLowerCase() === statusFilter
-      );
+
+    if (completionFilter === "filled") {
+      result = result.filter((recruit) => recruit.recruitFullNameTh?.trim());
+    } else if (completionFilter === "empty") {
+      result = result.filter((recruit) => !recruit.recruitFullNameTh?.trim());
     }
+
     return result;
-  }, [data, searchTerm, statusFilter]);
+  }, [data, searchTerm, completionFilter]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, completionFilter]);
 
   const handleAction = useCallback(
     (action, item) => {
@@ -126,6 +125,16 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
       switch (colKey) {
         case "recruitId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
+        case "recruitFullNameTh":
+          return (
+            <Link
+              href={`/apply/${item.applySlug}`}
+              className="text-blue-600 underline hover:text-blue-800"
+              title={`ลิงก์: /apply/${item.applySlug}`}
+            >
+              {item.recruitFullNameTh?.trim() || "คลิกเพื่อกรอกใบสมัคร"}
+            </Link>
+          );
         case "recruitStatus":
           return (
             <Button
@@ -192,7 +201,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
           <div className="flex items-center justify-center h-full p-2 gap-2">
             {canManage && (
               <Button
@@ -213,10 +221,10 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
         <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
             <UISelectFilter
-              label="สถานะการใช้งาน"
-              selectedValue={statusFilter}
-              items={statusOptions}
-              onChange={setStatusFilter}
+              label="สถานะใบสมัคร"
+              selectedValue={completionFilter}
+              items={completionOptions}
+              onChange={setCompletionFilter}
             />
           </div>
         </div>
