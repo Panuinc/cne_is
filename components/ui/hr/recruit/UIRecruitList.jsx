@@ -77,7 +77,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     const baseColumns = [
       { name: "ลำดับ", uid: "recruitId" },
       { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
-      { name: "ตัวย่อใบสมัครงาน", uid: "recruitNameShot" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
     ];
 
