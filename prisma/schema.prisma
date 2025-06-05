@@ -607,7 +607,7 @@ model Recruit {
   recruitStatus     RecruitStatus @default(Pending)
   recruitCreatedAt  DateTime      @default(now()) @db.Timestamp()
   recruitUpdateBy   Int?
-  recruitUpdatedAt  DateTime?     @updatedAt
+  recruitUpdatedAt  DateTime?
   applySlug         String?       @unique @db.VarChar(255)
 
   recruitDetail RecruitDetail?

@@ -68,7 +68,6 @@ export class RecruitService {
         recruitDetail.recruitDetailIdCardEndDate
       );
     }
-    console.log("recruitData before create:", recruitData);
 
     return prisma.recruit.create({
       data: {
@@ -140,6 +139,7 @@ export class RecruitService {
         recruitFullNameEn: "",
         recruitNickName: "",
         recruitStatus: "Pending",
+        recruitCreatedAt: formatDateOnly(new Date()),
       });
     }
 
@@ -149,5 +149,26 @@ export class RecruitService {
     }
 
     return `${process.env.NEXT_PUBLIC_BASE_URL}/apply/${slug}`;
+  }
+
+  static async getRecruitBySlug(slug) {
+    return prisma.recruit.findFirst({
+      where: { applySlug: slug },
+      include: {
+        recruitDetail: true,
+        recruitPerReq: {
+          select: { perReqDocumentId: true, perReqStatus: true },
+        },
+        recruitFamilyMembers: true,
+        recruitEmergencyContacts: true,
+        recruitEducations: true,
+        recruitProfessionalLicenses: true,
+        recruitLanguageSkills: true,
+        recruitOtherSkills: true,
+        recruitSpecialAbilities: true,
+        recruitEnglishScores: true,
+        recruitWorkExperiences: true,
+      },
+    });
   }
 }

@@ -2,6 +2,7 @@
 
 import UIRecruitForm from "./UIRecruitForm";
 import { useEffect, useState, useCallback, useRef } from "react";
+const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 export default function RecruitApplyPage({ slug }) {
   const [formData, setFormData] = useState({});
@@ -26,20 +27,30 @@ export default function RecruitApplyPage({ slug }) {
     if (!slug) return;
 
     (async () => {
-      const res = await fetch(`/api/hr/recruit/slug/${slug}`);
-      const json = await res.json();
+      try {
+        const res = await fetch(`/api/hr/recruit/slug/${slug}`, {
+          headers: {
+            "secret-token": SECRET_TOKEN || "",
+          },
+        });
 
-      if (res.ok && json?.recruit?.[0]) {
-        setFormData(json.recruit[0]);
+        const json = await res.json();
+
+        if (res.ok && json?.recruit?.[0]) {
+          setFormData(json.recruit[0]);
+        } else {
+          setFormData(null);
+        }
+      } catch (err) {
+        setFormData(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, [slug]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit:", formData);
-    // Optional: POST formData to API here
   };
 
   if (loading) return <p>Loading...</p>;
@@ -52,7 +63,7 @@ export default function RecruitApplyPage({ slug }) {
       onSubmit={handleSubmit}
       errors={errors}
       formData={formData}
-      handleInputChange={handleInputChange} // ✅ ใส่ตรงนี้
+      handleInputChange={handleInputChange}
       isUpdate={true}
       operatedBy="ผู้สมัคร"
     />
