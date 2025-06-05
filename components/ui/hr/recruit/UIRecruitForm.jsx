@@ -76,39 +76,45 @@ export default function UIRecruitForm({
           />
         )}
 
-        <div className="flex flex-row items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           {step > 1 && (
-            <Button
-              color="primary"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
-              onPress={handleBack}
-            >
-              ย้อนกลับ
-            </Button>
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+              <Button
+                color="danger"
+                size="md"
+                radius="full"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2"
+                onPress={handleBack}
+              >
+                ย้อนกลับ
+              </Button>
+            </div>
           )}
           {step < 5 && (
-            <Button
-              color="primary"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
-              onPress={handleNext}
-            >
-              ถัดไป
-            </Button>
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
+              <Button
+                color="primary"
+                size="md"
+                radius="full"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2"
+                onPress={handleNext}
+              >
+                ถัดไป
+              </Button>
+            </div>
           )}
           {step === 5 && (
-            <Button
-              color="primary"
-              size="md"
-              radius="full"
-              type="submit"
-              className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
-            >
-              บันทึก
-            </Button>
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
+              <Button
+                color="primary"
+                size="md"
+                radius="full"
+                type="submit"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2"
+              >
+                บันทึก
+              </Button>
+            </div>
           )}
         </div>
       </form>
