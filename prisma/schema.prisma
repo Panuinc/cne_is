@@ -686,6 +686,7 @@ model RecruitDetail {
   recruitDetailConsentGeneral            Boolean
   recruitDetailConsentSensitive          Boolean
   recruitDetailSignatureImage            String?                      @db.VarChar(500)
+  recruitDetailProfileImage              String?                      @db.VarChar(500)
 
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }

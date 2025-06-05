@@ -158,6 +158,7 @@ export const recruitPostSchema = z.object({
         "Consent for sensitive data?"
       ),
       recruitDetailSignatureImage: preprocessString().optional(),
+      recruitDetailProfileImage: preprocessString().optional(),
     })
     .optional(),
 
