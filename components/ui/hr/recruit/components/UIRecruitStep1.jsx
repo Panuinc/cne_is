@@ -149,6 +149,42 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          สถานภาพการสมรส
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          1
+        </div>
+      </div>
+
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          มี.....บาท ไม่มี
+        </div>
+      </div>
+
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          จำนวนบุตร
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          มี.....บาท ไม่มี
+        </div>
+      </div>
+
+      <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          สถานภาพทางทหาร
+        </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          1
+        </div>
+      </div>
+
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
         <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <Input

@@ -3,6 +3,9 @@
 import UIHeader from "@/components/other/UIHeader";
 import UIRecruitStep1 from "./components/UIRecruitStep1";
 import UIRecruitStep2 from "./components/UIRecruitStep2";
+import UIRecruitStep3 from "./components/UIRecruitStep3";
+import UIRecruitStep4 from "./components/UIRecruitStep4";
+import UIRecruitStep5 from "./components/UIRecruitStep5"; // ✅ เพิ่ม step 5
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 
@@ -51,6 +54,27 @@ export default function UIRecruitForm({
             errors={errors}
           />
         )}
+        {step === 3 && (
+          <UIRecruitStep3
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
+        {step === 4 && (
+          <UIRecruitStep4
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
+        {step === 5 && (
+          <UIRecruitStep5
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
 
         <div className="flex flex-row items-center justify-between w-full p-2 gap-2 border-2 border-dark">
           {step > 1 && (
@@ -64,7 +88,7 @@ export default function UIRecruitForm({
               ย้อนกลับ
             </Button>
           )}
-          {step < 2 && (
+          {step < 5 && (
             <Button
               color="primary"
               size="md"
@@ -75,7 +99,7 @@ export default function UIRecruitForm({
               ถัดไป
             </Button>
           )}
-          {step === 2 && (
+          {step === 5 && (
             <Button
               color="primary"
               size="md"
