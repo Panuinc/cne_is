@@ -165,9 +165,8 @@ export default function PerReqList() {
       }
 
       await navigator.clipboard.writeText(json.url);
-      toast.success("คัดลอกลิงก์สมัครงานแล้ว: " + json.url);
+      toast.success("ลิงก์สมัครงานใหม่ถูกคัดลอกแล้ว: " + json.url);
     } catch (err) {
-      console.error(err);
       toast.error(err.message || "เกิดข้อผิดพลาดในการสร้างลิงก์");
     }
   };

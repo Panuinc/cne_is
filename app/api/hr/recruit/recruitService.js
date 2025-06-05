@@ -128,4 +128,26 @@ export class RecruitService {
     });
     return slug;
   }
+  static async getOrCreateApplyLink(perReqId) {
+    let recruit = await prisma.recruit.findFirst({
+      where: { recruitPerReqId: perReqId, recruitStatus: "Pending" },
+    });
+
+    if (!recruit) {
+      recruit = await RecruitService.createRecruit({
+        recruitPerReqId: perReqId,
+        recruitFullNameTh: "",
+        recruitFullNameEn: "",
+        recruitNickName: "",
+        recruitStatus: "Pending",
+      });
+    }
+
+    let slug = recruit.applySlug;
+    if (!slug) {
+      slug = await RecruitService.generateSlug(recruit.recruitId);
+    }
+
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/apply/${slug}`;
+  }
 }

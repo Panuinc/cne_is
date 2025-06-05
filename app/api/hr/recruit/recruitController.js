@@ -170,29 +170,8 @@ export class RecruitController {
           { status: 400 }
         );
       }
+      const url = await RecruitService.getOrCreateApplyLink(id);
 
-      // หาว่ามี Recruit ที่ Pending อยู่ไหม
-      let recruit = await prisma.recruit.findFirst({
-        where: { recruitPerReqId: id, recruitStatus: "Pending" },
-      });
-
-      // ถ้าไม่มีก็สร้างใหม่
-      if (!recruit) {
-        recruit = await RecruitService.createRecruit({
-          recruitPerReqId: id,
-          recruitFullNameTh: "",
-          recruitFullNameEn: "",
-          recruitNickName: "",
-          recruitStatus: "Pending",
-        });
-      }
-
-      let slug = recruit.applySlug;
-      if (!slug) {
-        slug = await RecruitService.generateSlug(recruit.recruitId);
-      }
-
-      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/apply/${slug}`;
       return NextResponse.json({ url }, { status: 200 });
     } catch (error) {
       return handleGetErrors(error, ip, "Failed to create link");
