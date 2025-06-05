@@ -68,6 +68,7 @@ export class RecruitService {
         recruitDetail.recruitDetailIdCardEndDate
       );
     }
+    console.log("recruitData before create:", recruitData);
 
     return prisma.recruit.create({
       data: {

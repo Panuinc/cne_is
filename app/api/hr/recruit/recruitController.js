@@ -171,10 +171,12 @@ export class RecruitController {
         );
       }
 
+      // หาว่ามี Recruit ที่ Pending อยู่ไหม
       let recruit = await prisma.recruit.findFirst({
         where: { recruitPerReqId: id, recruitStatus: "Pending" },
       });
 
+      // ถ้าไม่มีก็สร้างใหม่
       if (!recruit) {
         recruit = await RecruitService.createRecruit({
           recruitPerReqId: id,
@@ -182,12 +184,13 @@ export class RecruitController {
           recruitFullNameEn: "",
           recruitNickName: "",
           recruitStatus: "Pending",
-          recruitCreateBy: 0,
         });
       }
 
       let slug = recruit.applySlug;
-      if (!slug) slug = await RecruitService.generateSlug(recruit.recruitId);
+      if (!slug) {
+        slug = await RecruitService.generateSlug(recruit.recruitId);
+      }
 
       const url = `${process.env.NEXT_PUBLIC_BASE_URL}/apply/${slug}`;
       return NextResponse.json({ url }, { status: 200 });

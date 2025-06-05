@@ -147,6 +147,31 @@ export default function PerReqList() {
     }
   };
 
+  const handleGenerateRecruitLink = async (perReqId) => {
+    if (!perReqId) {
+      toast.error("ไม่พบ ID ของเอกสารขออัตรากำลังคน");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/hr/recruit/link/${perReqId}`, {
+        headers: { "secret-token": SECRET_TOKEN || "" },
+      });
+
+      const json = await res.json();
+
+      if (!res.ok || !json?.url) {
+        throw new Error(json?.error || "ไม่สามารถสร้างลิงก์สมัครงานได้");
+      }
+
+      await navigator.clipboard.writeText(json.url);
+      toast.success("คัดลอกลิงก์สมัครงานแล้ว: " + json.url);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "เกิดข้อผิดพลาดในการสร้างลิงก์");
+    }
+  };
+
   return (
     <>
       <Toaster position="top-right" />
@@ -157,6 +182,7 @@ export default function PerReqList() {
         onExportPDF={handleExportPDF}
         onExportImages={handleExportImages}
         onExportImagesAll={handleExportAllImagesAsAlbum}
+        onGenerateRecruitLink={handleGenerateRecruitLink}
       />
     </>
   );

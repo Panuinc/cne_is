@@ -68,6 +68,7 @@ export default function UIPerReqList({
   onExportPDF,
   onExportImages,
   onExportImagesAll,
+  onGenerateRecruitLink,
 }) {
   const { data: session, status } = useSession();
   if (status === "loading") return null;
@@ -245,8 +246,7 @@ export default function UIPerReqList({
             </Button>
           );
         }
-
-        case "actions":
+        case "actions": {
           const isOwner = item.perReqCreateBy === currentUserId;
           const isManager =
             item.PerReqCreateBy?.empEmpEmployment?.[0]
@@ -254,6 +254,7 @@ export default function UIPerReqList({
           const isPendingManager =
             item.perReqStatus === "PendingManagerApprove";
           const isPendingHr = item.perReqStatus === "PendingHrApprove";
+          const isApproved = item.perReqStatus === "ApprovedSuccess";
 
           const canEdit =
             (roleName === "ผู้จัดการฝ่าย" &&
@@ -261,9 +262,9 @@ export default function UIPerReqList({
               isPendingHr) ||
             ((isOwner || isManager) && isPendingManager);
 
-          if (canEdit) {
-            return (
-              <div className="flex items-center justify-center p-2 gap-2">
+          return (
+            <div className="flex items-center justify-center p-2 gap-2">
+              {canEdit && (
                 <Dropdown>
                   <DropdownTrigger>
                     <Button isIconOnly variant="none" className="text-primary">
@@ -274,13 +275,22 @@ export default function UIPerReqList({
                     <DropdownItem key="edit">แก้ไข</DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
-              </div>
-            );
-          }
+              )}
 
-          if (divisionName === "ทรัพยากรบุคคล") return null;
-
-          return null;
+              {isApproved && (
+                <Button
+                  size="sm"
+                  radius="full"
+                  color="success"
+                  className="text-white"
+                  onPress={() => onGenerateRecruitLink?.(item.perReqId)}
+                >
+                  ลิงก์สมัครงาน
+                </Button>
+              )}
+            </div>
+          );
+        }
 
         default:
           return item[colKey] || "-";
