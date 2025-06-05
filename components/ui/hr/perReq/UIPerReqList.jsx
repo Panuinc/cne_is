@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Folder, Setting, Document, Picture } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
+import toast from "react-hot-toast";
+
+const SECRET_TOKEN = process.env.NEXT_PUBLIC_SECRET_TOKEN;
 
 import {
   Input,
@@ -70,6 +73,30 @@ export default function UIPerReqList({
   onExportImagesAll,
   onGenerateRecruitLink,
 }) {
+ const handleGenerateNewRecruitLink = async (perReqId) => {
+  if (!perReqId) {
+    toast.error("ไม่พบ ID ของเอกสารขออัตรากำลังคน");
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/hr/recruit/link/new/${perReqId}`, {
+      headers: { "secret-token": process.env.NEXT_PUBLIC_SECRET_TOKEN || "" },
+    });
+
+    const json = await res.json();
+
+    if (!res.ok || !json?.url) {
+      throw new Error(json?.error || "ไม่สามารถสร้างลิงก์สมัครงานได้");
+    }
+
+    await navigator.clipboard.writeText(json.url);
+    toast.success("ลิงก์สมัครงานใหม่ถูกคัดลอกแล้ว: " + json.url);
+  } catch (err) {
+    toast.error(err.message || "เกิดข้อผิดพลาดในการสร้างลิงก์");
+  }
+};
+
   const { data: session, status } = useSession();
   if (status === "loading") return null;
 
@@ -276,16 +303,15 @@ export default function UIPerReqList({
                   </DropdownMenu>
                 </Dropdown>
               )}
-
               {isApproved && (
                 <Button
                   size="sm"
                   radius="full"
-                  color="success"
+                  color="secondary"
                   className="text-white"
-                  onPress={() => onGenerateRecruitLink?.(item.perReqId)}
+                  onPress={() => handleGenerateNewRecruitLink?.(item.perReqId)}
                 >
-                  ลิงก์สมัครงาน
+                  สร้างลิงก์สมัครใหม่
                 </Button>
               )}
             </div>
