@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { customAlphabet } from "nanoid";
+import { getLocalNow } from "@/lib/getLocalNow";
 
 const formatDateOnly = (dateInput) => {
   if (!dateInput) return null;
@@ -127,21 +128,16 @@ export class RecruitService {
     });
     return slug;
   }
-  static async getOrCreateApplyLink(perReqId) {
-    let recruit = await prisma.recruit.findFirst({
-      where: { recruitPerReqId: perReqId, recruitStatus: "Pending" },
-    });
 
-    if (!recruit) {
-      recruit = await RecruitService.createRecruit({
-        recruitPerReqId: perReqId,
-        recruitFullNameTh: "",
-        recruitFullNameEn: "",
-        recruitNickName: "",
-        recruitStatus: "Pending",
-        recruitCreatedAt: formatDateOnly(new Date()),
-      });
-    }
+  static async getOrCreateApplyLink(perReqId) {
+    const recruit = await RecruitService.createRecruit({
+      recruitPerReqId: perReqId,
+      recruitFullNameTh: "",
+      recruitFullNameEn: "",
+      recruitNickName: "",
+      recruitStatus: "Pending",
+      recruitCreatedAt: getLocalNow(),
+    });
 
     let slug = recruit.applySlug;
     if (!slug) {
