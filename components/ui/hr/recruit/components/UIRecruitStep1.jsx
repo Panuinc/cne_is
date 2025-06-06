@@ -601,8 +601,8 @@ export default function UIRecruitStep1({
       {/* ──────────── Marital status ──────────── */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         {/* Row 1 */}
-        <div className="flex flex-row items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
-          {/* Marital status */}
+
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
             <span className="text-md font-[600]">สถานภาพการสมรส</span>
             <span className="text-sm font-[300]">Marital Status</span>
@@ -621,7 +621,9 @@ export default function UIRecruitStep1({
             // isInvalid={!!errors.recruitMaritalStatus}
             // errorMessage={errors.recruitMaritalStatus}
           />
-          {/* Spouse income */}
+        </div>
+
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
             <span className="text-md font-[600]">
               ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่
