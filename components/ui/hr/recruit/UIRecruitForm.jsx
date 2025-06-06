@@ -1,16 +1,14 @@
 "use client";
 
-import UIHeader from "@/components/other/UIHeader";
 import UIRecruitStep1 from "./components/UIRecruitStep1";
 import UIRecruitStep2 from "./components/UIRecruitStep2";
 import UIRecruitStep3 from "./components/UIRecruitStep3";
 import UIRecruitStep4 from "./components/UIRecruitStep4";
-import UIRecruitStep5 from "./components/UIRecruitStep5"; // ✅ เพิ่ม step 5
+import UIRecruitStep5 from "./components/UIRecruitStep5";
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 
 export default function UIRecruitForm({
-  header,
   formRef,
   onSubmit,
   errors,
@@ -34,7 +32,6 @@ export default function UIRecruitForm({
 
   return (
     <>
-      <UIHeader Header={header} />
       <form
         ref={formRef}
         onSubmit={onSubmit}
