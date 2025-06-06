@@ -15,7 +15,7 @@ export default function UIRecruitStep1({
 
   return (
     <>
-      {/* ───────────────────── Header ───────────────────── */}
+      {/* ──────────── Header ──────────── */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Image
@@ -28,7 +28,7 @@ export default function UIRecruitStep1({
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl font-[600]">
           บริษัท ชาญนคร วิศวกรรม จำกัด
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xs">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm leading-tight">
           <span>
             50/1 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพ 10900
             โทร.0-2105-0999 (10 คู่สาย) แฟ็กซ์.0-2589-2932
@@ -40,7 +40,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* ───────────────────── Title & Date ───────────────────── */}
+      {/* ──────────── Title & Date ──────────── */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full p-2 gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-lg font-[600]">
@@ -51,21 +51,22 @@ export default function UIRecruitStep1({
           </div>
         </div>
         <div className="flex flex-col items-start justify-center w-full xl:w-2/12 h-full p-2 gap-2">
-          <span className="text-md font-[300]">วันที่</span>
-          <span className="text-xs font-[300] border-b-2 border-dark w-full">
+          <span className="text-md font-[600]">วันที่</span>
+          <span className="text-sm font-[300] border-b-2 border-dark w-full">
             {formattedDate}
           </span>
         </div>
       </div>
 
-      {/* ───────────────────── Position & Salary ───────────────────── */}
+      {/* ──────────── Position & Salary ──────────── */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        {/* Left column */}
         <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           {/* Position */}
           <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[300]">ตำแหน่งที่สมัคร</span>
-              <span className="text-xs font-[300]">Position</span>
+              <span className="text-md font-[600]">ตำแหน่งที่สมัคร</span>
+              <span className="text-sm font-[300]">Position</span>
             </div>
             <Input
               id="recruitPosition"
@@ -82,11 +83,11 @@ export default function UIRecruitStep1({
               // errorMessage={errors.recruitPosition}
             />
           </div>
-          {/* Expected Salary */}
+          {/* Expected salary */}
           <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[300]">เงินเดือนที่ต้องการ</span>
-              <span className="text-xs font-[300]">Expected Salary</span>
+              <span className="text-md font-[600]">เงินเดือนที่ต้องการ</span>
+              <span className="text-sm font-[300]">Expected Salary</span>
             </div>
             <Input
               id="perReqDesiredSalary"
@@ -104,14 +105,14 @@ export default function UIRecruitStep1({
             />
           </div>
         </div>
-        {/* Photo Upload */}
+        {/* Right column – Photo */}
         <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-4 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[300]">
+              <span className="text-md font-[600]">
                 รูปถ่าย 1 นิ้ว หรือ 2 นิ้ว
               </span>
-              <span className="text-xs font-[300]">Photo 1” or 2”</span>
+              <span className="text-sm font-[300]">Photo 1” or 2”</span>
             </div>
             <Input
               id="recruitPhoto"
@@ -130,7 +131,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* ───────────────────── Personal Data Title ───────────────────── */}
+      {/* ──────────── PERSONAL DATA heading ──────────── */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
           ประวัติส่วนตัว
@@ -140,15 +141,15 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* ───────────────────── Full Name & Nickname ───────────────────── */}
+      {/* ──────────── Full name & nickname ──────────── */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        {/* FullName TH */}
+        {/* TH title */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">
+            <span className="text-md font-[600]">
               คำนำหน้าชื่อ นาย/นาง/นางสาว
             </span>
-            <span className="text-xs font-[300]">Title (TH)</span>
+            <span className="text-sm font-[300]">Title (TH)</span>
           </div>
           <Input
             id="recruitFullNameTh"
@@ -165,11 +166,11 @@ export default function UIRecruitStep1({
             // errorMessage={errors.recruitFullNameTh}
           />
         </div>
-        {/* FullName EN */}
+        {/* EN title */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">Title Mr./Mrs./Miss</span>
-            <span className="text-xs font-[300]">Title (EN)</span>
+            <span className="text-md font-[600]">Title Mr./Mrs./Miss</span>
+            <span className="text-sm font-[300]">Title (EN)</span>
           </div>
           <Input
             id="recruitFullNameEn"
@@ -189,8 +190,8 @@ export default function UIRecruitStep1({
         {/* Nickname */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">ชื่อเล่น</span>
-            <span className="text-xs font-[300]">Nickname</span>
+            <span className="text-md font-[600]">ชื่อเล่น</span>
+            <span className="text-sm font-[300]">Nickname</span>
           </div>
           <Input
             id="recruitNickname"
@@ -209,252 +210,402 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* ───────────────────── Birth / Age / Gender / Nationality ───────────────────── */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        {/* Date of Birth */}
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          {[
-            {
-              id: "recruitDob",
-              labelTh: "วัน เดือน ปี เกิด",
-              labelEn: "Date of Birth",
-            },
-            { id: "recruitAge", labelTh: "อายุ", labelEn: "Age" },
-            { id: "recruitGender", labelTh: "เพศ", labelEn: "Gender" },
-            {
-              id: "recruitNationality",
-              labelTh: "สัญชาติ",
-              labelEn: "Nationality",
-            },
-          ].map((field) => (
-            <div
-              key={field.id}
-              className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-            >
-              <div className="flex flex-col">
-                <span className="text-md font-[300]">{field.labelTh}</span>
-                <span className="text-xs font-[300]">{field.labelEn}</span>
-              </div>
-              <Input
-                id={field.id}
-                name={field.id}
-                type="text"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                className="flex-1"
-                // value={formData[field.id] || ""}
-                // onChange={handleInputChange(field.id)}
-                // isInvalid={!!errors[field.id]}
-                // errorMessage={errors[field.id]}
-              />
-            </div>
-          ))}
+      {/* ──────────── Birth / Age / Gender / Nationality ──────────── */}
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        {/* Date of birth */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">วัน เดือน ปี เกิด</span>
+            <span className="text-sm font-[300]">Date of Birth</span>
+          </div>
+          <Input
+            id="recruitDob"
+            name="recruitDob"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitDob || ""}
+            // onChange={handleInputChange("recruitDob")}
+            // isInvalid={!!errors.recruitDob}
+            // errorMessage={errors.recruitDob}
+          />
+        </div>
+        {/* Age */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">อายุ</span>
+            <span className="text-sm font-[300]">Age</span>
+          </div>
+          <Input
+            id="recruitAge"
+            name="recruitAge"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitAge || ""}
+            // onChange={handleInputChange("recruitAge")}
+            // isInvalid={!!errors.recruitAge}
+            // errorMessage={errors.recruitAge}
+          />
+        </div>
+        {/* Gender */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">เพศ</span>
+            <span className="text-sm font-[300]">Gender</span>
+          </div>
+          <Input
+            id="recruitGender"
+            name="recruitGender"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitGender || ""}
+            // onChange={handleInputChange("recruitGender")}
+            // isInvalid={!!errors.recruitGender}
+            // errorMessage={errors.recruitGender}
+          />
+        </div>
+        {/* Nationality */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">สัญชาติ</span>
+            <span className="text-sm font-[300]">Nationality</span>
+          </div>
+          <Input
+            id="recruitNationality"
+            name="recruitNationality"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitNationality || ""}
+            // onChange={handleInputChange("recruitNationality")}
+            // isInvalid={!!errors.recruitNationality}
+            // errorMessage={errors.recruitNationality}
+          />
         </div>
       </div>
 
-      {/* ───────────────────── Religion / Height / Weight / Blood ───────────────────── */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          {[
-            { id: "recruitReligion", labelTh: "ศาสนา", labelEn: "Religion" },
-            { id: "recruitHeight", labelTh: "ส่วนสูง", labelEn: "Height" },
-            { id: "recruitWeight", labelTh: "น้ำหนัก", labelEn: "Weight" },
-            {
-              id: "recruitBlood",
-              labelTh: "กรุ๊ปเลือด",
-              labelEn: "Blood Type",
-            },
-          ].map((field) => (
-            <div
-              key={field.id}
-              className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-            >
-              <div className="flex flex-col">
-                <span className="text-md font-[300]">{field.labelTh}</span>
-                <span className="text-xs font-[300]">{field.labelEn}</span>
-              </div>
-              <Input
-                id={field.id}
-                name={field.id}
-                type="text"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                className="flex-1"
-                // value={formData[field.id] || ""}
-                // onChange={handleInputChange(field.id)}
-                // isInvalid={!!errors[field.id]}
-                // errorMessage={errors[field.id]}
-              />
-            </div>
-          ))}
+      {/* ──────────── Religion / Height / Weight / Blood type ──────────── */}
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        {/* Religion */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">ศาสนา</span>
+            <span className="text-sm font-[300]">Religion</span>
+          </div>
+          <Input
+            id="recruitReligion"
+            name="recruitReligion"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitReligion || ""}
+            // onChange={handleInputChange("recruitReligion")}
+            // isInvalid={!!errors.recruitReligion}
+            // errorMessage={errors.recruitReligion}
+          />
+        </div>
+        {/* Height */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">ส่วนสูง</span>
+            <span className="text-sm font-[300]">Height</span>
+          </div>
+          <Input
+            id="recruitHeight"
+            name="recruitHeight"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitHeight || ""}
+            // onChange={handleInputChange("recruitHeight")}
+            // isInvalid={!!errors.recruitHeight}
+            // errorMessage={errors.recruitHeight}
+          />
+        </div>
+        {/* Weight */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">น้ำหนัก</span>
+            <span className="text-sm font-[300]">Weight</span>
+          </div>
+          <Input
+            id="recruitWeight"
+            name="recruitWeight"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitWeight || ""}
+            // onChange={handleInputChange("recruitWeight")}
+            // isInvalid={!!errors.recruitWeight}
+            // errorMessage={errors.recruitWeight}
+          />
+        </div>
+        {/* Blood type */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">กรุ๊ปเลือด</span>
+            <span className="text-sm font-[300]">Blood Type</span>
+          </div>
+          <Input
+            id="recruitBlood"
+            name="recruitBlood"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitBlood || ""}
+            // onChange={handleInputChange("recruitBlood")}
+            // isInvalid={!!errors.recruitBlood}
+            // errorMessage={errors.recruitBlood}
+          />
         </div>
       </div>
 
-      {/* ───────────────────── ID Card & Contact ───────────────────── */}
+      {/* ──────────── ID card & contacts ──────────── */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         {/* Column 1 */}
         <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-          {[
-            {
-              id: "recruitCardNo",
-              labelTh: "เลขที่บัตรประชาชน",
-              labelEn: "Identification card No.",
-            },
-            {
-              id: "recruitCardIssuedDate",
-              labelTh: "วันที่ออกบัตร",
-              labelEn: "Date Issued",
-            },
-          ].map((field) => (
-            <div
-              key={field.id}
-              className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-            >
-              <div className="flex flex-col">
-                <span className="text-md font-[300]">{field.labelTh}</span>
-                <span className="text-xs font-[300]">{field.labelEn}</span>
-              </div>
-              <Input
-                id={field.id}
-                name={field.id}
-                type="text"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                className="flex-1"
-                // value={formData[field.id] || ""}
-                // onChange={handleInputChange(field.id)}
-                // isInvalid={!!errors[field.id]}
-                // errorMessage={errors[field.id]}
-              />
-            </div>
-          ))}
-        </div>
-        {/* Column 2 */}
-        <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-          {[
-            {
-              id: "recruitCardIssuedAt",
-              labelTh: "สถานที่ออกบัตร",
-              labelEn: "Issued at",
-            },
-            {
-              id: "recruitCardExpired",
-              labelTh: "วันหมดอายุ",
-              labelEn: "Date Expired",
-            },
-          ].map((field) => (
-            <div
-              key={field.id}
-              className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-            >
-              <div className="flex flex-col">
-                <span className="text-md font-[300]">{field.labelTh}</span>
-                <span className="text-xs font-[300]">{field.labelEn}</span>
-              </div>
-              <Input
-                id={field.id}
-                name={field.id}
-                type="text"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                className="flex-1"
-                // value={formData[field.id] || ""}
-                // onChange={handleInputChange(field.id)}
-                // isInvalid={!!errors[field.id]}
-                // errorMessage={errors[field.id]}
-              />
-            </div>
-          ))}
-        </div>
-        {/* Column 3 */}
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          {[
-            {
-              id: "recruitPhone",
-              labelTh: "เบอร์โทรศัพท์",
-              labelEn: "Phone Number",
-            },
-            { id: "recruitEmail", labelTh: "อีเมลล์", labelEn: "Email" },
-            { id: "recruitLineId", labelTh: "ไอดีไลน์", labelEn: "ID Line" },
-          ].map((field) => (
-            <div
-              key={field.id}
-              className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-            >
-              <div className="flex flex-col">
-                <span className="text-md font-[300]">{field.labelTh}</span>
-                <span className="text-xs font-[300]">{field.labelEn}</span>
-              </div>
-              <Input
-                id={field.id}
-                name={field.id}
-                type="text"
-                size="md"
-                variant="underlined"
-                color="none"
-                radius="full"
-                className="flex-1"
-                // value={formData[field.id] || ""}
-                // onChange={handleInputChange(field.id)}
-                // isInvalid={!!errors[field.id]}
-                // errorMessage={errors[field.id]}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ───────────────────── Addresses ───────────────────── */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        {[
-          {
-            id: "recruitAddressPresent",
-            label: "ที่อยู่ปัจจุบัน (Present Address)",
-          },
-          {
-            id: "recruitAddressRegistered",
-            label: "ที่อยู่ตามทะเบียนบ้าน (Registered Address)",
-          },
-        ].map((field) => (
-          <div
-            key={field.id}
-            className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark"
-          >
+          {/* Card number */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[300]">{field.label}</span>
+              <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
+              <span className="text-sm font-[300]">
+                Identification card No.
+              </span>
             </div>
             <Input
-              id={field.id}
-              name={field.id}
+              id="recruitCardNo"
+              name="recruitCardNo"
               type="text"
               size="md"
               variant="underlined"
               color="none"
               radius="full"
               className="flex-1"
-              // value={formData[field.id] || ""}
-              // onChange={handleInputChange(field.id)}
-              // isInvalid={!!errors[field.id]}
-              // errorMessage={errors[field.id]}
+              // value={formData.recruitCardNo || ""}
+              // onChange={handleInputChange("recruitCardNo")}
+              // isInvalid={!!errors.recruitCardNo}
+              // errorMessage={errors.recruitCardNo}
             />
           </div>
-        ))}
+          {/* Card issued date */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">วันที่ออกบัตร</span>
+              <span className="text-sm font-[300]">Date issued</span>
+            </div>
+            <Input
+              id="recruitCardIssuedDate"
+              name="recruitCardIssuedDate"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitCardIssuedDate || ""}
+              // onChange={handleInputChange("recruitCardIssuedDate")}
+              // isInvalid={!!errors.recruitCardIssuedDate}
+              // errorMessage={errors.recruitCardIssuedDate}
+            />
+          </div>
+        </div>
+
+        {/* Column 2 */}
+        <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+          {/* Card issued at */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">สถานที่ออกบัตร</span>
+              <span className="text-sm font-[300]">Issued at</span>
+            </div>
+            <Input
+              id="recruitCardIssuedAt"
+              name="recruitCardIssuedAt"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitCardIssuedAt || ""}
+              // onChange={handleInputChange("recruitCardIssuedAt")}
+              // isInvalid={!!errors.recruitCardIssuedAt}
+              // errorMessage={errors.recruitCardIssuedAt}
+            />
+          </div>
+          {/* Card expired */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">วันหมดอายุ</span>
+              <span className="text-sm font-[300]">Date Expired</span>
+            </div>
+            <Input
+              id="recruitCardExpired"
+              name="recruitCardExpired"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitCardExpired || ""}
+              // onChange={handleInputChange("recruitCardExpired")}
+              // isInvalid={!!errors.recruitCardExpired}
+              // errorMessage={errors.recruitCardExpired}
+            />
+          </div>
+        </div>
+
+        {/* Column 3 */}
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          {/* Phone */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
+              <span className="text-sm font-[300]">Phone Number</span>
+            </div>
+            <Input
+              id="recruitPhone"
+              name="recruitPhone"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitPhone || ""}
+              // onChange={handleInputChange("recruitPhone")}
+              // isInvalid={!!errors.recruitPhone}
+              // errorMessage={errors.recruitPhone}
+            />
+          </div>
+          {/* Email */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">อีเมลล์</span>
+              <span className="text-sm font-[300]">Email</span>
+            </div>
+            <Input
+              id="recruitEmail"
+              name="recruitEmail"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitEmail || ""}
+              // onChange={handleInputChange("recruitEmail")}
+              // isInvalid={!!errors.recruitEmail}
+              // errorMessage={errors.recruitEmail}
+            />
+          </div>
+          {/* Line ID */}
+          <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">ไอดีไลน์</span>
+              <span className="text-sm font-[300]">ID Line</span>
+            </div>
+            <Input
+              id="recruitLineId"
+              name="recruitLineId"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+              // value={formData.recruitLineId || ""}
+              // onChange={handleInputChange("recruitLineId")}
+              // isInvalid={!!errors.recruitLineId}
+              // errorMessage={errors.recruitLineId}
+            />
+          </div>
+        </div>
       </div>
 
-      {/* ───────────────────── Marital Status ───────────────────── */}
+      {/* ──────────── Addresses ──────────── */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-row items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+        {/* Present address */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">สถานภาพการสมรส</span>
-            <span className="text-xs font-[300]">Marital Status</span>
+            <span className="text-md font-[600]">
+              ที่อยู่ปัจจุบัน (Present Address)
+            </span>
+          </div>
+          <Input
+            id="recruitAddressPresent"
+            name="recruitAddressPresent"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitAddressPresent || ""}
+            // onChange={handleInputChange("recruitAddressPresent")}
+            // isInvalid={!!errors.recruitAddressPresent}
+            // errorMessage={errors.recruitAddressPresent}
+          />
+        </div>
+        {/* Registered address */}
+        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">
+              ที่อยู่ตามทะเบียนบ้าน (Registered Address)
+            </span>
+          </div>
+          <Input
+            id="recruitAddressRegistered"
+            name="recruitAddressRegistered"
+            type="text"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
+            className="flex-1"
+            // value={formData.recruitAddressRegistered || ""}
+            // onChange={handleInputChange("recruitAddressRegistered")}
+            // isInvalid={!!errors.recruitAddressRegistered}
+            // errorMessage={errors.recruitAddressRegistered}
+          />
+        </div>
+      </div>
+
+      {/* ──────────── Marital status ──────────── */}
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        {/* Row 1 */}
+        <div className="flex flex-row items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+          {/* Marital status */}
+          <div className="flex flex-col">
+            <span className="text-md font-[600]">สถานภาพการสมรส</span>
+            <span className="text-sm font-[300]">Marital Status</span>
           </div>
           <Input
             id="recruitMaritalStatus"
@@ -470,11 +621,12 @@ export default function UIRecruitStep1({
             // isInvalid={!!errors.recruitMaritalStatus}
             // errorMessage={errors.recruitMaritalStatus}
           />
+          {/* Spouse income */}
           <div className="flex flex-col">
-            <span className="text-md font-[300]">
+            <span className="text-md font-[600]">
               ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่
             </span>
-            <span className="text-xs font-[300]">
+            <span className="text-sm font-[300]">
               If married does the spouse has income?
             </span>
           </div>
@@ -493,10 +645,11 @@ export default function UIRecruitStep1({
             // errorMessage={errors.recruitSpouseIncome}
           />
         </div>
+        {/* Row 2 – children */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">จำนวนบุตร</span>
-            <span className="text-xs font-[300]">Number of Children</span>
+            <span className="text-md font-[600]">จำนวนบุตร</span>
+            <span className="text-sm font-[300]">Number of Children</span>
           </div>
           <Input
             id="recruitChildren"
@@ -515,12 +668,12 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* ───────────────────── Military Status ───────────────────── */}
+      {/* ──────────── Military status ──────────── */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
-            <span className="text-md font-[300]">สถานภาพทางทหาร</span>
-            <span className="text-xs font-[300]">Military Service Status</span>
+            <span className="text-md font-[600]">สถานภาพทางทหาร</span>
+            <span className="text-sm font-[300]">Military Service Status</span>
           </div>
           <Input
             id="recruitMilitaryStatus"
