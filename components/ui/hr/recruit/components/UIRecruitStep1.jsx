@@ -260,20 +260,23 @@ export default function UIRecruitStep1({
             <span className="text-md font-[600]">เพศ</span>
             <span className="text-sm font-[300]">Gender</span>
           </div>
-          <Input
-            id="recruitGender"
-            name="recruitGender"
-            type="text"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            className="flex-1"
-            // value={formData.recruitGender || ""}
-            // onChange={handleInputChange("recruitGender")}
-            // isInvalid={!!errors.recruitGender}
-            // errorMessage={errors.recruitGender}
-          />
+          <div className="flex flex-row gap-4">
+            {["ชาย", "หญิง", "อื่น ๆ"].map((label, index) => {
+              const value = ["Male", "FeMale", "Other"][index];
+              return (
+                <label key={value} className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="recruitGender"
+                    value={value}
+                    checked={formData.recruitGender === value}
+                    onChange={handleInputChange("recruitGender")}
+                  />
+                  {label}
+                </label>
+              );
+            })}
+          </div>
         </div>
         {/* Nationality */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
@@ -607,46 +610,90 @@ export default function UIRecruitStep1({
             <span className="text-md font-[600]">สถานภาพการสมรส</span>
             <span className="text-sm font-[300]">Marital Status</span>
           </div>
-          <Input
-            id="recruitMaritalStatus"
-            name="recruitMaritalStatus"
-            type="text"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            className="flex-1"
-            // value={formData.recruitMaritalStatus || ""}
-            // onChange={handleInputChange("recruitMaritalStatus")}
-            // isInvalid={!!errors.recruitMaritalStatus}
-            // errorMessage={errors.recruitMaritalStatus}
-          />
+          <div className="flex flex-row gap-4">
+            {["โสด", "สมรส", "หย่าร้าง", "หม้าย"].map((label, index) => {
+              const value = ["Single", "Married", "Divorced", "Widowed"][index];
+              return (
+                <label key={value} className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="recruitMaritalStatus"
+                    value={value}
+                    checked={formData.recruitMaritalStatus === value}
+                    onChange={handleInputChange("recruitMaritalStatus")}
+                  />
+                  {label}
+                </label>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
-          <div className="flex flex-col">
-            <span className="text-md font-[600]">
-              ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่
-            </span>
-            <span className="text-sm font-[300]">
-              If married does the spouse has income?
-            </span>
-          </div>
-          <Input
-            id="recruitSpouseIncome"
-            name="recruitSpouseIncome"
-            type="text"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            className="flex-1"
-            // value={formData.recruitSpouseIncome || ""}
-            // onChange={handleInputChange("recruitSpouseIncome")}
-            // isInvalid={!!errors.recruitSpouseIncome}
-            // errorMessage={errors.recruitSpouseIncome}
-          />
-        </div>
+        {/* Spouse Earn Income */}
+        {formData.recruitMaritalStatus === "Married" && (
+          <>
+            {/* Radio: Yes / No */}
+            <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">
+                  คู่สมรสมีรายได้หรือไม่?
+                </span>
+                <span className="text-sm font-[300]">
+                  Does the spouse earn income?
+                </span>
+              </div>
+              <div className="flex flex-row gap-4">
+                <label className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="recruitSpouseEarnIncome"
+                    value="Yes"
+                    checked={formData.recruitSpouseEarnIncome === "Yes"}
+                    onChange={handleInputChange("recruitSpouseEarnIncome")}
+                  />
+                  Yes
+                </label>
+                <label className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="recruitSpouseEarnIncome"
+                    value="No"
+                    checked={formData.recruitSpouseEarnIncome === "No"}
+                    onChange={handleInputChange("recruitSpouseEarnIncome")}
+                  />
+                  No
+                </label>
+              </div>
+            </div>
+
+            {/* Input: Amount (only if Yes) */}
+            {formData.recruitSpouseEarnIncome === "Yes" && (
+              <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+                <div className="flex flex-col">
+                  <span className="text-md font-[600]">
+                    จำนวนรายได้ของคู่สมรส
+                  </span>
+                  <span className="text-sm font-[300]">
+                    Spouse's Income (THB)
+                  </span>
+                </div>
+                <Input
+                  id="recruitSpouseIncomeAmount"
+                  name="recruitSpouseIncomeAmount"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  className="flex-1"
+                  value={formData.recruitSpouseIncomeAmount || ""}
+                  onChange={handleInputChange("recruitSpouseIncomeAmount")}
+                />
+              </div>
+            )}
+          </>
+        )}
+
         {/* Row 2 – children */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
