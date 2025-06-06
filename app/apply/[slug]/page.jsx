@@ -62,15 +62,17 @@ export default function RecruitApplyPage() {
   if (!formData) return <p>{errorMessage || "ไม่พบข้อมูลใบสมัคร"}</p>;
 
   return (
-    <UIRecruitForm
-      header="ใบสมัครงาน"
-      formRef={formRef}
-      onSubmit={handleSubmit}
-      errors={errors}
-      formData={formData}
-      handleInputChange={handleInputChange}
-      isUpdate={true}
-      operatedBy="ผู้สมัคร"
-    />
+    <div className="flex flex-col items-center justify-center w-full h-screen p-2 gap-2 border-2 border-dark">
+      <UIRecruitForm
+        header="ใบสมัครงาน"
+        formRef={formRef}
+        onSubmit={handleSubmit}
+        errors={errors}
+        formData={formData}
+        handleInputChange={handleInputChange}
+        isUpdate={true}
+        operatedBy="ผู้สมัคร"
+      />
+    </div>
   );
 }
