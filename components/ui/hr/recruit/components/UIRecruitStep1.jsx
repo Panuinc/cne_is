@@ -261,23 +261,29 @@ export default function UIRecruitStep1({
             <span className="text-sm font-[300]">Gender</span>
           </div>
           <div className="flex flex-row gap-4">
-            {["ชาย", "หญิง", "อื่น ๆ"].map((label, index) => {
-              const value = ["Male", "FeMale", "Other"][index];
-              return (
-                <label key={value} className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    name="recruitGender"
-                    value={value}
-                    checked={formData.recruitGender === value}
-                    onChange={handleInputChange("recruitGender")}
-                  />
-                  {label}
-                </label>
-              );
-            })}
+            {[
+              { label: "ชาย", en: "Male", value: "Male" },
+              { label: "หญิง", en: "Female", value: "FeMale" },
+            ].map(({ label, en, value }) => (
+              <label key={value} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="recruitGender"
+                  value={value}
+                  checked={formData.recruitGender === value}
+                  onChange={handleInputChange("recruitGender")}
+                />
+                <span>
+                  {label}{" "}
+                  <span className="text-xs font-[300] text-gray-600">
+                    ({en})
+                  </span>
+                </span>
+              </label>
+            ))}
           </div>
         </div>
+
         {/* Nationality */}
         <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
@@ -605,35 +611,42 @@ export default function UIRecruitStep1({
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         {/* Row 1 */}
 
-        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+        <div className="flex items-center justify-start w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
             <span className="text-md font-[600]">สถานภาพการสมรส</span>
             <span className="text-sm font-[300]">Marital Status</span>
           </div>
-          <div className="flex flex-row gap-4">
-            {["โสด", "สมรส", "หย่าร้าง", "หม้าย"].map((label, index) => {
-              const value = ["Single", "Married", "Divorced", "Widowed"][index];
-              return (
-                <label key={value} className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    name="recruitMaritalStatus"
-                    value={value}
-                    checked={formData.recruitMaritalStatus === value}
-                    onChange={handleInputChange("recruitMaritalStatus")}
-                  />
-                  {label}
-                </label>
-              );
-            })}
+          <div className="flex flex-row gap-4 flex-wrap">
+            {[
+              { label: "โสด", en: "Single", value: "Single" },
+              { label: "สมรส", en: "Married", value: "Married" },
+              { label: "หย่าร้าง", en: "Divorced", value: "Divorced" },
+              { label: "หม้าย", en: "Widowed", value: "Widowed" },
+            ].map(({ label, en, value }) => (
+              <label key={value} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="recruitMaritalStatus"
+                  value={value}
+                  checked={formData.recruitMaritalStatus === value}
+                  onChange={handleInputChange("recruitMaritalStatus")}
+                />
+                <span>
+                  {label}{" "}
+                  <span className="text-xs font-[300] text-gray-600">
+                    ({en})
+                  </span>
+                </span>
+              </label>
+            ))}
           </div>
         </div>
 
         {/* Spouse Earn Income */}
         {formData.recruitMaritalStatus === "Married" && (
-          <>
+          <div className="flex flex-row items-center justify-center w-full border-2 border-dark">
             {/* Radio: Yes / No */}
-            <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+            <div className="flex items-center justify-start w-full px-2 py-4 gap-4 border-2 border-dark">
               <div className="flex flex-col">
                 <span className="text-md font-[600]">
                   คู่สมรสมีรายได้หรือไม่?
@@ -643,26 +656,26 @@ export default function UIRecruitStep1({
                 </span>
               </div>
               <div className="flex flex-row gap-4">
-                <label className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    name="recruitSpouseEarnIncome"
-                    value="Yes"
-                    checked={formData.recruitSpouseEarnIncome === "Yes"}
-                    onChange={handleInputChange("recruitSpouseEarnIncome")}
-                  />
-                  Yes
-                </label>
-                <label className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    name="recruitSpouseEarnIncome"
-                    value="No"
-                    checked={formData.recruitSpouseEarnIncome === "No"}
-                    onChange={handleInputChange("recruitSpouseEarnIncome")}
-                  />
-                  No
-                </label>
+                {[
+                  { label: "มีรายได้", en: "Yes", value: "Yes" },
+                  { label: "ไม่มีรายได้", en: "No", value: "No" },
+                ].map(({ label, en, value }) => (
+                  <label key={value} className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      name="recruitSpouseEarnIncome"
+                      value={value}
+                      checked={formData.recruitSpouseEarnIncome === value}
+                      onChange={handleInputChange("recruitSpouseEarnIncome")}
+                    />
+                    <span>
+                      {label}{" "}
+                      <span className="text-xs font-[300] text-gray-600">
+                        ({en})
+                      </span>
+                    </span>
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -691,7 +704,7 @@ export default function UIRecruitStep1({
                 />
               </div>
             )}
-          </>
+          </div>
         )}
 
         {/* Row 2 – children */}
@@ -719,25 +732,52 @@ export default function UIRecruitStep1({
 
       {/* ──────────── Military status ──────────── */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full px-2 py-4 gap-4 border-2 border-dark">
+        <div className="flex items-center justify-start w-full px-2 py-4 gap-4 border-2 border-dark">
           <div className="flex flex-col">
             <span className="text-md font-[600]">สถานภาพทางทหาร</span>
             <span className="text-sm font-[300]">Military Service Status</span>
           </div>
-          <Input
-            id="recruitMilitaryStatus"
-            name="recruitMilitaryStatus"
-            type="text"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            className="flex-1"
-            // value={formData.recruitMilitaryStatus || ""}
-            // onChange={handleInputChange("recruitMilitaryStatus")}
-            // isInvalid={!!errors.recruitMilitaryStatus}
-            // errorMessage={errors.recruitMilitaryStatus}
-          />
+          <div className="flex flex-row gap-4 flex-wrap">
+            {[
+              { label: "ได้รับการยกเว้น", en: "Exempted", value: "Exempted" },
+              {
+                label: "ผ่านการเกณฑ์แล้ว",
+                en: "Completed",
+                value: "Completed",
+              },
+              {
+                label: "ยังไม่เกณฑ์",
+                en: "Not yet served",
+                value: "NotYetServed",
+              },
+              {
+                label: "อยู่ระหว่างการเกณฑ์",
+                en: "In progress",
+                value: "InProgress",
+              },
+              {
+                label: "ไม่ต้องเกณฑ์",
+                en: "Not required",
+                value: "NotRequired",
+              },
+            ].map(({ label, en, value }) => (
+              <label key={value} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="recruitMilitaryStatus"
+                  value={value}
+                  checked={formData.recruitMilitaryStatus === value}
+                  onChange={handleInputChange("recruitMilitaryStatus")}
+                />
+                <span>
+                  {label}{" "}
+                  <span className="text-xs font-[300] text-gray-600">
+                    ({en})
+                  </span>
+                </span>
+              </label>
+            ))}
+          </div>
         </div>
       </div>
     </>
