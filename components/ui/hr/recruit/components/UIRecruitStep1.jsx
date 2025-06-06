@@ -40,7 +40,10 @@ export default function UIRecruitStep1({
         </div>
         <div className="flex flex-col items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            วันที่ {formattedDate}
+            วันที่
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            {formattedDate}
           </div>
         </div>
       </div>
@@ -52,7 +55,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">ตำแหน่งที่สมัคร</span>
+                  <span className="text-md">ตำแหน่งที่สมัคร</span>
                   <span className="text-sm font-[300]">Position</span>
                 </div>
               }
@@ -74,9 +77,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">
-                    เงินเดือนที่ต้องการ
-                  </span>
+                  <span className="text-md">เงินเดือนที่ต้องการ</span>
                   <span className="text-sm font-[300]">Expected salary</span>
                 </div>
               }
@@ -129,9 +130,7 @@ export default function UIRecruitStep1({
             name="recruitFullNameTh"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">
-                  คำนำหน้าชื่อ นาย/นาง/นางสาว
-                </span>
+                <span className="text-md">คำนำหน้าชื่อ นาย/นาง/นางสาว</span>
               </div>
             }
             placeholder="Please Enter Data"
@@ -152,7 +151,7 @@ export default function UIRecruitStep1({
             name="recruitFullNameEn"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">Title Mr./Mrs./Miss</span>
+                <span className="text-md">Title Mr./Mrs./Miss</span>
               </div>
             }
             placeholder="Please Enter Data"
@@ -173,7 +172,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">ชื่อเล่น</span>
+                <span className="text-md">ชื่อเล่น</span>
                 <span className="text-sm font-[300]">Nickname</span>
               </div>
             }
@@ -199,7 +198,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">วัน เดือน ปี เกิด</span>
+                  <span className="text-md">วัน เดือน ปี เกิด</span>
                   <span className="text-sm font-[300]">Date of Birth</span>
                 </div>
               }
@@ -222,7 +221,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">อายุ</span>
+                  <span className="text-md">อายุ</span>
                   <span className="text-sm font-[300]">Age</span>
                 </div>
               }
@@ -245,7 +244,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">เพศ</span>
+                  <span className="text-md">เพศ</span>
                   <span className="text-sm font-[300]">Gender</span>
                 </div>
               }
@@ -268,7 +267,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">สัญชาติ</span>
+                  <span className="text-md">สัญชาติ</span>
                   <span className="text-sm font-[300]">Nationality</span>
                 </div>
               }
@@ -293,7 +292,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">ศาสนา</span>
+                  <span className="text-md">ศาสนา</span>
                   <span className="text-sm font-[300]">Religion</span>
                 </div>
               }
@@ -316,7 +315,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">ส่วนสูง</span>
+                  <span className="text-md">ส่วนสูง</span>
                   <span className="text-sm font-[300]">Hright</span>
                 </div>
               }
@@ -339,7 +338,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">น้ำหนัก</span>
+                  <span className="text-md">น้ำหนัก</span>
                   <span className="text-sm font-[300]">Weight</span>
                 </div>
               }
@@ -362,7 +361,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">กรุ๊ปเลือด</span>
+                  <span className="text-md">กรุ๊ปเลือด</span>
                   <span className="text-sm font-[300]">Blood Type</span>
                 </div>
               }
@@ -389,7 +388,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
+                  <span className="text-md">เลขที่บัตรประชาชน</span>
                   <span className="text-sm font-[300]">
                     Identification card No.
                   </span>
@@ -414,7 +413,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">วันที่ออกบัตร</span>
+                  <span className="text-md">วันที่ออกบัตร</span>
                   <span className="text-sm font-[300]">Date issued</span>
                 </div>
               }
@@ -439,7 +438,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">สถานที่ออกบัตร</span>
+                  <span className="text-md">สถานที่ออกบัตร</span>
                   <span className="text-sm font-[300]">Issued at</span>
                 </div>
               }
@@ -462,7 +461,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">วันหมดอายุ</span>
+                  <span className="text-md">วันหมดอายุ</span>
                   <span className="text-sm font-[300]">Date Expired</span>
                 </div>
               }
@@ -487,7 +486,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
+                  <span className="text-md">เบอร์โทรศัพท์</span>
                   <span className="text-sm font-[300]">Phone Number</span>
                 </div>
               }
@@ -510,7 +509,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">อีเมลล์</span>
+                  <span className="text-md">อีเมลล์</span>
                   <span className="text-sm font-[300]">Email</span>
                 </div>
               }
@@ -533,7 +532,7 @@ export default function UIRecruitStep1({
               name="perReqDesiredSalary"
               label={
                 <div className="flex flex-col text-start">
-                  <span className="text-md font-[600]">ไอดีไลน์</span>
+                  <span className="text-md">ไอดีไลน์</span>
                   <span className="text-sm font-[300]">ID Line</span>
                 </div>
               }
@@ -559,7 +558,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">
+                <span className="text-md">
                   ที่อยู่ปัจจุบัน (Present Address)
                 </span>
               </div>
@@ -582,7 +581,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">
+                <span className="text-md">
                   ที่อยู่ตามทะเบียนบ้าน (Registered Address)
                 </span>
               </div>
@@ -608,7 +607,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">สถานภาพการสมรส</span>
+                <span className="text-md">สถานภาพการสมรส</span>
                 <span className="text-sm font-[300]">Marital Status</span>
               </div>
             }
@@ -628,7 +627,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">
+                <span className="text-md">
                   ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่
                 </span>
                 <span className="text-sm font-[300]">
@@ -654,7 +653,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">จำนวนบุตร</span>
+                <span className="text-md">จำนวนบุตร</span>
                 <span className="text-sm font-[300]">Number of Children</span>
               </div>
             }
@@ -679,7 +678,7 @@ export default function UIRecruitStep1({
             name="perReqDesiredSalary"
             label={
               <div className="flex flex-col text-start">
-                <span className="text-md font-[600]">สถานภาพทางทหาร</span>
+                <span className="text-md">สถานภาพทางทหาร</span>
                 <span className="text-sm font-[300]">
                   Military Service Status
                 </span>
