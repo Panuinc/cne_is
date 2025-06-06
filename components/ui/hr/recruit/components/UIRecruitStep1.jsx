@@ -47,8 +47,8 @@ export default function UIRecruitStep1({
           <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
             ตำแหน่งที่สมัคร
           </div>
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 เงินเดือนที่ต้องการ
               </div>
@@ -171,7 +171,7 @@ export default function UIRecruitStep1({
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               เงินเดื วัน เดือน ปี เกิดอนที่ต้องการ
             </div>
@@ -198,7 +198,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               อายุ
             </div>
@@ -225,7 +225,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               เพศ
             </div>
@@ -252,7 +252,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               สัญชาติ
             </div>
@@ -281,7 +281,7 @@ export default function UIRecruitStep1({
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               ศาสนา
             </div>
@@ -308,7 +308,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               ส่วนสูง
             </div>
@@ -335,7 +335,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               น้ำหนัก
             </div>
@@ -362,7 +362,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
               กรุ๊ปเลือด
             </div>
@@ -392,7 +392,7 @@ export default function UIRecruitStep1({
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 เลขที่บัตรประชาชน
               </div>
@@ -419,7 +419,7 @@ export default function UIRecruitStep1({
           </div>
 
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 วันที่ออกบัตร
               </div>
@@ -448,7 +448,7 @@ export default function UIRecruitStep1({
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 สถานที่ออกบัตร
               </div>
@@ -475,7 +475,7 @@ export default function UIRecruitStep1({
           </div>
 
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 วันหมดอายุ
               </div>
@@ -504,7 +504,7 @@ export default function UIRecruitStep1({
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 เบอร์โทรศัพท์
               </div>
@@ -531,7 +531,7 @@ export default function UIRecruitStep1({
           </div>
 
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 อีเมลล์
               </div>
@@ -557,7 +557,7 @@ export default function UIRecruitStep1({
             </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
                 ไอดีไลน์
               </div>
