@@ -1,4 +1,6 @@
-import { Input } from "@heroui/react";
+"use client";
+
+import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
 import Image from "next/image";
 
 export default function UIRecruitStep1({
@@ -58,7 +60,7 @@ export default function UIRecruitStep1({
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
         <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full gap-2">
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">ตำแหน่งที่สมัคร</span>
               <span className="text-sm font-[300]">Position</span>
@@ -74,7 +76,7 @@ export default function UIRecruitStep1({
               className="flex-1"
             />
           </div>
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">เงินเดือนที่ต้องการ</span>
               <span className="text-sm font-[300]">Expected Salary</span>
@@ -123,7 +125,7 @@ export default function UIRecruitStep1({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">
               คำนำหน้าชื่อ นาย/นาง/นางสาว
@@ -141,7 +143,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">Title Mr./Mrs./Miss</span>
             <span className="text-sm font-[300]">Title (EN)</span>
@@ -157,7 +159,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">ชื่อเล่น</span>
             <span className="text-sm font-[300]">Nickname</span>
@@ -175,8 +177,8 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+      <div className="grid grid-cols-1 xl:grid-cols-3 w-full p-2 gap-4 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">วัน เดือน ปี เกิด</span>
             <span className="text-sm font-[300]">Date of Birth</span>
@@ -192,7 +194,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">อายุ</span>
             <span className="text-sm font-[300]">Age</span>
@@ -208,44 +210,32 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">เพศ</span>
-            <span className="text-sm font-[300]">Gender</span>
+            <span className="text-sm font-[300]">Sex</span>
           </div>
-          <div className="flex flex-row gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitGender"
-                value="Male"
-                checked={formData.recruitGender === "Male"}
-                onChange={handleInputChange("recruitGender")}
-              />
-              <span>
-                ชาย{" "}
-                <span className="text-xs font-[300] text-gray-600">(Male)</span>
-              </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitGender"
-                value="FeMale"
-                checked={formData.recruitGender === "FeMale"}
-                onChange={handleInputChange("recruitGender")}
-              />
-              <span>
-                หญิง{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Female)
-                </span>
-              </span>
-            </label>
-          </div>
+          <RadioGroup
+            name="recruitGender"
+            orientation="horizontal"
+            value={formData.recruitGender}
+            onValueChange={(value) =>
+              handleInputChange("recruitGender")({ target: { value } })
+            }
+            className="flex flex-row gap-4"
+          >
+            <Radio value="Male">
+              ชาย{" "}
+              <span className="text-xs font-[300] text-gray-600">(Male)</span>
+            </Radio>
+            <Radio value="FeMale">
+              หญิง{" "}
+              <span className="text-xs font-[300] text-gray-600">(Female)</span>
+            </Radio>
+          </RadioGroup>
         </div>
 
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">สัญชาติ</span>
             <span className="text-sm font-[300]">Nationality</span>
@@ -261,10 +251,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-      </div>
-
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">ศาสนา</span>
             <span className="text-sm font-[300]">Religion</span>
@@ -280,7 +267,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">ส่วนสูง</span>
             <span className="text-sm font-[300]">Height</span>
@@ -296,7 +283,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">น้ำหนัก</span>
             <span className="text-sm font-[300]">Weight</span>
@@ -312,27 +299,89 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">กรุ๊ปเลือด</span>
             <span className="text-sm font-[300]">Blood Type</span>
           </div>
-          <Input
+          <Select
             id="recruitBlood"
             name="recruitBlood"
-            type="text"
+            selectedKeys={[formData.recruitBlood]}
+            onSelectionChange={(key) =>
+              handleInputChange("recruitBlood")({
+                target: { value: Array.from(key)[0] },
+              })
+            }
+            className="flex-1"
             size="md"
             variant="underlined"
             color="none"
             radius="full"
-            className="flex-1"
-          />
+          >
+            <SelectItem key="A">A</SelectItem>
+            <SelectItem key="B">B</SelectItem>
+            <SelectItem key="AB">AB</SelectItem>
+            <SelectItem key="O">O</SelectItem>
+            <SelectItem key="Unknown">ไม่ทราบ (Unknown)</SelectItem>
+          </Select>
         </div>
       </div>
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
+              <span className="text-sm font-[300]">Phone Number</span>
+            </div>
+            <Input
+              id="recruitPhone"
+              name="recruitPhone"
+              type="number"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+            />
+          </div>
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">อีเมลล์</span>
+              <span className="text-sm font-[300]">Email</span>
+            </div>
+            <Input
+              id="recruitEmail"
+              name="recruitEmail"
+              type="email"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+            />
+          </div>
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">ไอดีไลน์</span>
+              <span className="text-sm font-[300]">ID Line</span>
+            </div>
+            <Input
+              id="recruitLineId"
+              name="recruitLineId"
+              type="text"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
+              className="flex-1"
+            />
+          </div>
+        </div>
+
         <div className="flex flex-col items-center justify-start w-full h-full gap-2">
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
               <span className="text-sm font-[300]">
@@ -350,7 +399,7 @@ export default function UIRecruitStep1({
               className="flex-1"
             />
           </div>
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">วันที่ออกบัตร</span>
               <span className="text-sm font-[300]">Date issued</span>
@@ -369,7 +418,7 @@ export default function UIRecruitStep1({
         </div>
 
         <div className="flex flex-col items-center justify-start w-full h-full gap-2">
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">สถานที่ออกบัตร</span>
               <span className="text-sm font-[300]">Issued at</span>
@@ -385,7 +434,7 @@ export default function UIRecruitStep1({
               className="flex-1"
             />
           </div>
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
             <div className="flex flex-col">
               <span className="text-md font-[600]">วันหมดอายุ</span>
               <span className="text-sm font-[300]">Date Expired</span>
@@ -402,61 +451,10 @@ export default function UIRecruitStep1({
             />
           </div>
         </div>
-
-        <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
-              <span className="text-sm font-[300]">Phone Number</span>
-            </div>
-            <Input
-              id="recruitPhone"
-              name="recruitPhone"
-              type="number"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              className="flex-1"
-            />
-          </div>
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">อีเมลล์</span>
-              <span className="text-sm font-[300]">Email</span>
-            </div>
-            <Input
-              id="recruitEmail"
-              name="recruitEmail"
-              type="email"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              className="flex-1"
-            />
-          </div>
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">ไอดีไลน์</span>
-              <span className="text-sm font-[300]">ID Line</span>
-            </div>
-            <Input
-              id="recruitLineId"
-              name="recruitLineId"
-              type="text"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              className="flex-1"
-            />
-          </div>
-        </div>
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">
               ที่อยู่ปัจจุบัน (Present Address)
@@ -473,7 +471,7 @@ export default function UIRecruitStep1({
             className="flex-1"
           />
         </div>
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">
               ที่อยู่ตามทะเบียนบ้าน (Registered Address)
@@ -498,72 +496,42 @@ export default function UIRecruitStep1({
             <span className="text-md font-[600]">สถานภาพการสมรส</span>
             <span className="text-sm font-[300]">Marital Status</span>
           </div>
-          <div className="flex flex-row gap-4 flex-wrap">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMaritalStatus"
-                value="Single"
-                checked={formData.recruitMaritalStatus === "Single"}
-                onChange={handleInputChange("recruitMaritalStatus")}
-              />
-              <span>
-                โสด{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Single)
-                </span>
+          <RadioGroup
+            name="recruitMaritalStatus"
+            orientation="horizontal"
+            value={formData.recruitMaritalStatus}
+            onValueChange={(value) =>
+              handleInputChange("recruitMaritalStatus")({ target: { value } })
+            }
+            className="flex flex-row gap-4 flex-wrap"
+          >
+            <Radio value="Single">
+              โสด{" "}
+              <span className="text-xs font-[300] text-gray-600">(Single)</span>
+            </Radio>
+            <Radio value="Married">
+              สมรส{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Married)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMaritalStatus"
-                value="Married"
-                checked={formData.recruitMaritalStatus === "Married"}
-                onChange={handleInputChange("recruitMaritalStatus")}
-              />
-              <span>
-                สมรส{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Married)
-                </span>
+            </Radio>
+            <Radio value="Divorced">
+              หย่าร้าง{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Divorced)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMaritalStatus"
-                value="Divorced"
-                checked={formData.recruitMaritalStatus === "Divorced"}
-                onChange={handleInputChange("recruitMaritalStatus")}
-              />
-              <span>
-                หย่าร้าง{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Divorced)
-                </span>
+            </Radio>
+            <Radio value="Widowed">
+              หม้าย{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Widowed)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMaritalStatus"
-                value="Widowed"
-                checked={formData.recruitMaritalStatus === "Widowed"}
-                onChange={handleInputChange("recruitMaritalStatus")}
-              />
-              <span>
-                หม้าย{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Widowed)
-                </span>
-              </span>
-            </label>
-          </div>
+            </Radio>
+          </RadioGroup>
         </div>
 
         {formData.recruitMaritalStatus === "Married" && (
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full gap-2 border-2 border-warning">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
               <div className="flex flex-col">
                 <span className="text-md font-[600]">
@@ -573,38 +541,28 @@ export default function UIRecruitStep1({
                   Does the spouse earn income?
                 </span>
               </div>
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="recruitSpouseEarnIncome"
-                  value="Yes"
-                  checked={formData.recruitSpouseEarnIncome === "Yes"}
-                  onChange={handleInputChange("recruitSpouseEarnIncome")}
-                />
-                <span>
-                  มีรายได้{" "}
-                  <span className="text-xs font-[300] text-gray-600">
-                    (Yes)
-                  </span>
-                </span>
-              </label>
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="recruitSpouseEarnIncome"
-                  value="No"
-                  checked={formData.recruitSpouseEarnIncome === "No"}
-                  onChange={handleInputChange("recruitSpouseEarnIncome")}
-                />
-                <span>
-                  ไม่มีรายได้{" "}
-                  <span className="text-xs font-[300] text-gray-600">(No)</span>
-                </span>
-              </label>
+              <RadioGroup
+                name="recruitSpouseEarnIncome"
+                orientation="horizontal"
+                value={formData.recruitSpouseEarnIncome}
+                onValueChange={(value) =>
+                  handleInputChange("recruitSpouseEarnIncome")({
+                    target: { value },
+                  })
+                }
+                className="flex flex-row gap-4"
+              >
+                <Radio value="Yes">
+                  มีรายได้ <span className="text-xs font-[300]">(Yes)</span>
+                </Radio>
+                <Radio value="No">
+                  ไม่มีรายได้ <span className="text-xs font-[300]">(No)</span>
+                </Radio>
+              </RadioGroup>
             </div>
 
             {formData.recruitSpouseEarnIncome === "Yes" && (
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
                 <div className="flex flex-col">
                   <span className="text-md font-[600]">
                     จำนวนรายได้ของคู่สมรส
@@ -630,7 +588,7 @@ export default function UIRecruitStep1({
           </div>
         )}
 
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">จำนวนบุตร</span>
             <span className="text-sm font-[300]">Number of Children</span>
@@ -649,88 +607,51 @@ export default function UIRecruitStep1({
       </div>
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start xl:justify-center w-full px-2 py-4 gap-4 border-2 border-warning">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full px-2 py-4 gap-4 border-2 border-warning">
           <div className="flex flex-col">
             <span className="text-md font-[600]">สถานภาพทางทหาร</span>
             <span className="text-sm font-[300]">Military Service Status</span>
           </div>
-          <div className="flex flex-row gap-4 flex-wrap">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMilitaryStatus"
-                value="Exempted"
-                checked={formData.recruitMilitaryStatus === "Exempted"}
-                onChange={handleInputChange("recruitMilitaryStatus")}
-              />
-              <span>
-                ได้รับการยกเว้น{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Exempted)
-                </span>
+          <RadioGroup
+            name="recruitMilitaryStatus"
+            orientation="horizontal"
+            value={formData.recruitMilitaryStatus}
+            onValueChange={(value) =>
+              handleInputChange("recruitMilitaryStatus")({ target: { value } })
+            }
+            className="flex flex-row gap-4 flex-wrap"
+          >
+            <Radio value="Exempted">
+              ได้รับการยกเว้น{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Exempted)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMilitaryStatus"
-                value="Completed"
-                checked={formData.recruitMilitaryStatus === "Completed"}
-                onChange={handleInputChange("recruitMilitaryStatus")}
-              />
-              <span>
-                ผ่านการเกณฑ์แล้ว{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Completed)
-                </span>
+            </Radio>
+            <Radio value="Completed">
+              ผ่านการเกณฑ์แล้ว{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Completed)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMilitaryStatus"
-                value="NotYetServed"
-                checked={formData.recruitMilitaryStatus === "NotYetServed"}
-                onChange={handleInputChange("recruitMilitaryStatus")}
-              />
-              <span>
-                ยังไม่เกณฑ์{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Not yet served)
-                </span>
+            </Radio>
+            <Radio value="NotYetServed">
+              ยังไม่เกณฑ์{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Not yet served)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMilitaryStatus"
-                value="InProgress"
-                checked={formData.recruitMilitaryStatus === "InProgress"}
-                onChange={handleInputChange("recruitMilitaryStatus")}
-              />
-              <span>
-                อยู่ระหว่างการเกณฑ์{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (In progress)
-                </span>
+            </Radio>
+            <Radio value="InProgress">
+              อยู่ระหว่างการเกณฑ์{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (In progress)
               </span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="recruitMilitaryStatus"
-                value="NotRequired"
-                checked={formData.recruitMilitaryStatus === "NotRequired"}
-                onChange={handleInputChange("recruitMilitaryStatus")}
-              />
-              <span>
-                ไม่ต้องเกณฑ์{" "}
-                <span className="text-xs font-[300] text-gray-600">
-                  (Not required)
-                </span>
+            </Radio>
+            <Radio value="NotRequired">
+              ไม่ต้องเกณฑ์{" "}
+              <span className="text-xs font-[300] text-gray-600">
+                (Not required)
               </span>
-            </label>
-          </div>
+            </Radio>
+          </RadioGroup>
         </div>
       </div>
     </>
