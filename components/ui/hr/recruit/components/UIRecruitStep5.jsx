@@ -22,32 +22,35 @@ export default function UIRecruitStep5() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4 gap-6">
-
-      {/* ───── แนะนำตัวเอง ───── */}
+    <>
       <Section title="แนะนำตัวเอง" subtitle="SELF INTRODUCTION">
-        <Textarea
-          label="โปรดแนะนำตัวเอง"
-          value={formData.selfIntro}
-          onChange={(e) => handleChange("selfIntro", e.target.value)}
-          className="w-full"
-        />
+        <ItemCard>
+          <Textarea
+            label="โปรดแนะนำตัวเอง"
+            value={formData.selfIntro}
+            onChange={(e) => handleChange("selfIntro", e.target.value)}
+            className="w-full"
+          />
+        </ItemCard>
       </Section>
 
-      {/* ───── ลิงก์แผนที่บ้าน ───── */}
-      <Section title="ลิงก์ที่อยู่ Google Maps" subtitle="HOME LOCATION (GOOGLE MAPS)">
-        <Input
-          label="Google Maps URL"
-          placeholder="https://maps.google.com/..."
-          value={formData.homeMapUrl}
-          onChange={(e) => handleChange("homeMapUrl", e.target.value)}
-          className="w-full"
-        />
+      <Section
+        title="ลิงก์ที่อยู่ Google Maps"
+        subtitle="HOME LOCATION (GOOGLE MAPS)"
+      >
+        <ItemCard>
+          <Input
+            label="Google Maps URL"
+            placeholder="https://maps.google.com/..."
+            value={formData.homeMapUrl}
+            onChange={(e) => handleChange("homeMapUrl", e.target.value)}
+            className="w-full"
+          />
+        </ItemCard>
       </Section>
 
-      {/* ───── เอกสารแนบ ───── */}
       <Section title="แนบเอกสารประกอบ" subtitle="DOCUMENT ATTACHMENTS">
-        <div className="grid grid-cols-2 gap-2 w-full">
+        <ItemCard>
           <Input
             label="สำเนาบัตรประชาชน"
             value={formData.attachIdCard}
@@ -73,48 +76,66 @@ export default function UIRecruitStep5() {
             value={formData.attachMilitaryDoc}
             onChange={(e) => handleChange("attachMilitaryDoc", e.target.value)}
           />
-        </div>
+        </ItemCard>
       </Section>
 
-      {/* ───── ความยินยอมข้อมูล ───── */}
-      <Section title="ความยินยอมข้อมูลส่วนบุคคล" subtitle="PERSONAL DATA CONSENT">
-        <div className="flex flex-col gap-4 w-full">
-          <div className="flex items-center justify-between border p-2 rounded">
+      <Section
+        title="ความยินยอมข้อมูลส่วนบุคคล"
+        subtitle="PERSONAL DATA CONSENT"
+      >
+        <ItemCard>
+          <div className="flex items-center justify-between border p-2 rounded w-full">
             <span>ยินยอมให้ใช้ข้อมูลทั่วไป</span>
             <Switch
               checked={formData.consentGeneral}
               onChange={(e) => handleChange("consentGeneral", e.target.checked)}
             />
           </div>
-          <div className="flex items-center justify-between border p-2 rounded">
+          <div className="flex items-center justify-between border p-2 rounded w-full">
             <span>ยินยอมให้ใช้ข้อมูลอ่อนไหว (สุขภาพ, คดี, ศาสนา ฯลฯ)</span>
             <Switch
               checked={formData.consentSensitive}
-              onChange={(e) => handleChange("consentSensitive", e.target.checked)}
+              onChange={(e) =>
+                handleChange("consentSensitive", e.target.checked)
+              }
             />
           </div>
-        </div>
+        </ItemCard>
       </Section>
 
-      {/* ───── ลายเซ็น ───── */}
       <Section title="ลายเซ็นผู้สมัคร" subtitle="SIGNATURE">
-        <Input
-          label="ลิงก์รูปภาพลายเซ็น (.png หรือ .jpg)"
-          value={formData.signatureImage}
-          onChange={(e) => handleChange("signatureImage", e.target.value)}
-          className="w-full"
-        />
+        <ItemCard>
+          <Input
+            label="ลิงก์รูปภาพลายเซ็น (.png หรือ .jpg)"
+            value={formData.signatureImage}
+            onChange={(e) => handleChange("signatureImage", e.target.value)}
+            className="w-full"
+          />
+        </ItemCard>
       </Section>
+    </>
+  );
+}
+
+function Section({ title, subtitle, children }) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+        {title}
+      </div>
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+        {subtitle}
+      </div>
+      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        {children}
+      </div>
     </div>
   );
 }
 
-/* ────────── Sub Component ────────── */
-function Section({ title, subtitle, children }) {
+function ItemCard({ children }) {
   return (
-    <div className="flex flex-col w-full p-2 gap-4 border-2 border-dark rounded">
-      <div className="text-center text-lg font-bold border-2 border-dark w-full p-2">{title}</div>
-      <div className="text-center text-sm border-2 border-dark w-full p-2">{subtitle}</div>
+    <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
       {children}
     </div>
   );

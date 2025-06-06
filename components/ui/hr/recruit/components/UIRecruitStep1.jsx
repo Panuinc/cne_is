@@ -24,15 +24,15 @@ export default function UIRecruitStep1({
             height={75}
           />
         </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-2xl font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
           บริษัท ชาญนคร วิศวกรรม จำกัด
         </div>
         <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full xl:w-9/12 h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
               ใบสมัครงาน
             </div>
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
               EMPLOYMENT APPLICATION
             </div>
           </div>
@@ -95,10 +95,10 @@ export default function UIRecruitStep1({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
           ประวัติส่วนตัว
         </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
           PERSONAL DATA
         </div>
       </div>

@@ -219,10 +219,7 @@ export default function UIRecruitStep2({
         </div>
       </Section>
 
-      <Section
-        title="บุคคลที่สามารถติดต่อได้ในกรณีฉุกเฉิน"
-        subtitle="EMERGENCY CONTACT"
-      >
+      <Section title="บุคคลติดต่อในกรณีฉุกเฉิน" subtitle="EMERGENCY CONTACT">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
@@ -277,6 +274,13 @@ export default function UIRecruitStep2({
           </div>
         </div>
       </Section>
+
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
+          ให้เปิดเผยข้แมูลส่วนบุคคลแก่บริษัท
+        </div>
+      </div>
 
       <Section title="ประวัติการศึกษา" subtitle="EDUCATION BACKGROUND">
         {educationList.map((edu, index) => (
@@ -515,10 +519,10 @@ export default function UIRecruitStep2({
 function Section({ title, subtitle, children }) {
   return (
     <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
         {title}
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
         {subtitle}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
