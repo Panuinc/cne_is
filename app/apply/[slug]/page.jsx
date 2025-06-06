@@ -62,7 +62,7 @@ export default function RecruitApplyPage() {
   if (!formData) return <p>{errorMessage || "ไม่พบข้อมูลใบสมัคร"}</p>;
 
   return (
-    <div className="flex flex-col items-center justify-center w-10/12 h-screen p-2 gap-2 border-2 border-dark">
+    <div className="flex flex-col items-center justify-center w-10/12 h-screen gap-2">
       <UIRecruitForm
         formRef={formRef}
         onSubmit={handleSubmit}
