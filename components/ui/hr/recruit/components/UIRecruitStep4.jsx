@@ -100,6 +100,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อสถานที่ทำงาน"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   value={exp.workplaceName}
                   onChange={(e) =>
                     handleWorkChange(index, "workplaceName", e.target.value)
@@ -109,6 +114,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ตำแหน่ง"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   value={exp.position}
                   onChange={(e) =>
                     handleWorkChange(index, "position", e.target.value)
@@ -118,6 +128,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
                   label="ประเภทการจ้าง"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   options={employmentTypes}
                   value={exp.employmentType}
                   onValueChange={(val) =>
@@ -128,6 +143,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="วันที่เริ่มงาน"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   type="date"
                   value={exp.startDate}
                   onChange={(e) =>
@@ -138,6 +158,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="วันที่สิ้นสุด"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   type="date"
                   value={exp.endDate}
                   onChange={(e) =>
@@ -148,6 +173,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="เงินเดือน"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   type="number"
                   value={exp.salary}
                   onChange={(e) =>
@@ -158,6 +188,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="รายได้เสริม"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   type="number"
                   value={exp.extraIncome}
                   onChange={(e) =>
@@ -168,6 +203,11 @@ export default function UIRecruitStep4() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="เหตุผลที่ลาออก"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   value={exp.reasonForLeaving}
                   onChange={(e) =>
                     handleWorkChange(index, "reasonForLeaving", e.target.value)
@@ -178,6 +218,11 @@ export default function UIRecruitStep4() {
                 <Textarea
                   className="col-span-2"
                   label="ลักษณะงาน"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   value={exp.jobDescription}
                   onChange={(e) =>
                     handleWorkChange(index, "jobDescription", e.target.value)
@@ -195,6 +240,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="อนุญาตให้ตรวจสอบบุคคลอ้างอิงได้"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.allowReferenceCheck}
               onValueChange={(val) =>
                 handleDetailChange("allowReferenceCheck", val)
@@ -205,6 +255,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="เหตุผล (ถ้าไม่อนุญาต)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.allowReferenceCheckReason}
               onChange={(e) =>
                 handleDetailChange("allowReferenceCheckReason", e.target.value)
@@ -214,6 +269,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="เคยถูกไล่ออกหรือไม่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.everFired}
               onValueChange={(val) => handleDetailChange("everFired", val)}
               options={yesNoOptions}
@@ -222,6 +282,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="เหตุผล"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.everFiredReason}
               onChange={(e) =>
                 handleDetailChange("everFiredReason", e.target.value)
@@ -231,6 +296,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีประวัติป่วยร้ายแรงหรือไม่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.severeIllnessHistory}
               onValueChange={(val) =>
                 handleDetailChange("severeIllnessHistory", val)
@@ -241,6 +311,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ระบุอาการ"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.severeIllnessDetail}
               onChange={(e) =>
                 handleDetailChange("severeIllnessDetail", e.target.value)
@@ -250,6 +325,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="เคยมีคดีความหรือไม่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.criminalRecord}
               onValueChange={(val) => handleDetailChange("criminalRecord", val)}
               options={yesNoOptions}
@@ -258,6 +338,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="รายละเอียดคดี"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.criminalRecordDetail}
               onChange={(e) =>
                 handleDetailChange("criminalRecordDetail", e.target.value)
@@ -267,6 +352,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="กำลังตั้งครรภ์หรือไม่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.isPregnant}
               onValueChange={(val) => handleDetailChange("isPregnant", val)}
               options={yesNoOptions}
@@ -275,6 +365,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="อายุครรภ์ (ถ้ามี)"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.pregnancyDetail}
               onChange={(e) =>
                 handleDetailChange("pregnancyDetail", e.target.value)
@@ -284,6 +379,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีเพื่อน/ญาติทำงานในบริษัทนี้หรือไม่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.hasFriendInCompany}
               onValueChange={(val) =>
                 handleDetailChange("hasFriendInCompany", val)
@@ -294,6 +394,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่อเพื่อน/ญาติในบริษัท"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.friendInCompanyName}
               onChange={(e) =>
                 handleDetailChange("friendInCompanyName", e.target.value)
@@ -308,6 +413,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 1"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref1Name}
               onChange={(e) => handleDetailChange("ref1Name", e.target.value)}
             />
@@ -315,6 +425,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="อาชีพ"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref1Occupation}
               onChange={(e) =>
                 handleDetailChange("ref1Occupation", e.target.value)
@@ -324,6 +439,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ที่อยู่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref1Address}
               onChange={(e) =>
                 handleDetailChange("ref1Address", e.target.value)
@@ -333,6 +453,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="เบอร์โทร"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref1Phone}
               onChange={(e) => handleDetailChange("ref1Phone", e.target.value)}
             />
@@ -340,6 +465,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 2"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref2Name}
               onChange={(e) => handleDetailChange("ref2Name", e.target.value)}
             />
@@ -347,6 +477,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="อาชีพ"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref2Occupation}
               onChange={(e) =>
                 handleDetailChange("ref2Occupation", e.target.value)
@@ -356,6 +491,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ที่อยู่"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref2Address}
               onChange={(e) =>
                 handleDetailChange("ref2Address", e.target.value)
@@ -365,6 +505,11 @@ export default function UIRecruitStep4() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="เบอร์โทร"
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={detail.ref2Phone}
               onChange={(e) => handleDetailChange("ref2Phone", e.target.value)}
             />

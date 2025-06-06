@@ -27,6 +27,11 @@ export default function UIRecruitStep5() {
         <ItemCard>
           <Textarea
             label="โปรดแนะนำตัวเอง"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.selfIntro}
             onChange={(e) => handleChange("selfIntro", e.target.value)}
             className="w-full"
@@ -42,6 +47,10 @@ export default function UIRecruitStep5() {
           <Input
             label="Google Maps URL"
             placeholder="https://maps.google.com/..."
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.homeMapUrl}
             onChange={(e) => handleChange("homeMapUrl", e.target.value)}
             className="w-full"
@@ -53,26 +62,51 @@ export default function UIRecruitStep5() {
         <ItemCard>
           <Input
             label="สำเนาบัตรประชาชน"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.attachIdCard}
             onChange={(e) => handleChange("attachIdCard", e.target.value)}
           />
           <Input
             label="สำเนาทะเบียนบ้าน"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.attachHouseReg}
             onChange={(e) => handleChange("attachHouseReg", e.target.value)}
           />
           <Input
             label="วุฒิการศึกษา"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.attachEducation}
             onChange={(e) => handleChange("attachEducation", e.target.value)}
           />
           <Input
             label="ใบรับรองแพทย์"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.attachMedicalCert}
             onChange={(e) => handleChange("attachMedicalCert", e.target.value)}
           />
           <Input
             label="เอกสารทางทหาร"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.attachMilitaryDoc}
             onChange={(e) => handleChange("attachMilitaryDoc", e.target.value)}
           />
@@ -107,6 +141,11 @@ export default function UIRecruitStep5() {
         <ItemCard>
           <Input
             label="ลิงก์รูปภาพลายเซ็น (.png หรือ .jpg)"
+            placeholder="Please Enter Data"
+            size="md"
+            variant="underlined"
+            color="none"
+            radius="full"
             value={formData.signatureImage}
             onChange={(e) => handleChange("signatureImage", e.target.value)}
             className="w-full"
