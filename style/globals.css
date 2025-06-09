@@ -5,7 +5,7 @@
 body {
   font-family: var(--nunito), var(--kanit);
   font-weight: 300;
-  font-size: 1.0rem;
+  font-size: 0.75rem;
   color: #000000;
   background-color: #F4F7FB;
 }
