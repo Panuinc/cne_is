@@ -17,7 +17,7 @@ export default function UIRecruitStep1({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <Image
             src="/logoCompany/com-1.png"
@@ -41,7 +41,9 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+      {/* //// ---- //// */}
+
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
         <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
             ใบสมัครงาน
@@ -58,7 +60,9 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+      {/* //// ---- //// */}
+
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
         <div className="flex flex-col items-center justify-end w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
@@ -115,14 +119,19 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
-          ประวัติส่วนตัว
+      {/* //// ---- //// */}
+
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
+            ประวัติส่วนตัว
+          </div>
+          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
+            PERSONAL DATA
+          </div>
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
-          PERSONAL DATA
-        </div>
+        {/* //// ---- //// */}
 
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
@@ -340,128 +349,122 @@ export default function UIRecruitStep1({
               </Select>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
-                  <span className="text-sm font-[300]">Phone Number</span>
-                </div>
-                <Input
-                  id="recruitPhone"
-                  name="recruitPhone"
-                  type="number"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+          <div className="grid grid-cols-1 xl:grid-cols-3 w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
+                <span className="text-sm font-[300]">Phone Number</span>
               </div>
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">อีเมลล์</span>
-                  <span className="text-sm font-[300]">Email</span>
-                </div>
-                <Input
-                  id="recruitEmail"
-                  name="recruitEmail"
-                  type="email"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+              <Input
+                id="recruitPhone"
+                name="recruitPhone"
+                type="number"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
+            </div>
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">อีเมลล์</span>
+                <span className="text-sm font-[300]">Email</span>
               </div>
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">ไอดีไลน์</span>
-                  <span className="text-sm font-[300]">ID Line</span>
-                </div>
-                <Input
-                  id="recruitLineId"
-                  name="recruitLineId"
-                  type="text"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+              <Input
+                id="recruitEmail"
+                name="recruitEmail"
+                type="email"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
+            </div>
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">ไอดีไลน์</span>
+                <span className="text-sm font-[300]">ID Line</span>
               </div>
+              <Input
+                id="recruitLineId"
+                name="recruitLineId"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
-                  <span className="text-sm font-[300]">
-                    Identification card No.
-                  </span>
-                </div>
-                <Input
-                  id="recruitCardNo"
-                  name="recruitCardNo"
-                  type="text"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
+                <span className="text-sm font-[300]">
+                  Identification card No.
+                </span>
               </div>
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">วันที่ออกบัตร</span>
-                  <span className="text-sm font-[300]">Date issued</span>
-                </div>
-                <Input
-                  id="recruitCardIssuedDate"
-                  name="recruitCardIssuedDate"
-                  type="date"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+              <Input
+                id="recruitCardNo"
+                name="recruitCardNo"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
+            </div>
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">วันที่ออกบัตร</span>
+                <span className="text-sm font-[300]">Date issued</span>
               </div>
+              <Input
+                id="recruitCardIssuedDate"
+                name="recruitCardIssuedDate"
+                type="date"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
             </div>
 
-            <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">สถานที่ออกบัตร</span>
-                  <span className="text-sm font-[300]">Issued at</span>
-                </div>
-                <Input
-                  id="recruitCardIssuedAt"
-                  name="recruitCardIssuedAt"
-                  type="text"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">สถานที่ออกบัตร</span>
+                <span className="text-sm font-[300]">Issued at</span>
               </div>
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
-                <div className="flex flex-col">
-                  <span className="text-md font-[600]">วันหมดอายุ</span>
-                  <span className="text-sm font-[300]">Date Expired</span>
-                </div>
-                <Input
-                  id="recruitCardExpired"
-                  name="recruitCardExpired"
-                  type="date"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  className="flex-1"
-                />
+              <Input
+                id="recruitCardIssuedAt"
+                name="recruitCardIssuedAt"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
+            </div>
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col">
+                <span className="text-md font-[600]">วันหมดอายุ</span>
+                <span className="text-sm font-[300]">Date Expired</span>
               </div>
+              <Input
+                id="recruitCardExpired"
+                name="recruitCardExpired"
+                type="date"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                className="flex-1"
+              />
             </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
@@ -671,6 +674,8 @@ export default function UIRecruitStep1({
           </div>
         </div>
       </div>
+
+      {/* //// ---- //// */}
     </>
   );
 }
