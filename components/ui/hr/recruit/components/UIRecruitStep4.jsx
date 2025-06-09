@@ -447,6 +447,17 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="บุคคลอ้างอิง" subtitle="PERSONAL REFERENCES">
+        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
+            กรุณาเขียนชื่อ ที่อยู่ เบอร์โทรศัพท์ และอาชีพของบุคคลอ้างอิงจำนวน 2
+            คน (ซึ่งไม่ใช่ญาติหรืออดีตนายจ้าง)
+            ที่รู้จักและคุ้นเคยกับตัวท่านเป็นอย่างดี
+          </div>
+          <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
+            List names, addresses, telephone and occupation of 2 references
+            (other than relatives or former employers) who know you.
+          </div>
+        </div>
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
@@ -500,6 +511,9 @@ export default function UIRecruitStep4() {
               onChange={(e) => handleDetailChange("ref1Phone", e.target.value)}
             />
           </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 2"

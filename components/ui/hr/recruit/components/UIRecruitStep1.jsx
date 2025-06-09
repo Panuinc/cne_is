@@ -119,9 +119,11 @@ export default function UIRecruitStep1({
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
           ประวัติส่วนตัว
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
           PERSONAL DATA
         </div>
+
         <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
