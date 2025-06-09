@@ -132,7 +132,7 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
               className="text-blue-600 underline hover:text-blue-800"
               title={`ลิงก์: /apply/${item.applySlug}`}
             >
-              {item.recruitFullNameTh?.trim() || "คลิกเพื่อกรอกใบสมัคร"}
+              {item.recruitFullNameTh?.trim() || "คลิกเพื่อดูใบสมัคร"}
             </Link>
           );
         case "recruitStatus":

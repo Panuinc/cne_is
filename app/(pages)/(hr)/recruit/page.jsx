@@ -20,7 +20,9 @@ export default function RecruitList() {
         const recruitJsonData = await recruitResponse.json();
 
         if (!recruitResponse.ok) {
-          throw new Error(recruitJsonData.error || "Failed to load recruit data");
+          throw new Error(
+            recruitJsonData.error || "Failed to load recruit data"
+          );
         }
 
         setRecruitDataList(recruitJsonData.recruit || []);
