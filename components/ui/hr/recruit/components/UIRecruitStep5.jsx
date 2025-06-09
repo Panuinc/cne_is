@@ -174,7 +174,7 @@ function Section({ title, subtitle, children }) {
 
 function ItemCard({ children }) {
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+    <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
       {children}
     </div>
   );

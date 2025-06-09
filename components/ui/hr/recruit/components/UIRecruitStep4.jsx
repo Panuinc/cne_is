@@ -96,7 +96,7 @@ export default function UIRecruitStep4() {
             index={index}
             onRemove={() => removeExperience(index)}
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อสถานที่ทำงาน"
@@ -236,7 +236,7 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="ข้อมูลเพิ่มเติม" subtitle="ADDITIONAL INFORMATION">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="อนุญาตให้ตรวจสอบบุคคลอ้างอิงได้"
@@ -409,7 +409,7 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="บุคคลอ้างอิง" subtitle="PERSONAL REFERENCES">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 1"
@@ -547,7 +547,7 @@ function ItemCard({ index, onRemove, children }) {
         <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
           {index > 0 && (
             <Button
-              color="danger"
+              color="dark"
               size="md"
               radius="full"
               className="flex items-center justify-center h-full p-4 gap-2"

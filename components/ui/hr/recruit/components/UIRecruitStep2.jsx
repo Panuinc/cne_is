@@ -76,7 +76,7 @@ export default function UIRecruitStep2({
             index={index}
             onRemove={() => removeFromList(setFamilyList, familyList, index)}
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="ความสัมพันธ์"
@@ -220,7 +220,7 @@ export default function UIRecruitStep2({
       </Section>
 
       <Section title="บุคคลติดต่อในกรณีฉุกเฉิน" subtitle="EMERGENCY CONTACT">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่อ-นามสกุล"
@@ -291,7 +291,7 @@ export default function UIRecruitStep2({
               removeFromList(setEducationList, educationList, index)
             }
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="ระดับการศึกษา"
@@ -462,7 +462,7 @@ export default function UIRecruitStep2({
             index={index}
             onRemove={() => removeFromList(setLicenseList, licenseList, index)}
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="ชื่อใบอนุญาต"
@@ -543,10 +543,10 @@ function ItemCard({ index, onRemove, children }) {
         <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
           {index > 0 && (
             <Button
-              color="danger"
+              color="dark"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full p-4 gap-2"
+              className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
               onPress={onRemove}
             >
               ลบ
@@ -568,7 +568,7 @@ function AddButton({ label, onClick }) {
         color="primary"
         size="md"
         radius="full"
-        className="flex items-center justify-center h-full p-4 gap-2"
+        className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
         onPress={onClick}
       >
         {label}

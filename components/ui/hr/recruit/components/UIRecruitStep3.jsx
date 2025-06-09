@@ -97,7 +97,7 @@ export default function UIRecruitStep3() {
               removeItem(setLanguageSkills, languageSkills, index)
             }
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อภาษา"
@@ -226,7 +226,7 @@ export default function UIRecruitStep3() {
             index={index}
             onRemove={() => removeItem(setOtherSkills, otherSkills, index)}
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
                   label="ประเภททักษะ"
@@ -294,7 +294,7 @@ export default function UIRecruitStep3() {
               removeItem(setSpecialAbilities, specialAbilities, index)
             }
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อความสามารถพิเศษ"
@@ -312,7 +312,7 @@ export default function UIRecruitStep3() {
       </Section>
 
       <Section title="คะแนนภาษาอังกฤษ" subtitle="ENGLISH TEST SCORE">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="ประเภทแบบทดสอบ"
@@ -348,7 +348,7 @@ export default function UIRecruitStep3() {
         title="ข้อมูลยานพาหนะและใบขับขี่"
         subtitle="VEHICLE & LICENSE INFO"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีรถยนต์ส่วนตัว"
@@ -418,7 +418,7 @@ function ItemCard({ index, onRemove, children }) {
         <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
           {index > 0 && (
             <Button
-              color="danger"
+              color="dark"
               size="md"
               radius="full"
               className="flex items-center justify-center h-full p-4 gap-2"
