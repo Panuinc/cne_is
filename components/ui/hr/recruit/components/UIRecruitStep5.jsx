@@ -158,11 +158,11 @@ export default function UIRecruitStep5() {
 
 function Section({ title, subtitle, children }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+    <div className="flex flex-col items-center justify-center w-full p-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {title}
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {subtitle}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">

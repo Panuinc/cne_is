@@ -96,138 +96,152 @@ export default function UIRecruitStep4() {
             index={index}
             onRemove={() => removeExperience(index)}
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="ชื่อสถานที่ทำงาน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={exp.workplaceName}
-                  onChange={(e) =>
-                    handleWorkChange(index, "workplaceName", e.target.value)
-                  }
-                />
+            <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="ชื่อสถานที่ทำงาน"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    value={exp.workplaceName}
+                    onChange={(e) =>
+                      handleWorkChange(index, "workplaceName", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="ตำแหน่ง"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    value={exp.position}
+                    onChange={(e) =>
+                      handleWorkChange(index, "position", e.target.value)
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="ตำแหน่ง"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={exp.position}
-                  onChange={(e) =>
-                    handleWorkChange(index, "position", e.target.value)
-                  }
-                />
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Select
+                    label="ประเภทการจ้าง"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    options={employmentTypes}
+                    value={exp.employmentType}
+                    onValueChange={(val) =>
+                      handleWorkChange(index, "employmentType", val)
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="ประเภทการจ้าง"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  options={employmentTypes}
-                  value={exp.employmentType}
-                  onValueChange={(val) =>
-                    handleWorkChange(index, "employmentType", val)
-                  }
-                />
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="วันที่เริ่มงาน"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    type="date"
+                    value={exp.startDate}
+                    onChange={(e) =>
+                      handleWorkChange(index, "startDate", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="วันที่สิ้นสุด"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    type="date"
+                    value={exp.endDate}
+                    onChange={(e) =>
+                      handleWorkChange(index, "endDate", e.target.value)
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="วันที่เริ่มงาน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  type="date"
-                  value={exp.startDate}
-                  onChange={(e) =>
-                    handleWorkChange(index, "startDate", e.target.value)
-                  }
-                />
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="เงินเดือน"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    type="number"
+                    value={exp.salary}
+                    onChange={(e) =>
+                      handleWorkChange(index, "salary", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="รายได้เสริม"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    type="number"
+                    value={exp.extraIncome}
+                    onChange={(e) =>
+                      handleWorkChange(index, "extraIncome", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="เหตุผลที่ลาออก"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    value={exp.reasonForLeaving}
+                    onChange={(e) =>
+                      handleWorkChange(
+                        index,
+                        "reasonForLeaving",
+                        e.target.value
+                      )
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="วันที่สิ้นสุด"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  type="date"
-                  value={exp.endDate}
-                  onChange={(e) =>
-                    handleWorkChange(index, "endDate", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="เงินเดือน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  type="number"
-                  value={exp.salary}
-                  onChange={(e) =>
-                    handleWorkChange(index, "salary", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="รายได้เสริม"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  type="number"
-                  value={exp.extraIncome}
-                  onChange={(e) =>
-                    handleWorkChange(index, "extraIncome", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="เหตุผลที่ลาออก"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={exp.reasonForLeaving}
-                  onChange={(e) =>
-                    handleWorkChange(index, "reasonForLeaving", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Textarea
-                  className="col-span-2"
-                  label="ลักษณะงาน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={exp.jobDescription}
-                  onChange={(e) =>
-                    handleWorkChange(index, "jobDescription", e.target.value)
-                  }
-                />
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Textarea
+                    className="col-span-2"
+                    label="ลักษณะงาน"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    value={exp.jobDescription}
+                    onChange={(e) =>
+                      handleWorkChange(index, "jobDescription", e.target.value)
+                    }
+                  />
+                </div>
               </div>
             </div>
           </ItemCard>
@@ -522,11 +536,11 @@ export default function UIRecruitStep4() {
 
 function Section({ title, subtitle, children }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+    <div className="flex flex-col items-center justify-center w-full p-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {title}
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {subtitle}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">

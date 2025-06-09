@@ -1,6 +1,6 @@
 "use client";
 
-import { Input, Button } from "@heroui/react";
+import { Input, Select, SelectItem, Button } from "@heroui/react";
 import { useState } from "react";
 
 export default function UIRecruitStep2({
@@ -25,6 +25,33 @@ export default function UIRecruitStep2({
     phone: "",
     address: "",
   });
+
+  const educationLevelOptions = [
+    { label: "ประถมศึกษา", value: "Primary" },
+    { label: "มัธยมศึกษาตอนต้น", value: "LowerSecondary" },
+    { label: "มัธยมศึกษาตอนปลาย", value: "UpperSecondary" },
+    { label: "ปวช.", value: "Vocational" },
+    { label: "ปวส.", value: "HighVocational" },
+    { label: "ปริญญาตรี", value: "Bachelor" },
+    { label: "ปริญญาโท", value: "Master" },
+    { label: "ปริญญาเอก", value: "Doctorate" },
+  ];
+
+  const familyRelationOptions = [
+    { label: "บิดา", value: "Father" },
+    { label: "มารดา", value: "Mother" },
+    { label: "พี่", value: "OlderSibling" },
+    { label: "น้อง", value: "YoungerSibling" },
+  ];
+
+  const emergencyRelationOptions = [
+    { label: "บิดา", value: "Father" },
+    { label: "มารดา", value: "Mother" },
+    { label: "พี่น้อง", value: "Sibling" },
+    { label: "เพื่อน", value: "Friend" },
+    { label: "หัวหน้า", value: "Manager" },
+    { label: "อื่น ๆ", value: "Other" },
+  ];
 
   const [educationList, setEducationList] = useState([
     {
@@ -78,24 +105,30 @@ export default function UIRecruitStep2({
             children={
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
+                  <Select
                     label="ความสัมพันธ์"
-                    placeholder="Please Enter Data"
+                    placeholder="Please Select"
                     size="md"
                     variant="underlined"
                     color="none"
                     radius="full"
-                    value={member.relation}
-                    onChange={(e) =>
+                    selectedKey={member.relation}
+                    onSelectionChange={(val) =>
                       handleChangeList(
                         setFamilyList,
                         familyList,
                         index,
                         "relation",
-                        e.target.value
+                        val
                       )
                     }
-                  />
+                  >
+                    {familyRelationOptions.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
                 </div>
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
@@ -234,18 +267,24 @@ export default function UIRecruitStep2({
             />
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
+            <Select
               label="ความสัมพันธ์"
-              placeholder="Please Enter Data"
+              placeholder="Please Select"
               size="md"
               variant="underlined"
               color="none"
               radius="full"
-              value={emergencyContact.relation}
-              onChange={(e) =>
-                handleEmergencyChange("relation", e.target.value)
+              selectedKey={emergencyContact.relation}
+              onSelectionChange={(val) =>
+                handleEmergencyChange("relation", val)
               }
-            />
+            >
+              {emergencyRelationOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
@@ -299,24 +338,30 @@ export default function UIRecruitStep2({
             children={
               <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
+                  <Select
                     label="ระดับการศึกษา"
-                    placeholder="Please Enter Data"
+                    placeholder="Please Select"
                     size="md"
                     variant="underlined"
                     color="none"
                     radius="full"
-                    value={edu.level}
-                    onChange={(e) =>
+                    selectedKey={edu.level}
+                    onSelectionChange={(val) =>
                       handleChangeList(
                         setEducationList,
                         educationList,
                         index,
                         "level",
-                        e.target.value
+                        val
                       )
                     }
-                  />
+                  >
+                    {educationLevelOptions.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
                 </div>
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
