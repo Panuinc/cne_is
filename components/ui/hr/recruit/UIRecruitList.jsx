@@ -21,8 +21,12 @@ import {
 
 const completionOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "กรอกแล้ว", uniqueIdentifier: "filled" },
-  { name: "ยังไม่กรอก", uniqueIdentifier: "empty" },
+  { name: "นำส่งใบสมัคร", uniqueIdentifier: "Pending" },
+  { name: "ผู้สมัครกรอกใบสมัครแล้วเสร็จ", uniqueIdentifier: "Submitted" },
+  { name: "นัดสัมภาษณ์", uniqueIdentifier: "Interviewing" },
+  { name: "ไม่ผ่าน", uniqueIdentifier: "Rejected" },
+  { name: "ได้รับเลือก", uniqueIdentifier: "Hired" },
+  { name: "เก็บไว้พิจารณา", uniqueIdentifier: "Considered" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -73,6 +77,8 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     const baseColumns = [
       { name: "ลำดับ", uid: "recruitId" },
       { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
+      { name: "ตำแหน่งที่ต้องการ", uid: "positionNameTH" },
+      { name: "เลขที่เอกสาร", uid: "perReqDocumentId" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
     ];
     if (canManage) {
@@ -98,10 +104,10 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
       );
     }
 
-    if (completionFilter === "filled") {
-      result = result.filter((recruit) => recruit.recruitFullNameTh?.trim());
-    } else if (completionFilter === "empty") {
-      result = result.filter((recruit) => !recruit.recruitFullNameTh?.trim());
+    if (completionFilter !== "all") {
+      result = result.filter(
+        (recruit) => recruit.recruitStatus === completionFilter
+      );
     }
 
     return result;
@@ -132,26 +138,44 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
               className="text-blue-600 underline hover:text-blue-800"
               title={`ลิงก์: /apply/${item.applySlug}`}
             >
-              {item.recruitFullNameTh?.trim() || "คลิกเพื่อดูใบสมัคร"}
+              {item.recruitFullNameTh?.trim() ||
+                `คลิกเพื่อดูใบสมัคร ${item.recruitFullNameTh}`}
             </Link>
           );
-        case "recruitStatus":
+        case "positionNameTH":
+          return item.recruitPerReq?.PerReqPositionId?.positionNameTH || "-";
+        case "perReqDocumentId":
+          return item.recruitPerReq?.perReqDocumentId || "-";
+        case "recruitStatus": {
+          const statusMap = {
+            Pending: { label: "นำส่งใบสมัคร", color: "warning" },
+            Submitted: {
+              label: "ผู้สมัครกรอกใบสมัครแล้วเสร็จ",
+              color: "primary",
+            },
+            Interviewing: { label: "นัดสัมภาษณ์", color: "secondary" },
+            Rejected: { label: "ไม่ผ่าน", color: "danger" },
+            Hired: { label: "ได้รับเลือก", color: "success" },
+            Considered: { label: "เก็บไว้พิจารณา", color: "default" },
+          };
+
+          const status = item.recruitStatus;
+          const statusInfo = statusMap[status] || {
+            label: "-",
+            color: "default",
+          };
+
           return (
             <Button
               size="sm"
-              color={
-                item.recruitStatus?.toLowerCase() === "active"
-                  ? "primary"
-                  : "danger"
-              }
+              color={statusInfo.color}
               radius="full"
               className="min-w-10 min-h-10 text-white"
             >
-              {item.recruitStatus?.toLowerCase() === "active"
-                ? "เปิดใช้งาน"
-                : "ปิดใช้งาน"}
+              {statusInfo.label}
             </Button>
           );
+        }
         case "createdBy":
           return item.RecruitCreateBy
             ? `${item.RecruitCreateBy.empFirstNameTH} ${item.RecruitCreateBy.empLastNameTH}`

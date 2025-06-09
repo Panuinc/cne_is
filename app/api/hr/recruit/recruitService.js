@@ -16,8 +16,26 @@ export class RecruitService {
     return prisma.recruit.findMany({
       include: {
         recruitPerReq: {
-          select: { perReqDocumentId: true, perReqStatus: true },
+          select: {
+            perReqDocumentId: true,
+            perReqStatus: true,
+            PerReqPositionId: {
+              select: {
+                positionNameTH: true,
+              },
+            },
+          },
         },
+        recruitDetail: true,
+        recruitFamilyMembers: true,
+        recruitEmergencyContacts: true,
+        recruitEducations: true,
+        recruitProfessionalLicenses: true,
+        recruitLanguageSkills: true,
+        recruitOtherSkills: true,
+        recruitSpecialAbilities: true,
+        recruitEnglishScores: true,
+        recruitWorkExperiences: true,
       },
     });
   }
@@ -27,7 +45,15 @@ export class RecruitService {
       where: { recruitId },
       include: {
         recruitPerReq: {
-          select: { perReqDocumentId: true, perReqStatus: true },
+          select: {
+            perReqDocumentId: true,
+            perReqStatus: true,
+            PerReqPositionId: {
+              select: {
+                positionNameTH: true,
+              },
+            },
+          },
         },
         recruitDetail: true,
         recruitFamilyMembers: true,
@@ -151,10 +177,18 @@ export class RecruitService {
     return prisma.recruit.findFirst({
       where: { applySlug: slug },
       include: {
-        recruitDetail: true,
         recruitPerReq: {
-          select: { perReqDocumentId: true, perReqStatus: true },
+          select: {
+            perReqDocumentId: true,
+            perReqStatus: true,
+            PerReqPositionId: {
+              select: {
+                positionNameTH: true,
+              },
+            },
+          },
         },
+        recruitDetail: true,
         recruitFamilyMembers: true,
         recruitEmergencyContacts: true,
         recruitEducations: true,
