@@ -17,7 +17,7 @@ export default function UIRecruitStep1({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <Image
             src="/logoCompany/com-1.png"
@@ -41,7 +41,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
             ใบสมัครงาน
@@ -58,7 +58,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-end w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
@@ -115,7 +115,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
           ประวัติส่วนตัว
         </div>
