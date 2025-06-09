@@ -1,6 +1,13 @@
 "use client";
 
-import { Input, Select, SelectItem, Button } from "@heroui/react";
+import {
+  Input,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
+  Button,
+} from "@heroui/react";
 import { useState } from "react";
 
 const skillLevels = [
@@ -392,80 +399,78 @@ export default function UIRecruitStep3() {
       >
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีรถยนต์ส่วนตัว"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">มีรถยนต์ส่วนตัว</span>
+              <span className="text-sm font-[300]">(Own Car)</span>
+            </div>
+            <RadioGroup
+              name="ownCar"
+              orientation="horizontal"
               value={vehicleInfo.ownCar}
               onValueChange={(val) => handleVehicleChange("ownCar", val)}
+              className="flex-1 flex gap-4"
             >
-              {vehicleOptions.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </Select>
+              <Radio value="Yes">มี</Radio>
+              <Radio value="No">ไม่มี</Radio>
+            </RadioGroup>
           </div>
+
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีรถจักรยานยนต์ส่วนตัว"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">มีรถจักรยานยนต์ส่วนตัว</span>
+              <span className="text-sm font-[300]">(Own Motorcycle)</span>
+            </div>
+            <RadioGroup
+              name="ownMotorcycle"
+              orientation="horizontal"
               value={vehicleInfo.ownMotorcycle}
               onValueChange={(val) => handleVehicleChange("ownMotorcycle", val)}
+              className="flex-1 flex gap-4"
             >
-              {vehicleOptions.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </Select>
+              <Radio value="Yes">มี</Radio>
+              <Radio value="No">ไม่มี</Radio>
+            </RadioGroup>
           </div>
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีใบขับขี่รถยนต์"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">มีใบขับขี่รถยนต์</span>
+              <span className="text-sm font-[300]">(Car License)</span>
+            </div>
+            <RadioGroup
+              name="haveCarLicense"
+              orientation="horizontal"
               value={vehicleInfo.haveCarLicense}
               onValueChange={(val) =>
                 handleVehicleChange("haveCarLicense", val)
               }
+              className="flex-1 flex gap-4"
             >
-              {vehicleOptions.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </Select>
+              <Radio value="Yes">มี</Radio>
+              <Radio value="No">ไม่มี</Radio>
+            </RadioGroup>
           </div>
+
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีใบขับขี่รถจักรยานยนต์"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                มีใบขับขี่รถจักรยานยนต์
+              </span>
+              <span className="text-sm font-[300]">(Motorcycle License)</span>
+            </div>
+            <RadioGroup
+              name="haveMotorcycleLicense"
+              orientation="horizontal"
               value={vehicleInfo.haveMotorcycleLicense}
               onValueChange={(val) =>
                 handleVehicleChange("haveMotorcycleLicense", val)
               }
+              className="flex-1 flex gap-4"
             >
-              {vehicleOptions.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </Select>
+              <Radio value="Yes">มี</Radio>
+              <Radio value="No">ไม่มี</Radio>
+            </RadioGroup>
           </div>
         </div>
       </Section>

@@ -1,6 +1,13 @@
 "use client";
 
-import { Input, Select, Textarea, Button } from "@heroui/react";
+import {
+  Input,
+  RadioGroup,
+  Radio,
+  Select,
+  Textarea,
+  Button,
+} from "@heroui/react";
 import { useState } from "react";
 
 const employmentTypes = [
@@ -250,175 +257,192 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="ข้อมูลเพิ่มเติม" subtitle="ADDITIONAL INFORMATION">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="อนุญาตให้ตรวจสอบบุคคลอ้างอิงได้"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.allowReferenceCheck}
-              onValueChange={(val) =>
-                handleDetailChange("allowReferenceCheck", val)
-              }
-              options={yesNoOptions}
-            />
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                ท่านเคยถูกให้ออกจากงานหรือไม่?
+              </span>
+              <span className="text-xs font-[300]">
+                Have you ever been discharged from employment for any reason?
+              </span>
+            </div>
+            <RadioGroup
+              name="fired"
+              orientation="horizontal"
+              value={detail.fired}
+              onValueChange={(val) => handleDetailChange("fired", val)}
+            >
+              <Radio value="Yes">ใช่</Radio>
+              <Radio value="No">ไม่ใช่</Radio>
+            </RadioGroup>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="เหตุผล (ถ้าไม่อนุญาต)"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.allowReferenceCheckReason}
-              onChange={(e) =>
-                handleDetailChange("allowReferenceCheckReason", e.target.value)
-              }
-            />
+          {detail.fired === "Yes" && (
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              <Input
+                label="เหตุผล"
+                placeholder="Please Enter Data"
+                size="md"
+                variant="underlined"
+                radius="full"
+                value={detail.firedReason}
+                onChange={(e) =>
+                  handleDetailChange("firedReason", e.target.value)
+                }
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่?
+              </span>
+              <span className="text-xs font-[300]">
+                Have you ever been seriously ill or contracted with contagious
+                disease?
+              </span>
+            </div>
+            <RadioGroup
+              name="severeIllness"
+              orientation="horizontal"
+              value={detail.severeIllness}
+              onValueChange={(val) => handleDetailChange("severeIllness", val)}
+            >
+              <Radio value="Yes">ใช่</Radio>
+              <Radio value="No">ไม่ใช่</Radio>
+            </RadioGroup>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="เคยถูกไล่ออกหรือไม่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.everFired}
-              onValueChange={(val) => handleDetailChange("everFired", val)}
-              options={yesNoOptions}
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="เหตุผล"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.everFiredReason}
-              onChange={(e) =>
-                handleDetailChange("everFiredReason", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีประวัติป่วยร้ายแรงหรือไม่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.severeIllnessHistory}
-              onValueChange={(val) =>
-                handleDetailChange("severeIllnessHistory", val)
-              }
-              options={yesNoOptions}
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ระบุอาการ"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.severeIllnessDetail}
-              onChange={(e) =>
-                handleDetailChange("severeIllnessDetail", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="เคยมีคดีความหรือไม่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+          {detail.severeIllness === "Yes" && (
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              <Input
+                label="ระบุอาการ"
+                placeholder="Please Enter Data"
+                size="md"
+                variant="underlined"
+                radius="full"
+                value={detail.severeIllnessDetail}
+                onChange={(e) =>
+                  handleDetailChange("severeIllnessDetail", e.target.value)
+                }
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                ท่านเคยได้รับโทษทางอาญา หรือจำคุก หรือเป็นบุคคลล้มละลายหรือไม่?
+              </span>
+              <span className="text-xs font-[300]">
+                Have you ever been arrested or convicted for any offense or
+                crime or bankrupt?
+              </span>
+            </div>
+            <RadioGroup
+              name="criminalRecord"
+              orientation="horizontal"
               value={detail.criminalRecord}
               onValueChange={(val) => handleDetailChange("criminalRecord", val)}
-              options={yesNoOptions}
-            />
+            >
+              <Radio value="Yes">ใช่</Radio>
+              <Radio value="No">ไม่ใช่</Radio>
+            </RadioGroup>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="รายละเอียดคดี"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.criminalRecordDetail}
-              onChange={(e) =>
-                handleDetailChange("criminalRecordDetail", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="กำลังตั้งครรภ์หรือไม่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+          {detail.criminalRecord === "Yes" && (
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              <Input
+                label="รายละเอียดคดี"
+                placeholder="Please Enter Data"
+                size="md"
+                variant="underlined"
+                radius="full"
+                value={detail.criminalRecordDetail}
+                onChange={(e) =>
+                  handleDetailChange("criminalRecordDetail", e.target.value)
+                }
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                ขณะนี้คุณตั้งครรภ์หรือไม่?
+              </span>
+              <span className="text-xs font-[300]">Are you pregnant?</span>
+            </div>
+            <RadioGroup
+              name="isPregnant"
+              orientation="horizontal"
               value={detail.isPregnant}
               onValueChange={(val) => handleDetailChange("isPregnant", val)}
-              options={yesNoOptions}
-            />
+            >
+              <Radio value="Yes">ใช่</Radio>
+              <Radio value="No">ไม่ใช่</Radio>
+            </RadioGroup>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="อายุครรภ์ (ถ้ามี)"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.pregnancyDetail}
-              onChange={(e) =>
-                handleDetailChange("pregnancyDetail", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="มีเพื่อน/ญาติทำงานในบริษัทนี้หรือไม่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
+          {detail.isPregnant === "Yes" && (
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              <Input
+                label="อายุครรภ์ (ถ้ามี)"
+                placeholder="Please Enter Data"
+                size="md"
+                variant="underlined"
+                radius="full"
+                value={detail.pregnancyDetail}
+                onChange={(e) =>
+                  handleDetailChange("pregnancyDetail", e.target.value)
+                }
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col">
+              <span className="text-md font-[600]">
+                ท่านมีเพื่อน คนรู้จัก หรือญาติที่ทำงานในบริษัทนี้หรือไม่?
+              </span>
+              <span className="text-xs font-[300]">
+                Do you have relatives and/or friends who are working in this
+                company?
+              </span>
+            </div>
+            <RadioGroup
+              name="hasFriendInCompany"
+              orientation="horizontal"
               value={detail.hasFriendInCompany}
               onValueChange={(val) =>
                 handleDetailChange("hasFriendInCompany", val)
               }
-              options={yesNoOptions}
-            />
+            >
+              <Radio value="Yes">ใช่</Radio>
+              <Radio value="No">ไม่ใช่</Radio>
+            </RadioGroup>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ชื่อเพื่อน/ญาติในบริษัท"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.friendInCompanyName}
-              onChange={(e) =>
-                handleDetailChange("friendInCompanyName", e.target.value)
-              }
-            />
-          </div>
+          {detail.hasFriendInCompany === "Yes" && (
+            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+              <Input
+                label="ชื่อเพื่อน/ญาติในบริษัท"
+                placeholder="Please Enter Data"
+                size="md"
+                variant="underlined"
+                radius="full"
+                value={detail.friendInCompanyName}
+                onChange={(e) =>
+                  handleDetailChange("friendInCompanyName", e.target.value)
+                }
+              />
+            </div>
+          )}
         </div>
       </Section>
 
