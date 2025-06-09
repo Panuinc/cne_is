@@ -29,7 +29,7 @@ export default function UIRecruitStep1({
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
           บริษัท ชาญนคร วิศวกรรม จำกัด
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm leading-tight">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm leading-tight bg-success text-white">
           <span>
             50/1 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพ 10900
             โทร.0-2105-0999 (10 คู่สาย) แฟ็กซ์.0-2589-2932
@@ -52,7 +52,7 @@ export default function UIRecruitStep1({
         </div>
         <div className="flex flex-col items-start justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
           <span className="text-md font-[600]">วันที่</span>
-          <span className="text-sm font-[300] border-b-2 border-dark/50 w-full">
+          <span className="text-sm font-[300] border-b-2 border-dark w-full">
             {formattedDate}
           </span>
         </div>
@@ -94,8 +94,8 @@ export default function UIRecruitStep1({
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-60 p-2 gap-2 border-2 border-dark border-2 border-dark/50">
-            <div className="flex flex-col">
+          <div className="flex flex-col items-center justify-center w-full h-60 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col h-full">
               <span className="text-md font-[600]">
                 รูปถ่าย 1 นิ้ว หรือ 2 นิ้ว
               </span>
@@ -115,7 +115,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark bg-success text-white">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
           ประวัติส่วนตัว
         </div>
@@ -222,7 +222,6 @@ export default function UIRecruitStep1({
             onValueChange={(value) =>
               handleInputChange("recruitGender")({ target: { value } })
             }
-            className="flex flex-row p-2 gap-2 border-2 border-dark"
           >
             <Radio value="Male">
               ชาย{" "}
@@ -319,11 +318,21 @@ export default function UIRecruitStep1({
             color="none"
             radius="full"
           >
-            <SelectItem key="A">A</SelectItem>
-            <SelectItem key="B">B</SelectItem>
-            <SelectItem key="AB">AB</SelectItem>
-            <SelectItem key="O">O</SelectItem>
-            <SelectItem key="Unknown">ไม่ทราบ (Unknown)</SelectItem>
+            <SelectItem key="A" value="A">
+              A
+            </SelectItem>
+            <SelectItem key="B" value="B">
+              B
+            </SelectItem>
+            <SelectItem key="AB" value="AB">
+              AB
+            </SelectItem>
+            <SelectItem key="O" value="O">
+              O
+            </SelectItem>
+            <SelectItem key="Unknown" value="Unknown">
+              ไม่ทราบ (Unknown)
+            </SelectItem>
           </Select>
         </div>
       </div>
@@ -503,7 +512,6 @@ export default function UIRecruitStep1({
             onValueChange={(value) =>
               handleInputChange("recruitMaritalStatus")({ target: { value } })
             }
-            className="flex flex-row p-2 gap-2 border-2 border-dark flex-wrap"
           >
             <Radio value="Single">
               โสด{" "}
@@ -550,7 +558,6 @@ export default function UIRecruitStep1({
                     target: { value },
                   })
                 }
-                className="flex flex-row p-2 gap-2 border-2 border-dark"
               >
                 <Radio value="Yes">
                   มีรายได้ <span className="text-xs font-[300]">(Yes)</span>
@@ -619,7 +626,6 @@ export default function UIRecruitStep1({
             onValueChange={(value) =>
               handleInputChange("recruitMilitaryStatus")({ target: { value } })
             }
-            className="flex flex-row p-2 gap-2 border-2 border-dark flex-wrap"
           >
             <Radio value="Exempted">
               ได้รับการยกเว้น{" "}

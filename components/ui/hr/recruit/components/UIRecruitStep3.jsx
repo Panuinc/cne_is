@@ -1,13 +1,12 @@
 "use client";
 
-import { Input, Select, Button } from "@heroui/react";
+import { Input, Select, SelectItem, Button } from "@heroui/react";
 import { useState } from "react";
 
 const skillLevels = [
   { label: "ดีมาก", value: "Excellent" },
   { label: "ดี", value: "Good" },
   { label: "พอใช้", value: "Fair" },
-  { label: "น้อย", value: "Poor" },
 ];
 
 const otherSkillTypes = [
@@ -126,7 +125,6 @@ export default function UIRecruitStep3() {
                   variant="underlined"
                   color="none"
                   radius="full"
-                  options={skillLevels}
                   value={lang.listenLevel}
                   onValueChange={(val) =>
                     handleListChange(
@@ -137,7 +135,13 @@ export default function UIRecruitStep3() {
                       val
                     )
                   }
-                />
+                >
+                  {skillLevels.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
@@ -158,7 +162,13 @@ export default function UIRecruitStep3() {
                       val
                     )
                   }
-                />
+                >
+                  {skillLevels.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
@@ -179,7 +189,13 @@ export default function UIRecruitStep3() {
                       val
                     )
                   }
-                />
+                >
+                  {skillLevels.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
@@ -200,7 +216,13 @@ export default function UIRecruitStep3() {
                       val
                     )
                   }
-                />
+                >
+                  {skillLevels.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
               </div>
             </div>
           </ItemCard>
@@ -230,7 +252,11 @@ export default function UIRecruitStep3() {
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
                   label="ประเภททักษะ"
-                  options={otherSkillTypes}
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
                   value={skill.type}
                   onValueChange={(val) =>
                     handleListChange(
@@ -241,7 +267,13 @@ export default function UIRecruitStep3() {
                       val
                     )
                   }
-                />
+                >
+                  {otherSkillTypes.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
               </div>
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
@@ -316,10 +348,20 @@ export default function UIRecruitStep3() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="ประเภทแบบทดสอบ"
-              options={englishTestTypes}
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={englishScore.type}
               onValueChange={(val) => handleEnglishScoreChange("type", val)}
-            />
+            >
+              {englishTestTypes.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
@@ -352,38 +394,78 @@ export default function UIRecruitStep3() {
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีรถยนต์ส่วนตัว"
-              options={vehicleOptions}
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={vehicleInfo.ownCar}
               onValueChange={(val) => handleVehicleChange("ownCar", val)}
-            />
+            >
+              {vehicleOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีรถจักรยานยนต์ส่วนตัว"
-              options={vehicleOptions}
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={vehicleInfo.ownMotorcycle}
               onValueChange={(val) => handleVehicleChange("ownMotorcycle", val)}
-            />
+            >
+              {vehicleOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีใบขับขี่รถยนต์"
-              options={vehicleOptions}
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={vehicleInfo.haveCarLicense}
               onValueChange={(val) =>
                 handleVehicleChange("haveCarLicense", val)
               }
-            />
+            >
+              {vehicleOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Select
               label="มีใบขับขี่รถจักรยานยนต์"
-              options={vehicleOptions}
+              placeholder="Please Enter Data"
+              size="md"
+              variant="underlined"
+              color="none"
+              radius="full"
               value={vehicleInfo.haveMotorcycleLicense}
               onValueChange={(val) =>
                 handleVehicleChange("haveMotorcycleLicense", val)
               }
-            />
+            >
+              {vehicleOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </Select>
           </div>
         </div>
       </Section>

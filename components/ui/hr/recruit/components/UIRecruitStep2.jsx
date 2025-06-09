@@ -276,9 +276,15 @@ export default function UIRecruitStep2({
       </Section>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
           ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
-          ให้เปิดเผยข้แมูลส่วนบุคคลแก่บริษัท
+          ให้เปิดเผยข้แมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
+          สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+        </div>
+        <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
+          I certify that I have received the above person’s consent for
+          disclosing his/her personal data to the company for making contact,
+          asking for information and verifying my information.
         </div>
       </div>
 
@@ -307,26 +313,6 @@ export default function UIRecruitStep2({
                         educationList,
                         index,
                         "level",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="สถานศึกษา"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={edu.school}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "school",
                         e.target.value
                       )
                     }
@@ -369,6 +355,26 @@ export default function UIRecruitStep2({
                         educationList,
                         index,
                         "toDate",
+                        e.target.value
+                      )
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                  <Input
+                    label="สถานศึกษา"
+                    placeholder="Please Enter Data"
+                    size="md"
+                    variant="underlined"
+                    color="none"
+                    radius="full"
+                    value={edu.school}
+                    onChange={(e) =>
+                      handleChangeList(
+                        setEducationList,
+                        educationList,
+                        index,
+                        "school",
                         e.target.value
                       )
                     }
@@ -518,11 +524,11 @@ export default function UIRecruitStep2({
 
 function Section({ title, subtitle, children }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+    <div className="flex flex-col items-center justify-center w-full p-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {title}
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
         {subtitle}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">

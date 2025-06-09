@@ -35,7 +35,7 @@ export default function UIRecruitForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark bg-white overflow-auto border-2 border-dark/50"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark bg-white overflow-auto"
       >
         {step === 1 && (
           <UIRecruitStep1
