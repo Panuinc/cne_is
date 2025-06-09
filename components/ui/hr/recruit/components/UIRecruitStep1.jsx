@@ -30,14 +30,14 @@ export default function UIRecruitStep1({
           บริษัท ชาญนคร วิศวกรรม จำกัด
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm leading-tight bg-success text-white">
-          <span>
+          <div>
             50/1 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพ 10900
             โทร.0-2105-0999 (10 คู่สาย) แฟ็กซ์.0-2589-2932
-          </span>
-          <span>
+          </div>
+          <div>
             50/1 Ngamwongwan Road, Lat Yao Subdistrict, Chatuchak District,
             Bangkok 10900 Tel: 0-2105-0999 (10 lines) Fax: 0-2589-2932
-          </span>
+          </div>
         </div>
       </div>
 
@@ -53,10 +53,10 @@ export default function UIRecruitStep1({
           </div>
         </div>
         <div className="flex flex-col items-start justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
-          <span className="text-md font-[600]">วันที่</span>
-          <span className="text-sm font-[300] border-b-2 border-dark w-full">
+          <div className="text-md font-[600]">วันที่</div>
+          <div className="text-sm font-[300] border-b-2 border-dark w-full">
             {formattedDate}
-          </span>
+          </div>
         </div>
       </div>
 
@@ -66,8 +66,8 @@ export default function UIRecruitStep1({
         <div className="flex flex-col items-center justify-end w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[600]">ตำแหน่งที่สมัคร</span>
-              <span className="text-sm font-[300]">Position</span>
+              <div className="text-md font-[600]">ตำแหน่งที่สมัคร</div>
+              <div className="text-sm font-[300]">Position</div>
             </div>
             <Input
               id="recruitPosition"
@@ -82,8 +82,8 @@ export default function UIRecruitStep1({
           </div>
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
-              <span className="text-md font-[600]">เงินเดือนที่ต้องการ</span>
-              <span className="text-sm font-[300]">Expected Salary</span>
+              <div className="text-md font-[600]">เงินเดือนที่ต้องการ</div>
+              <div className="text-sm font-[300]">Expected Salary</div>
             </div>
             <Input
               id="perReqDesiredSalary"
@@ -100,10 +100,10 @@ export default function UIRecruitStep1({
         <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
           <div className="flex flex-col items-center justify-center w-full h-60 p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col h-full">
-              <span className="text-md font-[600]">
+              <div className="text-md font-[600]">
                 รูปถ่าย 1 นิ้ว หรือ 2 นิ้ว
-              </span>
-              <span className="text-sm font-[300]">Photo 1” or 2”</span>
+              </div>
+              <div className="text-sm font-[300]">Photo 1” or 2”</div>
             </div>
             <Input
               id="recruitPhoto"
@@ -137,10 +137,10 @@ export default function UIRecruitStep1({
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">
+                <div className="text-md font-[600]">
                   คำนำหน้าชื่อ นาย/นาง/นางสาว
-                </span>
-                <span className="text-sm font-[300]">Title (TH)</span>
+                </div>
+                <div className="text-sm font-[300]">Title (TH)</div>
               </div>
               <Input
                 id="recruitFullNameTh"
@@ -155,8 +155,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">Title Mr./Mrs./Miss</span>
-                <span className="text-sm font-[300]">Title (EN)</span>
+                <div className="text-md font-[600]">Title Mr./Mrs./Miss</div>
+                <div className="text-sm font-[300]">Title (EN)</div>
               </div>
               <Input
                 id="recruitFullNameEn"
@@ -171,8 +171,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">ชื่อเล่น</span>
-                <span className="text-sm font-[300]">Nickname</span>
+                <div className="text-md font-[600]">ชื่อเล่น</div>
+                <div className="text-sm font-[300]">Nickname</div>
               </div>
               <Input
                 id="recruitNickName"
@@ -189,8 +189,8 @@ export default function UIRecruitStep1({
           <div className="grid grid-cols-1 xl:grid-cols-3 w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">วัน เดือน ปี เกิด</span>
-                <span className="text-sm font-[300]">Date of Birth</span>
+                <div className="text-md font-[600]">วัน เดือน ปี เกิด</div>
+                <div className="text-sm font-[300]">Date of Birth</div>
               </div>
               <Input
                 id="recruitDob"
@@ -205,8 +205,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">อายุ</span>
-                <span className="text-sm font-[300]">Age</span>
+                <div className="text-md font-[600]">อายุ</div>
+                <div className="text-sm font-[300]">Age</div>
               </div>
               <Input
                 id="recruitAge"
@@ -221,8 +221,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">เพศ</span>
-                <span className="text-sm font-[300]">Sex</span>
+                <div className="text-md font-[600]">เพศ</div>
+                <div className="text-sm font-[300]">Sex</div>
               </div>
               <RadioGroup
                 name="recruitGender"
@@ -234,23 +234,21 @@ export default function UIRecruitStep1({
               >
                 <Radio value="Male">
                   ชาย{" "}
-                  <span className="text-xs font-[300] text-gray-600">
-                    (Male)
-                  </span>
+                  <div className="text-xs font-[300] text-gray-600">(Male)</div>
                 </Radio>
                 <Radio value="FeMale">
                   หญิง{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Female)
-                  </span>
+                  </div>
                 </Radio>
               </RadioGroup>
             </div>
 
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">สัญชาติ</span>
-                <span className="text-sm font-[300]">Nationality</span>
+                <div className="text-md font-[600]">สัญชาติ</div>
+                <div className="text-sm font-[300]">Nationality</div>
               </div>
               <Input
                 id="recruitNationality"
@@ -265,8 +263,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">ศาสนา</span>
-                <span className="text-sm font-[300]">Religion</span>
+                <div className="text-md font-[600]">ศาสนา</div>
+                <div className="text-sm font-[300]">Religion</div>
               </div>
               <Input
                 id="recruitReligion"
@@ -281,8 +279,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">ส่วนสูง</span>
-                <span className="text-sm font-[300]">Height</span>
+                <div className="text-md font-[600]">ส่วนสูง</div>
+                <div className="text-sm font-[300]">Height</div>
               </div>
               <Input
                 id="recruitHeight"
@@ -297,8 +295,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">น้ำหนัก</span>
-                <span className="text-sm font-[300]">Weight</span>
+                <div className="text-md font-[600]">น้ำหนัก</div>
+                <div className="text-sm font-[300]">Weight</div>
               </div>
               <Input
                 id="recruitWeight"
@@ -313,8 +311,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">กรุ๊ปเลือด</span>
-                <span className="text-sm font-[300]">Blood Type</span>
+                <div className="text-md font-[600]">กรุ๊ปเลือด</div>
+                <div className="text-sm font-[300]">Blood Type</div>
               </div>
               <Select
                 id="recruitBlood"
@@ -352,8 +350,8 @@ export default function UIRecruitStep1({
           <div className="grid grid-cols-1 xl:grid-cols-3 w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">เบอร์โทรศัพท์</span>
-                <span className="text-sm font-[300]">Phone Number</span>
+                <div className="text-md font-[600]">เบอร์โทรศัพท์</div>
+                <div className="text-sm font-[300]">Phone Number</div>
               </div>
               <Input
                 id="recruitPhone"
@@ -368,8 +366,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">อีเมลล์</span>
-                <span className="text-sm font-[300]">Email</span>
+                <div className="text-md font-[600]">อีเมลล์</div>
+                <div className="text-sm font-[300]">Email</div>
               </div>
               <Input
                 id="recruitEmail"
@@ -384,8 +382,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">ไอดีไลน์</span>
-                <span className="text-sm font-[300]">ID Line</span>
+                <div className="text-md font-[600]">ไอดีไลน์</div>
+                <div className="text-sm font-[300]">ID Line</div>
               </div>
               <Input
                 id="recruitLineId"
@@ -401,10 +399,10 @@ export default function UIRecruitStep1({
 
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">เลขที่บัตรประชาชน</span>
-                <span className="text-sm font-[300]">
+                <div className="text-md font-[600]">เลขที่บัตรประชาชน</div>
+                <div className="text-sm font-[300]">
                   Identification card No.
-                </span>
+                </div>
               </div>
               <Input
                 id="recruitCardNo"
@@ -419,8 +417,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">วันที่ออกบัตร</span>
-                <span className="text-sm font-[300]">Date issued</span>
+                <div className="text-md font-[600]">วันที่ออกบัตร</div>
+                <div className="text-sm font-[300]">Date issued</div>
               </div>
               <Input
                 id="recruitCardIssuedDate"
@@ -436,8 +434,8 @@ export default function UIRecruitStep1({
 
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">สถานที่ออกบัตร</span>
-                <span className="text-sm font-[300]">Issued at</span>
+                <div className="text-md font-[600]">สถานที่ออกบัตร</div>
+                <div className="text-sm font-[300]">Issued at</div>
               </div>
               <Input
                 id="recruitCardIssuedAt"
@@ -452,8 +450,8 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">วันหมดอายุ</span>
-                <span className="text-sm font-[300]">Date Expired</span>
+                <div className="text-md font-[600]">วันหมดอายุ</div>
+                <div className="text-sm font-[300]">Date Expired</div>
               </div>
               <Input
                 id="recruitCardExpired"
@@ -470,9 +468,9 @@ export default function UIRecruitStep1({
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">
+                <div className="text-md font-[600]">
                   ที่อยู่ปัจจุบัน (Present Address)
-                </span>
+                </div>
               </div>
               <Input
                 id="recruitAddressPresent"
@@ -487,9 +485,9 @@ export default function UIRecruitStep1({
             </div>
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">
+                <div className="text-md font-[600]">
                   ที่อยู่ตามทะเบียนบ้าน (Registered Address)
-                </span>
+                </div>
               </div>
               <Input
                 id="recruitAddressRegistered"
@@ -506,8 +504,8 @@ export default function UIRecruitStep1({
           <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">สถานภาพการสมรส</span>
-                <span className="text-sm font-[300]">Marital Status</span>
+                <div className="text-md font-[600]">สถานภาพการสมรส</div>
+                <div className="text-sm font-[300]">Marital Status</div>
               </div>
               <RadioGroup
                 name="recruitMaritalStatus"
@@ -521,27 +519,27 @@ export default function UIRecruitStep1({
               >
                 <Radio value="Single">
                   โสด{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Single)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="Married">
                   สมรส{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Married)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="Divorced">
                   หย่าร้าง{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Divorced)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="Widowed">
                   หม้าย{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Widowed)
-                  </span>
+                  </div>
                 </Radio>
               </RadioGroup>
             </div>
@@ -550,12 +548,12 @@ export default function UIRecruitStep1({
               <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
                 <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
                   <div className="flex flex-col">
-                    <span className="text-md font-[600]">
+                    <div className="text-md font-[600]">
                       คู่สมรสมีรายได้หรือไม่?
-                    </span>
-                    <span className="text-sm font-[300]">
+                    </div>
+                    <div className="text-sm font-[300]">
                       Does the spouse earn income?
-                    </span>
+                    </div>
                   </div>
                   <RadioGroup
                     name="recruitSpouseEarnIncome"
@@ -568,11 +566,10 @@ export default function UIRecruitStep1({
                     }
                   >
                     <Radio value="Yes">
-                      มีรายได้ <span className="text-xs font-[300]">(Yes)</span>
+                      มีรายได้ <div className="text-xs font-[300]">(Yes)</div>
                     </Radio>
                     <Radio value="No">
-                      ไม่มีรายได้{" "}
-                      <span className="text-xs font-[300]">(No)</span>
+                      ไม่มีรายได้ <div className="text-xs font-[300]">(No)</div>
                     </Radio>
                   </RadioGroup>
                 </div>
@@ -580,12 +577,12 @@ export default function UIRecruitStep1({
                 {formData.recruitSpouseEarnIncome === "Yes" && (
                   <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
                     <div className="flex flex-col">
-                      <span className="text-md font-[600]">
+                      <div className="text-md font-[600]">
                         จำนวนรายได้ของคู่สมรส
-                      </span>
-                      <span className="text-sm font-[300]">
+                      </div>
+                      <div className="text-sm font-[300]">
                         Spouse's Income (THB)
-                      </span>
+                      </div>
                     </div>
                     <Input
                       id="recruitSpouseIncomeAmount"
@@ -606,8 +603,8 @@ export default function UIRecruitStep1({
 
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">จำนวนบุตร</span>
-                <span className="text-sm font-[300]">Number of Children</span>
+                <div className="text-md font-[600]">จำนวนบุตร</div>
+                <div className="text-sm font-[300]">Number of Children</div>
               </div>
               <Input
                 id="recruitChildren"
@@ -624,10 +621,10 @@ export default function UIRecruitStep1({
           <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
               <div className="flex flex-col">
-                <span className="text-md font-[600]">สถานภาพทางทหาร</span>
-                <span className="text-sm font-[300]">
+                <div className="text-md font-[600]">สถานภาพทางทหาร</div>
+                <div className="text-sm font-[300]">
                   Military Service Status
-                </span>
+                </div>
               </div>
               <RadioGroup
                 name="recruitMilitaryStatus"
@@ -641,33 +638,33 @@ export default function UIRecruitStep1({
               >
                 <Radio value="Exempted">
                   ได้รับการยกเว้น{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Exempted)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="Completed">
                   ผ่านการเกณฑ์แล้ว{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Completed)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="NotYetServed">
                   ยังไม่เกณฑ์{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Not yet served)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="InProgress">
                   อยู่ระหว่างการเกณฑ์{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (In progress)
-                  </span>
+                  </div>
                 </Radio>
                 <Radio value="NotRequired">
                   ไม่ต้องเกณฑ์{" "}
-                  <span className="text-xs font-[300] text-gray-600">
+                  <div className="text-xs font-[300] text-gray-600">
                     (Not required)
-                  </span>
+                  </div>
                 </Radio>
               </RadioGroup>
             </div>
