@@ -40,7 +40,7 @@ export default function PerReqList() {
 
     (async () => {
       try {
-        const url = `/api/hr/perReq/perReqImages/${perReqId}`;
+        const url = `/api/hr/perReq/perReqPDF/${perReqId}`;
         const response = await fetch(url, {
           headers: { "secret-token": SECRET_TOKEN || "" },
         });

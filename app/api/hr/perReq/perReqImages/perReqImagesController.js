@@ -83,17 +83,17 @@ export class PerReqImagesController {
         body {
             margin: 0;
             padding: 0;
-            width: 1250px;
-            height: 1250px;
+            width: 3000px;
+            height: 4000px;
             background: white;
             font-family: 'DBHelvethaicaMonXBd', sans-serif;
-            font-size: 22px;
+            font-size: 80px;
         }
 
         .bg-green {
             background: #03994C;
             color: #FFFFFF;
-            font-size: 22px;
+            font-size: 80px;
             font-weight: 900;
         }
 
@@ -104,14 +104,14 @@ export class PerReqImagesController {
         .text-green-header {
             background: rgba(255, 255, 255, 0.5);
             color: #03994C;
-            font-size: 40px;
+            font-size: 100px;
             font-weight: 900;
         }
 
         .text-green-detail {
             background: rgba(255, 255, 255, 0.8);
             color: #03994C;
-            font-size: 60px;
+            font-size: 120px;
             font-weight: 900;
         }
     </style>
@@ -149,7 +149,7 @@ export class PerReqImagesController {
         </div>
 
         <div class="flex flex-row items-end justify-start w-full gap-1 bg-white rounded-bl-3xl rounded-br-3xl">
-            <div class="flex flex-col items-start w-9/12 p-1 gap-1">
+            <div class="flex flex-col items-start p-1 gap-1">
                 <div class="flex items-center justify-start w-40 p-1 bg-green rounded-tr-xl rounded-br-xl">
                     คุณสมบัติ
                 </div>
@@ -186,9 +186,6 @@ export class PerReqImagesController {
                     </div>
                 </div>
             </div>
-            <div class="flex items-center justify-center w-3/12 p-2">
-                <img src="data:image/png;base64,${footerBase64}" class="w-full" />
-            </div>
         </div>
     </div>
 </body>
@@ -199,7 +196,7 @@ export class PerReqImagesController {
       const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
       const page = await browser.newPage();
 
-      await page.setViewport({ width: 1250, height: 1250 });
+      await page.setViewport({ width: 3000, height: 4000 });
 
       await page.setContent(html, { waitUntil: "networkidle0" });
 
@@ -208,8 +205,8 @@ export class PerReqImagesController {
         clip: {
           x: 0,
           y: 0,
-          width: 1250,
-          height: 1250,
+          width: 3000,
+          height: 4000,
         },
       });
 
