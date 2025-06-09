@@ -77,13 +77,12 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     const baseColumns = [
       { name: "ลำดับ", uid: "recruitId" },
       { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
-      { name: "ตำแหน่งที่ต้องการ", uid: "positionNameTH" },
       { name: "เลขที่เอกสาร", uid: "perReqDocumentId" },
+      { name: "ตำแหน่งที่เปิดรับสมัคร", uid: "positionNameTH" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
     ];
     if (canManage) {
       baseColumns.push(
-        { name: "สร้างโดย", uid: "createdBy" },
         { name: "สร้างเมื่อวันที่", uid: "recruitCreateAt" },
         { name: "แก้ไขโดย", uid: "updatedBy" },
         { name: "แก้ไขเมื่อวันที่", uid: "recruitUpdateAt" },
@@ -176,10 +175,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
             </Button>
           );
         }
-        case "createdBy":
-          return item.RecruitCreateBy
-            ? `${item.RecruitCreateBy.empFirstNameTH} ${item.RecruitCreateBy.empLastNameTH}`
-            : "-";
         case "updatedBy":
           return item.RecruitUpdateBy
             ? `${item.RecruitUpdateBy.empFirstNameTH} ${item.RecruitUpdateBy.empLastNameTH}`
