@@ -44,7 +44,7 @@ export default function UIRecruitStep1({
       {/* //// ---- //// */}
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600]">
             ใบสมัครงาน
           </div>
@@ -52,9 +52,11 @@ export default function UIRecruitStep1({
             EMPLOYMENT APPLICATION
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
-          <div className="text-md font-[600]">วันที่</div>
-          <div className="text-sm font-[300] border-b-2 border-dark w-full">
+        <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full gap-2">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+            วันที่
+          </div>
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[300]">
             {formattedDate}
           </div>
         </div>
@@ -62,8 +64,9 @@ export default function UIRecruitStep1({
 
       {/* //// ---- //// */}
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex flex-col items-center justify-end w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-col items-center justify-end w-full xl:w-10/12 h-full p-2 gap-2 border-2 border-warning">
+
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <div className="text-md font-[600]">ตำแหน่งที่สมัคร</div>
@@ -80,6 +83,7 @@ export default function UIRecruitStep1({
               className="flex-1"
             />
           </div>
+          
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-start w-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <div className="text-md font-[600]">เงินเดือนที่ต้องการ</div>
@@ -97,7 +101,7 @@ export default function UIRecruitStep1({
             />
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full xl:w-2/12 h-full p-2 gap-2 border-2 border-warning">
           <div className="flex flex-col items-center justify-center w-full h-60 p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col h-full">
               <div className="text-md font-[600]">
