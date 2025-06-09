@@ -77,9 +77,8 @@ enum perReqEducation {
 }
 
 enum RecruitStatus {
-  Pending // ยังไม่ส่งใบสมัคร
-  Submitted // ส่งใบสมัครแล้ว
-  Interviewing // นัดสัมภาษณ์
+  Pending // นำส่งใบสมัครให้ผู้สมัครงานเรียบร้อย
+  Submitted // ผู้สมัครกรอกใบสมัครแล้วเสร็จ  Interviewing // นัดสัมภาษณ์
   Rejected // ไม่ผ่าน
   Hired // ได้รับเลือก
   Considered // เก็บไว้พิจารณา
