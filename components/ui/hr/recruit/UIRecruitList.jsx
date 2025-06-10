@@ -134,11 +134,13 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
           return (
             <Link
               href={`/apply/${item.applySlug}`}
+              target="_blank"
               className="text-blue-600 underline hover:text-blue-800"
               title={`ลิงก์: /apply/${item.applySlug}`}
             >
-              {item.recruitFullNameTh?.trim() ||
-                `คลิกเพื่อดูใบสมัคร ${item.recruitFullNameTh}`}
+              {item.recruitFullNameTh?.trim()
+                ? item.recruitFullNameTh.trim()
+                : "คลิกเพื่อดูใบสมัคร"}
             </Link>
           );
         case "positionNameTH":
