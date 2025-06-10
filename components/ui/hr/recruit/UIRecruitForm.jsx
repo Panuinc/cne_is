@@ -35,7 +35,7 @@ export default function UIRecruitForm({
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start w-full h-full p-2 xl:px-8 xl:py-4 gap-2 border-2 bg-white overflow-auto"
+        className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark bg-white overflow-auto"
       >
         {step === 1 && (
           <UIRecruitStep1
@@ -73,14 +73,14 @@ export default function UIRecruitForm({
           />
         )}
 
-        <div className="flex flex-row items-center justify-center w-full gap-2">
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
           {step > 1 && (
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="danger"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
                 onPress={handleBack}
               >
                 ย้อนกลับ
@@ -88,12 +88,12 @@ export default function UIRecruitForm({
             </div>
           )}
           {step < 5 && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="warning"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
                 onPress={handleNext}
               >
                 ถัดไป
@@ -101,13 +101,13 @@ export default function UIRecruitForm({
             </div>
           )}
           {step === 5 && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2">
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="primary"
                 size="md"
                 radius="full"
                 type="submit"
-                className="flex items-center justify-center w-2/12 h-full p-4 gap-2"
+                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
               >
                 บันทึก
               </Button>
