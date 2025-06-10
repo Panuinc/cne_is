@@ -103,7 +103,7 @@ export default function UIRecruitStep2({
             index={index}
             onRemove={() => removeFromList(setFamilyList, familyList, index)}
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Select
                     label="ความสัมพันธ์"
@@ -235,7 +235,7 @@ export default function UIRecruitStep2({
             }
           />
         ))}
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full gap-2">
           <AddButton
             label="เพิ่มสมาชิกในครอบครัว"
             onClick={() =>
@@ -253,7 +253,7 @@ export default function UIRecruitStep2({
       </Section>
 
       <Section title="บุคคลติดต่อในกรณีฉุกเฉิน" subtitle="EMERGENCY CONTACT">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่อ-นามสกุล"
@@ -336,7 +336,7 @@ export default function UIRecruitStep2({
               removeFromList(setEducationList, educationList, index)
             }
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Select
                     label="ระดับการศึกษา"
@@ -513,7 +513,7 @@ export default function UIRecruitStep2({
             index={index}
             onRemove={() => removeFromList(setLicenseList, licenseList, index)}
             children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="ชื่อใบอนุญาต"
@@ -569,14 +569,12 @@ export default function UIRecruitStep2({
 
 function Section({ title, subtitle, children }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full">
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
-        {title}
+    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm bg-success text-white">
+        <div>{title}</div>
+        <div>{subtitle}</div>
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-lg font-[600] bg-success text-white">
-        {subtitle}
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full h-full gap-2">
         {children}
       </div>
     </div>
@@ -585,8 +583,8 @@ function Section({ title, subtitle, children }) {
 
 function ItemCard({ index, onRemove, children }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-      <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+    <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
         <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
           #{""}
           {index + 1}
@@ -605,7 +603,7 @@ function ItemCard({ index, onRemove, children }) {
           )}
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
         {children}
       </div>
     </div>
