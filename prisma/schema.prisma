@@ -766,7 +766,6 @@ model RecruitOtherSkill {
   recruitOtherSkillRecruitId Int
   recruitOtherSkillType      OtherSkillType
   recruitOtherSkillName      String         @db.VarChar(100)
-  recruitOtherSkillScore     Float?
 
   RecruitOtherSkillRecruitId Recruit @relation("RecruitOtherSkillRecruitId", fields: [recruitOtherSkillRecruitId], references: [recruitId])
 

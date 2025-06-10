@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
@@ -12,8 +14,7 @@ export default function UIRecruitStep1() {
 
   return (
     <>
-      {/* //-----// */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <Image
             src="/logoCompany/com-1.png"
@@ -36,8 +37,8 @@ export default function UIRecruitStep1() {
           </div>
         </div>
       </div>
-      {/* //-----// */}
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ใบสมัครงาน</div>
           <div>Employment Application</div>
@@ -47,8 +48,8 @@ export default function UIRecruitStep1() {
           <div>Date {formattedDate}</div>
         </div>
       </div>
-      {/* //-----// */}
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-48 xl:w-2/12 p-2 gap-2 border-2 border-dark">
           Pic
         </div>
@@ -97,8 +98,8 @@ export default function UIRecruitStep1() {
           </div>
         </div>
       </div>
-      {/* //-----// */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ประวัติส่วนตัว</div>
           <div>Personal Data</div>
@@ -318,8 +319,7 @@ export default function UIRecruitStep1() {
             <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Select
                 name="roleStatus"
-                label="สถานะการใช้งาน"
-                placeholder="กรุณากรอกข้อมูล"
+                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

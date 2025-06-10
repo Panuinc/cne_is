@@ -5,6 +5,7 @@ import UIRecruitStep2 from "./components/UIRecruitStep2";
 import UIRecruitStep3 from "./components/UIRecruitStep3";
 import UIRecruitStep4 from "./components/UIRecruitStep4";
 import UIRecruitStep5 from "./components/UIRecruitStep5";
+import UIRecruitStep6 from "./components/UIRecruitStep6";
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 
@@ -20,9 +21,6 @@ export default function UIRecruitForm({
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
-    // if (step === 1 && !formData.recruitFullNameTh) {
-    //   return;
-    // }
     setStep((prev) => prev + 1);
   };
 
@@ -72,6 +70,13 @@ export default function UIRecruitForm({
             errors={errors}
           />
         )}
+        {step === 6 && (
+          <UIRecruitStep6
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
 
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
           {step > 1 && (
@@ -87,7 +92,7 @@ export default function UIRecruitForm({
               </Button>
             </div>
           )}
-          {step < 5 && (
+          {step < 6 && (
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="warning"
@@ -100,7 +105,7 @@ export default function UIRecruitForm({
               </Button>
             </div>
           )}
-          {step === 5 && (
+          {step === 6 && (
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="primary"
