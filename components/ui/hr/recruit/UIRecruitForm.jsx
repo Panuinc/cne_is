@@ -6,6 +6,8 @@ import UIRecruitStep3 from "./components/UIRecruitStep3";
 import UIRecruitStep4 from "./components/UIRecruitStep4";
 import UIRecruitStep5 from "./components/UIRecruitStep5";
 import UIRecruitStep6 from "./components/UIRecruitStep6";
+import UIRecruitStep7 from "./components/UIRecruitStep7"; // ✅ เพิ่มบรรทัดนี้
+
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 
@@ -77,6 +79,13 @@ export default function UIRecruitForm({
             errors={errors}
           />
         )}
+        {step === 7 && ( // ✅ เพิ่มบรรทัดนี้
+          <UIRecruitStep7
+            formData={formData}
+            handleInputChange={handleInputChange}
+            errors={errors}
+          />
+        )}
 
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
           {step > 1 && (
@@ -92,7 +101,7 @@ export default function UIRecruitForm({
               </Button>
             </div>
           )}
-          {step < 6 && (
+          {step < 7 && ( // ✅ เปลี่ยนจาก step < 6
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="warning"
@@ -105,7 +114,7 @@ export default function UIRecruitForm({
               </Button>
             </div>
           )}
-          {step === 6 && (
+          {step === 7 && ( // ✅ เปลี่ยนจาก step === 6
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
               <Button
                 color="primary"
