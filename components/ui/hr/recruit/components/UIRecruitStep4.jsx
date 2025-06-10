@@ -103,8 +103,8 @@ export default function UIRecruitStep4() {
             index={index}
             onRemove={() => removeExperience(index)}
           >
-            <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="ชื่อสถานที่ทำงาน"
@@ -134,7 +134,7 @@ export default function UIRecruitStep4() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Select
                     label="ประเภทการจ้าง"
@@ -151,7 +151,7 @@ export default function UIRecruitStep4() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="วันที่เริ่มงาน"
@@ -183,7 +183,7 @@ export default function UIRecruitStep4() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Input
                     label="เงินเดือน"
@@ -233,7 +233,7 @@ export default function UIRecruitStep4() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
                 <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                   <Textarea
                     className="col-span-2"
@@ -257,8 +257,8 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="ข้อมูลเพิ่มเติม" subtitle="ADDITIONAL INFORMATION">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">
                 ท่านเคยถูกให้ออกจากงานหรือไม่?
@@ -278,7 +278,7 @@ export default function UIRecruitStep4() {
             </RadioGroup>
           </div>
           {detail.fired === "Yes" && (
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 label="เหตุผล"
                 placeholder="Please Enter Data"
@@ -294,8 +294,8 @@ export default function UIRecruitStep4() {
           )}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">
                 ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่?
@@ -316,7 +316,7 @@ export default function UIRecruitStep4() {
             </RadioGroup>
           </div>
           {detail.severeIllness === "Yes" && (
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 label="ระบุอาการ"
                 placeholder="Please Enter Data"
@@ -332,8 +332,8 @@ export default function UIRecruitStep4() {
           )}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">
                 ท่านเคยได้รับโทษทางอาญา หรือจำคุก หรือเป็นบุคคลล้มละลายหรือไม่?
@@ -354,7 +354,7 @@ export default function UIRecruitStep4() {
             </RadioGroup>
           </div>
           {detail.criminalRecord === "Yes" && (
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 label="รายละเอียดคดี"
                 placeholder="Please Enter Data"
@@ -370,8 +370,8 @@ export default function UIRecruitStep4() {
           )}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">
                 ขณะนี้คุณตั้งครรภ์หรือไม่?
@@ -389,7 +389,7 @@ export default function UIRecruitStep4() {
             </RadioGroup>
           </div>
           {detail.isPregnant === "Yes" && (
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 label="อายุครรภ์ (ถ้ามี)"
                 placeholder="Please Enter Data"
@@ -405,8 +405,8 @@ export default function UIRecruitStep4() {
           )}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-between w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">
                 ท่านมีเพื่อน คนรู้จัก หรือญาติที่ทำงานในบริษัทนี้หรือไม่?
@@ -429,7 +429,7 @@ export default function UIRecruitStep4() {
             </RadioGroup>
           </div>
           {detail.hasFriendInCompany === "Yes" && (
-            <div className="flex items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 label="ชื่อเพื่อน/ญาติในบริษัท"
                 placeholder="Please Enter Data"
@@ -447,7 +447,7 @@ export default function UIRecruitStep4() {
       </Section>
 
       <Section title="บุคคลอ้างอิง" subtitle="PERSONAL REFERENCES">
-        <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full gap-2">
           <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
             กรุณาเขียนชื่อ ที่อยู่ เบอร์โทรศัพท์ และอาชีพของบุคคลอ้างอิงจำนวน 2
             คน (ซึ่งไม่ใช่ญาติหรืออดีตนายจ้าง)
@@ -458,7 +458,7 @@ export default function UIRecruitStep4() {
             (other than relatives or former employers) who know you.
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 1"
@@ -513,7 +513,7 @@ export default function UIRecruitStep4() {
           </div>
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <Input
               label="ชื่ออ้างอิง 2"

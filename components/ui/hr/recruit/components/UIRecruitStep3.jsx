@@ -69,8 +69,10 @@ export default function UIRecruitStep3() {
     setter(updated);
   };
 
-  const handleEnglishScoreChange = (field, value) => {
-    setEnglishScore((prev) => ({ ...prev, [field]: value }));
+  const handleEnglishScoreChange = (index, field, value) => {
+    const updated = [...englishScores];
+    updated[index][field] = value;
+    setEnglishScores(updated);
   };
 
   const handleAbilityChange = (index, value) => {
@@ -78,6 +80,10 @@ export default function UIRecruitStep3() {
     updated[index].name = value;
     setSpecialAbilities(updated);
   };
+
+  const [englishScores, setEnglishScores] = useState([
+    { type: "", value: "", detail: "" },
+  ]);
 
   const handleVehicleChange = (field, value) => {
     setVehicleInfo((prev) => ({ ...prev, [field]: value }));
@@ -103,7 +109,7 @@ export default function UIRecruitStep3() {
               removeItem(setLanguageSkills, languageSkills, index)
             }
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อภาษา"
@@ -255,7 +261,7 @@ export default function UIRecruitStep3() {
             index={index}
             onRemove={() => removeItem(setOtherSkills, otherSkills, index)}
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Select
                   label="ประเภททักษะ"
@@ -333,7 +339,7 @@ export default function UIRecruitStep3() {
               removeItem(setSpecialAbilities, specialAbilities, index)
             }
           >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <Input
                   label="ชื่อความสามารถพิเศษ"
@@ -351,53 +357,68 @@ export default function UIRecruitStep3() {
       </Section>
 
       <Section title="คะแนนภาษาอังกฤษ" subtitle="ENGLISH TEST SCORE">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="ประเภทแบบทดสอบ"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={englishScore.type}
-              onValueChange={(val) => handleEnglishScoreChange("type", val)}
-            >
-              {englishTestTypes.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </Select>
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="คะแนน"
-              type="number"
-              value={englishScore.value}
-              onChange={(e) =>
-                handleEnglishScoreChange("value", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="รายละเอียดเพิ่มเติม"
-              className="col-span-2"
-              value={englishScore.detail}
-              onChange={(e) =>
-                handleEnglishScoreChange("detail", e.target.value)
-              }
-            />
-          </div>
-        </div>
+        {englishScores.map((score, index) => (
+          <ItemCard
+            key={index}
+            index={index}
+            onRemove={() => removeItem(setEnglishScores, englishScores, index)}
+          >
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <Select
+                  label="ประเภทแบบทดสอบ"
+                  placeholder="Please Enter Data"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={score.type}
+                  onValueChange={(val) =>
+                    handleEnglishScoreChange(index, "type", val)
+                  }
+                >
+                  {englishTestTypes.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </Select>
+              </div>
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <Input
+                  label="คะแนน"
+                  type="number"
+                  value={score.value}
+                  onChange={(e) =>
+                    handleEnglishScoreChange(index, "value", e.target.value)
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <Input
+                  label="รายละเอียดเพิ่มเติม"
+                  value={score.detail}
+                  onChange={(e) =>
+                    handleEnglishScoreChange(index, "detail", e.target.value)
+                  }
+                />
+              </div>
+            </div>
+          </ItemCard>
+        ))}
+        <AddButton
+          label="เพิ่มคะแนนภาษาอังกฤษ"
+          onClick={() =>
+            addItem(setEnglishScores, { type: "", value: "", detail: "" })
+          }
+        />
       </Section>
 
       <Section
         title="ข้อมูลยานพาหนะและใบขับขี่"
         subtitle="VEHICLE & LICENSE INFO"
       >
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">มีรถยนต์ส่วนตัว</span>
@@ -432,7 +453,7 @@ export default function UIRecruitStep3() {
             </RadioGroup>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
             <div className="flex flex-col">
               <span className="text-md font-[600]">มีใบขับขี่รถยนต์</span>
