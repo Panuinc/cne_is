@@ -15,7 +15,7 @@ export default function UIRecruitStep5() {
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 กรุณาแนะนำตัวท่านเอง เพื่อให้บริษัทรู้จักตัวท่านดีขึ้น
@@ -46,7 +46,7 @@ export default function UIRecruitStep5() {
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ข้าพเจ้าขอรับรองว่า
@@ -91,7 +91,7 @@ export default function UIRecruitStep5() {
           <div>Enclosed Documents</div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สำเนาบัตรประชาชน</div>
               <div className="text-sm text-gray-500">Identification Card</div>
@@ -138,7 +138,7 @@ export default function UIRecruitStep5() {
             </div>
           </div>
           {/* //--// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สำเนาทะเบียนบ้าน</div>
               <div className="text-sm text-gray-500">House Registration</div>
@@ -185,7 +185,7 @@ export default function UIRecruitStep5() {
             </div>
           </div>
           {/* //--// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">หลักฐานการศึกษา</div>
               <div className="text-sm text-gray-500">Transcript</div>
@@ -232,7 +232,7 @@ export default function UIRecruitStep5() {
             </div>
           </div>
           {/* //--// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ใบรับรองการผ่านงาน</div>
               <div className="text-sm text-gray-500">
@@ -281,7 +281,7 @@ export default function UIRecruitStep5() {
             </div>
           </div>
           {/* //--// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ใบรับรองแพทย์ (ไม่เกิน 30 วัน)
@@ -332,7 +332,7 @@ export default function UIRecruitStep5() {
             </div>
           </div>
           {/* //--// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">หลักฐานการเกณฑ์ทหาร</div>
               <div className="text-sm text-gray-500">Military Certificate</div>

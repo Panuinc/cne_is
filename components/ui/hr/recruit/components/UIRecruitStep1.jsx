@@ -54,7 +54,7 @@ export default function UIRecruitStep1() {
           Pic
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ตำแหน่งที่สมัคร</div>
               <div className="text-sm text-gray-500">Position applied</div>
@@ -75,7 +75,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">เงินเดือนที่ต้องการ</div>
               <div className="text-sm text-gray-500">Expected salary</div>
@@ -100,12 +100,12 @@ export default function UIRecruitStep1() {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
           <div>ประวัติส่วนตัว</div>
           <div>Personal Data</div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ชื่อ - นามสกุล นาย / นาง / นางสาว (ภาษาไทย)
@@ -128,7 +128,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 Name & Surname Mr. / Mrs. / Miss (English)
@@ -153,7 +153,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-4 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">วัน เดือน ปี เกิด</div>
               <div className="text-sm text-gray-500">Date of Birth</div>
@@ -174,7 +174,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">เพศ</div>
               <div className="text-sm text-gray-500">Gender</div>
@@ -205,7 +205,7 @@ export default function UIRecruitStep1() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">อายุ</div>
               <div className="text-sm text-gray-500">Age</div>
@@ -226,7 +226,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สัญชาติ</div>
               <div className="text-sm text-gray-500">Nationality</div>
@@ -247,7 +247,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ศาสนา</div>
               <div className="text-sm text-gray-500">Religion</div>
@@ -268,7 +268,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ส่วนสูง</div>
               <div className="text-sm text-gray-500">Height</div>
@@ -289,7 +289,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">น้ำหนัก</div>
               <div className="text-sm text-gray-500">Weight</div>
@@ -310,7 +310,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">กรุ๊ปเลือด</div>
               <div className="text-sm text-gray-500">Blood Type</div>
@@ -350,7 +350,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-4 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">เลขที่บัตรประชาชน</div>
               <div className="text-sm text-gray-500">
@@ -373,7 +373,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สถานที่ออกบัตร</div>
               <div className="text-sm text-gray-500">Issued at</div>
@@ -394,7 +394,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">วันที่ออกบัตร</div>
               <div className="text-sm text-gray-500">Date issued</div>
@@ -415,7 +415,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">วันหมดอายุ</div>
               <div className="text-sm text-gray-500">Date expired</div>
@@ -438,7 +438,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-3 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">เบอร์โทรศัพท์</div>
               <div className="text-sm text-gray-500">Telephone number </div>
@@ -459,7 +459,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ไอดีไลน์</div>
               <div className="text-sm text-gray-500">Line ID</div>
@@ -480,7 +480,7 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">อีเมลล์</div>
               <div className="text-sm text-gray-500">Email</div>
@@ -503,7 +503,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ที่อยู่ปัจจุบัน</div>
               <div className="text-sm text-gray-500">Present address</div>
@@ -524,7 +524,32 @@ export default function UIRecruitStep1() {
               />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ที่อยู่ปัจจุบัน (Google Map)
+              </div>
+              <div className="text-sm text-gray-500">
+                Present address (Google Map)
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                placeholder="xxx xxx"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ที่อยู่ตามทะเบียนบ้าน
@@ -549,7 +574,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สถานภาพการสมรส</div>
               <div className="text-sm text-gray-500">Marital Status</div>
@@ -586,7 +611,7 @@ export default function UIRecruitStep1() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 คู่สมรสมีรายได้หรือไม่
@@ -621,7 +646,7 @@ export default function UIRecruitStep1() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 จำนวนรายได้ของคู่สมรส
@@ -646,7 +671,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">จำนวนบุตร</div>
               <div className="text-sm text-gray-500">Number of Children</div>
@@ -669,7 +694,7 @@ export default function UIRecruitStep1() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">สถานภาพทางทหาร</div>
               <div className="text-sm text-gray-500">

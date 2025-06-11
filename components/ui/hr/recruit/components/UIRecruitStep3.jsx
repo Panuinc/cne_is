@@ -7,12 +7,12 @@ export default function UIRecruitStep3() {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
           <div>ภาษา กรุณาระบุ ดีมาก, ดี, พอใช้</div>
           <div>LANGUAGE - Please Identify: EXCELLENT, GOOD, FAIR</div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-5 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ภาษา</div>
               <div className="text-sm text-gray-500">Language</div>
@@ -46,7 +46,7 @@ export default function UIRecruitStep3() {
               </Select>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">การฟัง</div>
               <div className="text-sm text-gray-500">Listening</div>
@@ -77,7 +77,7 @@ export default function UIRecruitStep3() {
               </Select>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">การพูด</div>
               <div className="text-sm text-gray-500">Speaking</div>
@@ -108,7 +108,7 @@ export default function UIRecruitStep3() {
               </Select>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">การอ่าน</div>
               <div className="text-sm text-gray-500">Reading</div>
@@ -139,7 +139,7 @@ export default function UIRecruitStep3() {
               </Select>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">การเขียน</div>
               <div className="text-sm text-gray-500">Writing</div>
@@ -175,13 +175,13 @@ export default function UIRecruitStep3() {
 
       {/* //---// */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
           <div>ทักษะอื่นๆ</div>
           <div>Other Skill</div>
         </div>
         <div className="flex flex-col xl:flex-row w-full h-full gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   ทักษะทางด้านคอมพิวเตอร์
@@ -204,7 +204,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">กีฬา</div>
                 <div className="text-sm text-gray-500">Sports</div>
@@ -225,7 +225,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   ความสามารถพิเศษอื่นๆ
@@ -250,7 +250,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   การใช้เครื่องใช้สำนักงาน
@@ -275,7 +275,7 @@ export default function UIRecruitStep3() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">TOEIC</div>
               </div>
@@ -295,7 +295,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">TOEFL</div>
               </div>
@@ -315,7 +315,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">IELTS</div>
               </div>
@@ -335,7 +335,7 @@ export default function UIRecruitStep3() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">อื่นๆ</div>
               </div>
@@ -371,7 +371,7 @@ export default function UIRecruitStep3() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">รถยนต์</div>
               <div className="text-sm text-gray-500">Car</div>
@@ -402,7 +402,7 @@ export default function UIRecruitStep3() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">มอเตอร์ไซต์</div>
               <div className="text-sm text-gray-500">Motorcycle</div>
@@ -439,7 +439,7 @@ export default function UIRecruitStep3() {
           <div>Do you have hold a driving license?</div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">รถยนต์</div>
               <div className="text-sm text-gray-500">Car</div>
@@ -470,7 +470,7 @@ export default function UIRecruitStep3() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">มอเตอร์ไซต์</div>
               <div className="text-sm text-gray-500">Motorcycle</div>
