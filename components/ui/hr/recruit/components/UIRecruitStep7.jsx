@@ -697,7 +697,7 @@ export default function UIRecruitStep7() {
           <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
             <RadioGroup
               name="recruitGender"
-              size="sm"
+              size="md"
               variant="underlined"
               color="primary"
               radius="full"

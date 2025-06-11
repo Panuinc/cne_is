@@ -27,33 +27,30 @@ export default function UIRecruitStep1() {
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center bg-success text-white">
+          <div>35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140</div>
           <div>
-            50/1 หมู่ที่ 20 ซอยงามวงศ์วาน 57 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร
-            กรุงเทพมหานคร 10900
-          </div>
-          <div>
-            50/1 Moo 20, Soi Ngamwongwan 57, Ngamwongwan Road, Lat Yao
-            Subdistrict, Chatuchak District, Bangkok 10900
+            35 Moo 12, Ku Bang Luang Sub-district Lat Lum Kaeo District, Pathum
+            Thani 12140
           </div>
         </div>
       </div>
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 text-center text-xl font-[600]">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-9/12 p-2 gap-2 text-center text-xl font-[600] xl:indent-64">
           <div>ใบสมัครงาน</div>
           <div>Employment Application</div>
         </div>
-        <div className="flex flex-col items-start justify-center w-full h-full xl:w-2/12 p-2 gap-2 text-center">
+        <div className="flex flex-col items-start justify-center w-full h-full xl:w-3/12 p-2 gap-2 text-center">
           <div>วันที่</div>
           <div>Date {formattedDate}</div>
         </div>
       </div>
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-        <div className="flex flex-col items-center justify-center w-full h-48 xl:w-2/12 p-2 gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-52 xl:w-3/12 p-2 gap-2 border-2 border-dark/25">
           Pic
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-9/12 p-2 gap-2 border-2 border-dark/25">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
               <div className="font-medium text-black">ตำแหน่งที่สมัคร</div>
@@ -64,7 +61,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -85,7 +82,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -117,7 +114,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -140,7 +137,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -163,7 +160,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -182,7 +179,7 @@ export default function UIRecruitStep1() {
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
@@ -215,7 +212,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -236,7 +233,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -257,7 +254,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -278,7 +275,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -299,7 +296,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -320,7 +317,7 @@ export default function UIRecruitStep1() {
               <Select
                 name="roleStatus"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -362,7 +359,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -383,7 +380,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -404,7 +401,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -425,7 +422,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -448,7 +445,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -469,7 +466,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -490,7 +487,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -513,7 +510,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -538,7 +535,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -561,7 +558,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -582,7 +579,7 @@ export default function UIRecruitStep1() {
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
@@ -623,7 +620,7 @@ export default function UIRecruitStep1() {
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
@@ -658,7 +655,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -681,7 +678,7 @@ export default function UIRecruitStep1() {
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
@@ -704,7 +701,7 @@ export default function UIRecruitStep1() {
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="sm"
+                size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
