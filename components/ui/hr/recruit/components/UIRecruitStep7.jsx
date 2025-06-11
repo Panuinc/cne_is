@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { Input } from "@heroui/react";
+import {
+  Input,
+  Textarea,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 
 export default function UIRecruitStep7() {
   return (
@@ -677,6 +684,58 @@ export default function UIRecruitStep7() {
             บริษัทจะแจ้งให้ท่านทราบผ่านทางเว็บไซต์ แอปพลิเคชัน
             หรือช่องทางการสื่อสารอื่นของบริษัท
             โดยประกาศคุ้มครองข้อมูลส่วนบุคคลฉบับใหม่จะมีผลบังคับใช้ทันทีในวันที่ประกาศให้ท่านทราบ
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark/25">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
+            <div className="font-medium text-black">ข้าพเจ้า</div>
+            <div className="text-sm text-gray-500">I</div>
+          </div>
+          <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
+            <RadioGroup
+              name="recruitGender"
+              size="sm"
+              variant="underlined"
+              color="primary"
+              radius="full"
+              orientation="horizontal"
+              className="flex items-start justify-center xl:items-start w-full h-full"
+              // value={formData.recruitGender}
+              // onValueChange={(value) =>
+              //   handleInputChange("recruitGender")({ target: { value } })
+              // }
+              // onChange={handleInputChange("roleName")}
+              // isInvalid={!!errors.roleName}
+              // errorMessage={errors.roleName}
+            >
+              <Radio key="Yes" value="Yes">
+                ยินยอม
+                <div className="text-sm text-gray-500">(Give consent)</div>
+              </Radio>
+              <Radio key="No" value="No">
+                ไม่ยินยอม
+                <div className="text-sm text-gray-500">
+                  (Do not give consent)
+                </div>
+              </Radio>
+            </RadioGroup>
+          </div>
+        </div>
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
+          <div>
+            ข้าพเจ้ายินยอมให้บริษัท ชาญนครวิศวกรรม จำกัด (CHAN NAKORN
+            ENGINEERING CO., LTD.) ประมวลผลข้อมูลส่วนบุคคลของข้าพเจ้า
+            เพื่อใช้ในการพิจารณาตำแหน่งงานที่เหมาะสมกับข้าพเจ้า
+            และเพื่อแจ้งเตือนเมื่อมีประกาศรับสมัครงานใหม่จากทางบริษัท
+          </div>
+          <div>
+            II consent to CHAN NAKORN ENGINEERING CO., LTD. processing my
+            personal data for the purpose of considering job positions
+            appropriate to me and notifying me when new recruitment
+            announcements are made by the Company.
           </div>
         </div>
       </div>
