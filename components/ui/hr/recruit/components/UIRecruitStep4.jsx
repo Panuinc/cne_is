@@ -15,7 +15,7 @@ export default function UIRecruitStep4() {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ประวัติการทำงาน</div>
           <div>Professional Experience</div>
         </div>
@@ -25,7 +25,7 @@ export default function UIRecruitStep4() {
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full gap-2">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">ชื่อสถานที่ทำงาน</div>
                 <div className="text-sm text-gray-500">Company's name</div>
@@ -46,7 +46,7 @@ export default function UIRecruitStep4() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">ตำแหน่งงาน</div>
                 <div className="text-sm text-gray-500">Position</div>
@@ -69,7 +69,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">ประเภทการจ้างงาน</div>
                 <div className="text-sm text-gray-500">Type of employment</div>
@@ -108,7 +108,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   วัน เดือน ปี ที่เข้าทำงาน
@@ -131,7 +131,7 @@ export default function UIRecruitStep4() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   วัน เดือน ปี ที่ลาออก
@@ -156,7 +156,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">เงินเดือน</div>
                 <div className="text-sm text-gray-500">Salary</div>
@@ -177,7 +177,7 @@ export default function UIRecruitStep4() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">รายได้พิเศษอื่นๆ</div>
                 <div className="text-sm text-gray-500">Allowances</div>
@@ -198,7 +198,7 @@ export default function UIRecruitStep4() {
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">เหตุผลในการลาออก</div>
                 <div className="text-sm text-gray-500">Reason for leaving</div>
@@ -222,7 +222,7 @@ export default function UIRecruitStep4() {
           </div>
 
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
               <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
                 <div className="font-medium text-black">
                   ลักษณะงานที่รับผิดชอบ
@@ -253,7 +253,7 @@ export default function UIRecruitStep4() {
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ท่านจะมาเริ่มงานกับริษัทได้เมื่อไหร่ ถ้ามีตำแหน่ง
@@ -281,7 +281,7 @@ export default function UIRecruitStep4() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ข้าพเจ้า</div>
               <div className="text-sm text-gray-500">I</div>
@@ -334,13 +334,13 @@ export default function UIRecruitStep4() {
 
       {/* //---// */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ข้อความเพิ่มเติม</div>
           <div>Further Information</div>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           {/* //----// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ท่านเคยถูกให้ออกจากงานหรือไม่?
@@ -392,7 +392,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           {/* //----// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่?
@@ -445,7 +445,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           {/* //----// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ท่านเคยได้รับโทษทางอาญา หรือจำคุก หรือเป็นบุคคลล้มละลายหรือไม่?
@@ -497,7 +497,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           {/* //----// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ขณะนี้คุณตั้งครรภ์หรือไม่?
@@ -551,7 +551,7 @@ export default function UIRecruitStep4() {
             </div>
           </div>
           {/* //----// */}
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">
                 ท่านมีเพื่อน คนรู้จัก หรือญาติที่ทำงานในบริษัทนี้หรือไม่?
@@ -621,7 +621,7 @@ export default function UIRecruitStep4() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ลำดับที่ 1</div>
               <div className="text-sm text-gray-500">No 1</div>
@@ -642,7 +642,7 @@ export default function UIRecruitStep4() {
               />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ลำดับที่ 2</div>
               <div className="text-sm text-gray-500">No 2</div>

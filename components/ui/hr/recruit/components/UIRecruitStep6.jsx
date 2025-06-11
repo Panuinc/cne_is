@@ -14,7 +14,7 @@ export default function UIRecruitStep6() {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล</div>
           <div>Consent on Personal Data Processing</div>
         </div>
@@ -47,7 +47,7 @@ export default function UIRecruitStep6() {
           </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ข้าพเจ้า</div>
               <div className="text-sm text-gray-500">I</div>
@@ -100,13 +100,13 @@ export default function UIRecruitStep6() {
       </div>
       {/* //--// */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600]">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล ที่มีความอ่อนไหว</div>
           <div>Consent regarding sensitive personal data</div>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
               <div className="font-medium text-black">ข้าพเจ้า</div>
               <div className="text-sm text-gray-500">I</div>
@@ -178,7 +178,7 @@ export default function UIRecruitStep6() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
-          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-warning">
             <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
               <Input
                 name="roleName"
