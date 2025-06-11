@@ -13,12 +13,12 @@ import {
 export default function UIRecruitStep6() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล</div>
           <div>Consent on Personal Data Processing</div>
         </div>
-        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
           <div>
             บริษัท ชาญนครวิศวกรรม จำกัด (CHAN NAKORN ENGINEERING CO., LTD.)
             มีความจำเป็นต้องเก็บ รวบรวม ใช้ และเปิดเผย (ซึ่งต่อไปนี้เรียกรวมว่า
@@ -46,18 +46,18 @@ export default function UIRecruitStep6() {
             legal requirements.
           </div>
         </div>
-        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
               <div className="font-medium text-black">ข้าพเจ้า</div>
               <div className="text-sm text-gray-500">I</div>
             </div>
-            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="md"
+                size="sm"
                 variant="underlined"
-                color="none"
+                color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
@@ -82,7 +82,7 @@ export default function UIRecruitStep6() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
             <div>
               ข้าพเจ้ายินยอมให้บริษัท ชาญนครวิศวกรรม จำกัด (CHAN NAKORN
               ENGINEERING CO., LTD.) ประมวลผลข้อมูลส่วนบุคคลของข้าพเจ้า
@@ -99,24 +99,24 @@ export default function UIRecruitStep6() {
         </div>
       </div>
       {/* //--// */}
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล ที่มีความอ่อนไหว</div>
           <div>Consent regarding sensitive personal data</div>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
               <div className="font-medium text-black">ข้าพเจ้า</div>
               <div className="text-sm text-gray-500">I</div>
             </div>
-            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
                 name="recruitGender"
-                size="md"
+                size="sm"
                 variant="underlined"
-                color="none"
+                color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
@@ -141,7 +141,7 @@ export default function UIRecruitStep6() {
               </RadioGroup>
             </div>
           </div>
-          <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
             <div>
               ข้าพเจ้ายินยอมให้บริษัท ชาญนครวิศวกรรม จำกัด (CHAN NAKORN
               ENGINEERING CO., LTD.) เก็บรวบรวม ใช้
@@ -161,8 +161,8 @@ export default function UIRecruitStep6() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
           <div>
             ในการแสดงเจตนาของข้าพเจ้า
             ข้าพเจ้าเข้าใจและรับทราบถึงรายละเอียดตามที่กำหนดไว้ในประกาศคุ้มครองข้อมูลส่วนบุคคล
@@ -177,14 +177,14 @@ export default function UIRecruitStep6() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
                 name="roleName"
                 type="text"
                 placeholder="xxx xxx"
-                size="md"
+                size="sm"
                 variant="underlined"
                 color="none"
                 radius="full"
