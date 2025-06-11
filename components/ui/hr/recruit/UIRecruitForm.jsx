@@ -87,9 +87,9 @@ export default function UIRecruitForm({
           />
         )}
 
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-2 border-danger">
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
           {step > 1 && (
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex items-center justify-start w-full h-full gap-2">
               <Button
                 color="danger"
                 size="md"
@@ -102,7 +102,7 @@ export default function UIRecruitForm({
             </div>
           )}
           {step < 7 && ( // ✅ เปลี่ยนจาก step < 6
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex items-center justify-end w-full h-full gap-2">
               <Button
                 color="warning"
                 size="md"
@@ -115,7 +115,7 @@ export default function UIRecruitForm({
             </div>
           )}
           {step === 7 && ( // ✅ เปลี่ยนจาก step === 6
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-warning">
+            <div className="flex items-center justify-end w-full h-full gap-2">
               <Button
                 color="primary"
                 size="md"
