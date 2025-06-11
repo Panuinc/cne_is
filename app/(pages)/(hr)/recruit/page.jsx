@@ -34,7 +34,7 @@ export default function RecruitList() {
 
   return (
     <UIRecruitList
-      header="ใบสมัคงาน"
+      header="ใบสมัครงาน"
       data={recruitDataList}
       error={errorMessage}
     />

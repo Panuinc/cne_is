@@ -95,7 +95,7 @@ export default function recruitUpdate() {
     <>
       <Toaster position="top-right" />
       <UIRecruitForm
-        header="แก้ไข ใบสมัคงาน"
+        header="แก้ไข ใบสมัครงาน"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}

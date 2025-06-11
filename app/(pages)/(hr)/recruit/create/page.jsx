@@ -73,7 +73,7 @@ export default function recruitCreate() {
     <>
       <Toaster position="top-right" />
       <UIRecruitForm
-        header="เพิ่ม ใบสมัคงาน"
+        header="เพิ่ม ใบสมัครงาน"
         formRef={formRef}
         onSubmit={handleSubmit}
         errors={errors}
