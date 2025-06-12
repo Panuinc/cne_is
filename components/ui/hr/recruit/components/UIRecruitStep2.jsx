@@ -23,17 +23,35 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
-                placeholder="xxx xxx"
+                name="recruitFamilyMembers[0].recruitFamilyMemberRelation"
+                placeholder="เลือกความสัมพันธ์"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberRelation
+                    ? [
+                        formData.recruitFamilyMembers[0]
+                          .recruitFamilyMemberRelation,
+                      ]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitFamilyMembers[0].recruitFamilyMemberRelation"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberRelation
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation
+                }
               >
                 <SelectItem key="Father" value="Father">
                   บิดา (Father)
@@ -59,17 +77,27 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitFamilyMembers[0].recruitFamilyMemberFullName"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberFullName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberFullName"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberFullName
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberFullName
+                }
               />
             </div>
           </div>
@@ -80,17 +108,26 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitFamilyMembers[0].recruitFamilyMemberAge"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge ||
+                  ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberAge"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge
+                }
               />
             </div>
           </div>
@@ -101,17 +138,28 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitFamilyMembers[0].recruitFamilyMemberOccupation"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberOccupation"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation
+                }
               />
             </div>
           </div>
@@ -122,17 +170,28 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitFamilyMembers[0].recruitFamilyMemberWorkplace"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberWorkplace"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace
+                }
               />
             </div>
           </div>
@@ -143,17 +202,26 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitFamilyMembers[0].recruitFamilyMemberPhone"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberPhone || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberPhone"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberPhone
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberPhone
+                }
               />
             </div>
           </div>
@@ -162,7 +230,7 @@ export default function UIRecruitStep2({
           <div>กรณีเร่งด่วนติดต่อ</div>
           <div>In case of emergency, please notify</div>
         </div>
-        <div className="grid grid-cols-1 xl:grid-cols-3 w-full h-full p-2 gap-2">
+        <div className="grid grid-cols-1 xl:grid-cols-4 w-full h-full p-2 gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2">
               <div className="font-medium text-black">ชื่อ - นามสกุล</div>
@@ -172,17 +240,28 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitEmergencyContacts[0].recruitEmergencyContactName"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactName"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName
+                }
               />
             </div>
           </div>
@@ -193,17 +272,36 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
-                placeholder="xxx xxx"
+                name="recruitEmergencyContacts[0].recruitEmergencyContactRelation"
+                placeholder="เลือกความสัมพันธ์"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                    ? [
+                        formData.recruitEmergencyContacts[0]
+                          .recruitEmergencyContactRelation,
+                      ]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitEmergencyContacts[0].recruitEmergencyContactRelation"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                }
               >
                 <SelectItem key="Father" value="Father">
                   บิดา (Father)
@@ -233,17 +331,60 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitEmergencyContacts[0].recruitEmergencyContactPhone"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactPhone"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2">
+              <div className="font-medium text-black">ที่อยู่</div>
+              <div className="text-sm text-gray-500">Address</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2">
+              <Input
+                name="recruitEmergencyContacts[0].recruitEmergencyContactAddress"
+                type="text"
+                placeholder="xxx xxx"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactAddress"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress
+                }
               />
             </div>
           </div>
@@ -277,32 +418,45 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
-                placeholder="xxx xxx"
+                name="recruitEducations[0].recruitEducationLevel"
+                placeholder="เลือกระดับการศึกษา"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitEducations?.[0]?.recruitEducationLevel
+                    ? [formData.recruitEducations[0].recruitEducationLevel]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitEducations[0].recruitEducationLevel"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationLevel
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationLevel
+                }
               >
                 <SelectItem key="Primary" value="Primary">
                   ประถมศึกษา (Primary)
                 </SelectItem>
                 <SelectItem key="LowerSecondary" value="LowerSecondary">
-                  มัธยมศึกษาตอนต้น (Lower Secondary)
+                  มัธยมต้น (Lower Secondary)
                 </SelectItem>
                 <SelectItem key="UpperSecondary" value="UpperSecondary">
-                  มัธยมศึกษาตอนปลาย (Upper Secondary)
+                  มัธยมปลาย (Upper Secondary)
                 </SelectItem>
                 <SelectItem key="Vocational" value="Vocational">
-                  ปวช (Vocational)
+                  ปวช. (Vocational)
                 </SelectItem>
                 <SelectItem key="HighVocational" value="HighVocational">
-                  ปวส (High Vocational)
+                  ปวส. (High Vocational)
                 </SelectItem>
                 <SelectItem key="Bachelor" value="Bachelor">
                   ปริญญาตรี (Bachelor)
@@ -323,17 +477,26 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
-                type="text"
+                name="recruitEducations[0].recruitEducationFromDate"
+                type="date"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationFromDate ||
+                  ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationFromDate"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationFromDate
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationFromDate
+                }
               />
             </div>
           </div>
@@ -344,17 +507,25 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
-                type="text"
+                name="recruitEducations[0].recruitEducationToDate"
+                type="date"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationToDate || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationToDate"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationToDate
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationToDate
+                }
               />
             </div>
           </div>
@@ -369,17 +540,25 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitEducations[0].recruitEducationSchool"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationSchool || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationSchool"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationSchool
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationSchool
+                }
               />
             </div>
           </div>
@@ -394,17 +573,25 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitEducations[0].recruitEducationDegree"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationDegree || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationDegree"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationDegree
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationDegree
+                }
               />
             </div>
           </div>
@@ -415,17 +602,25 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitEducations[0].recruitEducationMajor"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationMajor || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationMajor"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationMajor
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationMajor
+                }
               />
             </div>
           </div>
@@ -436,17 +631,25 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
-                type="text"
+                name="recruitEducations[0].recruitEducationGPA"
+                type="number"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationGPA || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationGPA"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationGPA
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationGPA
+                }
               />
             </div>
           </div>
@@ -472,17 +675,26 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
+                name="recruitProfessionalLicenses[0].recruitLicenseName"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitProfessionalLicenses[0].recruitLicenseName"
+                )}
+                isInvalid={
+                  !!errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseName
+                }
+                errorMessage={
+                  errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseName
+                }
               />
             </div>
           </div>
@@ -497,17 +709,27 @@ export default function UIRecruitStep2({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Input
-                name="roleName"
-                type="text"
+                name="recruitProfessionalLicenses[0].recruitLicenseNumber"
+                type="number"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseNumber || ""
+                }
+                onChange={handleInputChange(
+                  "recruitProfessionalLicenses[0].recruitLicenseNumber"
+                )}
+                isInvalid={
+                  !!errors?.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseNumber
+                }
+                errorMessage={
+                  errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseNumber
+                }
               />
             </div>
           </div>

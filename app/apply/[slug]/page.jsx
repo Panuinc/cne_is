@@ -31,7 +31,22 @@ export default function RecruitApplyPage() {
           throw new Error(json?.error || "ไม่พบข้อมูลใบสมัคร");
         }
 
-        setFormData(json.recruit[0]);
+        const data = JSON.parse(JSON.stringify(json.recruit[0]));
+        data.recruitFamilyMembers = data.recruitFamilyMembers?.length
+          ? data.recruitFamilyMembers
+          : [{}];
+        data.recruitEmergencyContacts = data.recruitEmergencyContacts?.length
+          ? data.recruitEmergencyContacts
+          : [{}];
+        data.recruitEducations = data.recruitEducations?.length
+          ? data.recruitEducations
+          : [{}];
+        data.recruitProfessionalLicenses = data.recruitProfessionalLicenses
+          ?.length
+          ? data.recruitProfessionalLicenses
+          : [{}];
+
+        setFormData(data);
       } catch (error) {
         setErrorMessage(error.message || "เกิดข้อผิดพลาดในการโหลดข้อมูล");
         setFormData(null);
@@ -44,23 +59,36 @@ export default function RecruitApplyPage() {
   const handleInputChange = useCallback(
     (path) => (e) => {
       const value = e?.target?.value ?? e;
-      const keys = path.split(".");
+
+      const keys = path
+        .replace(/\[(\d+)\]/g, ".$1")
+        .split(".")
+        .filter(Boolean);
 
       setFormData((prev) => {
         const updated = { ...prev };
-        let current = updated;
+        let curr = updated;
 
         for (let i = 0; i < keys.length - 1; i++) {
-          current[keys[i]] = { ...current[keys[i]] };
-          current = current[keys[i]];
+          const k = keys[i];
+
+          if (Array.isArray(curr[k])) {
+            const idx = parseInt(keys[++i], 10);
+            curr[k] = [...curr[k]];
+            if (!curr[k][idx]) curr[k][idx] = {};
+            curr = curr[k][idx];
+          } else {
+            curr[k] = { ...curr[k] };
+            curr = curr[k];
+          }
         }
 
-        current[keys[keys.length - 1]] = value;
+        curr[keys[keys.length - 1]] = value;
         return updated;
       });
 
       setErrors((prev) => {
-        const { [path]: removed, ...rest } = prev;
+        const { [path]: _ignore, ...rest } = prev;
         return rest;
       });
     },
@@ -73,7 +101,6 @@ export default function RecruitApplyPage() {
       if (!formRef.current || !formData) return;
 
       const form = new FormData(formRef.current);
-
       form.append("recruitDetail", JSON.stringify(formData.recruitDetail));
 
       const arrayFields = [
