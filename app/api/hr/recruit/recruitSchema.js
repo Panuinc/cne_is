@@ -63,6 +63,9 @@ export const recruitPostSchema = z.object({
     recruitDetailPresentAddress: preprocessString(
       "Please provide present address"
     ),
+    recruitDetailPresentAddressLink: preprocessString(
+      "Please provide present address link"
+    ),
     recruitDetailRegisteredAddress: preprocessString(
       "Please provide registered address"
     ),

@@ -647,6 +647,7 @@ model RecruitDetail {
   recruitDetailEmail                     String                       @db.VarChar(255)
   recruitDetailLine                      String                       @db.VarChar(255)
   recruitDetailPresentAddress            String                       @db.VarChar(255)
+  recruitDetailPresentAddressLink        String                       @db.VarChar(255)
   recruitDetailRegisteredAddress         String                       @db.VarChar(255)
   recruitDetailMaritalStatus             RecruitMaritalStatus
   recruitDetailSpouseEarnIncome          RecruitSpouseEarnIncome?
