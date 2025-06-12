@@ -3,7 +3,11 @@
 import React from "react";
 import { Input, Select, SelectItem } from "@heroui/react";
 
-export default function UIRecruitStep2() {
+export default function UIRecruitStep2({
+  formData,
+  handleInputChange,
+  errors,
+}) {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">

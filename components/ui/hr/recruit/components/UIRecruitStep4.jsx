@@ -11,7 +11,11 @@ import {
   SelectItem,
 } from "@heroui/react";
 
-export default function UIRecruitStep4() {
+export default function UIRecruitStep4({
+  formData,
+  handleInputChange,
+  errors,
+}) {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
