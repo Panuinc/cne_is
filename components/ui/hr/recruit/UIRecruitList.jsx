@@ -6,7 +6,7 @@ import UIHeader from "@/components/other/UIHeader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Folder, Setting } from "@/components/icons/icons";
+import { Setting } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
   Input,
@@ -221,21 +221,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
-          <div className="flex items-center justify-center h-full p-2 gap-2">
-            {canManage && (
-              <Button
-                as={Link}
-                href="/recruit/create"
-                color="primary"
-                size="md"
-                radius="full"
-                className="flex items-center justify-center w-full h-full p-4 gap-2"
-                startContent={<Folder />}
-              >
-                เพิ่ม
-              </Button>
-            )}
           </div>
         </div>
 
