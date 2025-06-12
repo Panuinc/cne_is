@@ -247,7 +247,7 @@ export default function UIRecruitStep2() {
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           <div>
             ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
-            ให้เปิดเผยข้แมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
+            ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
             สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
           </div>
           <div>
