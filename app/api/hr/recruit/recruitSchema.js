@@ -21,16 +21,17 @@ export const formatRecruitData = (recruits) =>
 
 export const recruitPostSchema = z.object({
   recruitPerReqId: preprocessInt("Please provide the related perReqId"),
+
   recruitStatus: preprocessEnum(
     ["Pending", "Submitted", "Interviewing", "Rejected", "Hired", "Considered"],
     "Please provide a valid recruit status"
   ).optional(),
 
-  recruitFullNameTh: preprocessString("Please provide the full name (TH)"),
-  recruitFullNameEn: preprocessString("Please provide the full name (EN)"),
-  recruitNickName: preprocessString("Please provide the nickname"),
-
   recruitDetail: z.object({
+    recruitFullNameTh: preprocessString("Please provide the full name (TH)"),
+    recruitFullNameEn: preprocessString("Please provide the full name (EN)"),
+    recruitNickName: preprocessString("Please provide the nickname"),
+
     recruitDetailSalary: preprocessInt("Please provide the expected salary"),
     recruitDetailBirthDay: preprocessDate,
     recruitDetailGender: preprocessEnum(

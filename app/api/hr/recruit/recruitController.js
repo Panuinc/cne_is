@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 import { RecruitService } from "./recruitService";
 import {
   recruitPostSchema,
@@ -62,7 +61,6 @@ export class RecruitController {
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
 
-      // 🔁 Parse nested JSON arrays safely
       const keysToParse = [
         "recruitFamilyMembers",
         "recruitEmergencyContacts",
@@ -82,7 +80,6 @@ export class RecruitController {
         }
       }
 
-      // 🔁 Parse nested object
       if (raw.recruitDetail) {
         try {
           raw.recruitDetail = JSON.parse(raw.recruitDetail);
@@ -93,7 +90,6 @@ export class RecruitController {
 
       const data = recruitPostSchema.parse(raw);
       const localNow = getLocalNow();
-
       formatRecruitDetailDates(data.recruitDetail);
 
       const recruit = await RecruitService.createRecruit({
