@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
 
-export default function UIRecruitStep1() {
+export default function UIRecruitStep1({ formData }) {
   const today = new Date();
   const formattedDate = today.toLocaleDateString("th-TH", {
     year: "numeric",
@@ -58,17 +58,18 @@ export default function UIRecruitStep1() {
             </div>
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <Input
-                name="roleName"
+                name="positionApplied"
                 type="text"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleName || ""}
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData?.recruitPerReq?.PerReqPositionId?.positionNameTH ||
+                  ""
+                }
+                readOnly
               />
             </div>
           </div>

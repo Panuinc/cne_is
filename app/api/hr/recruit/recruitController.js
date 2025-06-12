@@ -15,9 +15,20 @@ const formatDateOnly = (dateInput) => {
   if (!dateInput) return null;
   const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
   return `${year}-${month}-${day}T00:00:00.000Z`;
+};
+
+const formatRecruitDetailDates = (detail) => {
+  if (!detail) return;
+  detail.recruitDetailBirthDay = formatDateOnly(detail.recruitDetailBirthDay);
+  detail.recruitDetailIdCardIssuedDate = formatDateOnly(
+    detail.recruitDetailIdCardIssuedDate
+  );
+  detail.recruitDetailIdCardEndDate = formatDateOnly(
+    detail.recruitDetailIdCardEndDate
+  );
 };
 
 export class RecruitController {
@@ -25,7 +36,6 @@ export class RecruitController {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const recruits = await RecruitService.getAllRecruit();
       if (!recruits?.length) {
         return NextResponse.json(
@@ -33,7 +43,6 @@ export class RecruitController {
           { status: 404 }
         );
       }
-
       return NextResponse.json(
         {
           message: "Successfully retrieved recruit",
@@ -53,7 +62,8 @@ export class RecruitController {
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
 
-      [
+      // 🔁 Parse nested JSON arrays safely
+      const keysToParse = [
         "recruitFamilyMembers",
         "recruitEmergencyContacts",
         "recruitEducations",
@@ -63,23 +73,28 @@ export class RecruitController {
         "recruitSpecialAbilities",
         "recruitEnglishScores",
         "recruitWorkExperiences",
-      ].forEach((k) => (raw[k] = JSON.parse(raw[k] || "[]")));
-      if (raw.recruitDetail) raw.recruitDetail = JSON.parse(raw.recruitDetail);
+      ];
+      for (const key of keysToParse) {
+        try {
+          raw[key] = JSON.parse(raw[key] || "[]");
+        } catch {
+          raw[key] = [];
+        }
+      }
+
+      // 🔁 Parse nested object
+      if (raw.recruitDetail) {
+        try {
+          raw.recruitDetail = JSON.parse(raw.recruitDetail);
+        } catch {
+          raw.recruitDetail = null;
+        }
+      }
 
       const data = recruitPostSchema.parse(raw);
       const localNow = getLocalNow();
 
-      if (data.recruitDetail) {
-        data.recruitDetail.recruitDetailBirthDay = formatDateOnly(
-          data.recruitDetail.recruitDetailBirthDay
-        );
-        data.recruitDetail.recruitDetailIdCardIssuedDate = formatDateOnly(
-          data.recruitDetail.recruitDetailIdCardIssuedDate
-        );
-        data.recruitDetail.recruitDetailIdCardEndDate = formatDateOnly(
-          data.recruitDetail.recruitDetailIdCardEndDate
-        );
-      }
+      formatRecruitDetailDates(data.recruitDetail);
 
       const recruit = await RecruitService.createRecruit({
         ...data,
@@ -142,8 +157,8 @@ export class RecruitController {
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
       const data = recruitPutSchema.parse({ ...raw, recruitId: id });
-      const localNow = getLocalNow();
 
+      const localNow = getLocalNow();
       const recruit = await RecruitService.updateRecruit(id, {
         recruitStatus: data.recruitStatus,
         recruitUpdateBy: data.recruitUpdateBy,
@@ -170,8 +185,8 @@ export class RecruitController {
           { status: 400 }
         );
       }
-      const url = await RecruitService.getOrCreateApplyLink(id);
 
+      const url = await RecruitService.getOrCreateApplyLink(id);
       return NextResponse.json({ url }, { status: 200 });
     } catch (error) {
       return handleGetErrors(error, ip, "Failed to create link");
@@ -182,7 +197,6 @@ export class RecruitController {
     let ip = "";
     try {
       ip = await validateRequest(request);
-
       const recruit = await RecruitService.getRecruitBySlug(slug);
 
       if (!recruit) {

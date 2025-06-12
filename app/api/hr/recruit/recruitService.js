@@ -11,6 +11,17 @@ const formatDateOnly = (dateInput) => {
   return `${year}-${month}-${day}T00:00:00.000Z`;
 };
 
+const applyDateFormatting = (detail) => {
+  if (!detail) return;
+  detail.recruitDetailBirthDay = formatDateOnly(detail.recruitDetailBirthDay);
+  detail.recruitDetailIdCardIssuedDate = formatDateOnly(
+    detail.recruitDetailIdCardIssuedDate
+  );
+  detail.recruitDetailIdCardEndDate = formatDateOnly(
+    detail.recruitDetailIdCardEndDate
+  );
+};
+
 export class RecruitService {
   static getAllRecruit() {
     return prisma.recruit.findMany({
@@ -84,50 +95,51 @@ export class RecruitService {
       ...recruitData
     } = data;
 
-    if (recruitDetail) {
-      recruitDetail.recruitDetailBirthDay = formatDateOnly(
-        recruitDetail.recruitDetailBirthDay
-      );
-      recruitDetail.recruitDetailIdCardIssuedDate = formatDateOnly(
-        recruitDetail.recruitDetailIdCardIssuedDate
-      );
-      recruitDetail.recruitDetailIdCardEndDate = formatDateOnly(
-        recruitDetail.recruitDetailIdCardEndDate
-      );
-    }
+    applyDateFormatting(recruitDetail);
 
     return prisma.recruit.create({
       data: {
         ...recruitData,
         recruitStatus: recruitData.recruitStatus ?? "Pending",
         ...(recruitDetail && { recruitDetail: { create: recruitDetail } }),
-        ...(recruitFamilyMembers?.length && {
-          recruitFamilyMembers: { create: recruitFamilyMembers },
-        }),
-        ...(recruitEmergencyContacts?.length && {
-          recruitEmergencyContacts: { create: recruitEmergencyContacts },
-        }),
-        ...(recruitEducations?.length && {
-          recruitEducations: { create: recruitEducations },
-        }),
-        ...(recruitProfessionalLicenses?.length && {
-          recruitProfessionalLicenses: { create: recruitProfessionalLicenses },
-        }),
-        ...(recruitLanguageSkills?.length && {
-          recruitLanguageSkills: { create: recruitLanguageSkills },
-        }),
-        ...(recruitOtherSkills?.length && {
-          recruitOtherSkills: { create: recruitOtherSkills },
-        }),
-        ...(recruitSpecialAbilities?.length && {
-          recruitSpecialAbilities: { create: recruitSpecialAbilities },
-        }),
-        ...(recruitEnglishScores?.length && {
-          recruitEnglishScores: { create: recruitEnglishScores },
-        }),
-        ...(recruitWorkExperiences?.length && {
-          recruitWorkExperiences: { create: recruitWorkExperiences },
-        }),
+        ...(Array.isArray(recruitFamilyMembers) &&
+          recruitFamilyMembers.length > 0 && {
+            recruitFamilyMembers: { create: recruitFamilyMembers },
+          }),
+        ...(Array.isArray(recruitEmergencyContacts) &&
+          recruitEmergencyContacts.length > 0 && {
+            recruitEmergencyContacts: { create: recruitEmergencyContacts },
+          }),
+        ...(Array.isArray(recruitEducations) &&
+          recruitEducations.length > 0 && {
+            recruitEducations: { create: recruitEducations },
+          }),
+        ...(Array.isArray(recruitProfessionalLicenses) &&
+          recruitProfessionalLicenses.length > 0 && {
+            recruitProfessionalLicenses: {
+              create: recruitProfessionalLicenses,
+            },
+          }),
+        ...(Array.isArray(recruitLanguageSkills) &&
+          recruitLanguageSkills.length > 0 && {
+            recruitLanguageSkills: { create: recruitLanguageSkills },
+          }),
+        ...(Array.isArray(recruitOtherSkills) &&
+          recruitOtherSkills.length > 0 && {
+            recruitOtherSkills: { create: recruitOtherSkills },
+          }),
+        ...(Array.isArray(recruitSpecialAbilities) &&
+          recruitSpecialAbilities.length > 0 && {
+            recruitSpecialAbilities: { create: recruitSpecialAbilities },
+          }),
+        ...(Array.isArray(recruitEnglishScores) &&
+          recruitEnglishScores.length > 0 && {
+            recruitEnglishScores: { create: recruitEnglishScores },
+          }),
+        ...(Array.isArray(recruitWorkExperiences) &&
+          recruitWorkExperiences.length > 0 && {
+            recruitWorkExperiences: { create: recruitWorkExperiences },
+          }),
       },
     });
   }
@@ -136,7 +148,7 @@ export class RecruitService {
     return prisma.recruit.update({
       where: { recruitId },
       data: {
-        recruitStatus: data.recruitStatus,
+        recruitStatus: data.recruitStatus ?? "Pending",
         recruitUpdateBy: data.recruitUpdateBy,
       },
     });
@@ -158,9 +170,6 @@ export class RecruitService {
   static async getOrCreateApplyLink(perReqId) {
     const recruit = await RecruitService.createRecruit({
       recruitPerReqId: perReqId,
-      recruitFullNameTh: "",
-      recruitFullNameEn: "",
-      recruitNickName: "",
       recruitStatus: "Pending",
       recruitCreatedAt: getLocalNow(),
     });

@@ -599,16 +599,13 @@ model PerReq {
 }
 
 model Recruit {
-  recruitId         Int           @id @default(autoincrement())
-  recruitPerReqId   Int
-  recruitFullNameTh String        @db.VarChar(255)
-  recruitFullNameEn String        @db.VarChar(255)
-  recruitNickName   String        @db.VarChar(255)
-  recruitStatus     RecruitStatus @default(Pending)
-  recruitCreatedAt  DateTime      @default(now()) @db.Timestamp()
-  recruitUpdateBy   Int?
-  recruitUpdatedAt  DateTime?
-  applySlug         String?       @unique @db.VarChar(255)
+  recruitId        Int           @id @default(autoincrement())
+  recruitPerReqId  Int
+  recruitStatus    RecruitStatus @default(Pending)
+  recruitCreatedAt DateTime      @default(now()) @db.Timestamp()
+  recruitUpdateBy  Int?
+  recruitUpdatedAt DateTime?
+  applySlug        String?       @unique @db.VarChar(255)
 
   recruitDetail RecruitDetail?
 
@@ -630,6 +627,9 @@ model Recruit {
 model RecruitDetail {
   recruitDetailId                        Int                          @id @default(autoincrement())
   recruitDetailRecruitId                 Int                          @unique
+  recruitFullNameTh                      String                       @db.VarChar(255)
+  recruitFullNameEn                      String                       @db.VarChar(255)
+  recruitNickName                        String                       @db.VarChar(255)
   recruitDetailSalary                    Int
   recruitDetailBirthDay                  DateTime
   recruitDetailGender                    Gender
