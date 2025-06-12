@@ -24,7 +24,7 @@ export default function UIRecruitStep2({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitFamilyMembers[0].recruitFamilyMemberRelation"
-                placeholder="เลือกความสัมพันธ์"
+                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -273,7 +273,7 @@ export default function UIRecruitStep2({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitEmergencyContacts[0].recruitEmergencyContactRelation"
-                placeholder="เลือกความสัมพันธ์"
+                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

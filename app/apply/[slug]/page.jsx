@@ -109,9 +109,6 @@ export default function RecruitApplyPage() {
         "recruitEducations",
         "recruitProfessionalLicenses",
         "recruitLanguageSkills",
-        "recruitOtherSkills",
-        "recruitSpecialAbilities",
-        "recruitEnglishScores",
         "recruitWorkExperiences",
       ];
       arrayFields.forEach((key) => {

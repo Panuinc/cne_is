@@ -23,17 +23,26 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
-                placeholder="xxx xxx"
+                name="recruitLanguageSkills[0].recruitLanguageName"
+                placeholder="เลือกภาษา"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageName
+                    ? [formData.recruitLanguageSkills[0].recruitLanguageName]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageName"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]?.recruitLanguageName
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageName
+                }
               >
                 <SelectItem key="Thai" value="Thai">
                   ไทย (Thai)
@@ -57,17 +66,31 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="recruitLanguageSkills[0].recruitLanguageListenLevel"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageListenLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageListenLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageListenLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageListenLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageListenLevel
+                }
               >
                 <SelectItem key="Excellent" value="Excellent">
                   ดีมาก (Excellent)
@@ -88,17 +111,30 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="recruitLanguageSkills[0].recruitLanguageSpeakLevel"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageSpeakLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageSpeakLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageSpeakLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageSpeakLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageSpeakLevel
+                }
               >
                 <SelectItem key="Excellent" value="Excellent">
                   ดีมาก (Excellent)
@@ -119,17 +155,29 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="recruitLanguageSkills[0].recruitLanguageReadLevel"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageReadLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageReadLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                }
               >
                 <SelectItem key="Excellent" value="Excellent">
                   ดีมาก (Excellent)
@@ -150,17 +198,30 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
-                name="roleStatus"
+                name="recruitLanguageSkills[0].recruitLanguageWriteLevel"
                 placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
                 radius="full"
-                // value={formData.roleStatus || ""}
-                // selectedKeys={formData.roleStatus ? [formData.roleStatus] : []}
-                // onChange={handleInputChange("roleStatus")}
-                // isInvalid={!!errors.roleStatus}
-                // errorMessage={errors.roleStatus}
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageWriteLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageWriteLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageWriteLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageWriteLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageWriteLevel
+                }
               >
                 <SelectItem key="Excellent" value="Excellent">
                   ดีมาก (Excellent)
@@ -177,7 +238,7 @@ export default function UIRecruitStep3({
         </div>
       </div>
 
-      {/* //---// */}
+      {/* //--5555--// */}
       <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ทักษะอื่นๆ</div>
@@ -194,41 +255,29 @@ export default function UIRecruitStep3({
               </div>
               <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
                 <Input
-                  name="roleName"
+                  name="recruitDetailComputerSkill"
                   type="text"
                   placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
                   radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
+                  value={
+                    formData?.recruitDetail?.recruitDetailComputerSkill || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailComputerSkill"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailComputerSkill"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailComputerSkill"]
+                  }
                 />
               </div>
             </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
-                <div className="font-medium text-black">กีฬา</div>
-                <div className="text-sm text-gray-500">Sports</div>
-              </div>
-              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
-                <Input
-                  name="roleName"
-                  type="text"
-                  placeholder="xxx xxx"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
-                />
-              </div>
-            </div>
+
             <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
                 <div className="font-medium text-black">
@@ -240,40 +289,23 @@ export default function UIRecruitStep3({
               </div>
               <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
                 <Input
-                  name="roleName"
+                  name="recruitDetailOtherSkill"
                   type="text"
                   placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
                   radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
-                <div className="font-medium text-black">
-                  การใช้เครื่องใช้สำนักงาน
-                </div>
-                <div className="text-sm text-gray-500">Office Equipment</div>
-              </div>
-              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
-                <Input
-                  name="roleName"
-                  type="text"
-                  placeholder="xxx xxx"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
+                  value={formData?.recruitDetail?.recruitDetailOtherSkill || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailOtherSkill"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailOtherSkill"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailOtherSkill"]
+                  }
                 />
               </div>
             </div>
@@ -285,17 +317,23 @@ export default function UIRecruitStep3({
               </div>
               <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
                 <Input
-                  name="roleName"
-                  type="text"
+                  name="recruitDetailScoreToeic"
+                  type="number"
                   placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
                   radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
+                  value={formData?.recruitDetail?.recruitDetailScoreToeic || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreToeic"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreToeic"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreToeic"]
+                  }
                 />
               </div>
             </div>
@@ -305,17 +343,23 @@ export default function UIRecruitStep3({
               </div>
               <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
                 <Input
-                  name="roleName"
-                  type="text"
+                  name="recruitDetailScoreToefl"
+                  type="number"
                   placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
                   radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
+                  value={formData?.recruitDetail?.recruitDetailScoreToefl || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreToefl"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreToefl"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreToefl"]
+                  }
                 />
               </div>
             </div>
@@ -325,37 +369,23 @@ export default function UIRecruitStep3({
               </div>
               <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
                 <Input
-                  name="roleName"
-                  type="text"
+                  name="recruitDetailScoreIelts"
+                  type="number"
                   placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
                   radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
-                <div className="font-medium text-black">อื่นๆ</div>
-              </div>
-              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
-                <Input
-                  name="roleName"
-                  type="text"
-                  placeholder="xxx xxx"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  // value={formData.roleName || ""}
-                  // onChange={handleInputChange("roleName")}
-                  // isInvalid={!!errors.roleName}
-                  // errorMessage={errors.roleName}
+                  value={formData?.recruitDetail?.recruitDetailScoreIelts || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreIelts"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreIelts"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreIelts"]
+                  }
                 />
               </div>
             </div>
@@ -382,20 +412,30 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
-                name="recruitGender"
+                name="recruitDetailAllowReferenceCheck"
                 size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
-                // value={formData.recruitGender}
-                // onValueChange={(value) =>
-                //   handleInputChange("recruitGender")({ target: { value } })
-                // }
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData?.recruitDetail?.recruitDetailAllowReferenceCheck ||
+                  ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailAllowReferenceCheck"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.["recruitDetail.recruitDetailAllowReferenceCheck"]
+                }
+                errorMessage={
+                  errors?.["recruitDetail.recruitDetailAllowReferenceCheck"]
+                }
               >
                 <Radio key="Yes" value="Yes">
                   มี <div className="text-sm text-gray-500">(Yes)</div>
@@ -413,20 +453,34 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
-                name="recruitGender"
+                name="recruitDetailAllowReferenceCheckReason"
                 size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
-                // value={formData.recruitGender}
-                // onValueChange={(value) =>
-                //   handleInputChange("recruitGender")({ target: { value } })
-                // }
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData?.recruitDetail
+                    ?.recruitDetailAllowReferenceCheckReason || ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.[
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  ]
+                }
+                errorMessage={
+                  errors?.[
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  ]
+                }
               >
                 <Radio key="Yes" value="Yes">
                   มี <div className="text-sm text-gray-500">(Yes)</div>
@@ -450,20 +504,21 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
-                name="recruitGender"
+                name="recruitDetailEverFired"
                 size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
-                // value={formData.recruitGender}
-                // onValueChange={(value) =>
-                //   handleInputChange("recruitGender")({ target: { value } })
-                // }
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={formData?.recruitDetail?.recruitDetailEverFired || ""}
+                onValueChange={(value) =>
+                  handleInputChange("recruitDetail.recruitDetailEverFired")({
+                    target: { value },
+                  })
+                }
+                isInvalid={!!errors?.["recruitDetail.recruitDetailEverFired"]}
+                errorMessage={errors?.["recruitDetail.recruitDetailEverFired"]}
               >
                 <Radio key="Yes" value="Yes">
                   มี <div className="text-sm text-gray-500">(Yes)</div>
@@ -481,20 +536,29 @@ export default function UIRecruitStep3({
             </div>
             <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2">
               <RadioGroup
-                name="recruitGender"
+                name="recruitDetailEverFiredReason"
                 size="md"
                 variant="underlined"
                 color="primary"
                 radius="full"
                 orientation="horizontal"
                 className="flex items-start justify-center xl:items-start w-full h-full"
-                // value={formData.recruitGender}
-                // onValueChange={(value) =>
-                //   handleInputChange("recruitGender")({ target: { value } })
-                // }
-                // onChange={handleInputChange("roleName")}
-                // isInvalid={!!errors.roleName}
-                // errorMessage={errors.roleName}
+                value={
+                  formData?.recruitDetail?.recruitDetailEverFiredReason || ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailEverFiredReason"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.["recruitDetail.recruitDetailEverFiredReason"]
+                }
+                errorMessage={
+                  errors?.["recruitDetail.recruitDetailEverFiredReason"]
+                }
               >
                 <Radio key="Yes" value="Yes">
                   มี <div className="text-sm text-gray-500">(Yes)</div>

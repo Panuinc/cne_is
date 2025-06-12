@@ -616,9 +616,6 @@ model Recruit {
   recruitEducations           RecruitEducation[]           @relation("RecruitEducationRecruitId")
   recruitProfessionalLicenses RecruitProfessionalLicense[] @relation("RecruitProfessionalLicenseRecruitId")
   recruitLanguageSkills       RecruitLanguageSkill[]       @relation("RecruitLanguageSkillId")
-  recruitOtherSkills          RecruitOtherSkill[]          @relation("RecruitOtherSkillRecruitId")
-  recruitSpecialAbilities     RecruitSpecialAbility[]      @relation("RecruitSpecialAbilityRecruitId")
-  recruitEnglishScores        RecruitEnglishScore[]        @relation("RecruitEnglishScoreRecruitId")
   recruitWorkExperiences      RecruitWorkExperience[]      @relation("RecruitWorkExperienceRecruitId")
 
   @@index([recruitPerReqId])
@@ -658,6 +655,11 @@ model RecruitDetail {
   recruitDetailOwnMotorcycle             VehiclePossession
   recruitDetailHaveCarLicense            VehiclePossession
   recruitDetailHaveMotorcycleLicense     VehiclePossession
+  recruitDetailComputerSkill             String?                      @db.VarChar(255)
+  recruitDetailOtherSkill                String?                      @db.VarChar(255)
+  recruitDetailScoreToeic                String?                      @db.VarChar(255)
+  recruitDetailScoreToefl                String?                      @db.VarChar(255)
+  recruitDetailScoreIelts                String?                      @db.VarChar(255)
   recruitDetailAllowReferenceCheck       Boolean
   recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
   recruitDetailEverFired                 Boolean
@@ -760,39 +762,6 @@ model RecruitLanguageSkill {
   RecruitLanguageSkillId Recruit @relation("RecruitLanguageSkillId", fields: [recruitLanguageSkillRecruitId], references: [recruitId])
 
   @@index([recruitLanguageSkillRecruitId])
-}
-
-model RecruitOtherSkill {
-  recruitOtherSkillId        Int            @id @default(autoincrement())
-  recruitOtherSkillRecruitId Int
-  recruitOtherSkillType      OtherSkillType
-  recruitOtherSkillName      String         @db.VarChar(100)
-
-  RecruitOtherSkillRecruitId Recruit @relation("RecruitOtherSkillRecruitId", fields: [recruitOtherSkillRecruitId], references: [recruitId])
-
-  @@index([recruitOtherSkillRecruitId])
-}
-
-model RecruitSpecialAbility {
-  recruitSpecialAbilityId        Int    @id @default(autoincrement())
-  recruitSpecialAbilityRecruitId Int
-  recruitSpecialAbilityName      String @db.VarChar(255)
-
-  RecruitSpecialAbilityRecruitId Recruit @relation("RecruitSpecialAbilityRecruitId", fields: [recruitSpecialAbilityRecruitId], references: [recruitId])
-
-  @@index([recruitSpecialAbilityRecruitId])
-}
-
-model RecruitEnglishScore {
-  recruitEnglishScoreId        Int             @id @default(autoincrement())
-  recruitEnglishScoreRecruitId Int
-  recruitEnglishScoreType      EnglishTestType
-  recruitEnglishScoreValue     Float?
-  recruitEnglishScoreDetail    String?         @db.VarChar(255)
-
-  RecruitEnglishScoreRecruitId Recruit @relation("RecruitEnglishScoreRecruitId", fields: [recruitEnglishScoreRecruitId], references: [recruitId])
-
-  @@index([recruitEnglishScoreRecruitId])
 }
 
 model RecruitWorkExperience {

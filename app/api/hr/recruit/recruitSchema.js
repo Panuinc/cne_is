@@ -96,6 +96,15 @@ export const recruitPostSchema = z.object({
       ["Yes", "No"],
       "Have motorcycle license?"
     ),
+    recruitDetailComputerSkill: preprocessString(
+      "Please provide Computer Skill"
+    ),
+    recruitDetailOtherSkill: preprocessString("Please provide Other Skill"),
+
+    recruitDetailScoreToeic: preprocessString("Please provide Score Toeic"),
+    recruitDetailScoreToefl: preprocessString("Please provide Score Toefl"),
+    recruitDetailScoreIelts: preprocessString("Please provide Score elts"),
+
     recruitDetailAllowReferenceCheck: preprocessBoolean(
       "Allow reference check?"
     ),
@@ -154,9 +163,6 @@ export const recruitPostSchema = z.object({
   recruitEducations: z.array(z.any()).optional(),
   recruitProfessionalLicenses: z.array(z.any()).optional(),
   recruitLanguageSkills: z.array(z.any()).optional(),
-  recruitOtherSkills: z.array(z.any()).optional(),
-  recruitSpecialAbilities: z.array(z.any()).optional(),
-  recruitEnglishScores: z.array(z.any()).optional(),
   recruitWorkExperiences: z.array(z.any()).optional(),
 });
 

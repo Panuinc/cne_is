@@ -67,9 +67,6 @@ export class RecruitController {
         "recruitEducations",
         "recruitProfessionalLicenses",
         "recruitLanguageSkills",
-        "recruitOtherSkills",
-        "recruitSpecialAbilities",
-        "recruitEnglishScores",
         "recruitWorkExperiences",
       ];
       for (const key of keysToParse) {

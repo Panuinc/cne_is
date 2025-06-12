@@ -89,9 +89,6 @@ export class RecruitService {
         recruitEducations: true,
         recruitProfessionalLicenses: true,
         recruitLanguageSkills: true,
-        recruitOtherSkills: true,
-        recruitSpecialAbilities: true,
-        recruitEnglishScores: true,
         recruitWorkExperiences: true,
       },
     });
@@ -105,9 +102,6 @@ export class RecruitService {
       recruitEducations = [],
       recruitProfessionalLicenses = [],
       recruitLanguageSkills = [],
-      recruitOtherSkills = [],
-      recruitSpecialAbilities = [],
-      recruitEnglishScores = [],
       recruitWorkExperiences = [],
       ...recruitData
     } = data;
@@ -124,9 +118,6 @@ export class RecruitService {
         recruitEducations: { create: recruitEducations },
         recruitProfessionalLicenses: { create: recruitProfessionalLicenses },
         recruitLanguageSkills: { create: recruitLanguageSkills },
-        recruitOtherSkills: { create: recruitOtherSkills },
-        recruitSpecialAbilities: { create: recruitSpecialAbilities },
-        recruitEnglishScores: { create: recruitEnglishScores },
         recruitWorkExperiences: { create: recruitWorkExperiences },
       },
     });
