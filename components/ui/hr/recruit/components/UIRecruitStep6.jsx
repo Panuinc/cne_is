@@ -187,7 +187,6 @@ export default function UIRecruitStep6({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

@@ -67,7 +67,6 @@ export default function UIRecruitStep3({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitLanguageSkills[0].recruitLanguageListenLevel"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -112,7 +111,6 @@ export default function UIRecruitStep3({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitLanguageSkills[0].recruitLanguageSpeakLevel"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -156,7 +154,6 @@ export default function UIRecruitStep3({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitLanguageSkills[0].recruitLanguageReadLevel"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -199,7 +196,6 @@ export default function UIRecruitStep3({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitLanguageSkills[0].recruitLanguageWriteLevel"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -257,7 +253,6 @@ export default function UIRecruitStep3({
                 <Input
                   name="recruitDetailComputerSkill"
                   type="text"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -291,7 +286,6 @@ export default function UIRecruitStep3({
                 <Input
                   name="recruitDetailOtherSkill"
                   type="text"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -319,7 +313,6 @@ export default function UIRecruitStep3({
                 <Input
                   name="recruitDetailScoreToeic"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -345,7 +338,6 @@ export default function UIRecruitStep3({
                 <Input
                   name="recruitDetailScoreToefl"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -371,7 +363,6 @@ export default function UIRecruitStep3({
                 <Input
                   name="recruitDetailScoreIelts"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"

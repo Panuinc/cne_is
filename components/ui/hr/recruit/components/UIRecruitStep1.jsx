@@ -87,7 +87,6 @@ export default function UIRecruitStep1({
               <Input
                 name="positionApplied"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -109,7 +108,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailSalary"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -143,7 +141,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitFullNameTh"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -166,7 +163,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitFullNameEn"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -187,7 +183,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitNickName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -210,7 +205,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailBirthDay"
                 type="date"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -265,7 +259,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailAge"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -286,7 +279,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailNationality"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -313,7 +305,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailReligion"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -336,7 +327,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailWright"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -359,7 +349,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailHeight"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -382,7 +371,6 @@ export default function UIRecruitStep1({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitDetailBloodGroup"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -431,7 +419,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailIdCardNumber"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -458,7 +445,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailIdCardIssuedAt"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -487,7 +473,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailIdCardIssuedDate"
                 type="date"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -516,7 +501,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailIdCardEndDate"
                 type="date"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -547,7 +531,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailPhone"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -568,7 +551,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailEmail"
                 type="email"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -589,7 +571,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailLine"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -612,7 +593,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailPresentAddress"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -645,7 +625,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailPresentAddressLink"
                 type="url"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -676,7 +655,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailRegisteredAddress"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -799,7 +777,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailSpouseIncomeAmount"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -830,7 +807,6 @@ export default function UIRecruitStep1({
               <Input
                 name="recruitDetailNumberOfChildren"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

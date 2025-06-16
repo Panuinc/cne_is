@@ -33,7 +33,6 @@ export default function UIRecruitStep5({
               <Textarea
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -74,7 +73,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -129,7 +127,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -176,7 +173,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -223,7 +219,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -272,7 +267,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -323,7 +317,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -370,7 +363,6 @@ export default function UIRecruitStep5({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

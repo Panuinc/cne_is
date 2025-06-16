@@ -24,7 +24,6 @@ export default function UIRecruitStep2({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitFamilyMembers[0].recruitFamilyMemberRelation"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -79,7 +78,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitFamilyMembers[0].recruitFamilyMemberFullName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -110,7 +108,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitFamilyMembers[0].recruitFamilyMemberAge"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -140,7 +137,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitFamilyMembers[0].recruitFamilyMemberOccupation"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -172,7 +168,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitFamilyMembers[0].recruitFamilyMemberWorkplace"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -204,7 +199,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitFamilyMembers[0].recruitFamilyMemberPhone"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -242,7 +236,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEmergencyContacts[0].recruitEmergencyContactName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -273,7 +266,6 @@ export default function UIRecruitStep2({
             <div className="flex items-end justify-center w-full h-full p-2 gap-2">
               <Select
                 name="recruitEmergencyContacts[0].recruitEmergencyContactRelation"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -333,7 +325,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEmergencyContacts[0].recruitEmergencyContactPhone"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -365,7 +356,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEmergencyContacts[0].recruitEmergencyContactAddress"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -479,7 +469,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationFromDate"
                 type="date"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -509,7 +498,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationToDate"
                 type="date"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -542,7 +530,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationSchool"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -575,7 +562,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationDegree"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -604,7 +590,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationMajor"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -633,7 +618,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitEducations[0].recruitEducationGPA"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -677,7 +661,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitProfessionalLicenses[0].recruitLicenseName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -711,7 +694,6 @@ export default function UIRecruitStep2({
               <Input
                 name="recruitProfessionalLicenses[0].recruitLicenseNumber"
                 type="number"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"

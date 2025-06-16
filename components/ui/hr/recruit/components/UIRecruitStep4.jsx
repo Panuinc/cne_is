@@ -38,7 +38,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitWorkplaceName"
                   type="text"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -68,7 +67,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitWorkPosition"
                   type="text"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -142,7 +140,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitStartDate"
                   type="date"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -173,7 +170,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitEndDate"
                   type="date"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -204,7 +200,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitSalary"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -233,7 +228,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitExtraIncome"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -263,7 +257,6 @@ export default function UIRecruitStep4({
                 <Input
                   name="recruitWorkExperiences[0].recruitReasonForLeaving"
                   type="number"
-                  placeholder="xxx xxx"
                   size="md"
                   variant="underlined"
                   color="none"
@@ -340,7 +333,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -453,7 +445,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -506,7 +497,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -558,7 +548,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -611,7 +600,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -667,7 +655,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -704,7 +691,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
@@ -725,7 +711,6 @@ export default function UIRecruitStep4({
               <Input
                 name="roleName"
                 type="text"
-                placeholder="xxx xxx"
                 size="md"
                 variant="underlined"
                 color="none"
