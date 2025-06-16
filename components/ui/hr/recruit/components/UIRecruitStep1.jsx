@@ -9,7 +9,6 @@ export default function UIRecruitStep1({
   handleInputChange,
   errors,
   preview,
-  setPreview,
   handleFileChange,
   fileInputRef,
   formattedDate,
