@@ -627,10 +627,11 @@ model Recruit {
 model RecruitDetail {
   recruitDetailId                        Int                          @id @default(autoincrement())
   recruitDetailRecruitId                 Int                          @unique
+  recruitDetailSalary                    Int
+  recruitDetailProfileImage              String                       @db.VarChar(500)
   recruitFullNameTh                      String                       @db.VarChar(255)
   recruitFullNameEn                      String                       @db.VarChar(255)
   recruitNickName                        String                       @db.VarChar(255)
-  recruitDetailSalary                    Int
   recruitDetailBirthDay                  DateTime
   recruitDetailGender                    Gender
   recruitDetailAge                       Int
@@ -693,7 +694,6 @@ model RecruitDetail {
   recruitDetailConsentGeneral            Boolean
   recruitDetailConsentSensitive          Boolean
   recruitDetailSignatureImage            String?                      @db.VarChar(500)
-  recruitDetailProfileImage              String?                      @db.VarChar(500)
 
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
