@@ -223,10 +223,11 @@ model Emp {
   createdEmpCv EmpCv[] @relation("EmpCvCreateBy")
   updatedEmpCv EmpCv[] @relation("EmpCvUpdateBy")
 
-  createdPerReq        PerReq[] @relation("PerReqCreateBy")
-  updatedPerReq        PerReq[] @relation("PerReqUpdateBy")
-  managerApprovePerReq PerReq[] @relation("PerReqManagerApproveBy")
-  hrApprovePerReq      PerReq[] @relation("PerReqHrApproveBy")
+  createdPerReq        PerReq[]  @relation("PerReqCreateBy")
+  updatedPerReq        PerReq[]  @relation("PerReqUpdateBy")
+  managerApprovePerReq PerReq[]  @relation("PerReqManagerApproveBy")
+  hrApprovePerReq      PerReq[]  @relation("PerReqHrApproveBy")
+  updatedRecruit       Recruit[] @relation("RecruitUpdateBy")
 
   @@index([empCreateBy])
   @@index([empUpdateBy])
@@ -609,7 +610,8 @@ model Recruit {
 
   recruitDetail RecruitDetail?
 
-  recruitPerReq PerReq @relation("RecruitPerReqId", fields: [recruitPerReqId], references: [perReqId])
+  recruitPerReq   PerReq @relation("RecruitPerReqId", fields: [recruitPerReqId], references: [perReqId])
+  RecruitUpdateBy Emp?   @relation("RecruitUpdateBy", fields: [recruitUpdateBy], references: [empId])
 
   recruitFamilyMembers        RecruitFamilyMember[]        @relation("RecruitFamilyMemberRecruitId")
   recruitEmergencyContacts    RecruitEmergencyContact[]    @relation("RecruitEmergencyContactRecruitId")
@@ -619,6 +621,7 @@ model Recruit {
   recruitWorkExperiences      RecruitWorkExperience[]      @relation("RecruitWorkExperienceRecruitId")
 
   @@index([recruitPerReqId])
+  @@index([recruitUpdateBy])
 }
 
 model RecruitDetail {
