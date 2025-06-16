@@ -17,7 +17,7 @@ export default function UIRecruitStep5({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2">
@@ -48,7 +48,7 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
           <div className="flex flex-col items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2">
@@ -89,7 +89,7 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           <div>เอกสารที่แนบพร้อมใบสมัคร</div>
           <div>Enclosed Documents</div>

@@ -692,7 +692,7 @@ export default function UIRecruitStep7({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark/25">
+      <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
             <div className="font-medium text-black">ข้าพเจ้า</div>

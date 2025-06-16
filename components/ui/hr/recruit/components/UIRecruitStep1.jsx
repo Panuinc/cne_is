@@ -80,7 +80,7 @@ export default function UIRecruitStep1({
       </div>
 
       <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-        <div className="flex flex-col items-center justify-center w-full xl:w-3/12 p-2 gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full xl:w-3/12 p-2 gap-2">
           <div className="relative w-full h-52 overflow-hidden">
             {preview ? (
               <Image
@@ -109,7 +109,7 @@ export default function UIRecruitStep1({
           </label>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-9/12 p-2 gap-2 border-2 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-9/12 p-2 gap-2">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
               <div className="font-medium text-black">ตำแหน่งที่สมัคร</div>
@@ -158,7 +158,7 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ประวัติส่วนตัว</div>
           <div>Personal Data</div>

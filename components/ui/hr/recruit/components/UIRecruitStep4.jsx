@@ -18,7 +18,7 @@ export default function UIRecruitStep4({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ประวัติการทำงาน</div>
           <div>Professional Experience</div>
@@ -325,7 +325,7 @@ export default function UIRecruitStep4({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
           <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
             <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2">
@@ -407,7 +407,7 @@ export default function UIRecruitStep4({
       </div>
 
       {/* //---// */}
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ข้อความเพิ่มเติม</div>
           <div>Further Information</div>
@@ -683,7 +683,7 @@ export default function UIRecruitStep4({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           <div>
             เขียน ชื่อ ที่อยู่ โทรศัพท์ และ อาชีพของผู้ที่จะอ้างถึง 2 คน

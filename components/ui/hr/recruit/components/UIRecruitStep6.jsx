@@ -17,7 +17,7 @@ export default function UIRecruitStep6({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล</div>
           <div>Consent on Personal Data Processing</div>
@@ -103,7 +103,7 @@ export default function UIRecruitStep6({
         </div>
       </div>
       {/* //--// */}
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล ที่มีความอ่อนไหว</div>
           <div>Consent regarding sensitive personal data</div>
@@ -165,7 +165,7 @@ export default function UIRecruitStep6({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-md font-[600]">
           <div>
             ในการแสดงเจตนาของข้าพเจ้า

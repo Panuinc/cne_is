@@ -10,7 +10,7 @@ export default function UIRecruitStep3({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ภาษา กรุณาระบุ ดีมาก, ดี, พอใช้</div>
           <div>LANGUAGE - Please Identify: EXCELLENT, GOOD, FAIR</div>
@@ -239,7 +239,7 @@ export default function UIRecruitStep3({
       </div>
 
       {/* //--5555--// */}
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ทักษะอื่นๆ</div>
           <div>Other Skill</div>
@@ -394,7 +394,7 @@ export default function UIRecruitStep3({
       </div>
 
       {/* //---// */}
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           <div>
             ท่านมีรถยนต์ /

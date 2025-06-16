@@ -10,7 +10,7 @@ export default function UIRecruitStep2({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ข้อมูลทางครอบครัว</div>
           <div>Family Data</div>
@@ -405,7 +405,7 @@ export default function UIRecruitStep2({
 
       {/* //---// */}
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 text-center text-xl font-[600] bg-success text-white">
           <div>ประวัติการศึกษา</div>
           <div>Education Background</div>
@@ -658,7 +658,7 @@ export default function UIRecruitStep2({
 
       {/* //---// */}
 
-      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark/25">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
         <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           <div>ใบอนุญาตประกอบวิชาชีพ</div>
           <div>Professional License</div>
