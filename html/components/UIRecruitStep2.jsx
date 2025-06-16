@@ -1,627 +1,722 @@
 "use client";
 
-import { Input, Select, SelectItem, Button } from "@heroui/react";
-import { useState } from "react";
+import React from "react";
+import { Input, Select, SelectItem } from "@heroui/react";
 
 export default function UIRecruitStep2({
   formData,
   handleInputChange,
   errors,
 }) {
-  const [familyList, setFamilyList] = useState([
-    {
-      relation: "",
-      fullName: "",
-      age: "",
-      occupation: "",
-      workplace: "",
-      phone: "",
-    },
-  ]);
-
-  const [emergencyContact, setEmergencyContact] = useState({
-    name: "",
-    relation: "",
-    phone: "",
-    address: "",
-  });
-
-  const educationLevelOptions = [
-    { label: "ประถมศึกษา", value: "Primary" },
-    { label: "มัธยมศึกษาตอนต้น", value: "LowerSecondary" },
-    { label: "มัธยมศึกษาตอนปลาย", value: "UpperSecondary" },
-    { label: "ปวช.", value: "Vocational" },
-    { label: "ปวส.", value: "HighVocational" },
-    { label: "ปริญญาตรี", value: "Bachelor" },
-    { label: "ปริญญาโท", value: "Master" },
-    { label: "ปริญญาเอก", value: "Doctorate" },
-  ];
-
-  const familyRelationOptions = [
-    { label: "บิดา", value: "Father" },
-    { label: "มารดา", value: "Mother" },
-    { label: "พี่", value: "OlderSibling" },
-    { label: "น้อง", value: "YoungerSibling" },
-  ];
-
-  const emergencyRelationOptions = [
-    { label: "บิดา", value: "Father" },
-    { label: "มารดา", value: "Mother" },
-    { label: "พี่น้อง", value: "Sibling" },
-    { label: "เพื่อน", value: "Friend" },
-    { label: "หัวหน้า", value: "Manager" },
-    { label: "อื่น ๆ", value: "Other" },
-  ];
-
-  const [educationList, setEducationList] = useState([
-    {
-      level: "",
-      fromDate: "",
-      toDate: "",
-      school: "",
-      degree: "",
-      major: "",
-      gpa: "",
-    },
-  ]);
-
-  const [licenseList, setLicenseList] = useState([
-    {
-      name: "",
-      number: "",
-    },
-  ]);
-
-  const handleChangeList = (setter, list, index, field, value) => {
-    const updated = [...list];
-    updated[index][field] = value;
-    setter(updated);
-  };
-
-  const addToList = (setter, newItem) => {
-    setter((prev) => [...prev, newItem]);
-  };
-
-  const removeFromList = (setter, list, index) => {
-    if (list.length > 1) {
-      const updated = [...list];
-      updated.splice(index, 1);
-      setter(updated);
-    }
-  };
-
-  const handleEmergencyChange = (field, value) => {
-    setEmergencyContact((prev) => ({ ...prev, [field]: value }));
-  };
-
   return (
     <>
-      <Section title="ข้อมูลทางครอบครัว" subtitle="FAMILY DATA">
-        {familyList.map((member, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() => removeFromList(setFamilyList, familyList, index)}
-            children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Select
-                    label="ความสัมพันธ์"
-                    placeholder="Please Select"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    selectedKey={member.relation}
-                    onSelectionChange={(val) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "relation",
-                        val
-                      )
-                    }
-                  >
-                    {familyRelationOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ชื่อ-นามสกุล"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={member.fullName}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "fullName",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="อายุ"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="number"
-                    value={member.age}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "age",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="อาชีพ"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={member.occupation}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "occupation",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="สถานที่ทำงาน"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={member.workplace}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "workplace",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="เบอร์โทร"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={member.phone}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setFamilyList,
-                        familyList,
-                        index,
-                        "phone",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-              </div>
-            }
-          />
-        ))}
-        <div className="flex items-center justify-center w-full h-full gap-2">
-          <AddButton
-            label="เพิ่มสมาชิกในครอบครัว"
-            onClick={() =>
-              addToList(setFamilyList, {
-                relation: "",
-                fullName: "",
-                age: "",
-                occupation: "",
-                workplace: "",
-                phone: "",
-              })
-            }
-          />
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ข้อมูลทางครอบครัว</div>
+          <div>Family Data</div>
         </div>
-      </Section>
-
-      <Section title="บุคคลติดต่อในกรณีฉุกเฉิน" subtitle="EMERGENCY CONTACT">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ชื่อ-นามสกุล"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={emergencyContact.name}
-              onChange={(e) => handleEmergencyChange("name", e.target.value)}
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Select
-              label="ความสัมพันธ์"
-              placeholder="Please Select"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              selectedKey={emergencyContact.relation}
-              onSelectionChange={(val) =>
-                handleEmergencyChange("relation", val)
-              }
-            >
-              {emergencyRelationOptions.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
+        <div className="grid grid-cols-1 xl:grid-cols-6 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ความสัมพันธ์</div>
+              <div className="text-sm text-gray-500">Relation</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitFamilyMembers[0].recruitFamilyMemberRelation"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberRelation
+                    ? [
+                        formData.recruitFamilyMembers[0]
+                          .recruitFamilyMemberRelation,
+                      ]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitFamilyMembers[0].recruitFamilyMemberRelation"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberRelation
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation
+                }
+              >
+                <SelectItem key="Father" value="Father">
+                  บิดา (Father)
                 </SelectItem>
-              ))}
-            </Select>
+                <SelectItem key="Mother" value="Mother">
+                  มารดา (Mother)
+                </SelectItem>
+                <SelectItem key="OlderSibling" value="OlderSibling">
+                  พี่ (Older Sibling)
+                </SelectItem>
+                <SelectItem key="YoungerSibling" value="YoungerSibling">
+                  น้อง (Younger Sibling)
+                </SelectItem>
+              </Select>
+            </div>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="เบอร์โทร"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={emergencyContact.phone}
-              onChange={(e) => handleEmergencyChange("phone", e.target.value)}
-            />
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ชื่อ - นามสกุล</div>
+              <div className="text-sm text-gray-500">
+                First name - Last name
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitFamilyMembers[0].recruitFamilyMemberFullName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberFullName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberFullName"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberFullName
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberFullName
+                }
+              />
+            </div>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ที่อยู่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={emergencyContact.address}
-              onCh
-              ange={(e) => handleEmergencyChange("address", e.target.value)}
-            />
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">อายุ</div>
+              <div className="text-sm text-gray-500">Age</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitFamilyMembers[0].recruitFamilyMemberAge"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge ||
+                  ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberAge"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberAge
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">อาชีพ / ตำแหน่ง</div>
+              <div className="text-sm text-gray-500">Occupation / Position</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitFamilyMembers[0].recruitFamilyMemberOccupation"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberOccupation"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberOccupation
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ที่ทำงาน</div>
+              <div className="text-sm text-gray-500">Office</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitFamilyMembers[0].recruitFamilyMemberWorkplace"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberWorkplace"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberWorkplace
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">โทรศัพท์</div>
+              <div className="text-sm text-gray-500">Tel</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitFamilyMembers[0].recruitFamilyMemberPhone"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitFamilyMembers?.[0]
+                    ?.recruitFamilyMemberPhone || ""
+                }
+                onChange={handleInputChange(
+                  "recruitFamilyMembers[0].recruitFamilyMemberPhone"
+                )}
+                isInvalid={
+                  !!errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberPhone
+                }
+                errorMessage={
+                  errors?.recruitFamilyMembers?.[0]?.recruitFamilyMemberPhone
+                }
+              />
+            </div>
           </div>
         </div>
-      </Section>
-
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-        <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
-          ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
-          ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
-          สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>กรณีเร่งด่วนติดต่อ</div>
+          <div>In case of emergency, please notify</div>
         </div>
-        <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
-          I certify that I have received the above person’s consent for
-          disclosing his/her personal data to the company for making contact,
-          asking for information and verifying my information.
+        <div className="grid grid-cols-1 xl:grid-cols-4 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ชื่อ - นามสกุล</div>
+              <div className="text-sm text-gray-500">
+                First name - Last name
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEmergencyContacts[0].recruitEmergencyContactName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactName"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactName
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ความสัมพันธ์</div>
+              <div className="text-sm text-gray-500">Relation</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitEmergencyContacts[0].recruitEmergencyContactRelation"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                    ? [
+                        formData.recruitEmergencyContacts[0]
+                          .recruitEmergencyContactRelation,
+                      ]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitEmergencyContacts[0].recruitEmergencyContactRelation"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactRelation
+                }
+              >
+                <SelectItem key="Father" value="Father">
+                  บิดา (Father)
+                </SelectItem>
+                <SelectItem key="Mother" value="Mother">
+                  มารดา (Mother)
+                </SelectItem>
+                <SelectItem key="Sibling" value="Sibling">
+                  พี่น้อง (Sibling)
+                </SelectItem>
+                <SelectItem key="Friend" value="Friend">
+                  เพื่อน (Friend)
+                </SelectItem>
+                <SelectItem key="Manager" value="Manager">
+                  หัวหน้า (Manager)
+                </SelectItem>
+                <SelectItem key="Other" value="Other">
+                  อื่น ๆ (Other)
+                </SelectItem>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">โทรศัพท์</div>
+              <div className="text-sm text-gray-500">Tel</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEmergencyContacts[0].recruitEmergencyContactPhone"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactPhone"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactPhone
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ที่อยู่</div>
+              <div className="text-sm text-gray-500">Address</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEmergencyContacts[0].recruitEmergencyContactAddress"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEmergencyContacts[0].recruitEmergencyContactAddress"
+                )}
+                isInvalid={
+                  !!errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress
+                }
+                errorMessage={
+                  errors?.recruitEmergencyContacts?.[0]
+                    ?.recruitEmergencyContactAddress
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>
+            ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
+            ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
+            สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+          </div>
+          <div>
+            I certify that I have received the above person’s consent for
+            disclosing his/her personal data to the company for making contact,
+            asking for information and verifying my information.
+          </div>
         </div>
       </div>
 
-      <Section title="ประวัติการศึกษา" subtitle="EDUCATION BACKGROUND">
-        {educationList.map((edu, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() =>
-              removeFromList(setEducationList, educationList, index)
-            }
-            children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Select
-                    label="ระดับการศึกษา"
-                    placeholder="Please Select"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    selectedKey={edu.level}
-                    onSelectionChange={(val) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "level",
-                        val
-                      )
-                    }
-                  >
-                    {educationLevelOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ช่วงเวลาเริ่มต้น"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="date"
-                    value={edu.fromDate}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "fromDate",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ช่วงเวลาสิ้นสุด"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="date"
-                    value={edu.toDate}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "toDate",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="สถานศึกษา"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={edu.school}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "school",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="วุฒิ/ปริญญา"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={edu.degree}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "degree",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="สาขา"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={edu.major}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "major",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="เกรดเฉลี่ย"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="number"
-                    value={edu.gpa}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setEducationList,
-                        educationList,
-                        index,
-                        "gpa",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-              </div>
-            }
-          />
-        ))}
-        <AddButton
-          label="เพิ่มการศึกษา"
-          onClick={() =>
-            addToList(setEducationList, {
-              level: "",
-              fromDate: "",
-              toDate: "",
-              school: "",
-              degree: "",
-              major: "",
-              gpa: "",
-            })
-          }
-        />
-      </Section>
+      {/* //---// */}
 
-      <Section title="ใบอนุญาตประกอบวิชาชีพ" subtitle="PROFESSIONAL LICENSES">
-        {licenseList.map((lic, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() => removeFromList(setLicenseList, licenseList, index)}
-            children={
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ชื่อใบอนุญาต"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={lic.name}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setLicenseList,
-                        licenseList,
-                        index,
-                        "name",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="เลขที่ใบอนุญาต"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={lic.number}
-                    onChange={(e) =>
-                      handleChangeList(
-                        setLicenseList,
-                        licenseList,
-                        index,
-                        "number",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ประวัติการศึกษา</div>
+          <div>Education Background</div>
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-7 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ระดับการศึกษา</div>
+              <div className="text-sm text-gray-500">Level of education</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitEducations[0].recruitEducationLevel"
+                placeholder="เลือกระดับการศึกษา"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitEducations?.[0]?.recruitEducationLevel
+                    ? [formData.recruitEducations[0].recruitEducationLevel]
+                    : []
+                }
+                onSelectionChange={(keys) =>
+                  handleInputChange(
+                    "recruitEducations[0].recruitEducationLevel"
+                  )({
+                    target: { value: Array.from(keys)[0] },
+                  })
+                }
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationLevel
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationLevel
+                }
+              >
+                <SelectItem key="Primary" value="Primary">
+                  ประถมศึกษา (Primary)
+                </SelectItem>
+                <SelectItem key="LowerSecondary" value="LowerSecondary">
+                  มัธยมต้น (Lower Secondary)
+                </SelectItem>
+                <SelectItem key="UpperSecondary" value="UpperSecondary">
+                  มัธยมปลาย (Upper Secondary)
+                </SelectItem>
+                <SelectItem key="Vocational" value="Vocational">
+                  ปวช. (Vocational)
+                </SelectItem>
+                <SelectItem key="HighVocational" value="HighVocational">
+                  ปวส. (High Vocational)
+                </SelectItem>
+                <SelectItem key="Bachelor" value="Bachelor">
+                  ปริญญาตรี (Bachelor)
+                </SelectItem>
+                <SelectItem key="Master" value="Master">
+                  ปริญญาโท (Master)
+                </SelectItem>
+                <SelectItem key="Doctorate" value="Doctorate">
+                  ปริญญาเอก (Doctorate)
+                </SelectItem>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ตั้งแต่</div>
+              <div className="text-sm text-gray-500">From</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationFromDate"
+                type="date"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationFromDate ||
+                  ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationFromDate"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationFromDate
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationFromDate
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ถึง</div>
+              <div className="text-sm text-gray-500">To</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationToDate"
+                type="date"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationToDate || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationToDate"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationToDate
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationToDate
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ชื่อสถานศึกษา และที่ตั้ง
               </div>
-            }
-          />
-        ))}
-        <AddButton
-          label="เพิ่มใบอนุญาต"
-          onClick={() => addToList(setLicenseList, { name: "", number: "" })}
-        />
-      </Section>
+              <div className="text-sm text-gray-500">
+                Name of institute and location
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationSchool"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationSchool || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationSchool"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationSchool
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationSchool
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                วุฒิการศึกษาที่ได้รับ
+              </div>
+              <div className="text-sm text-gray-500">
+                Certificate / Diploma / Degree
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationDegree"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationDegree || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationDegree"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationDegree
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationDegree
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">วิชาเอก</div>
+              <div className="text-sm text-gray-500">Major subject</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationMajor"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationMajor || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationMajor"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationMajor
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationMajor
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">เกรดเฉลี่ย</div>
+              <div className="text-sm text-gray-500">GPA</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitEducations[0].recruitEducationGPA"
+                type="number"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitEducations?.[0]?.recruitEducationGPA || ""
+                }
+                onChange={handleInputChange(
+                  "recruitEducations[0].recruitEducationGPA"
+                )}
+                isInvalid={
+                  !!errors?.recruitEducations?.[0]?.recruitEducationGPA
+                }
+                errorMessage={
+                  errors?.recruitEducations?.[0]?.recruitEducationGPA
+                }
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* //---// */}
+
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>ใบอนุญาตประกอบวิชาชีพ</div>
+          <div>Professional License</div>
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ชื่อใบอนุญาตประกอบวิชาชีพ
+              </div>
+              <div className="text-sm text-gray-500">
+                Professional License Name
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitProfessionalLicenses[0].recruitLicenseName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseName || ""
+                }
+                onChange={handleInputChange(
+                  "recruitProfessionalLicenses[0].recruitLicenseName"
+                )}
+                isInvalid={
+                  !!errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseName
+                }
+                errorMessage={
+                  errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseName
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                เลขที่ใบอนุญาตประกอบวิชาชีพ
+              </div>
+              <div className="text-sm text-gray-500">
+                Professional License Number
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="recruitProfessionalLicenses[0].recruitLicenseNumber"
+                type="number"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                value={
+                  formData.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseNumber || ""
+                }
+                onChange={handleInputChange(
+                  "recruitProfessionalLicenses[0].recruitLicenseNumber"
+                )}
+                isInvalid={
+                  !!errors?.recruitProfessionalLicenses?.[0]
+                    ?.recruitLicenseNumber
+                }
+                errorMessage={
+                  errors?.recruitProfessionalLicenses?.[0]?.recruitLicenseNumber
+                }
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  );
-}
-
-function Section({ title, subtitle, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm bg-success text-white">
-        <div>{title}</div>
-        <div>{subtitle}</div>
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function ItemCard({ index, onRemove, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
-          #{""}
-          {index + 1}
-        </div>
-        <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-          {index > 0 && (
-            <Button
-              color="danger"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-              onPress={onRemove}
-            >
-              ลบ
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function AddButton({ label, onClick }) {
-  return (
-    <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-      <Button
-        color="primary"
-        size="md"
-        radius="full"
-        className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-        onPress={onClick}
-      >
-        {label}
-      </Button>
-    </div>
   );
 }

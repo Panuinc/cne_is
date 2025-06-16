@@ -1,559 +1,569 @@
 "use client";
 
-import {
-  Input,
-  RadioGroup,
-  Radio,
-  Select,
-  SelectItem,
-  Button,
-} from "@heroui/react";
-import { useState } from "react";
+import React from "react";
+import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
 
-const skillLevels = [
-  { label: "ดีมาก", value: "Excellent" },
-  { label: "ดี", value: "Good" },
-  { label: "พอใช้", value: "Fair" },
-];
-
-const otherSkillTypes = [
-  { label: "คอมพิวเตอร์", value: "Computer" },
-  { label: "ทักษะอื่น", value: "Other" },
-];
-
-const englishTestTypes = [
-  { label: "TOEIC", value: "TOEIC" },
-  { label: "TOEFL", value: "TOEFL" },
-  { label: "IELTS", value: "IELTS" },
-  { label: "อื่น ๆ", value: "Other" },
-];
-
-const vehicleOptions = [
-  { label: "มี", value: "Yes" },
-  { label: "ไม่มี", value: "No" },
-];
-
-export default function UIRecruitStep3() {
-  const [languageSkills, setLanguageSkills] = useState([
-    {
-      name: "",
-      listenLevel: "",
-      speakLevel: "",
-      readLevel: "",
-      writeLevel: "",
-    },
-  ]);
-
-  const [otherSkills, setOtherSkills] = useState([
-    { type: "", name: "", score: "" },
-  ]);
-
-  const [specialAbilities, setSpecialAbilities] = useState([{ name: "" }]);
-
-  const [englishScore, setEnglishScore] = useState({
-    type: "",
-    value: "",
-    detail: "",
-  });
-
-  const [vehicleInfo, setVehicleInfo] = useState({
-    ownCar: "",
-    ownMotorcycle: "",
-    haveCarLicense: "",
-    haveMotorcycleLicense: "",
-  });
-
-  const handleListChange = (setter, list, index, field, value) => {
-    const updated = [...list];
-    updated[index][field] = value;
-    setter(updated);
-  };
-
-  const handleEnglishScoreChange = (index, field, value) => {
-    const updated = [...englishScores];
-    updated[index][field] = value;
-    setEnglishScores(updated);
-  };
-
-  const handleAbilityChange = (index, value) => {
-    const updated = [...specialAbilities];
-    updated[index].name = value;
-    setSpecialAbilities(updated);
-  };
-
-  const [englishScores, setEnglishScores] = useState([
-    { type: "", value: "", detail: "" },
-  ]);
-
-  const handleVehicleChange = (field, value) => {
-    setVehicleInfo((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const addItem = (setter, newItem) => setter((prev) => [...prev, newItem]);
-  const removeItem = (setter, list, index) => {
-    if (list.length > 1) {
-      const updated = [...list];
-      updated.splice(index, 1);
-      setter(updated);
-    }
-  };
-
+export default function UIRecruitStep3({
+  formData,
+  handleInputChange,
+  errors,
+}) {
   return (
     <>
-      <Section title="ทักษะด้านภาษา" subtitle="LANGUAGE SKILLS">
-        {languageSkills.map((lang, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() =>
-              removeItem(setLanguageSkills, languageSkills, index)
-            }
-          >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="ชื่อภาษา"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={lang.name}
-                  onChange={(e) =>
-                    handleListChange(
-                      setLanguageSkills,
-                      languageSkills,
-                      index,
-                      "name",
-                      e.target.value
-                    )
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="การฟัง"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={lang.listenLevel}
-                  onValueChange={(val) =>
-                    handleListChange(
-                      setLanguageSkills,
-                      languageSkills,
-                      index,
-                      "listenLevel",
-                      val
-                    )
-                  }
-                >
-                  {skillLevels.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="การพูด"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  options={skillLevels}
-                  value={lang.speakLevel}
-                  onValueChange={(val) =>
-                    handleListChange(
-                      setLanguageSkills,
-                      languageSkills,
-                      index,
-                      "speakLevel",
-                      val
-                    )
-                  }
-                >
-                  {skillLevels.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="การอ่าน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  options={skillLevels}
-                  value={lang.readLevel}
-                  onValueChange={(val) =>
-                    handleListChange(
-                      setLanguageSkills,
-                      languageSkills,
-                      index,
-                      "readLevel",
-                      val
-                    )
-                  }
-                >
-                  {skillLevels.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="การเขียน"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  options={skillLevels}
-                  value={lang.writeLevel}
-                  onValueChange={(val) =>
-                    handleListChange(
-                      setLanguageSkills,
-                      languageSkills,
-                      index,
-                      "writeLevel",
-                      val
-                    )
-                  }
-                >
-                  {skillLevels.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ภาษา กรุณาระบุ ดีมาก, ดี, พอใช้</div>
+          <div>LANGUAGE - Please Identify: EXCELLENT, GOOD, FAIR</div>
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-5 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ภาษา</div>
+              <div className="text-sm text-gray-500">Language</div>
             </div>
-          </ItemCard>
-        ))}
-        <AddButton
-          label="เพิ่มภาษา"
-          onClick={() =>
-            addItem(setLanguageSkills, {
-              name: "",
-              listenLevel: "",
-              speakLevel: "",
-              readLevel: "",
-              writeLevel: "",
-            })
-          }
-        />
-      </Section>
-
-      <Section title="ทักษะอื่น ๆ" subtitle="OTHER SKILLS">
-        {otherSkills.map((skill, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() => removeItem(setOtherSkills, otherSkills, index)}
-          >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="ประเภททักษะ"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={skill.type}
-                  onValueChange={(val) =>
-                    handleListChange(
-                      setOtherSkills,
-                      otherSkills,
-                      index,
-                      "type",
-                      val
-                    )
-                  }
-                >
-                  {otherSkillTypes.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="ชื่อทักษะ"
-                  value={skill.name}
-                  onChange={(e) =>
-                    handleListChange(
-                      setOtherSkills,
-                      otherSkills,
-                      index,
-                      "name",
-                      e.target.value
-                    )
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="คะแนน (ถ้ามี)"
-                  type="number"
-                  value={skill.score}
-                  onChange={(e) =>
-                    handleListChange(
-                      setOtherSkills,
-                      otherSkills,
-                      index,
-                      "score",
-                      e.target.value
-                    )
-                  }
-                />
-              </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitLanguageSkills[0].recruitLanguageName"
+                placeholder="เลือกภาษา"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageName
+                    ? [formData.recruitLanguageSkills[0].recruitLanguageName]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageName"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]?.recruitLanguageName
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageName
+                }
+              >
+                <SelectItem key="Thai" value="Thai">
+                  ไทย (Thai)
+                </SelectItem>
+                <SelectItem key="English" value="English">
+                  อังกฤษ (English)
+                </SelectItem>
+                <SelectItem key="Chinese" value="Chinese">
+                  จีน (Chinese)
+                </SelectItem>
+                <SelectItem key="Japanese" value="Japanese">
+                  ญี่ปุ่น (Japanese)
+                </SelectItem>
+              </Select>
             </div>
-          </ItemCard>
-        ))}
-        <AddButton
-          label="เพิ่มทักษะอื่น"
-          onClick={() =>
-            addItem(setOtherSkills, { type: "", name: "", score: "" })
-          }
-        />
-      </Section>
-
-      <Section title="ความสามารถพิเศษ" subtitle="SPECIAL ABILITIES">
-        {specialAbilities.map((ability, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() =>
-              removeItem(setSpecialAbilities, specialAbilities, index)
-            }
-          >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="ชื่อความสามารถพิเศษ"
-                  value={ability.name}
-                  onChange={(e) => handleAbilityChange(index, e.target.value)}
-                />
-              </div>
-            </div>
-          </ItemCard>
-        ))}
-        <AddButton
-          label="เพิ่มความสามารถพิเศษ"
-          onClick={() => addItem(setSpecialAbilities, { name: "" })}
-        />
-      </Section>
-
-      <Section title="คะแนนภาษาอังกฤษ" subtitle="ENGLISH TEST SCORE">
-        {englishScores.map((score, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() => removeItem(setEnglishScores, englishScores, index)}
-          >
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Select
-                  label="ประเภทแบบทดสอบ"
-                  placeholder="Please Enter Data"
-                  size="md"
-                  variant="underlined"
-                  color="none"
-                  radius="full"
-                  value={score.type}
-                  onValueChange={(val) =>
-                    handleEnglishScoreChange(index, "type", val)
-                  }
-                >
-                  {englishTestTypes.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="คะแนน"
-                  type="number"
-                  value={score.value}
-                  onChange={(e) =>
-                    handleEnglishScoreChange(index, "value", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                <Input
-                  label="รายละเอียดเพิ่มเติม"
-                  value={score.detail}
-                  onChange={(e) =>
-                    handleEnglishScoreChange(index, "detail", e.target.value)
-                  }
-                />
-              </div>
-            </div>
-          </ItemCard>
-        ))}
-        <AddButton
-          label="เพิ่มคะแนนภาษาอังกฤษ"
-          onClick={() =>
-            addItem(setEnglishScores, { type: "", value: "", detail: "" })
-          }
-        />
-      </Section>
-
-      <Section
-        title="ข้อมูลยานพาหนะและใบขับขี่"
-        subtitle="VEHICLE & LICENSE INFO"
-      >
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">มีรถยนต์ส่วนตัว</span>
-              <span className="text-sm font-[300]">(Own Car)</span>
-            </div>
-            <RadioGroup
-              name="ownCar"
-              orientation="horizontal"
-              value={vehicleInfo.ownCar}
-              onValueChange={(val) => handleVehicleChange("ownCar", val)}
-              className="flex-1 flex gap-4"
-            >
-              <Radio value="Yes">มี</Radio>
-              <Radio value="No">ไม่มี</Radio>
-            </RadioGroup>
           </div>
-
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">มีรถจักรยานยนต์ส่วนตัว</span>
-              <span className="text-sm font-[300]">(Own Motorcycle)</span>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">การฟัง</div>
+              <div className="text-sm text-gray-500">Listening</div>
             </div>
-            <RadioGroup
-              name="ownMotorcycle"
-              orientation="horizontal"
-              value={vehicleInfo.ownMotorcycle}
-              onValueChange={(val) => handleVehicleChange("ownMotorcycle", val)}
-              className="flex-1 flex gap-4"
-            >
-              <Radio value="Yes">มี</Radio>
-              <Radio value="No">ไม่มี</Radio>
-            </RadioGroup>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitLanguageSkills[0].recruitLanguageListenLevel"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageListenLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageListenLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageListenLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageListenLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageListenLevel
+                }
+              >
+                <SelectItem key="Excellent" value="Excellent">
+                  ดีมาก (Excellent)
+                </SelectItem>
+                <SelectItem key="Good" value="Good">
+                  ดี (Good)
+                </SelectItem>
+                <SelectItem key="Fair" value="Fair">
+                  พอใช้ (Fair)
+                </SelectItem>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">การพูด</div>
+              <div className="text-sm text-gray-500">Speaking</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitLanguageSkills[0].recruitLanguageSpeakLevel"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageSpeakLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageSpeakLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageSpeakLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageSpeakLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageSpeakLevel
+                }
+              >
+                <SelectItem key="Excellent" value="Excellent">
+                  ดีมาก (Excellent)
+                </SelectItem>
+                <SelectItem key="Good" value="Good">
+                  ดี (Good)
+                </SelectItem>
+                <SelectItem key="Fair" value="Fair">
+                  พอใช้ (Fair)
+                </SelectItem>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">การอ่าน</div>
+              <div className="text-sm text-gray-500">Reading</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitLanguageSkills[0].recruitLanguageReadLevel"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageReadLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageReadLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageReadLevel
+                }
+              >
+                <SelectItem key="Excellent" value="Excellent">
+                  ดีมาก (Excellent)
+                </SelectItem>
+                <SelectItem key="Good" value="Good">
+                  ดี (Good)
+                </SelectItem>
+                <SelectItem key="Fair" value="Fair">
+                  พอใช้ (Fair)
+                </SelectItem>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">การเขียน</div>
+              <div className="text-sm text-gray-500">Writing</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Select
+                name="recruitLanguageSkills[0].recruitLanguageWriteLevel"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                selectedKeys={
+                  formData.recruitLanguageSkills?.[0]?.recruitLanguageWriteLevel
+                    ? [
+                        formData.recruitLanguageSkills[0]
+                          .recruitLanguageWriteLevel,
+                      ]
+                    : []
+                }
+                onChange={handleInputChange(
+                  "recruitLanguageSkills[0].recruitLanguageWriteLevel"
+                )}
+                isInvalid={
+                  !!errors?.recruitLanguageSkills?.[0]
+                    ?.recruitLanguageWriteLevel
+                }
+                errorMessage={
+                  errors?.recruitLanguageSkills?.[0]?.recruitLanguageWriteLevel
+                }
+              >
+                <SelectItem key="Excellent" value="Excellent">
+                  ดีมาก (Excellent)
+                </SelectItem>
+                <SelectItem key="Good" value="Good">
+                  ดี (Good)
+                </SelectItem>
+                <SelectItem key="Fair" value="Fair">
+                  พอใช้ (Fair)
+                </SelectItem>
+              </Select>
+            </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">มีใบขับขี่รถยนต์</span>
-              <span className="text-sm font-[300]">(Car License)</span>
-            </div>
-            <RadioGroup
-              name="haveCarLicense"
-              orientation="horizontal"
-              value={vehicleInfo.haveCarLicense}
-              onValueChange={(val) =>
-                handleVehicleChange("haveCarLicense", val)
-              }
-              className="flex-1 flex gap-4"
-            >
-              <Radio value="Yes">มี</Radio>
-              <Radio value="No">ไม่มี</Radio>
-            </RadioGroup>
-          </div>
+      </div>
 
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
-                มีใบขับขี่รถจักรยานยนต์
-              </span>
-              <span className="text-sm font-[300]">(Motorcycle License)</span>
+      {/* //--5555--// */}
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ทักษะอื่นๆ</div>
+          <div>Other Skill</div>
+        </div>
+        <div className="flex flex-col xl:flex-row w-full h-full gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">
+                  ทักษะทางด้านคอมพิวเตอร์
+                </div>
+                <div className="text-sm text-gray-500">Computer skills</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitDetailComputerSkill"
+                  type="text"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData?.recruitDetail?.recruitDetailComputerSkill || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailComputerSkill"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailComputerSkill"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailComputerSkill"]
+                  }
+                />
+              </div>
             </div>
-            <RadioGroup
-              name="haveMotorcycleLicense"
-              orientation="horizontal"
-              value={vehicleInfo.haveMotorcycleLicense}
-              onValueChange={(val) =>
-                handleVehicleChange("haveMotorcycleLicense", val)
-              }
-              className="flex-1 flex gap-4"
-            >
-              <Radio value="Yes">มี</Radio>
-              <Radio value="No">ไม่มี</Radio>
-            </RadioGroup>
+
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">
+                  ความสามารถพิเศษอื่นๆ
+                </div>
+                <div className="text-sm text-gray-500">
+                  Other special skills
+                </div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitDetailOtherSkill"
+                  type="text"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={formData?.recruitDetail?.recruitDetailOtherSkill || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailOtherSkill"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailOtherSkill"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailOtherSkill"]
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">TOEIC</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitDetailScoreToeic"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={formData?.recruitDetail?.recruitDetailScoreToeic || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreToeic"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreToeic"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreToeic"]
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">TOEFL</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitDetailScoreToefl"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={formData?.recruitDetail?.recruitDetailScoreToefl || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreToefl"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreToefl"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreToefl"]
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">IELTS</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitDetailScoreIelts"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={formData?.recruitDetail?.recruitDetailScoreIelts || ""}
+                  onChange={handleInputChange(
+                    "recruitDetail.recruitDetailScoreIelts"
+                  )}
+                  isInvalid={
+                    !!errors?.["recruitDetail.recruitDetailScoreIelts"]
+                  }
+                  errorMessage={
+                    errors?.["recruitDetail.recruitDetailScoreIelts"]
+                  }
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
+      </div>
+
+      {/* //---// */}
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>
+            ท่านมีรถยนต์ /
+            มอเตอร์ไซต์ส่วนตัวที่สามารถนำมาใช้ในธุระของบริษัทหรือไม่?
+          </div>
+          <div>
+            Do you have a car / motorcycle available for company business?
+          </div>
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">รถยนต์</div>
+              <div className="text-sm text-gray-500">Car</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitDetailAllowReferenceCheck"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                value={
+                  formData?.recruitDetail?.recruitDetailAllowReferenceCheck ||
+                  ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailAllowReferenceCheck"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.["recruitDetail.recruitDetailAllowReferenceCheck"]
+                }
+                errorMessage={
+                  errors?.["recruitDetail.recruitDetailAllowReferenceCheck"]
+                }
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+          </div>
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">มอเตอร์ไซต์</div>
+              <div className="text-sm text-gray-500">Motorcycle</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitDetailAllowReferenceCheckReason"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                value={
+                  formData?.recruitDetail
+                    ?.recruitDetailAllowReferenceCheckReason || ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.[
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  ]
+                }
+                errorMessage={
+                  errors?.[
+                    "recruitDetail.recruitDetailAllowReferenceCheckReason"
+                  ]
+                }
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>ท่านมีใบขับขี่หรือไม่?</div>
+          <div>Do you have hold a driving license?</div>
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">รถยนต์</div>
+              <div className="text-sm text-gray-500">Car</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitDetailEverFired"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                value={formData?.recruitDetail?.recruitDetailEverFired || ""}
+                onValueChange={(value) =>
+                  handleInputChange("recruitDetail.recruitDetailEverFired")({
+                    target: { value },
+                  })
+                }
+                isInvalid={!!errors?.["recruitDetail.recruitDetailEverFired"]}
+                errorMessage={errors?.["recruitDetail.recruitDetailEverFired"]}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+          </div>
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">มอเตอร์ไซต์</div>
+              <div className="text-sm text-gray-500">Motorcycle</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitDetailEverFiredReason"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                value={
+                  formData?.recruitDetail?.recruitDetailEverFiredReason || ""
+                }
+                onValueChange={(value) =>
+                  handleInputChange(
+                    "recruitDetail.recruitDetailEverFiredReason"
+                  )({
+                    target: { value },
+                  })
+                }
+                isInvalid={
+                  !!errors?.["recruitDetail.recruitDetailEverFiredReason"]
+                }
+                errorMessage={
+                  errors?.["recruitDetail.recruitDetailEverFiredReason"]
+                }
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* //---// */}
     </>
-  );
-}
-
-function Section({ title, subtitle, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm bg-success text-white">
-        <div>{title}</div>
-        <div>{subtitle}</div>
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function ItemCard({ index, onRemove, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
-          #{""}
-          {index + 1}
-        </div>
-        <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-          {index > 0 && (
-            <Button
-              color="danger"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-              onPress={onRemove}
-            >
-              ลบ
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function AddButton({ label, onClick }) {
-  return (
-    <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-      <Button
-        color="primary"
-        size="md"
-        radius="full"
-        className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-        onPress={onClick}
-      >
-        {label}
-      </Button>
-    </div>
   );
 }

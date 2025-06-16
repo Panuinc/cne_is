@@ -1,632 +1,742 @@
 "use client";
 
+import React from "react";
+import Image from "next/image";
 import {
   Input,
   RadioGroup,
   Radio,
-  Select,
   Textarea,
-  Button,
+  Select,
+  SelectItem,
 } from "@heroui/react";
-import { useState } from "react";
 
-const employmentTypes = [
-  { label: "ประจำ", value: "FullTime" },
-  { label: "ชั่วคราว", value: "PartTime" },
-  { label: "ฟรีแลนซ์", value: "Freelance" },
-  { label: "อื่น ๆ", value: "Other" },
-];
-
-const yesNoOptions = [
-  { label: "ใช่", value: "true" },
-  { label: "ไม่ใช่", value: "false" },
-];
-
-export default function UIRecruitStep4() {
-  const [workExperiences, setWorkExperiences] = useState([
-    {
-      workplaceName: "",
-      position: "",
-      employmentType: "",
-      startDate: "",
-      endDate: "",
-      salary: "",
-      extraIncome: "",
-      reasonForLeaving: "",
-      jobDescription: "",
-    },
-  ]);
-
-  const [detail, setDetail] = useState({
-    allowReferenceCheck: "",
-    allowReferenceCheckReason: "",
-    everFired: "",
-    everFiredReason: "",
-    severeIllnessHistory: "",
-    severeIllnessDetail: "",
-    criminalRecord: "",
-    criminalRecordDetail: "",
-    isPregnant: "",
-    pregnancyDetail: "",
-    hasFriendInCompany: "",
-    friendInCompanyName: "",
-    ref1Name: "",
-    ref1Address: "",
-    ref1Phone: "",
-    ref1Occupation: "",
-    ref2Name: "",
-    ref2Address: "",
-    ref2Phone: "",
-    ref2Occupation: "",
-  });
-
-  const handleWorkChange = (index, field, value) => {
-    const updated = [...workExperiences];
-    updated[index][field] = value;
-    setWorkExperiences(updated);
-  };
-
-  const addExperience = () =>
-    setWorkExperiences([
-      ...workExperiences,
-      {
-        workplaceName: "",
-        position: "",
-        employmentType: "",
-        startDate: "",
-        endDate: "",
-        salary: "",
-        extraIncome: "",
-        reasonForLeaving: "",
-        jobDescription: "",
-      },
-    ]);
-
-  const removeExperience = (index) => {
-    if (workExperiences.length > 1) {
-      const updated = [...workExperiences];
-      updated.splice(index, 1);
-      setWorkExperiences(updated);
-    }
-  };
-
-  const handleDetailChange = (field, value) => {
-    setDetail((prev) => ({ ...prev, [field]: value }));
-  };
-
+export default function UIRecruitStep4({
+  formData,
+  handleInputChange,
+  errors,
+}) {
   return (
     <>
-      <Section title="ประสบการณ์ทำงาน" subtitle="WORK EXPERIENCE">
-        {workExperiences.map((exp, index) => (
-          <ItemCard
-            key={index}
-            index={index}
-            onRemove={() => removeExperience(index)}
-          >
-            <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ชื่อสถานที่ทำงาน"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={exp.workplaceName}
-                    onChange={(e) =>
-                      handleWorkChange(index, "workplaceName", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="ตำแหน่ง"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={exp.position}
-                    onChange={(e) =>
-                      handleWorkChange(index, "position", e.target.value)
-                    }
-                  />
-                </div>
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ประวัติการทำงาน</div>
+          <div>Professional Experience</div>
+        </div>
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>กรุณาเรียงจากปัจจุบันไปหาอดีต?</div>
+          <div>From the most current</div>
+        </div>
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">ชื่อสถานที่ทำงาน</div>
+                <div className="text-sm text-gray-500">Company's name</div>
               </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Select
-                    label="ประเภทการจ้าง"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    options={employmentTypes}
-                    value={exp.employmentType}
-                    onValueChange={(val) =>
-                      handleWorkChange(index, "employmentType", val)
-                    }
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="วันที่เริ่มงาน"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="date"
-                    value={exp.startDate}
-                    onChange={(e) =>
-                      handleWorkChange(index, "startDate", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="วันที่สิ้นสุด"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="date"
-                    value={exp.endDate}
-                    onChange={(e) =>
-                      handleWorkChange(index, "endDate", e.target.value)
-                    }
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="เงินเดือน"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="number"
-                    value={exp.salary}
-                    onChange={(e) =>
-                      handleWorkChange(index, "salary", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="รายได้เสริม"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    type="number"
-                    value={exp.extraIncome}
-                    onChange={(e) =>
-                      handleWorkChange(index, "extraIncome", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Input
-                    label="เหตุผลที่ลาออก"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={exp.reasonForLeaving}
-                    onChange={(e) =>
-                      handleWorkChange(
-                        index,
-                        "reasonForLeaving",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-                <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-                  <Textarea
-                    className="col-span-2"
-                    label="ลักษณะงาน"
-                    placeholder="Please Enter Data"
-                    size="md"
-                    variant="underlined"
-                    color="none"
-                    radius="full"
-                    value={exp.jobDescription}
-                    onChange={(e) =>
-                      handleWorkChange(index, "jobDescription", e.target.value)
-                    }
-                  />
-                </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitWorkplaceName"
+                  type="text"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]
+                      ?.recruitWorkplaceName || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitWorkplaceName"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitWorkplaceName
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitWorkplaceName
+                  }
+                />
               </div>
             </div>
-          </ItemCard>
-        ))}
-        <AddButton label="+ เพิ่มประสบการณ์ทำงาน" onClick={addExperience} />
-      </Section>
-
-      <Section title="ข้อมูลเพิ่มเติม" subtitle="ADDITIONAL INFORMATION">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
-                ท่านเคยถูกให้ออกจากงานหรือไม่?
-              </span>
-              <span className="text-xs font-[300]">
-                Have you ever been discharged from employment for any reason?
-              </span>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">ตำแหน่งงาน</div>
+                <div className="text-sm text-gray-500">Position</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitWorkPosition"
+                  type="text"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]?.recruitWorkPosition ||
+                    ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitWorkPosition"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitWorkPosition
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitWorkPosition
+                  }
+                />
+              </div>
             </div>
-            <RadioGroup
-              name="fired"
-              orientation="horizontal"
-              value={detail.fired}
-              onValueChange={(val) => handleDetailChange("fired", val)}
-            >
-              <Radio value="Yes">ใช่</Radio>
-              <Radio value="No">ไม่ใช่</Radio>
-            </RadioGroup>
           </div>
-          {detail.fired === "Yes" && (
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">ประเภทการจ้างงาน</div>
+                <div className="text-sm text-gray-500">Type of employment</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <RadioGroup
+                  name="recruitWorkExperiences[0].recruitEmploymentType"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  orientation="horizontal"
+                  className="flex items-start justify-center xl:items-start w-full h-full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]
+                      ?.recruitEmploymentType || ""
+                  }
+                  onValueChange={(value) =>
+                    handleInputChange(
+                      "recruitWorkExperiences[0].recruitEmploymentType"
+                    )({
+                      target: { value },
+                    })
+                  }
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitEmploymentType
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitEmploymentType
+                  }
+                >
+                  <Radio value="FullTime">ประจำ</Radio>
+                  <Radio value="PartTime">ชั่วคราว</Radio>
+                  <Radio value="Internship">ฝึกงาน</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">
+                  วัน เดือน ปี ที่เข้าทำงาน
+                </div>
+                <div className="text-sm text-gray-500">Starting date</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitStartDate"
+                  type="date"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]?.recruitStartDate || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitStartDate"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitStartDate
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitStartDate
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">
+                  วัน เดือน ปี ที่ลาออก
+                </div>
+                <div className="text-sm text-gray-500">Leave date</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitEndDate"
+                  type="date"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]?.recruitEndDate || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitEndDate"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitEndDate
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitEndDate
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">เงินเดือน</div>
+                <div className="text-sm text-gray-500">Salary</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitSalary"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]?.recruitSalary || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitSalary"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitSalary
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitSalary
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">รายได้พิเศษอื่นๆ</div>
+                <div className="text-sm text-gray-500">Allowances</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitExtraIncome"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]?.recruitExtraIncome ||
+                    ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitExtraIncome"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitExtraIncome
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitExtraIncome
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">เหตุผลในการลาออก</div>
+                <div className="text-sm text-gray-500">Reason for leaving</div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+                <Input
+                  name="recruitWorkExperiences[0].recruitReasonForLeaving"
+                  type="number"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]
+                      ?.recruitReasonForLeaving || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitReasonForLeaving"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]
+                      ?.recruitReasonForLeaving
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitReasonForLeaving
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+              <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <div className="font-medium text-black">
+                  ลักษณะงานที่รับผิดชอบ
+                </div>
+                <div className="text-sm text-gray-500">
+                  Job description & Responsibility
+                </div>
+              </div>
+              <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+                <Textarea
+                  name="recruitWorkExperiences[0].recruitJobDescription"
+                  placeholder="รายละเอียดงานที่ทำ"
+                  size="md"
+                  variant="underlined"
+                  color="none"
+                  radius="full"
+                  value={
+                    formData.recruitWorkExperiences?.[0]
+                      ?.recruitJobDescription || ""
+                  }
+                  onChange={handleInputChange(
+                    "recruitWorkExperiences[0].recruitJobDescription"
+                  )}
+                  isInvalid={
+                    !!errors?.recruitWorkExperiences?.[0]?.recruitJobDescription
+                  }
+                  errorMessage={
+                    errors?.recruitWorkExperiences?.[0]?.recruitJobDescription
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ท่านจะมาเริ่มงานกับริษัทได้เมื่อไหร่ ถ้ามีตำแหน่ง
+              </div>
+              <div className="text-sm text-gray-500">
+                When can you start working with us, if employed?
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
               <Input
-                label="เหตุผล"
-                placeholder="Please Enter Data"
+                name="roleName"
+                type="text"
                 size="md"
                 variant="underlined"
+                color="none"
                 radius="full"
-                value={detail.firedReason}
-                onChange={(e) =>
-                  handleDetailChange("firedReason", e.target.value)
-                }
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
               />
             </div>
-          )}
+          </div>
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ข้าพเจ้า</div>
+              <div className="text-sm text-gray-500">I</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  ยินยอม
+                  <div className="text-sm text-gray-500">(Give consent)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่ยินยอม
+                  <div className="text-sm text-gray-500">
+                    (Do not give consent)
+                  </div>
+                </Radio>
+              </RadioGroup>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          <div>
+            ข้าพเจ้าขออนุญาตให้บริษัททำการตรวจสอบประวัติการทำงานและความประพฤติของข้าพเจ้ากับนายจ้างเดิม
+            เพื่อยืนยันความถูกต้องของข้อมูลที่ข้าพเจ้าได้แจ้งไว้กับบริษัท
+            และเพื่อประกอบการพิจารณาในการจ้างงาน
+          </div>
+          <div>
+            I hereby authorize the company to verify my employment history and
+            conduct with my previous employers in order to confirm the accuracy
+            of the information I have provided, and to support the company’s
+            consideration for employment.
+          </div>
+        </div>
+      </div>
+
+      {/* //---// */}
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-xl font-[600] bg-success text-white">
+          <div>ข้อความเพิ่มเติม</div>
+          <div>Further Information</div>
+        </div>
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          {/* //----// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ท่านเคยถูกให้ออกจากงานหรือไม่?
+              </div>
+              <div className="text-sm text-gray-500">
+                Have you ever been discharged from employment for any reason?
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-stat w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="No" value="No">
+                  ไม่เคย <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+                <Radio key="Yes" value="Yes">
+                  เคย เพราะ
+                  <div className="text-sm text-gray-500">(Yes Because)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //----// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
                 ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่?
-              </span>
-              <span className="text-xs font-[300]">
+              </div>
+              <div className="text-sm text-gray-500">
                 Have you ever been seriously ill or contracted with contagious
                 disease?
-              </span>
+              </div>
             </div>
-            <RadioGroup
-              name="severeIllness"
-              orientation="horizontal"
-              value={detail.severeIllness}
-              onValueChange={(val) => handleDetailChange("severeIllness", val)}
-            >
-              <Radio value="Yes">ใช่</Radio>
-              <Radio value="No">ไม่ใช่</Radio>
-            </RadioGroup>
-          </div>
-          {detail.severeIllness === "Yes" && (
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <Input
-                label="ระบุอาการ"
-                placeholder="Please Enter Data"
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
                 size="md"
                 variant="underlined"
+                color="primary"
                 radius="full"
-                value={detail.severeIllnessDetail}
-                onChange={(e) =>
-                  handleDetailChange("severeIllnessDetail", e.target.value)
-                }
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-stat w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="No" value="No">
+                  ไม่เคย <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+                <Radio key="Yes" value="Yes">
+                  เคยระบุชื่อโรค
+                  <div className="text-sm text-gray-500">(Yes Explain)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
               />
             </div>
-          )}
-        </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
+          </div>
+          {/* //----// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
                 ท่านเคยได้รับโทษทางอาญา หรือจำคุก หรือเป็นบุคคลล้มละลายหรือไม่?
-              </span>
-              <span className="text-xs font-[300]">
+              </div>
+              <div className="text-sm text-gray-500">
                 Have you ever been arrested or convicted for any offense or
                 crime or bankrupt?
-              </span>
+              </div>
             </div>
-            <RadioGroup
-              name="criminalRecord"
-              orientation="horizontal"
-              value={detail.criminalRecord}
-              onValueChange={(val) => handleDetailChange("criminalRecord", val)}
-            >
-              <Radio value="Yes">ใช่</Radio>
-              <Radio value="No">ไม่ใช่</Radio>
-            </RadioGroup>
-          </div>
-          {detail.criminalRecord === "Yes" && (
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <Input
-                label="รายละเอียดคดี"
-                placeholder="Please Enter Data"
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
                 size="md"
                 variant="underlined"
+                color="primary"
                 radius="full"
-                value={detail.criminalRecordDetail}
-                onChange={(e) =>
-                  handleDetailChange("criminalRecordDetail", e.target.value)
-                }
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-stat w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="No" value="No">
+                  ไม่เคย <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+                <Radio key="Yes" value="Yes">
+                  เคย <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
               />
             </div>
-          )}
-        </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
+          </div>
+          {/* //----// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
                 ขณะนี้คุณตั้งครรภ์หรือไม่?
-              </span>
-              <span className="text-xs font-[300]">Are you pregnant?</span>
+              </div>
+              <div className="text-sm text-gray-500">Are you pregnant?</div>
             </div>
-            <RadioGroup
-              name="isPregnant"
-              orientation="horizontal"
-              value={detail.isPregnant}
-              onValueChange={(val) => handleDetailChange("isPregnant", val)}
-            >
-              <Radio value="Yes">ใช่</Radio>
-              <Radio value="No">ไม่ใช่</Radio>
-            </RadioGroup>
-          </div>
-          {detail.isPregnant === "Yes" && (
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <Input
-                label="อายุครรภ์ (ถ้ามี)"
-                placeholder="Please Enter Data"
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
                 size="md"
                 variant="underlined"
+                color="primary"
                 radius="full"
-                value={detail.pregnancyDetail}
-                onChange={(e) =>
-                  handleDetailChange("pregnancyDetail", e.target.value)
-                }
-              />
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-stat w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="No" value="No">
+                  ไม่
+                  <div className="text-sm text-gray-500">(Not Pregnant)</div>
+                </Radio>
+                <Radio key="Yes" value="Yes">
+                  ตั้งครรภ์
+                  <div className="text-sm text-gray-500">
+                    (Yes I'm Pregnant)
+                  </div>
+                </Radio>
+              </RadioGroup>
             </div>
-          )}
-        </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-between w-full h-full p-2 gap-2 border-2 border-dark">
-            <div className="flex flex-col">
-              <span className="text-md font-[600]">
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+              เดือน (Months)
+            </div>
+          </div>
+          {/* //----// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
                 ท่านมีเพื่อน คนรู้จัก หรือญาติที่ทำงานในบริษัทนี้หรือไม่?
-              </span>
-              <span className="text-xs font-[300]">
+              </div>
+              <div className="text-sm text-gray-500">
                 Do you have relatives and/or friends who are working in this
                 company?
-              </span>
+              </div>
             </div>
-            <RadioGroup
-              name="hasFriendInCompany"
-              orientation="horizontal"
-              value={detail.hasFriendInCompany}
-              onValueChange={(val) =>
-                handleDetailChange("hasFriendInCompany", val)
-              }
-            >
-              <Radio value="Yes">ใช่</Radio>
-              <Radio value="No">ไม่ใช่</Radio>
-            </RadioGroup>
-          </div>
-          {detail.hasFriendInCompany === "Yes" && (
-            <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-              <Input
-                label="ชื่อเพื่อน/ญาติในบริษัท"
-                placeholder="Please Enter Data"
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
                 size="md"
                 variant="underlined"
+                color="primary"
                 radius="full"
-                value={detail.friendInCompanyName}
-                onChange={(e) =>
-                  handleDetailChange("friendInCompanyName", e.target.value)
-                }
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-stat w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+                <Radio key="Yes" value="Yes">
+                  มี ระบุชื่อ - นามสกุล
+                  <div className="text-sm text-gray-500">
+                    (Yes name - surname)
+                  </div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
               />
             </div>
-          )}
-        </div>
-      </Section>
-
-      <Section title="บุคคลอ้างอิง" subtitle="PERSONAL REFERENCES">
-        <div className="flex flex-col items-center justify-center w-full gap-2">
-          <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
-            กรุณาเขียนชื่อ ที่อยู่ เบอร์โทรศัพท์ และอาชีพของบุคคลอ้างอิงจำนวน 2
-            คน (ซึ่งไม่ใช่ญาติหรืออดีตนายจ้าง)
-            ที่รู้จักและคุ้นเคยกับตัวท่านเป็นอย่างดี
           </div>
-          <div className="flex items-center justify-start w-full p-2 gap-2 border-2 border-dark text-sm">
+          {/* //----// */}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>
+            เขียน ชื่อ ที่อยู่ โทรศัพท์ และ อาชีพของผู้ที่จะอ้างถึง 2 คน
+            (ซึ่งไม่ใช่ญาติหรือนายจ้างเดิม) ที่รู้จักคุ้นเคยตัวท่านดี
+          </div>
+          <div>
             List names, addresses, telephone and occupation of 2 references
             (other than relatives or former employers) who know you.
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ชื่ออ้างอิง 1"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref1Name}
-              onChange={(e) => handleDetailChange("ref1Name", e.target.value)}
-            />
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ลำดับที่ 1</div>
+              <div className="text-sm text-gray-500">No 1</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="อาชีพ"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref1Occupation}
-              onChange={(e) =>
-                handleDetailChange("ref1Occupation", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ที่อยู่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref1Address}
-              onChange={(e) =>
-                handleDetailChange("ref1Address", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="เบอร์โทร"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref1Phone}
-              onChange={(e) => handleDetailChange("ref1Phone", e.target.value)}
-            />
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ลำดับที่ 2</div>
+              <div className="text-sm text-gray-500">No 2</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-8/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
           </div>
         </div>
-
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ชื่ออ้างอิง 2"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref2Name}
-              onChange={(e) => handleDetailChange("ref2Name", e.target.value)}
-            />
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          <div>
+            ข้าพเจ้าขอรับรองว่า ได้รับอนุญาตจากบุคคลอ้างอิงที่มีรายชื่อข้างต้น
+            ให้ระบุชื่อไว้เพื่อเป็นข้อมูลอ้างอิงกับบริษัท
+            รวมถึงเพื่อให้บริษัทสามารถติดต่อสอบถามและยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้าได้ตามความเหมาะสม
           </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="อาชีพ"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref2Occupation}
-              onChange={(e) =>
-                handleDetailChange("ref2Occupation", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="ที่อยู่"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref2Address}
-              onChange={(e) =>
-                handleDetailChange("ref2Address", e.target.value)
-              }
-            />
-          </div>
-          <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-            <Input
-              label="เบอร์โทร"
-              placeholder="Please Enter Data"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={detail.ref2Phone}
-              onChange={(e) => handleDetailChange("ref2Phone", e.target.value)}
-            />
+          <div>
+            I hereby certify that I have obtained permission from the reference
+            persons listed above to provide their names as references to the
+            company. I also authorize the company to contact them for the
+            purpose of verifying information related to myself.
           </div>
         </div>
-      </Section>
+      </div>
     </>
-  );
-}
-
-function Section({ title, subtitle, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm bg-success text-white">
-        <div>{title}</div>
-        <div>{subtitle}</div>
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function ItemCard({ index, onRemove, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        <div className="flex items-center justify-center h-full p-2 gap-2 border-2 border-dark">
-          #{""}
-          {index + 1}
-        </div>
-        <div className="flex flex-row items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-          {index > 0 && (
-            <Button
-              color="danger"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-              onPress={onRemove}
-            >
-              ลบ
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function AddButton({ label, onClick }) {
-  return (
-    <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-2 border-dark">
-      <Button
-        color="primary"
-        size="md"
-        radius="full"
-        className="flex items-center justify-center h-full p-4 gap-2 border-2 border-dark"
-        onPress={onClick}
-      >
-        {label}
-      </Button>
-    </div>
   );
 }

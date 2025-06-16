@@ -1,179 +1,381 @@
 "use client";
 
-import { Input, Textarea, Switch } from "@heroui/react";
-import { useState } from "react";
+import React from "react";
+import {
+  Input,
+  Textarea,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 
-export default function UIRecruitStep5() {
-  const [formData, setFormData] = useState({
-    selfIntro: "",
-    homeMapUrl: "",
-    attachIdCard: "",
-    attachHouseReg: "",
-    attachEducation: "",
-    attachMedicalCert: "",
-    attachMilitaryDoc: "",
-    consentGeneral: false,
-    consentSensitive: false,
-    signatureImage: "",
-  });
-
-  const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
+export default function UIRecruitStep5({
+  formData,
+  handleInputChange,
+  errors,
+}) {
   return (
     <>
-      <Section title="แนะนำตัวเอง" subtitle="SELF INTRODUCTION">
-        <ItemCard>
-          <Textarea
-            label="โปรดแนะนำตัวเอง"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.selfIntro}
-            onChange={(e) => handleChange("selfIntro", e.target.value)}
-            className="w-full"
-          />
-        </ItemCard>
-      </Section>
-
-      <Section
-        title="ลิงก์ที่อยู่ Google Maps"
-        subtitle="HOME LOCATION (GOOGLE MAPS)"
-      >
-        <ItemCard>
-          <Input
-            label="Google Maps URL"
-            placeholder="https://maps.google.com/..."
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.homeMapUrl}
-            onChange={(e) => handleChange("homeMapUrl", e.target.value)}
-            className="w-full"
-          />
-        </ItemCard>
-      </Section>
-
-      <Section title="แนบเอกสารประกอบ" subtitle="DOCUMENT ATTACHMENTS">
-        <ItemCard>
-          <Input
-            label="สำเนาบัตรประชาชน"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.attachIdCard}
-            onChange={(e) => handleChange("attachIdCard", e.target.value)}
-          />
-          <Input
-            label="สำเนาทะเบียนบ้าน"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.attachHouseReg}
-            onChange={(e) => handleChange("attachHouseReg", e.target.value)}
-          />
-          <Input
-            label="วุฒิการศึกษา"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.attachEducation}
-            onChange={(e) => handleChange("attachEducation", e.target.value)}
-          />
-          <Input
-            label="ใบรับรองแพทย์"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.attachMedicalCert}
-            onChange={(e) => handleChange("attachMedicalCert", e.target.value)}
-          />
-          <Input
-            label="เอกสารทางทหาร"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.attachMilitaryDoc}
-            onChange={(e) => handleChange("attachMilitaryDoc", e.target.value)}
-          />
-        </ItemCard>
-      </Section>
-
-      <Section
-        title="ความยินยอมข้อมูลส่วนบุคคล"
-        subtitle="PERSONAL DATA CONSENT"
-      >
-        <ItemCard>
-          <div className="flex items-center justify-between border p-2 rounded w-full">
-            <span>ยินยอมให้ใช้ข้อมูลทั่วไป</span>
-            <Switch
-              checked={formData.consentGeneral}
-              onChange={(e) => handleChange("consentGeneral", e.target.checked)}
-            />
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                กรุณาแนะนำตัวท่านเอง เพื่อให้บริษัทรู้จักตัวท่านดีขึ้น
+              </div>
+              <div className="text-sm text-gray-500">
+                Please provide any further information about yourself which will
+                allow our company to know you better.
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Textarea
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
           </div>
-          <div className="flex items-center justify-between border p-2 rounded w-full">
-            <span>ยินยอมให้ใช้ข้อมูลอ่อนไหว (สุขภาพ, คดี, ศาสนา ฯลฯ)</span>
-            <Switch
-              checked={formData.consentSensitive}
-              onChange={(e) =>
-                handleChange("consentSensitive", e.target.checked)
-              }
-            />
-          </div>
-        </ItemCard>
-      </Section>
+        </div>
+      </div>
 
-      <Section title="ลายเซ็นผู้สมัคร" subtitle="SIGNATURE">
-        <ItemCard>
-          <Input
-            label="ลิงก์รูปภาพลายเซ็น (.png หรือ .jpg)"
-            placeholder="Please Enter Data"
-            size="md"
-            variant="underlined"
-            color="none"
-            radius="full"
-            value={formData.signatureImage}
-            onChange={(e) => handleChange("signatureImage", e.target.value)}
-            className="w-full"
-          />
-        </ItemCard>
-      </Section>
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="grid grid-cols-1 xl:grid-cols-1 w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ข้าพเจ้าขอรับรองว่า
+                ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ
+                หากภายหลังที่บริษัทได้ว่าจ้างให้ข้าพเจ้าทำงานแล้ว
+                ปรากฏว่าข้อความในใบสมัคร เอกสารประกอบ
+                หรือรายละเอียดที่ได้ให้ไว้ไม่เป็นความจริง
+                บริษัทมีสิทธิ์เลิกจ้างข้าพเจ้าได้โดยไม่ต้องจ่ายเงินชดเชยหรือค่าเสียหายใด
+                ๆ ทั้งสิ้น
+              </div>
+              <div className="text-sm text-gray-500">
+                I hereby certify that all statements made in this application
+                are true and correct in every respect. If, after being employed
+                by the company, any information provided in this application,
+                supporting documents, or other related details is found to be
+                false, the company reserves the right to terminate my employment
+                without any compensation or damages whatsoever.
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full gap-2 border-2 border-dark">
+        <div className="flex flex-col items-start justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+          <div>เอกสารที่แนบพร้อมใบสมัคร</div>
+          <div>Enclosed Documents</div>
+        </div>
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">สำเนาบัตรประชาชน</div>
+              <div className="text-sm text-gray-500">Identification Card</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //--// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">สำเนาทะเบียนบ้าน</div>
+              <div className="text-sm text-gray-500">House Registration</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //--// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">หลักฐานการศึกษา</div>
+              <div className="text-sm text-gray-500">Transcript</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //--// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">ใบรับรองการผ่านงาน</div>
+              <div className="text-sm text-gray-500">
+                Employment Certificate
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //--// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">
+                ใบรับรองแพทย์ (ไม่เกิน 30 วัน)
+              </div>
+              <div className="text-sm text-gray-500">
+                Medical Certificate (Not over 30 day)
+              </div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+          {/* //--// */}
+          <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2 border-2 border-dark">
+            <div className="flex flex-col items-start justify-center w-full h-full xl:w-4/12 p-2 gap-2 border-2 border-dark">
+              <div className="font-medium text-black">หลักฐานการเกณฑ์ทหาร</div>
+              <div className="text-sm text-gray-500">Military Certificate</div>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-5/12 p-2 gap-2 border-2 border-dark">
+              <RadioGroup
+                name="recruitGender"
+                size="md"
+                variant="underlined"
+                color="primary"
+                radius="full"
+                orientation="horizontal"
+                className="flex items-start justify-center xl:items-start w-full h-full"
+                // value={formData.recruitGender}
+                // onValueChange={(value) =>
+                //   handleInputChange("recruitGender")({ target: { value } })
+                // }
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              >
+                <Radio key="Yes" value="Yes">
+                  มี <div className="text-sm text-gray-500">(Yes)</div>
+                </Radio>
+                <Radio key="No" value="No">
+                  ไม่มี <div className="text-sm text-gray-500">(No)</div>
+                </Radio>
+              </RadioGroup>
+            </div>
+            <div className="flex items-end justify-center w-full h-full xl:w-3/12 p-2 gap-2 border-2 border-dark">
+              <Input
+                name="roleName"
+                type="text"
+                size="md"
+                variant="underlined"
+                color="none"
+                radius="full"
+                // value={formData.roleName || ""}
+                // onChange={handleInputChange("roleName")}
+                // isInvalid={!!errors.roleName}
+                // errorMessage={errors.roleName}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  );
-}
-
-function Section({ title, subtitle, children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-2 border-dark">
-      <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm bg-success text-white">
-        <div>{title}</div>
-        <div>{subtitle}</div>
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full gap-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function ItemCard({ children }) {
-  return (
-    <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-      {children}
-    </div>
   );
 }
