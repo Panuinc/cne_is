@@ -104,7 +104,7 @@ export default function UIRecruitForm({
                 color="danger"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
                 onPress={handleBack}
               >
                 ย้อนกลับ
@@ -117,7 +117,7 @@ export default function UIRecruitForm({
                 color="warning"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
                 onPress={handleNext}
               >
                 ถัดไป
@@ -131,7 +131,7 @@ export default function UIRecruitForm({
                 size="md"
                 radius="full"
                 type="submit"
-                className="flex items-center justify-center w-4/12 h-full p-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
               >
                 บันทึก
               </Button>
