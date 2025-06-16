@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import Image from "next/image";
 import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
 
@@ -8,43 +8,12 @@ export default function UIRecruitStep1({
   formData,
   handleInputChange,
   errors,
+  preview,
+  setPreview,
+  handleFileChange,
+  fileInputRef,
+  formattedDate,
 }) {
-  const [preview, setPreview] = useState(null);
-  const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if (
-      formData?.recruitDetail?.recruitDetailProfileImage &&
-      typeof formData.recruitDetail.recruitDetailProfileImage === "string"
-    ) {
-      setPreview(formData.recruitDetail.recruitDetailProfileImage);
-    }
-  }, [formData?.recruitDetail?.recruitDetailProfileImage]);
-
-  useEffect(() => {
-    return () => {
-      if (preview && preview.startsWith("blob:")) URL.revokeObjectURL(preview);
-    };
-  }, [preview]);
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreview(url);
-      handleInputChange("recruitDetail.recruitDetailProfileImage")({
-        target: { value: file },
-      });
-    }
-  };
-
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString("th-TH", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full gap-2">

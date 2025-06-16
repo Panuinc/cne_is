@@ -12,8 +12,10 @@ export default function RecruitApplyPage() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [preview, setPreview] = useState(null);
 
   const formRef = useRef(null);
+  const fileInputRef = useRef(null);
   const router = useRouter();
   const { slug } = useParams();
 
@@ -56,10 +58,37 @@ export default function RecruitApplyPage() {
     })();
   }, [slug]);
 
+  useEffect(() => {
+    if (
+      formData?.recruitDetail?.recruitDetailProfileImage &&
+      typeof formData.recruitDetail.recruitDetailProfileImage === "string"
+    ) {
+      setPreview(formData.recruitDetail.recruitDetailProfileImage);
+    }
+  }, [formData?.recruitDetail?.recruitDetailProfileImage]);
+
+  useEffect(() => {
+    return () => {
+      if (preview && preview.startsWith("blob:")) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+      handleInputChange("recruitDetail.recruitDetailProfileImage")({
+        target: { value: file },
+      });
+    }
+  };
+
   const handleInputChange = useCallback(
     (path) => (e) => {
       const value = e?.target?.value ?? e;
-
       const keys = path
         .replace(/\[(\d+)\]/g, ".$1")
         .split(".")
@@ -68,10 +97,8 @@ export default function RecruitApplyPage() {
       setFormData((prev) => {
         const updated = { ...prev };
         let curr = updated;
-
         for (let i = 0; i < keys.length - 1; i++) {
           const k = keys[i];
-
           if (Array.isArray(curr[k])) {
             const idx = parseInt(keys[++i], 10);
             curr[k] = [...curr[k]];
@@ -82,7 +109,6 @@ export default function RecruitApplyPage() {
             curr = curr[k];
           }
         }
-
         curr[keys[keys.length - 1]] = value;
         return updated;
       });
@@ -153,6 +179,13 @@ export default function RecruitApplyPage() {
     [formData, router]
   );
 
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   if (loading) return <p>Loading...</p>;
   if (!formData) return <p>{errorMessage || "ไม่พบข้อมูลใบสมัคร"}</p>;
 
@@ -168,6 +201,11 @@ export default function RecruitApplyPage() {
           handleInputChange={handleInputChange}
           isUpdate={false}
           operatedBy="ผู้สมัคร"
+          preview={preview}
+          setPreview={setPreview}
+          handleFileChange={handleFileChange}
+          fileInputRef={fileInputRef}
+          formattedDate={formattedDate}
         />
       </div>
     </>

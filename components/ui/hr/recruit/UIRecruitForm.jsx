@@ -19,6 +19,11 @@ export default function UIRecruitForm({
   handleInputChange,
   isUpdate,
   operatedBy,
+  preview,
+  setPreview,
+  handleFileChange,
+  fileInputRef,
+  formattedDate,
 }) {
   const [step, setStep] = useState(1);
 
@@ -42,6 +47,11 @@ export default function UIRecruitForm({
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
+            preview={preview}
+            setPreview={setPreview}
+            handleFileChange={handleFileChange}
+            fileInputRef={fileInputRef}
+            formattedDate={formattedDate}
           />
         )}
         {step === 2 && (
