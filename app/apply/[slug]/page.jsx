@@ -69,7 +69,7 @@ export default function RecruitApplyPage() {
 
   useEffect(() => {
     return () => {
-      if (preview && preview.startsWith("blob:")) {
+      if (preview?.startsWith("blob:")) {
         URL.revokeObjectURL(preview);
       }
     };
@@ -153,9 +153,7 @@ export default function RecruitApplyPage() {
         const res = await fetch("/api/hr/recruit", {
           method: "POST",
           body: form,
-          headers: {
-            "secret-token": SECRET_TOKEN || "",
-          },
+          headers: { "secret-token": SECRET_TOKEN || "" },
         });
 
         const result = await res.json();
