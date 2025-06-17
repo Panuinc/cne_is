@@ -2,83 +2,10 @@
 
 import Image from "next/image";
 import React from "react";
-import { Input, RadioGroup, Radio } from "@heroui/react";
-
-function renderInputField({
-  labelTH,
-  labelEN,
-  name,
-  type = "text",
-  placeholder = "xxx xxx",
-  value,
-  onChange,
-  error,
-  required = true,
-}) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
-        {labelTH} <br /> {labelEN}
-      </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
-        <Input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          size="md"
-          variant="underlined"
-          color="none"
-          radius="full"
-          required={required}
-          value={value}
-          onChange={onChange}
-          isInvalid={!!error}
-          errorMessage={error}
-        />
-      </div>
-    </div>
-  );
-}
-
-function renderRadioGroupField({
-  labelTH,
-  labelEN,
-  name,
-  value,
-  onChange,
-  error,
-  options = [],
-  orientation = "horizontal",
-}) {
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
-        {labelTH} <br /> {labelEN}
-      </div>
-      <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
-        <RadioGroup
-          name={name}
-          size="md"
-          variant="underlined"
-          color="primary"
-          radius="full"
-          orientation={orientation}
-          value={value}
-          onValueChange={(val) => onChange({ target: { value: val } })}
-          isInvalid={!!error}
-          errorMessage={error}
-        >
-          {options.map((opt) => (
-            <Radio key={opt.value} value={opt.value}>
-              {opt.labelTH}
-              {opt.labelEN && <>({opt.labelEN})</>}
-            </Radio>
-          ))}
-        </RadioGroup>
-      </div>
-    </div>
-  );
-}
+import {
+  renderInputField,
+  renderRadioGroupField,
+} from "@/components/ui/hr/recruit/components/UIRenderField";
 
 export default function UIRecruitStep1({
   formData,
@@ -102,10 +29,10 @@ export default function UIRecruitStep1({
             property="true"
           />
         </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm font-[600]">
           35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140
           <br />
           35, Moo 12, Khubangluang Sub-district, Lat Lum Kaeo District, Pathum
@@ -115,7 +42,7 @@ export default function UIRecruitStep1({
 
       {/* Session 2 */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-center">
+        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
           ใบสมัครงาน
           <br />
           Employment Application
@@ -178,7 +105,7 @@ export default function UIRecruitStep1({
 
       {/* Session 4 */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
           ประวัติส่วนตัว
           <br />
           Personal Data
@@ -437,6 +364,102 @@ export default function UIRecruitStep1({
                 labelTH: "หอพัก/บ้านเช่า",
                 labelEN: "Boarding_house_Rented_house",
                 value: "Boarding_house_Rented_house",
+              },
+            ],
+          })}
+          {renderRadioGroupField({
+            labelTH: "สถานภาพการสมรส",
+            labelEN: "Marital Status",
+            name: "recruitDetail.recruitDetailMaritalStatus",
+            value: formData?.recruitDetail?.recruitDetailMaritalStatus || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailMaritalStatus"
+            ),
+            error: errors?.["recruitDetail.recruitDetailMaritalStatus"],
+            options: [
+              { labelTH: "โสด", labelEN: "Single", value: "Single" },
+              { labelTH: "แต่งงาน", labelEN: "Married", value: "Married" },
+              { labelTH: "หย่าร้าง", labelEN: "Divorced", value: "Divorced" },
+              { labelTH: "หม้าย", labelEN: "Widowed", value: "Widowed" },
+            ],
+          })}
+          {formData?.recruitDetail?.recruitDetailMaritalStatus === "Married" &&
+            renderRadioGroupField({
+              labelTH: "ถ้าสมรสแล้วคู่สมรสมีรายได้หรือไม่",
+              labelEN: "If married does the spouse have income",
+              name: "recruitDetail.recruitDetailSpouseEarnIncome",
+              value:
+                formData?.recruitDetail?.recruitDetailSpouseEarnIncome || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDetailSpouseEarnIncome"
+              ),
+              error: errors?.["recruitDetail.recruitDetailSpouseEarnIncome"],
+              options: [
+                { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+                { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+              ],
+            })}
+          {formData?.recruitDetail?.recruitDetailMaritalStatus === "Married" &&
+            formData?.recruitDetail?.recruitDetailSpouseEarnIncome === "Yes" &&
+            renderInputField({
+              labelTH: "รายได้คู่สมรส",
+              labelEN: "Spouse income amount",
+              name: "recruitDetail.recruitDetailSpouseIncomeAmount",
+              type: "number",
+              value:
+                formData?.recruitDetail?.recruitDetailSpouseIncomeAmount || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDetailSpouseIncomeAmount"
+              ),
+              error: errors?.["recruitDetail.recruitDetailSpouseIncomeAmount"],
+            })}
+          {renderInputField({
+            labelTH: "จำนวนบุตร",
+            labelEN: "Number of children",
+            name: "recruitDetail.recruitDetailNumberOfChildren",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailNumberOfChildren || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailNumberOfChildren"
+            ),
+            error: errors?.["recruitDetail.recruitDetailNumberOfChildren"],
+          })}
+        </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "สถานภาพทางทหาร",
+            labelEN: "Military Service Status",
+            name: "recruitDetail.recruitDetailMilitaryStatus",
+            value: formData?.recruitDetail?.recruitDetailMilitaryStatus || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailMilitaryStatus"
+            ),
+            error: errors?.["recruitDetail.recruitDetailMilitaryStatus"],
+            options: [
+              {
+                labelTH: "ได้รับการยกเว้น",
+                labelEN: "Exempted",
+                value: "Exempted",
+              },
+              {
+                labelTH: "ผ่านการเกณฑ์แล้ว",
+                labelEN: "Completed",
+                value: "Completed",
+              },
+              {
+                labelTH: "ยังไม่เกณฑ์",
+                labelEN: "NotYetServed",
+                value: "NotYetServed",
+              },
+              {
+                labelTH: "กำลังอยู่ระหว่างการเกณฑ์",
+                labelEN: "InProgress",
+                value: "InProgress",
+              },
+              {
+                labelTH: "ไม่ต้องเข้ารับการเกณฑ์",
+                labelEN: "NotRequired",
+                value: "NotRequired",
               },
             ],
           })}
