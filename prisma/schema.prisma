@@ -622,7 +622,6 @@ model Recruit {
   RecruitUpdateBy Emp?   @relation("RecruitUpdateBy", fields: [recruitUpdateBy], references: [empId])
 
   recruitFamilyMembers        RecruitFamilyMember[]        @relation("RecruitFamilyMemberRecruitId")
-  recruitEmergencyContacts    RecruitEmergencyContact[]    @relation("RecruitEmergencyContactRecruitId")
   recruitEducations           RecruitEducation[]           @relation("RecruitEducationRecruitId")
   recruitProfessionalLicenses RecruitProfessionalLicense[] @relation("RecruitProfessionalLicenseRecruitId")
   recruitLanguageSkills       RecruitLanguageSkill[]       @relation("RecruitLanguageSkillId")
@@ -664,6 +663,9 @@ model RecruitDetail {
   recruitDetailSpouseIncomeAmount        Int?
   recruitDetailNumberOfChildren          Int?
   recruitDetailMilitaryStatus            RecruitMilitaryServiceStatus
+  recruitDetailEmergencyFullName         String                       @db.VarChar(255)
+  recruitDetailEmergencyRelationship     String                       @db.VarChar(255)
+  recruitDetailEmergencyPhone            String                       @db.VarChar(255)
   recruitDetailOwnCar                    VehiclePossession
   recruitDetailOwnMotorcycle             VehiclePossession
   recruitDetailHaveCarLicense            VehiclePossession
@@ -720,19 +722,6 @@ model RecruitFamilyMember {
   RecruitFamilyMemberRecruitId Recruit @relation("RecruitFamilyMemberRecruitId", fields: [recruitFamilyMemberRecruitId], references: [recruitId])
 
   @@index([recruitFamilyMemberRecruitId])
-}
-
-model RecruitEmergencyContact {
-  recruitEmergencyContactId        Int                      @id @default(autoincrement())
-  recruitEmergencyContactRecruitId Int
-  recruitEmergencyContactName      String                   @db.VarChar(255)
-  recruitEmergencyContactRelation  RecruitEmergencyRelation
-  recruitEmergencyContactPhone     String                   @db.VarChar(20)
-  recruitEmergencyContactAddress   String?                  @db.VarChar(255)
-
-  RecruitEmergencyContactRecruitId Recruit @relation("RecruitEmergencyContactRecruitId", fields: [recruitEmergencyContactRecruitId], references: [recruitId])
-
-  @@index([recruitEmergencyContactRecruitId])
 }
 
 model RecruitEducation {

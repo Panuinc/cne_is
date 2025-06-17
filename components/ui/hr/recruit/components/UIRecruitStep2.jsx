@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button } from "@heroui/react";
+import { MinusCircle, PlusCircle } from "lucide-react";
 import {
   renderInputField,
   renderSelectField,
@@ -153,8 +154,8 @@ export default function UIRecruitStep2({
           </div>
         ))}
 
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
             <Button
               color="primary"
               size="md"
@@ -162,7 +163,7 @@ export default function UIRecruitStep2({
               className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
               onPress={handleAddFamilyMember}
             >
-              เพิ่มสมาชิก
+              <PlusCircle /> เพิ่มสมาชิก
             </Button>
           </div>
           {familyMembers.length > 1 && (
@@ -174,10 +175,56 @@ export default function UIRecruitStep2({
                 className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
                 onPress={handleRemoveLastMember}
               >
-                ลบสมาชิก
+                <MinusCircle /> ลบสมาชิก
               </Button>
             </div>
           )}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+            กรณีเร่งด่วนติดต่อ In case od emergency, please notify
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderInputField({
+            labelTH: "ชื่อ - นามสกุล",
+            labelEN: "Name - Surname",
+            name: "recruitDetail.recruitDetailEmergencyFullName",
+            type: "text",
+            value:
+              formData?.recruitDetail?.recruitDetailEmergencyFullName || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailEmergencyFullName"
+            ),
+            error: errors?.["recruitDetail.recruitDetailEmergencyFullName"],
+          })}
+
+          {renderInputField({
+            labelTH: "ความสัมพันธ์",
+            labelEN: "Relationship",
+            name: "recruitDetail.recruitDetailEmergencyRelationship",
+            type: "text",
+            value:
+              formData?.recruitDetail?.recruitDetailEmergencyRelationship || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailEmergencyRelationship"
+            ),
+            error: errors?.["recruitDetail.recruitDetailEmergencyRelationship"],
+          })}
+
+          {renderInputField({
+            labelTH: "โทรศัพท์",
+            labelEN: "Tel",
+            name: "recruitDetail.recruitDetailEmergencyPhone",
+            type: "number",
+            value: formData?.recruitDetail?.recruitDetailEmergencyPhone || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailEmergencyPhone"
+            ),
+            error: errors?.["recruitDetail.recruitDetailEmergencyPhone"],
+          })}
         </div>
       </div>
     </>
