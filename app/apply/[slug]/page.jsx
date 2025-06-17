@@ -43,6 +43,9 @@ export default function RecruitApplyPage() {
         data.recruitLanguageSkills = data.recruitLanguageSkills?.length
           ? data.recruitLanguageSkills
           : [{}];
+        data.recruitWorkExperiences = data.recruitWorkExperiences?.length
+          ? data.recruitWorkExperiences
+          : [{}];
 
         setFormData(data);
       } catch (error) {

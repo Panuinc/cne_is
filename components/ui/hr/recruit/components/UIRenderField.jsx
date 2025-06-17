@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
+import {
+  Input,
+  Textarea,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 
 export function renderInputField({
   labelTH,
@@ -39,6 +46,44 @@ export function renderInputField({
   );
 }
 
+export function renderTextAreaField({
+  labelTH,
+  labelEN,
+  name,
+  placeholder = "xxx xxx",
+  value,
+  onChange,
+  error,
+  required = true,
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+        {labelTH} <br /> {labelEN}
+      </div>
+
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <Textarea
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onValueChange={(val) => onChange({ target: { value: val } })}
+          isRequired={required}
+          isInvalid={!!error}
+          errorMessage={error}
+          minRows={3}
+          variant="underlined"
+          radius="full"
+          size="md"
+          classNames={{
+            base: "w-full",
+            input: "rounded-3xl px-4 py-2",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 export function renderSelectField({
   labelTH,
   labelEN,
