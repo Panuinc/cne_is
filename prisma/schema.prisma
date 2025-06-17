@@ -683,8 +683,9 @@ model RecruitDetail {
   recruitDetailHaveCarLicense        VehiclePossession
   recruitDetailHaveMotorcycleLicense VehiclePossession
 
-  recruitDetailWhenStartWork                String  @db.VarChar(255)
-  recruitDetailCheckWorkingHistory          YesOrNo
+  recruitDetailWhenStartWork       String  @db.VarChar(255)
+  recruitDetailCheckWorkingHistory YesOrNo
+
   recruitDischarged                         YesOrNo
   recruitDischargedReason                   String? @db.VarChar(255)
   recruitDetailSeriousIllnessOrContagious   YesOrNo
@@ -696,6 +697,7 @@ model RecruitDetail {
   recruitDetailRelativesName                String? @db.VarChar(255)
   recruitDetailRef1Name                     String  @db.VarChar(255)
   recruitDetailRef2Name                     String  @db.VarChar(255)
+  recruitDetailSelfIntro                    String? @db.Text
 
   // recruitDetailAllowReferenceCheck       Boolean
   // recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)

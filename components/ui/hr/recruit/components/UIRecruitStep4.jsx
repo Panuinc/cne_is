@@ -246,7 +246,6 @@ export default function UIRecruitStep4({
           )}
         </div>
       </div>
-
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
           {renderInputField({
@@ -280,10 +279,211 @@ export default function UIRecruitStep4({
         </div>
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
           <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ให้บริษัทตรวจสอบ
-            <br />
-            Do you have a car / motorcycle available for company business
+            ให้บริษัทตรวจสอบประวัติการทำงานและความประพฤติของข้าพเจ้ากับนายจ้างเดิม
+            เพื่อยืนยันข้อมูลที่ข้าพเจ้าได้ให้ไว้กับบริษัทเพื่อการพิจารณาการจ้างงาน
+            <br />I authorize the company to verify my employment history and
+            conduct with my previous employers to confirm the information I have
+            provided for recruitment consideration.
           </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+          ข้อความเพิ่มเติม
+          <br />
+          Further Information
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "ท่านเคยถูกให้ออกจากงานหรือไม่",
+            labelEN:
+              "Have you ever been discharged from employment for any reason",
+            name: "recruitDetail.recruitDischarged",
+            value: formData?.recruitDetail?.recruitDischarged || "",
+            onChange: handleInputChange("recruitDetail.recruitDischarged"),
+            error: errors?.["recruitDetail.recruitDischarged"],
+            options: [
+              { labelTH: "ไม่เคย", labelEN: "No", value: "No" },
+              { labelTH: "เคย", labelEN: "Yes", value: "Yes" },
+            ],
+          })}
+
+          {formData?.recruitDetail?.recruitDischarged === "Yes" &&
+            renderInputField({
+              labelTH: "เพราะ",
+              labelEN: "Because",
+              name: "recruitDetail.recruitDischargedReason",
+              type: "text",
+              value: formData?.recruitDetail?.recruitDischargedReason || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDischargedReason"
+              ),
+              error: errors?.["recruitDetail.recruitDischargedReason"],
+            })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่",
+            labelEN:
+              "Have you ever been seriously ill or contracted with contagious disease",
+            name: "recruitDetail.recruitDetailSeriousIllnessOrContagious",
+            value:
+              formData?.recruitDetail
+                ?.recruitDetailSeriousIllnessOrContagious || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailSeriousIllnessOrContagious"
+            ),
+            error:
+              errors?.["recruitDetail.recruitDetailSeriousIllnessOrContagious"],
+            options: [
+              { labelTH: "ไม่เคย", labelEN: "No", value: "No" },
+              { labelTH: "เคย", labelEN: "Yes", value: "Yes" },
+            ],
+          })}
+
+          {formData?.recruitDetail?.recruitDetailSeriousIllnessOrContagious ===
+            "Yes" &&
+            renderInputField({
+              labelTH: "ชื่อโรค",
+              labelEN: "Explain",
+              name: "recruitDetail.recruitDetailIllnessName",
+              type: "text",
+              value: formData?.recruitDetail?.recruitDetailIllnessName || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDetailIllnessName"
+              ),
+              error: errors?.["recruitDetail.recruitDetailIllnessName"],
+            })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH:
+              "ท่านเคยได้รับโทษทางอาญาหรือจำคุกหรือเป็นบุคคลล้มละลายหรือไม่",
+            labelEN:
+              "Have you ever been arrested of convicted for any offense or crime or bankrupt",
+            name: "recruitDetail.recruitDetailCriminalConvictionOrBankrupt",
+            value:
+              formData?.recruitDetail
+                ?.recruitDetailCriminalConvictionOrBankrupt || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailCriminalConvictionOrBankrupt"
+            ),
+            error:
+              errors?.[
+                "recruitDetail.recruitDetailCriminalConvictionOrBankrupt"
+              ],
+            options: [
+              { labelTH: "ไม่เคย", labelEN: "No", value: "No" },
+              { labelTH: "เคย", labelEN: "Yes", value: "Yes" },
+            ],
+          })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "ขณะนี้คุณตั้งครรภ์หรือไม่",
+            labelEN: "Are you pregnant",
+            name: "recruitDetail.recruitDetailIsPregnant",
+            value: formData?.recruitDetail?.recruitDetailIsPregnant || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailIsPregnant"
+            ),
+            error: errors?.["recruitDetail.recruitDetailIsPregnant"],
+            options: [
+              { labelTH: "ไม่", labelEN: "No", value: "No" },
+              { labelTH: "ตั้งครรภ์", labelEN: "Yes", value: "Yes" },
+            ],
+          })}
+
+          {formData?.recruitDetail?.recruitDetailIsPregnant === "Yes" &&
+            renderInputField({
+              labelTH: "กี่เดือน",
+              labelEN: "Months",
+              name: "recruitDetail.recruitDetailPregnancyMonth",
+              type: "number",
+              value: formData?.recruitDetail?.recruitDetailPregnancyMonth || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDetailPregnancyMonth"
+              ),
+              error: errors?.["recruitDetail.recruitDetailPregnancyMonth"],
+            })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "ท่านมีเพื่อนที่รู้จัก หรือญาติที่ทำงานในบรษัทนี้หรือไม่",
+            labelEN:
+              "Do you have relatives and/or friends who are working in this company",
+            name: "recruitDetail.recruitDetailHasRelativesInCompany",
+            value:
+              formData?.recruitDetail?.recruitDetailHasRelativesInCompany || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailHasRelativesInCompany"
+            ),
+            error: errors?.["recruitDetail.recruitDetailHasRelativesInCompany"],
+            options: [
+              { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+              { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+            ],
+          })}
+
+          {formData?.recruitDetail?.recruitDetailHasRelativesInCompany ===
+            "Yes" &&
+            renderInputField({
+              labelTH: "กี่เดือน",
+              labelEN: "Months",
+              name: "recruitDetail.recruitDetailRelativesName",
+              type: "text",
+              value: formData?.recruitDetail?.recruitDetailRelativesName || "",
+              onChange: handleInputChange(
+                "recruitDetail.recruitDetailRelativesName"
+              ),
+              error: errors?.["recruitDetail.recruitDetailRelativesName"],
+            })}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          เขียนชื่อ ที่อยู่ โทรศัพท์ และอาชีพของผู้ที่อ้างถึง 2 คน
+          (ซึ่งไม่ใช่ญาติหรือนายจ้างเดิม) ที่รู้จักคุ้นเคยตัวท่านดี
+          <br />
+          Please provide the name, address, phone number, and occupation of two
+          references (not relatives or former employers) who are well acquainted
+          with you.
+        </div>
+
+        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderInputField({
+            labelTH: "คนที่ 1",
+            labelEN: "No 1",
+            name: "recruitDetail.recruitDetailRef1Name",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailRef1Name || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailRef1Name"),
+            error: errors?.["recruitDetail.recruitDetailRef1Name"],
+          })}
+          {renderInputField({
+            labelTH: "คนที่ 2",
+            labelEN: "No 2",
+            name: "recruitDetail.recruitDetailRef2Name",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailRef2Name || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailRef2Name"),
+            error: errors?.["recruitDetail.recruitDetailRef2Name"],
+          })}
+        </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          ข้าพเจ้าขอรับรองว่า ได้รับอนุญาตจากบุคคลอ้างอิงที่มีรายชื่อข้างต้น
+          ให้ระบุชื่อเพื่อเป็นข้อมูลอ้างอิงกับบริษัท
+          รวมถึงเพื่อให้บริษัทสามารถติดต่อสอบถามข้อมูลและยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+          <br />I certify that I have obtained consent from the listed
+          references to provide their names as part of this application, and to
+          allow the company to contact them for verification and reference
+          purposes.
         </div>
       </div>
     </>
