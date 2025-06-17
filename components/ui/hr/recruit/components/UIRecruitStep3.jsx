@@ -3,7 +3,11 @@
 import React from "react";
 import { Button } from "@heroui/react";
 import { MinusCircle, PlusCircle } from "lucide-react";
-import { renderSelectField } from "@/components/ui/hr/recruit/components/UIRenderField";
+import {
+  renderInputField,
+  renderRadioGroupField,
+  renderSelectField,
+} from "@/components/ui/hr/recruit/components/UIRenderField";
 
 export default function UIRecruitStep3({
   formData,
@@ -188,10 +192,161 @@ export default function UIRecruitStep3({
             </div>
           )}
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
           ทักษะอื่นๆ
           <br />
           Other Skills
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderInputField({
+            labelTH: "ทักษะทางด้านคอมพิวเตอร์",
+            labelEN: "Computer Skills",
+            name: "recruitDetail.recruitDetailComputerSkill",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailComputerSkill || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailComputerSkill"
+            ),
+            error: errors?.["recruitDetail.recruitDetailComputerSkill"],
+          })}
+          {renderInputField({
+            labelTH: "ทักษะทางด้านกีฬา",
+            labelEN: "Sport Skills",
+            name: "recruitDetail.recruitDetailSportSkill",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailSportSkill || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailSportSkill"
+            ),
+            error: errors?.["recruitDetail.recruitDetailSportSkill"],
+          })}
+          {renderInputField({
+            labelTH: "ทักษะทางด้านอื่นๆ",
+            labelEN: "Other Skills",
+            name: "recruitDetail.recruitDetailOtherSkill",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailOtherSkill || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailOtherSkill"
+            ),
+            error: errors?.["recruitDetail.recruitDetailOtherSkill"],
+          })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderInputField({
+            labelTH: "คะแนน Toeic",
+            labelEN: "Score Toeic",
+            name: "recruitDetail.recruitDetailScoreToeic",
+            type: "number",
+            value: formData?.recruitDetail?.recruitDetailScoreToeic || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailScoreToeic"
+            ),
+            error: errors?.["recruitDetail.recruitDetailScoreToeic"],
+          })}
+          {renderInputField({
+            labelTH: "คะแนน Toefl",
+            labelEN: "Score Toefl",
+            name: "recruitDetail.recruitDetailScoreToefl",
+            type: "number",
+            value: formData?.recruitDetail?.recruitDetailScoreToefl || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailScoreToefl"
+            ),
+            error: errors?.["recruitDetail.recruitDetailScoreToefl"],
+          })}
+          {renderInputField({
+            labelTH: "คะแนน Ielts",
+            labelEN: "Score Ielts",
+            name: "recruitDetail.recruitDetailScoreIelts",
+            type: "number",
+            value: formData?.recruitDetail?.recruitDetailScoreIelts || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailScoreIelts"
+            ),
+            error: errors?.["recruitDetail.recruitDetailScoreIelts"],
+          })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+            ท่านมีรถยนต์ /
+            มอเตอร์ไซต์ส่วนตัวที่สามารถนำมาใช้ในธุระของบริษัทหรือไม่
+            <br />
+            Do you have a car / motorcycle available for company business
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "รถยนต์",
+            labelEN: "Car",
+            name: "recruitDetail.recruitDetailOwnCar",
+            value: formData?.recruitDetail?.recruitDetailOwnCar || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailOwnCar"),
+            error: errors?.["recruitDetail.recruitDetailOwnCar"],
+            options: [
+              { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+              { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+            ],
+          })}
+          {renderRadioGroupField({
+            labelTH: "รถมอไซต์",
+            labelEN: "Motorcycle",
+            name: "recruitDetail.recruitDetailOwnMotorcycle",
+            value: formData?.recruitDetail?.recruitDetailOwnMotorcycle || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailOwnMotorcycle"
+            ),
+            error: errors?.["recruitDetail.recruitDetailOwnMotorcycle"],
+            options: [
+              { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+              { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+            ],
+          })}
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+            ท่านมีใบขับขี่หรือไม่
+            <br />
+            Do you have a driving license?
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderRadioGroupField({
+            labelTH: "รถยนต์",
+            labelEN: "Car",
+            name: "recruitDetail.recruitDetailHaveCarLicense",
+            value: formData?.recruitDetail?.recruitDetailHaveCarLicense || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailHaveCarLicense"
+            ),
+            error: errors?.["recruitDetail.recruitDetailHaveCarLicense"],
+            options: [
+              { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+              { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+            ],
+          })}
+          {renderRadioGroupField({
+            labelTH: "รถมอไซต์",
+            labelEN: "Motorcycle",
+            name: "recruitDetail.recruitDetailHaveMotorcycleLicense",
+            value:
+              formData?.recruitDetail?.recruitDetailHaveMotorcycleLicense || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailHaveMotorcycleLicense"
+            ),
+            error: errors?.["recruitDetail.recruitDetailHaveMotorcycleLicense"],
+            options: [
+              { labelTH: "มี", labelEN: "Yes", value: "Yes" },
+              { labelTH: "ไม่มี", labelEN: "No", value: "No" },
+            ],
+          })}
         </div>
       </div>
     </>
