@@ -30,10 +30,14 @@ export default function UIRecruitStep2({
           {renderSelectField({
             labelTH: "ความสัมพันธ์",
             labelEN: "Member Relation",
-            name: "recruitFamilyMemberRelation",
-            value: formData.recruitFamilyMemberRelation,
-            onChange: handleInputChange("recruitFamilyMemberRelation"),
-            error: errors.recruitFamilyMemberRelation,
+            name: "recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation",
+            value:
+              formData.recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation,
+            onChange: handleInputChange(
+              "recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation"
+            ),
+            error:
+              errors.recruitFamilyMembers?.[0]?.recruitFamilyMemberRelation,
             options: [
               { value: "Father", labelTH: "พ่อ", labelEN: "Father" },
               { value: "Mother", labelTH: "แม่", labelEN: "Mother" },
@@ -45,12 +49,20 @@ export default function UIRecruitStep2({
           })}
 
           {renderInputField({
-            labelTH: "Name - Surname",
-            labelEN: "Full name (EN)",
-            name: "recruitDetail.recruitFullNameEn",
-            value: formData?.recruitDetail?.recruitFullNameEn || "",
-            onChange: handleInputChange("recruitDetail.recruitFullNameEn"),
-            error: errors?.["recruitDetail.recruitFullNameEn"],
+            labelTH: "ชื่อ - นามสกุล",
+            labelEN: "First name - Last name",
+            name: "recruitFamilyMembers?.[0]?.recruitFamilyMemberFullName",
+            type: "text",
+            value:
+              formData?.recruitFamilyMembers?.[0]
+                ?.recruitFamilyMemberFullName || "",
+            onChange: handleInputChange(
+              "recruitFamilyMembers?.[0]?.recruitFamilyMemberFullName"
+            ),
+            error:
+              errors?.[
+                "recruitFamilyMembers?.[0]?.recruitFamilyMemberFullName"
+              ],
           })}
         </div>
       </div>

@@ -120,6 +120,7 @@ export default function UIRecruitStep1({
             labelTH: "ชื่อ - นามสกุล",
             labelEN: "Full name (TH)",
             name: "recruitDetail.recruitFullNameTh",
+            type: "text",
             value: formData?.recruitDetail?.recruitFullNameTh || "",
             onChange: handleInputChange("recruitDetail.recruitFullNameTh"),
             error: errors?.["recruitDetail.recruitFullNameTh"],
@@ -129,6 +130,7 @@ export default function UIRecruitStep1({
             labelTH: "Name - Surname",
             labelEN: "Full name (EN)",
             name: "recruitDetail.recruitFullNameEn",
+            type: "text",
             value: formData?.recruitDetail?.recruitFullNameEn || "",
             onChange: handleInputChange("recruitDetail.recruitFullNameEn"),
             error: errors?.["recruitDetail.recruitFullNameEn"],
@@ -138,6 +140,7 @@ export default function UIRecruitStep1({
             labelTH: "ชื่อเล่น",
             labelEN: "Nickname",
             name: "recruitDetail.recruitNickName",
+            type: "text",
             value: formData?.recruitDetail?.recruitNickName || "",
             onChange: handleInputChange("recruitDetail.recruitNickName"),
             error: errors?.["recruitDetail.recruitNickName"],
@@ -249,7 +252,7 @@ export default function UIRecruitStep1({
             labelTH: "สถานที่ออกบัตร",
             labelEN: "Issued at",
             name: "recruitDetail.recruitDetailIdCardIssuedAt",
-            type: "tex",
+            type: "text",
             value: formData?.recruitDetail?.recruitDetailIdCardIssuedAt || "",
             onChange: handleInputChange(
               "recruitDetail.recruitDetailIdCardIssuedAt"
@@ -292,7 +295,7 @@ export default function UIRecruitStep1({
           })}
           {renderInputField({
             labelTH: "อีเมลล์",
-            labelEN: "Eamil",
+            labelEN: "Email",
             name: "recruitDetail.recruitDetailEmail",
             type: "email",
             value: formData?.recruitDetail?.recruitDetailEmail || "",

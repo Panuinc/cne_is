@@ -7,7 +7,7 @@ export function renderInputField({
   labelTH,
   labelEN,
   name,
-  type = "text",
+  type,
   placeholder = "xxx xxx",
   value,
   onChange,
