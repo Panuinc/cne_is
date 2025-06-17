@@ -159,7 +159,6 @@ export const recruitPostSchema = z.object({
   }),
 
   recruitFamilyMembers: z.array(z.any()).optional(),
-  recruitEmergencyContacts: z.array(z.any()).optional(),
   recruitEducations: z.array(z.any()).optional(),
   recruitProfessionalLicenses: z.array(z.any()).optional(),
   recruitLanguageSkills: z.array(z.any()).optional(),

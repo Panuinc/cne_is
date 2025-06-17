@@ -37,9 +37,6 @@ export default function RecruitApplyPage() {
         data.recruitFamilyMembers = data.recruitFamilyMembers?.length
           ? data.recruitFamilyMembers
           : [{}];
-        data.recruitEmergencyContacts = data.recruitEmergencyContacts?.length
-          ? data.recruitEmergencyContacts
-          : [{}];
         data.recruitEducations = data.recruitEducations?.length
           ? data.recruitEducations
           : [{}];
@@ -131,7 +128,6 @@ export default function RecruitApplyPage() {
 
       const arrayFields = [
         "recruitFamilyMembers",
-        "recruitEmergencyContacts",
         "recruitEducations",
         "recruitProfessionalLicenses",
         "recruitLanguageSkills",

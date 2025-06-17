@@ -85,7 +85,6 @@ export class RecruitService {
         },
         recruitDetail: true,
         recruitFamilyMembers: true,
-        recruitEmergencyContacts: true,
         recruitEducations: true,
         recruitProfessionalLicenses: true,
         recruitLanguageSkills: true,
@@ -98,7 +97,6 @@ export class RecruitService {
     const {
       recruitDetail,
       recruitFamilyMembers = [],
-      recruitEmergencyContacts = [],
       recruitEducations = [],
       recruitProfessionalLicenses = [],
       recruitLanguageSkills = [],
@@ -114,7 +112,6 @@ export class RecruitService {
         recruitStatus: recruitData.recruitStatus ?? "Pending",
         recruitDetail: { create: recruitDetail },
         recruitFamilyMembers: { create: recruitFamilyMembers },
-        recruitEmergencyContacts: { create: recruitEmergencyContacts },
         recruitEducations: { create: recruitEducations },
         recruitProfessionalLicenses: { create: recruitProfessionalLicenses },
         recruitLanguageSkills: { create: recruitLanguageSkills },
