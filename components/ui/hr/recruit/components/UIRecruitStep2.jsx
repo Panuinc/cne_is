@@ -14,7 +14,6 @@ export default function UIRecruitStep2({
   errors,
 }) {
   const familyMembers = formData.recruitFamilyMembers || [];
-
   const handleAddFamilyMember = () => {
     handleInputChange("recruitFamilyMembers")([
       ...familyMembers,
@@ -28,7 +27,6 @@ export default function UIRecruitStep2({
       },
     ]);
   };
-
   const handleRemoveLastMember = () => {
     if (familyMembers.length > 1) {
       const updated = [...familyMembers];
@@ -37,6 +35,28 @@ export default function UIRecruitStep2({
     }
   };
 
+  const educationList = formData.recruitEducations || [];
+  const handleAddEducation = () => {
+    handleInputChange("recruitEducations")([
+      ...educationList,
+      {
+        recruitEducationLevel: "",
+        recruitEducationFromDate: "",
+        recruitEducationToDate: "",
+        recruitEducationSchool: "",
+        recruitEducationDegree: "",
+        recruitEducationMajor: "",
+        recruitEducationGPA: "",
+      },
+    ]);
+  };
+  const handleRemoveLastEducation = () => {
+    if (educationList.length > 1) {
+      const updated = [...educationList];
+      updated.pop();
+      handleInputChange("recruitEducations")(updated);
+    }
+  };
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
@@ -226,6 +246,181 @@ export default function UIRecruitStep2({
             error: errors?.["recruitDetail.recruitDetailEmergencyPhone"],
           })}
         </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+            ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
+            ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
+            สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+            <br />I certify that I have received the above person’s consent for
+            disclosing his/her personal data to the company for making contact,
+            asking for information and verifying my information.
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+          ประวัติการศึกษา
+          <br />
+          Education Back Ground
+        </div>
+
+        {educationList.map((_, index) => (
+          <div
+            key={index}
+            className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning"
+          >
+            {renderSelectField({
+              labelTH: "ระดับการศึกษา",
+              labelEN: "Education Level",
+              name: `recruitEducations[${index}].recruitEducationLevel`,
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationLevel ||
+                "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationLevel`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationLevel,
+              options: [
+                { value: "Primary", labelTH: "ประถมศึกษา", labelEN: "Primary" },
+                {
+                  value: "LowerSecondary",
+                  labelTH: "มัธยมศึกษาตอนต้น",
+                  labelEN: "LowerSecondary",
+                },
+                {
+                  value: "UpperSecondary",
+                  labelTH: "มัธยมศึกษาตอนปลาย",
+                  labelEN: "UpperSecondary",
+                },
+                { value: "Vocational", labelTH: "ปวช", labelEN: "Vocational" },
+                {
+                  value: "HighVocational",
+                  labelTH: "ปวส",
+                  labelEN: "HighVocational",
+                },
+                {
+                  value: "Bachelor",
+                  labelTH: "ปริญญาตรี",
+                  labelEN: "Bachelor",
+                },
+                { value: "Master", labelTH: "ปริญญาโท", labelEN: "Master" },
+                {
+                  value: "Doctorate",
+                  labelTH: "ปริญญาเอก",
+                  labelEN: "Doctorate",
+                },
+              ],
+            })}
+
+            {renderInputField({
+              labelTH: "ตั้งแต่",
+              labelEN: "From",
+              type: "date",
+              name: `recruitEducations[${index}].recruitEducationFromDate`,
+              value:
+                formData?.recruitEducations?.[index]
+                  ?.recruitEducationFromDate || "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationFromDate`
+              ),
+              error:
+                errors?.recruitEducations?.[index]?.recruitEducationFromDate,
+            })}
+
+            {renderInputField({
+              labelTH: "ถึง",
+              labelEN: "To",
+              type: "date",
+              name: `recruitEducations[${index}].recruitEducationToDate`,
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationToDate ||
+                "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationToDate`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationToDate,
+            })}
+
+            {renderInputField({
+              labelTH: "ชื่อสถานศึกษา",
+              labelEN: "School",
+              name: `recruitEducations[${index}].recruitEducationSchool`,
+              type: "text",
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationSchool ||
+                "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationSchool`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationSchool,
+            })}
+
+            {renderInputField({
+              labelTH: "วุฒิการศึกษา",
+              labelEN: "Degree",
+              name: `recruitEducations[${index}].recruitEducationDegree`,
+              type: "text",
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationDegree ||
+                "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationDegree`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationDegree,
+            })}
+
+            {renderInputField({
+              labelTH: "วิชาเอก",
+              labelEN: "Major",
+              name: `recruitEducations[${index}].recruitEducationMajor`,
+              type: "text",
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationMajor ||
+                "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationMajor`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationMajor,
+            })}
+
+            {renderInputField({
+              labelTH: "เกรดเฉลี่ย",
+              labelEN: "GPA",
+              name: `recruitEducations[${index}].recruitEducationGPA`,
+              type: "number",
+              value:
+                formData?.recruitEducations?.[index]?.recruitEducationGPA || "",
+              onChange: handleInputChange(
+                `recruitEducations[${index}].recruitEducationGPA`
+              ),
+              error: errors?.recruitEducations?.[index]?.recruitEducationGPA,
+            })}
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-row items-center justify-end w-full p-2 gap-2 border-4 border-warning">
+        <Button
+          color="primary"
+          size="md"
+          radius="full"
+          className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+          onPress={handleAddEducation}
+        >
+          <PlusCircle /> เพิ่มประวัติการศึกษา
+        </Button>
+        {educationList.length > 1 && (
+          <Button
+            color="danger"
+            size="md"
+            radius="full"
+            className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+            onPress={handleRemoveLastEducation}
+          >
+            <MinusCircle /> ลบรายการล่าสุด
+          </Button>
+        )}
       </div>
     </>
   );
