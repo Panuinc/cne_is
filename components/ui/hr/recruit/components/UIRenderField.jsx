@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Input, RadioGroup, Radio } from "@heroui/react";
+import { Input, RadioGroup, Radio, Select, SelectItem } from "@heroui/react";
 
 export function renderInputField({
   labelTH,
@@ -34,6 +34,47 @@ export function renderInputField({
           isInvalid={!!error}
           errorMessage={error}
         />
+      </div>
+    </div>
+  );
+}
+
+export function renderSelectField({
+  labelTH,
+  labelEN,
+  name,
+  value,
+  onChange,
+  error,
+  options = [],
+  placeholder = "xxx xxx",
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+        {labelTH} <br /> {labelEN}
+      </div>
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+        <Select
+          name={name}
+          placeholder={placeholder}
+          size="md"
+          variant="underlined"
+          color="none"
+          radius="full"
+          value={value || ""}
+          selectedKeys={value ? [value] : []}
+          onChange={onChange}
+          isInvalid={!!error}
+          errorMessage={error}
+        >
+          {options.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.labelTH}
+              {opt.labelEN && <> ({opt.labelEN})</>}
+            </SelectItem>
+          ))}
+        </Select>
       </div>
     </div>
   );

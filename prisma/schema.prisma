@@ -102,8 +102,10 @@ enum RecruitMilitaryServiceStatus {
 enum RecruitFamilyRelation {
   Father
   Mother
-  OlderSibling
-  YoungerSibling
+  Elder
+  Younger
+  Wife
+  Husband
 }
 
 enum RecruitBloodGroup {
