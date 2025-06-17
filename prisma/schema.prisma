@@ -672,6 +672,7 @@ model RecruitDetail {
   recruitDetailHaveCarLicense            VehiclePossession
   recruitDetailHaveMotorcycleLicense     VehiclePossession
   recruitDetailComputerSkill             String?                      @db.VarChar(255)
+  recruitDetailSportSkill                String?                      @db.VarChar(255)
   recruitDetailOtherSkill                String?                      @db.VarChar(255)
   recruitDetailScoreToeic                String?                      @db.VarChar(255)
   recruitDetailScoreToefl                String?                      @db.VarChar(255)
