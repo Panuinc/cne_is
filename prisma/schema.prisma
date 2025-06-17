@@ -667,16 +667,16 @@ model RecruitDetail {
   recruitDetailEmergencyPhone            String                       @db.VarChar(255)
   recruitDetailLicenseName               String?                      @db.VarChar(255)
   recruitDetailLicenseNumber             String?                      @db.VarChar(255)
-  recruitDetailOwnCar                    VehiclePossession
-  recruitDetailOwnMotorcycle             VehiclePossession
-  recruitDetailHaveCarLicense            VehiclePossession
-  recruitDetailHaveMotorcycleLicense     VehiclePossession
   recruitDetailComputerSkill             String?                      @db.VarChar(255)
   recruitDetailSportSkill                String?                      @db.VarChar(255)
   recruitDetailOtherSkill                String?                      @db.VarChar(255)
   recruitDetailScoreToeic                String?                      @db.VarChar(255)
   recruitDetailScoreToefl                String?                      @db.VarChar(255)
   recruitDetailScoreIelts                String?                      @db.VarChar(255)
+  recruitDetailOwnCar                    VehiclePossession
+  recruitDetailOwnMotorcycle             VehiclePossession
+  recruitDetailHaveCarLicense            VehiclePossession
+  recruitDetailHaveMotorcycleLicense     VehiclePossession
   recruitDetailAllowReferenceCheck       Boolean
   recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
   recruitDetailEverFired                 Boolean

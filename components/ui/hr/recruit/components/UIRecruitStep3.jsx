@@ -188,6 +188,11 @@ export default function UIRecruitStep3({
             </div>
           )}
         </div>
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+          ทักษะอื่นๆ
+          <br />
+          Other Skills
+        </div>
       </div>
     </>
   );
