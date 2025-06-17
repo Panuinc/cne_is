@@ -621,11 +621,10 @@ model Recruit {
   recruitPerReq   PerReq @relation("RecruitPerReqId", fields: [recruitPerReqId], references: [perReqId])
   RecruitUpdateBy Emp?   @relation("RecruitUpdateBy", fields: [recruitUpdateBy], references: [empId])
 
-  recruitFamilyMembers        RecruitFamilyMember[]        @relation("RecruitFamilyMemberRecruitId")
-  recruitEducations           RecruitEducation[]           @relation("RecruitEducationRecruitId")
-  recruitProfessionalLicenses RecruitProfessionalLicense[] @relation("RecruitProfessionalLicenseRecruitId")
-  recruitLanguageSkills       RecruitLanguageSkill[]       @relation("RecruitLanguageSkillId")
-  recruitWorkExperiences      RecruitWorkExperience[]      @relation("RecruitWorkExperienceRecruitId")
+  recruitFamilyMembers   RecruitFamilyMember[]   @relation("RecruitFamilyMemberRecruitId")
+  recruitEducations      RecruitEducation[]      @relation("RecruitEducationRecruitId")
+  recruitLanguageSkills  RecruitLanguageSkill[]  @relation("RecruitLanguageSkillId")
+  recruitWorkExperiences RecruitWorkExperience[] @relation("RecruitWorkExperienceRecruitId")
 
   @@index([recruitPerReqId])
   @@index([recruitUpdateBy])
@@ -666,6 +665,8 @@ model RecruitDetail {
   recruitDetailEmergencyFullName         String                       @db.VarChar(255)
   recruitDetailEmergencyRelationship     String                       @db.VarChar(255)
   recruitDetailEmergencyPhone            String                       @db.VarChar(255)
+  recruitDetailLicenseName               String?                      @db.VarChar(255)
+  recruitDetailLicenseNumber             String?                      @db.VarChar(255)
   recruitDetailOwnCar                    VehiclePossession
   recruitDetailOwnMotorcycle             VehiclePossession
   recruitDetailHaveCarLicense            VehiclePossession
@@ -738,17 +739,6 @@ model RecruitEducation {
   RecruitEducationRecruitId Recruit @relation("RecruitEducationRecruitId", fields: [recruitEducationRecruitId], references: [recruitId])
 
   @@index([recruitEducationRecruitId])
-}
-
-model RecruitProfessionalLicense {
-  recruitLicenseId        Int     @id @default(autoincrement())
-  recruitLicenseRecruitId Int
-  recruitLicenseName      String  @db.VarChar(255)
-  recruitLicenseNumber    String? @db.VarChar(100)
-
-  RecruitProfessionalLicenseRecruitId Recruit @relation("RecruitProfessionalLicenseRecruitId", fields: [recruitLicenseRecruitId], references: [recruitId])
-
-  @@index([recruitLicenseRecruitId])
 }
 
 model RecruitLanguageSkill {
