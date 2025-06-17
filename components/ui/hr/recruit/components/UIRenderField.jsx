@@ -49,11 +49,19 @@ export function renderSelectField({
   options = [],
   placeholder = "xxx xxx",
 }) {
+  const selectedKeys = value ? new Set([value]) : new Set();
+
+  const handleSelectionChange = (keys) => {
+    const selected = Array.from(keys)[0] || "";
+    onChange({ target: { value: selected } });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
       <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
         {labelTH} <br /> {labelEN}
       </div>
+
       <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
         <Select
           name={name}
@@ -62,14 +70,19 @@ export function renderSelectField({
           variant="underlined"
           color="none"
           radius="full"
-          value={value || ""}
-          selectedKeys={value ? [value] : []}
-          onChange={onChange}
+          selectedKeys={selectedKeys}
+          onSelectionChange={handleSelectionChange}
           isInvalid={!!error}
           errorMessage={error}
+          aria-label={`เลือก ${labelTH}`}
         >
           {options.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value}>
+            <SelectItem
+              key={opt.value}
+              textValue={`${opt.labelTH}${
+                opt.labelEN ? ` (${opt.labelEN})` : ""
+              }`}
+            >
               {opt.labelTH}
               {opt.labelEN && <> ({opt.labelEN})</>}
             </SelectItem>
