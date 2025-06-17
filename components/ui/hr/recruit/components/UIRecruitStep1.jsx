@@ -29,9 +29,11 @@ export default function UIRecruitStep1({
             property="true"
           />
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
+
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm font-[600]">
           35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140
           <br />
@@ -47,6 +49,7 @@ export default function UIRecruitStep1({
           <br />
           Employment Application
         </div>
+
         <div className="flex items-center justify-start w-full h-full xl:w-2/12 p-2 gap-2 border-2 border-dark">
           วันที่ {formattedDate} <br />
           Date
@@ -74,6 +77,7 @@ export default function UIRecruitStep1({
             error: errors?.["recruitDetail.recruitDetailSalary"],
           })}
         </div>
+
         <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 p-2 gap-2 border-4 border-warning">
           <div className="relative w-full h-full overflow-hidden">
             {preview ? (
@@ -425,6 +429,7 @@ export default function UIRecruitStep1({
             error: errors?.["recruitDetail.recruitDetailNumberOfChildren"],
           })}
         </div>
+
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
           {renderRadioGroupField({
             labelTH: "สถานภาพทางทหาร",
