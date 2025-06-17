@@ -169,6 +169,12 @@ enum EmploymentType {
   Internship // ฝึกงาน
 }
 
+enum Residence {
+  Parents_house
+  Own_house
+  Boarding_house_Rented_house
+}
+
 model Emp {
   empId          Int       @id @default(autoincrement())
   empTitle       Title
@@ -650,6 +656,7 @@ model RecruitDetail {
   recruitDetailPresentAddress            String                       @db.VarChar(255)
   recruitDetailPresentAddressLink        String                       @db.VarChar(255)
   recruitDetailRegisteredAddress         String                       @db.VarChar(255)
+  recruitDetailResidence                 Residence
   recruitDetailMaritalStatus             RecruitMaritalStatus
   recruitDetailSpouseEarnIncome          RecruitSpouseEarnIncome?
   recruitDetailSpouseIncomeAmount        Int?
