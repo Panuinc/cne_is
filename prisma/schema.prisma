@@ -177,6 +177,11 @@ enum Residence {
   Boarding_house_Rented_house
 }
 
+enum YesOrNo {
+  Yes
+  No
+}
+
 model Emp {
   empId          Int       @id @default(autoincrement())
   empTitle       Title
@@ -631,82 +636,97 @@ model Recruit {
 }
 
 model RecruitDetail {
-  recruitDetailId                        Int                          @id @default(autoincrement())
-  recruitDetailRecruitId                 Int                          @unique
-  recruitDetailSalary                    Int
-  recruitDetailProfileImage              String                       @db.VarChar(500)
-  recruitFullNameTh                      String                       @db.VarChar(255)
-  recruitFullNameEn                      String                       @db.VarChar(255)
-  recruitNickName                        String                       @db.VarChar(255)
-  recruitDetailBirthDay                  DateTime
-  recruitDetailGender                    Gender
-  recruitDetailAge                       Int
-  recruitDetailNationality               String                       @db.VarChar(255)
-  recruitDetailReligion                  String                       @db.VarChar(255)
-  recruitDetailWright                    Int
-  recruitDetailHeight                    Int
-  recruitDetailBloodGroup                RecruitBloodGroup
-  recruitDetailIdCardNumber              String                       @db.VarChar(20)
-  recruitDetailIdCardIssuedAt            String                       @db.VarChar(255)
-  recruitDetailIdCardIssuedDate          DateTime
-  recruitDetailIdCardEndDate             DateTime
-  recruitDetailPhone                     String                       @db.VarChar(20)
-  recruitDetailEmail                     String                       @db.VarChar(255)
-  recruitDetailLine                      String                       @db.VarChar(255)
-  recruitDetailPresentAddress            String                       @db.VarChar(255)
-  recruitDetailPresentAddressLink        String                       @db.VarChar(255)
-  recruitDetailRegisteredAddress         String                       @db.VarChar(255)
-  recruitDetailResidence                 Residence
-  recruitDetailMaritalStatus             RecruitMaritalStatus
-  recruitDetailSpouseEarnIncome          RecruitSpouseEarnIncome?
-  recruitDetailSpouseIncomeAmount        Int?
-  recruitDetailNumberOfChildren          Int?
-  recruitDetailMilitaryStatus            RecruitMilitaryServiceStatus
-  recruitDetailEmergencyFullName         String                       @db.VarChar(255)
-  recruitDetailEmergencyRelationship     String                       @db.VarChar(255)
-  recruitDetailEmergencyPhone            String                       @db.VarChar(255)
-  recruitDetailLicenseName               String?                      @db.VarChar(255)
-  recruitDetailLicenseNumber             String?                      @db.VarChar(255)
-  recruitDetailComputerSkill             String?                      @db.VarChar(255)
-  recruitDetailSportSkill                String?                      @db.VarChar(255)
-  recruitDetailOtherSkill                String?                      @db.VarChar(255)
-  recruitDetailScoreToeic                String?                      @db.VarChar(255)
-  recruitDetailScoreToefl                String?                      @db.VarChar(255)
-  recruitDetailScoreIelts                String?                      @db.VarChar(255)
-  recruitDetailOwnCar                    VehiclePossession
-  recruitDetailOwnMotorcycle             VehiclePossession
-  recruitDetailHaveCarLicense            VehiclePossession
-  recruitDetailHaveMotorcycleLicense     VehiclePossession
-  recruitDetailAllowReferenceCheck       Boolean
-  recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
-  recruitDetailEverFired                 Boolean
-  recruitDetailEverFiredReason           String?                      @db.VarChar(255)
-  recruitDetailSevereIllnessHistory      Boolean
-  recruitDetailSevereIllnessDetail       String?                      @db.VarChar(255)
-  recruitDetailCriminalRecord            Boolean
-  recruitDetailCriminalRecordDetail      String?                      @db.VarChar(255)
-  recruitDetailIsPregnant                Boolean
-  recruitDetailPregnancyDetail           String?                      @db.VarChar(255)
-  recruitDetailHasFriendInCompany        Boolean
-  recruitDetailFriendInCompanyName       String?                      @db.VarChar(255)
-  recruitDetailRef1Name                  String                       @db.VarChar(255)
-  recruitDetailRef1Address               String                       @db.VarChar(255)
-  recruitDetailRef1Phone                 String                       @db.VarChar(20)
-  recruitDetailRef1Occupation            String                       @db.VarChar(255)
-  recruitDetailRef2Name                  String                       @db.VarChar(255)
-  recruitDetailRef2Address               String                       @db.VarChar(255)
-  recruitDetailRef2Phone                 String                       @db.VarChar(20)
-  recruitDetailRef2Occupation            String                       @db.VarChar(255)
-  recruitDetailSelfIntro                 String?                      @db.Text
-  recruitDetailHomeMapUrl                String?                      @db.VarChar(500)
-  recruitDetailAttachIdCard              String?                      @db.VarChar(500)
-  recruitDetailAttachHouseReg            String?                      @db.VarChar(500)
-  recruitDetailAttachEducation           String?                      @db.VarChar(500)
-  recruitDetailAttachMedicalCert         String?                      @db.VarChar(500)
-  recruitDetailAttachMilitaryDoc         String?                      @db.VarChar(500)
-  recruitDetailConsentGeneral            Boolean
-  recruitDetailConsentSensitive          Boolean
-  recruitDetailSignatureImage            String?                      @db.VarChar(500)
+  recruitDetailId                    Int                          @id @default(autoincrement())
+  recruitDetailRecruitId             Int                          @unique
+  recruitDetailSalary                Int
+  recruitDetailProfileImage          String                       @db.VarChar(500)
+  recruitFullNameTh                  String                       @db.VarChar(255)
+  recruitFullNameEn                  String                       @db.VarChar(255)
+  recruitNickName                    String                       @db.VarChar(255)
+  recruitDetailBirthDay              DateTime
+  recruitDetailGender                Gender
+  recruitDetailAge                   Int
+  recruitDetailNationality           String                       @db.VarChar(255)
+  recruitDetailReligion              String                       @db.VarChar(255)
+  recruitDetailWright                Int
+  recruitDetailHeight                Int
+  recruitDetailBloodGroup            RecruitBloodGroup
+  recruitDetailIdCardNumber          String                       @db.VarChar(20)
+  recruitDetailIdCardIssuedAt        String                       @db.VarChar(255)
+  recruitDetailIdCardIssuedDate      DateTime
+  recruitDetailIdCardEndDate         DateTime
+  recruitDetailPhone                 String                       @db.VarChar(20)
+  recruitDetailEmail                 String                       @db.VarChar(255)
+  recruitDetailLine                  String                       @db.VarChar(255)
+  recruitDetailPresentAddress        String                       @db.VarChar(255)
+  recruitDetailPresentAddressLink    String                       @db.VarChar(255)
+  recruitDetailRegisteredAddress     String                       @db.VarChar(255)
+  recruitDetailResidence             Residence
+  recruitDetailMaritalStatus         RecruitMaritalStatus
+  recruitDetailSpouseEarnIncome      RecruitSpouseEarnIncome?
+  recruitDetailSpouseIncomeAmount    Int?
+  recruitDetailNumberOfChildren      Int?
+  recruitDetailMilitaryStatus        RecruitMilitaryServiceStatus
+  recruitDetailEmergencyFullName     String                       @db.VarChar(255)
+  recruitDetailEmergencyRelationship String                       @db.VarChar(255)
+  recruitDetailEmergencyPhone        String                       @db.VarChar(255)
+  recruitDetailLicenseName           String?                      @db.VarChar(255)
+  recruitDetailLicenseNumber         String?                      @db.VarChar(255)
+  recruitDetailComputerSkill         String?                      @db.VarChar(255)
+  recruitDetailSportSkill            String?                      @db.VarChar(255)
+  recruitDetailOtherSkill            String?                      @db.VarChar(255)
+  recruitDetailScoreToeic            String?                      @db.VarChar(255)
+  recruitDetailScoreToefl            String?                      @db.VarChar(255)
+  recruitDetailScoreIelts            String?                      @db.VarChar(255)
+  recruitDetailOwnCar                VehiclePossession
+  recruitDetailOwnMotorcycle         VehiclePossession
+  recruitDetailHaveCarLicense        VehiclePossession
+  recruitDetailHaveMotorcycleLicense VehiclePossession
+
+  recruitDetailWhenStartWork                String  @db.VarChar(255)
+  recruitDetailCheckWorkingHistory          YesOrNo
+  recruitDischarged                         YesOrNo
+  recruitDischargedReason                   String? @db.VarChar(255)
+  recruitDetailSeriousIllnessOrContagious   YesOrNo
+  recruitDetailIllnessName                  String? @db.VarChar(255)
+  recruitDetailCriminalConvictionOrBankrupt YesOrNo
+  recruitDetailIsPregnant                   YesOrNo
+  recruitDetailPregnancyMonth               Int?
+  recruitDetailHasRelativesInCompany        YesOrNo
+  recruitDetailRelativesName                String? @db.VarChar(255)
+  recruitDetailRef1Name                     String  @db.VarChar(255)
+  recruitDetailRef2Name                     String  @db.VarChar(255)
+
+  // recruitDetailAllowReferenceCheck       Boolean
+  // recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
+  // recruitDetailEverFired                 Boolean
+  // recruitDetailEverFiredReason           String?                      @db.VarChar(255)
+  // recruitDetailSevereIllnessHistory      Boolean
+  // recruitDetailSevereIllnessDetail       String?                      @db.VarChar(255)
+  // recruitDetailCriminalRecord            Boolean
+  // recruitDetailCriminalRecordDetail      String?                      @db.VarChar(255)
+  // recruitDetailIsPregnant                Boolean
+  // recruitDetailPregnancyDetail           String?                      @db.VarChar(255)
+  // recruitDetailHasFriendInCompany        Boolean
+  // recruitDetailFriendInCompanyName       String?                      @db.VarChar(255)
+  // recruitDetailRef1Name                  String                       @db.VarChar(255)
+  // recruitDetailRef1Address               String                       @db.VarChar(255)
+  // recruitDetailRef1Phone                 String                       @db.VarChar(20)
+  // recruitDetailRef1Occupation            String                       @db.VarChar(255)
+  // recruitDetailRef2Name                  String                       @db.VarChar(255)
+  // recruitDetailRef2Address               String                       @db.VarChar(255)
+  // recruitDetailRef2Phone                 String                       @db.VarChar(20)
+  // recruitDetailRef2Occupation            String                       @db.VarChar(255)
+  // recruitDetailSelfIntro                 String?                      @db.Text
+  // recruitDetailHomeMapUrl                String?                      @db.VarChar(500)
+  // recruitDetailAttachIdCard              String?                      @db.VarChar(500)
+  // recruitDetailAttachHouseReg            String?                      @db.VarChar(500)
+  // recruitDetailAttachEducation           String?                      @db.VarChar(500)
+  // recruitDetailAttachMedicalCert         String?                      @db.VarChar(500)
+  // recruitDetailAttachMilitaryDoc         String?                      @db.VarChar(500)
+  // recruitDetailConsentGeneral            Boolean
+  // recruitDetailConsentSensitive          Boolean
+  // recruitDetailSignatureImage            String?                      @db.VarChar(500)
 
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
