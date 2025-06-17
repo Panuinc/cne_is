@@ -64,7 +64,6 @@ export class RecruitController {
       const keysToParse = [
         "recruitFamilyMembers",
         "recruitEducations",
-        "recruitProfessionalLicenses",
         "recruitLanguageSkills",
         "recruitWorkExperiences",
       ];

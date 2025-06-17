@@ -86,7 +86,6 @@ export class RecruitService {
         recruitDetail: true,
         recruitFamilyMembers: true,
         recruitEducations: true,
-        recruitProfessionalLicenses: true,
         recruitLanguageSkills: true,
         recruitWorkExperiences: true,
       },
@@ -98,7 +97,6 @@ export class RecruitService {
       recruitDetail,
       recruitFamilyMembers = [],
       recruitEducations = [],
-      recruitProfessionalLicenses = [],
       recruitLanguageSkills = [],
       recruitWorkExperiences = [],
       ...recruitData
@@ -113,7 +111,6 @@ export class RecruitService {
         recruitDetail: { create: recruitDetail },
         recruitFamilyMembers: { create: recruitFamilyMembers },
         recruitEducations: { create: recruitEducations },
-        recruitProfessionalLicenses: { create: recruitProfessionalLicenses },
         recruitLanguageSkills: { create: recruitLanguageSkills },
         recruitWorkExperiences: { create: recruitWorkExperiences },
       },

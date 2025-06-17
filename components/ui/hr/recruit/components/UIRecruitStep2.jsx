@@ -425,6 +425,37 @@ export default function UIRecruitStep2({
             </div>
           )}
         </div>
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+            ใบประกอบวิชาชีพ / Professional License
+          </div>
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+          {renderInputField({
+            labelTH: "ชื่อใบประกอบวิชาชีพ",
+            labelEN: "License name",
+            name: "recruitDetail.recruitDetailLicenseName",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailLicenseName || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailLicenseName"
+            ),
+            error: errors?.["recruitDetail.recruitDetailLicenseName"],
+          })}
+
+          {renderInputField({
+            labelTH: "หมายเลขใบประกอบวิชาชีพ",
+            labelEN: "License number",
+            name: "recruitDetail.recruitDetailLicenseNumber",
+            type: "text",
+            value: formData?.recruitDetail?.recruitDetailLicenseNumber || "",
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailLicenseNumber"
+            ),
+            error: errors?.["recruitDetail.recruitDetailLicenseNumber"],
+          })}
+        </div>
       </div>
     </>
   );

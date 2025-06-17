@@ -40,10 +40,6 @@ export default function RecruitApplyPage() {
         data.recruitEducations = data.recruitEducations?.length
           ? data.recruitEducations
           : [{}];
-        data.recruitProfessionalLicenses = data.recruitProfessionalLicenses
-          ?.length
-          ? data.recruitProfessionalLicenses
-          : [{}];
 
         setFormData(data);
       } catch (error) {
@@ -129,7 +125,6 @@ export default function RecruitApplyPage() {
       const arrayFields = [
         "recruitFamilyMembers",
         "recruitEducations",
-        "recruitProfessionalLicenses",
         "recruitLanguageSkills",
         "recruitWorkExperiences",
       ];
