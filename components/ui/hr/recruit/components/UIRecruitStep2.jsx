@@ -399,28 +399,32 @@ export default function UIRecruitStep2({
             })}
           </div>
         ))}
-      </div>
-      <div className="flex flex-row items-center justify-end w-full p-2 gap-2 border-4 border-warning">
-        <Button
-          color="primary"
-          size="md"
-          radius="full"
-          className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
-          onPress={handleAddEducation}
-        >
-          <PlusCircle /> เพิ่มประวัติการศึกษา
-        </Button>
-        {educationList.length > 1 && (
-          <Button
-            color="danger"
-            size="md"
-            radius="full"
-            className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
-            onPress={handleRemoveLastEducation}
-          >
-            <MinusCircle /> ลบรายการล่าสุด
-          </Button>
-        )}
+        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
+            <Button
+              color="primary"
+              size="md"
+              radius="full"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              onPress={handleAddEducation}
+            >
+              <PlusCircle /> เพิ่มประวัติการศึกษา
+            </Button>
+          </div>
+          {familyMembers.length > 1 && (
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
+              <Button
+                color="danger"
+                size="md"
+                radius="full"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+                onPress={handleRemoveLastEducation}
+              >
+                <MinusCircle /> ลบรายการล่าสุด
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
