@@ -411,7 +411,7 @@ export default function UIRecruitStep2({
               <PlusCircle /> เพิ่มประวัติการศึกษา
             </Button>
           </div>
-          {familyMembers.length > 1 && (
+          {educationList.length > 1 && (
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
               <Button
                 color="danger"
