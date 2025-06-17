@@ -3,35 +3,33 @@
 import React from "react";
 import { Button } from "@heroui/react";
 import { MinusCircle, PlusCircle } from "lucide-react";
-import {
-  renderInputField,
-  renderSelectField,
-} from "@/components/ui/hr/recruit/components/UIRenderField";
+import { renderSelectField } from "@/components/ui/hr/recruit/components/UIRenderField";
 
 export default function UIRecruitStep3({
   formData,
   handleInputChange,
   errors,
 }) {
-  const familyMembers = formData.recruitFamilyMembers || [];
-  const handleAddFamilyMember = () => {
-    handleInputChange("recruitFamilyMembers")([
-      ...familyMembers,
+  const languageSkills = formData.recruitLanguageSkills || [];
+
+  const handleAddLanguageSkill = () => {
+    handleInputChange("recruitLanguageSkills")([
+      ...languageSkills,
       {
-        recruitFamilyMemberRelation: "",
-        recruitFamilyMemberFullName: "",
-        recruitFamilyMemberAge: "",
-        recruitFamilyMemberOccupation: "",
-        recruitFamilyMemberWorkplace: "",
-        recruitFamilyMemberPhone: "",
+        recruitLanguageName: "",
+        recruitLanguageListenLevel: "",
+        recruitLanguageSpeakLevel: "",
+        recruitLanguageReadLevel: "",
+        recruitLanguageWriteLevel: "",
       },
     ]);
   };
-  const handleRemoveLastMember = () => {
-    if (familyMembers.length > 1) {
-      const updated = [...familyMembers];
+
+  const handleRemoveLastSkill = () => {
+    if (languageSkills.length > 1) {
+      const updated = [...languageSkills];
       updated.pop();
-      handleInputChange("recruitFamilyMembers")(updated);
+      handleInputChange("recruitLanguageSkills")(updated);
     }
   };
 
@@ -44,7 +42,7 @@ export default function UIRecruitStep3({
           Language - Please Identify Excellent Good Fair
         </div>
 
-        {familyMembers.map((_, index) => (
+        {languageSkills.map((_, index) => (
           <div
             key={index}
             className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning"
@@ -83,7 +81,7 @@ export default function UIRecruitStep3({
             })}
 
             {renderSelectField({
-              labelTH: "การพูด",
+              labelTH: "การฟัง",
               labelEN: "Listening",
               name: `recruitLanguageSkills[${index}].recruitLanguageListenLevel`,
               value:
@@ -163,6 +161,7 @@ export default function UIRecruitStep3({
             })}
           </div>
         ))}
+
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
           <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
             <Button
@@ -170,21 +169,21 @@ export default function UIRecruitStep3({
               size="md"
               radius="full"
               className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
-              onPress={handleAddFamilyMember}
+              onPress={handleAddLanguageSkill}
             >
-              <PlusCircle /> เพิ่มสมาชิก
+              <PlusCircle /> เพิ่มทักษะภาษา
             </Button>
           </div>
-          {familyMembers.length > 1 && (
+          {languageSkills.length > 1 && (
             <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
               <Button
                 color="danger"
                 size="md"
                 radius="full"
                 className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
-                onPress={handleRemoveLastMember}
+                onPress={handleRemoveLastSkill}
               >
-                <MinusCircle /> ลบสมาชิก
+                <MinusCircle /> ลบทักษะภาษา
               </Button>
             </div>
           )}
