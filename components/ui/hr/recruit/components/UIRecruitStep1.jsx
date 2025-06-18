@@ -459,16 +459,6 @@ export default function UIRecruitStep1({
                 labelEN: "NotYetServed",
                 value: "NotYetServed",
               },
-              {
-                labelTH: "กำลังอยู่ระหว่างการเกณฑ์",
-                labelEN: "InProgress",
-                value: "InProgress",
-              },
-              {
-                labelTH: "ไม่ต้องเข้ารับการเกณฑ์",
-                labelEN: "NotRequired",
-                value: "NotRequired",
-              },
             ],
           })}
         </div>

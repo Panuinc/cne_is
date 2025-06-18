@@ -873,14 +873,6 @@ export default function UIRecruitStep1({
                   ยังไม่เกณฑ์
                   <div className="text-sm text-gray-500">(NotYetServed)</div>
                 </Radio>
-                <Radio key="InProgress" value="InProgress">
-                  อยู่ระหว่างการเกณฑ์
-                  <div className="text-sm text-gray-500">(InProgress)</div>
-                </Radio>
-                <Radio key="NotRequired" value="NotRequired">
-                  ไม่ต้องเกณฑ์
-                  <div className="text-sm text-gray-500">(NotRequired)</div>
-                </Radio>
               </RadioGroup>
             </div>
           </div>

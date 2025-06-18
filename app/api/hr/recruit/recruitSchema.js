@@ -80,7 +80,7 @@ export const recruitPostSchema = z.object({
     recruitDetailSpouseIncomeAmount: preprocessInt().optional(),
     recruitDetailNumberOfChildren: preprocessInt().optional(),
     recruitDetailMilitaryStatus: preprocessEnum(
-      ["Exempted", "Completed", "NotYetServed", "InProgress", "NotRequired"],
+      ["Exempted", "Completed", "NotYetServed"],
       "Please provide military status"
     ),
     recruitDetailOwnCar: preprocessEnum(["Yes", "No"], "Own a car?"),

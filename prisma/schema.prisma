@@ -95,8 +95,6 @@ enum RecruitMilitaryServiceStatus {
   Exempted // ได้รับการยกเว้น
   Completed // ผ่านการเกณฑ์แล้ว
   NotYetServed // ยังไม่เกณฑ์
-  InProgress // กำลังอยู่ระหว่างการเกณฑ์
-  NotRequired // ไม่ต้องเข้ารับการเกณฑ์ (เช่น ผู้หญิง)
 }
 
 enum RecruitFamilyRelation {
