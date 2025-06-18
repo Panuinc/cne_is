@@ -9,11 +9,12 @@ export default function Organize() {
   const [divisions, setDivisions] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [positions, setPositions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [divRes, depRes, empRes] = await Promise.all([
+        const [divRes, depRes, empRes, posRes] = await Promise.all([
           fetch("/api/hr/division", {
             headers: { "secret-token": SECRET_TOKEN || "" },
           }),
@@ -23,15 +24,19 @@ export default function Organize() {
           fetch("/api/hr/empMain", {
             headers: { "secret-token": SECRET_TOKEN || "" },
           }),
+          fetch("/api/hr/position", {
+            headers: { "secret-token": SECRET_TOKEN || "" },
+          }),
         ]);
 
-        const [divData, depData, empData] = await Promise.all([
+        const [divData, depData, empData, posData] = await Promise.all([
           divRes.json(),
           depRes.json(),
           empRes.json(),
+          posRes.json(),
         ]);
 
-        if (divRes.ok && depRes.ok && empRes.ok) {
+        if (divRes.ok && depRes.ok && empRes.ok && posRes.ok) {
           const activeDivisions = (divData.division || []).filter(
             (division) => division.divisionStatus === "Active"
           );
@@ -41,10 +46,14 @@ export default function Organize() {
           const activeEmployees = (empData.emp || []).filter(
             (employee) => employee.empStatus === "Active"
           );
+          const activePositions = (posData.position || []).filter(
+            (position) => position.positionStatus === "Active"
+          );
 
           setDivisions(activeDivisions);
           setDepartments(activeDepartments);
           setEmployees(activeEmployees);
+          setPositions(activePositions);
         }
       } catch (err) {
         console.error("Error loading organization data:", err);
@@ -59,6 +68,7 @@ export default function Organize() {
       divisions={divisions}
       departments={departments}
       employees={employees}
+      positions={positions}
     />
   );
 }

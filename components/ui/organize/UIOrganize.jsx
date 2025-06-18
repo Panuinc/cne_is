@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import UIHeader from "@/components/other/UIHeader";
 import { Tree, TreeNode } from "react-organizational-chart";
-import { Building, Network, Users2 } from "lucide-react";
+import { Building, Network, Users2, User } from "lucide-react";
 
 function StatBox({ label, value }) {
   return (
@@ -18,6 +18,7 @@ export default function UIOrganize({
   divisions = [],
   departments = [],
   employees = [],
+  positions = [], // ✅ เพิ่ม prop นี้
 }) {
   const treeData = useMemo(
     () => ({
@@ -26,11 +27,23 @@ export default function UIOrganize({
       children: divisions.map((division) => {
         const relatedDepartments = departments
           .filter((dept) => dept.departmentDivisionId === division.divisionId)
-          .map((dept) => ({
-            name: dept.departmentName,
-            type: "แผนก",
-            children: [],
-          }));
+          .map((dept) => {
+            const relatedPositions = positions.filter(
+              (pos) => pos.positionDepartmentId === dept.departmentId
+            );
+
+            const positionNodes = relatedPositions.map((pos) => ({
+              name: pos.positionNameTH,
+              type: "ตำแหน่ง",
+              children: [],
+            }));
+
+            return {
+              name: dept.departmentName,
+              type: "แผนก",
+              children: positionNodes,
+            };
+          });
 
         return {
           name: division.divisionName,
@@ -41,7 +54,7 @@ export default function UIOrganize({
         };
       }),
     }),
-    [divisions, departments]
+    [divisions, departments, positions]
   );
 
   const getIcon = (type) => {
@@ -52,6 +65,8 @@ export default function UIOrganize({
         return <Network size={20} className="text-yellow-600" />;
       case "แผนก":
         return <Users2 size={20} className="text-green-600" />;
+      case "ตำแหน่ง":
+        return <User size={18} className="text-blue-600" />;
       default:
         return null;
     }
@@ -79,7 +94,6 @@ export default function UIOrganize({
     <>
       <UIHeader Header="แผนผังองค์กร" />
       <div className="flex flex-col items-center justify-start w-full min-h-screen p-4 bg-default gap-6">
-        {/* Header Card */}
         <div className="w-full max-w-screen-xl flex flex-col lg:flex-row items-center justify-between p-6 gap-6 bg-white shadow rounded-3xl">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="text-lg font-bold text-gray-800">STRUCTURE</div>
@@ -95,7 +109,6 @@ export default function UIOrganize({
           </div>
         </div>
 
-        {/* Org Chart */}
         <div className="w-full overflow-auto pb-8">
           <Tree
             lineWidth="2px"
