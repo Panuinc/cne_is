@@ -17,19 +17,19 @@ const getIcon = (type) => {
     case "Company":
       return <Building size={20} className="text-primary" />;
     case "ฝ่าย":
-      return <Network size={20} className="text-yellow-600" />;
+      return <Network size={20} className="text-warning" />;
     case "แผนก":
-      return <Users2 size={20} className="text-green-600" />;
+      return <Users2 size={20} className="text-success" />;
     case "ตำแหน่ง":
-      return <User size={18} className="text-blue-600" />;
+      return <User size={18} className="text-info" />;
     default:
       return null;
   }
 };
 
 const NodeBox = ({ name, type }) => (
-  <div className="flex flex-col items-center bg-white shadow rounded-xl px-6 py-4 text-center text-sm min-w-[200px]">
-    <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
+  <div className="flex flex-col items-center bg-white shadow rounded-xl px-6 py-4 text-center">
+    <div className="flex flex-col items-center justify-center w-40 h-24 p-2 gap-2 text-sm">
       {getIcon(type)}
       {name}
     </div>
@@ -37,7 +37,6 @@ const NodeBox = ({ name, type }) => (
   </div>
 );
 
-// 👉 ใช้สำหรับ render ตำแหน่งแบบแนวตั้ง
 const renderVerticalChain = (positions) => {
   if (!positions || positions.length === 0) return null;
   const [first, ...rest] = positions;
@@ -89,7 +88,6 @@ export default function UIOrganize({
     <>
       <UIHeader Header="แผนผังองค์กร" />
       <div className="flex flex-col items-center justify-start w-full min-h-screen p-4 bg-default gap-6">
-        {/* Summary */}
         <div className="w-full max-w-screen-xl flex flex-col lg:flex-row items-center justify-between p-6 gap-6 bg-white shadow rounded-3xl">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="text-lg font-bold text-gray-800">STRUCTURE</div>
@@ -110,7 +108,7 @@ export default function UIOrganize({
           <Tree
             lineWidth="2px"
             lineColor="#00000030"
-            lineBorderRadius="10px"
+            lineBorderRadius="20px"
             label={<NodeBox name={treeData.name} type={treeData.type} />}
           >
             {treeData.children.map((division, i) => (
