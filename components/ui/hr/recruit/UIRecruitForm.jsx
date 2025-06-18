@@ -94,6 +94,7 @@ export default function UIRecruitForm({
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
+            formattedDate={formattedDate}
           />
         )}
 
