@@ -704,6 +704,7 @@ model RecruitDetail {
   recruitDetailAttachMilitaryDoc            String?                      @db.VarChar(500)
   recruitConsentGeneral                     YesOrNo
   recruitConsentSensitive                   YesOrNo
+  recruitConsentPdpa                        YesOrNo
 
   // recruitDetailAllowReferenceCheck       Boolean
   // recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
