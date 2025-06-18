@@ -7,7 +7,7 @@ import { Building, Network, Users2 } from "lucide-react";
 
 function StatBox({ label, value }) {
   return (
-    <div className="flex flex-col items-center justify-center min-w-[150px] px-4 py-6 bg-primary text-white shadow rounded-2xl">
+    <div className="flex flex-col items-center justify-center w-32 h-32 px-4 py-6 bg-primary text-white shadow rounded-full">
       <div className="text-sm font-semibold">{label}</div>
       <div className="text-2xl font-bold">{value}</div>
     </div>
