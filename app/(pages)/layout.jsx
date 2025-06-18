@@ -206,7 +206,7 @@ export default function PagesLayout({ children }) {
         { title: "ตำแหน่งงาน", href: "/position" },
         { title: "พนักงาน", href: "/emp" },
         { title: "ขออัตรากำลังคน", href: "/perReq" },
-        { title: "ใบสมัครงาน", href: "/recruit" },
+        // { title: "ใบสมัครงาน", href: "/recruit" },
       ],
     },
     // {
