@@ -5,95 +5,91 @@ import UIHeader from "@/components/other/UIHeader";
 import { Tree, TreeNode } from "react-organizational-chart";
 import { Building, Network, Users2, User } from "lucide-react";
 
-function StatBox({ label, value }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-32 h-32 px-4 py-6 bg-primary text-white shadow rounded-full">
-      <div className="text-sm font-semibold">{label}</div>
-      <div className="text-2xl font-bold">{value}</div>
+const StatBox = ({ label, value }) => (
+  <div className="flex flex-col items-center justify-center w-32 h-32 px-4 py-6 bg-primary text-white shadow rounded-full">
+    <div className="text-sm font-semibold">{label}</div>
+    <div className="text-2xl font-bold">{value}</div>
+  </div>
+);
+
+const getIcon = (type) => {
+  switch (type) {
+    case "Company":
+      return <Building size={20} className="text-primary" />;
+    case "ฝ่าย":
+      return <Network size={20} className="text-yellow-600" />;
+    case "แผนก":
+      return <Users2 size={20} className="text-green-600" />;
+    case "ตำแหน่ง":
+      return <User size={18} className="text-blue-600" />;
+    default:
+      return null;
+  }
+};
+
+const NodeBox = ({ name, type }) => (
+  <div className="flex flex-col items-center bg-white shadow rounded-xl px-6 py-4 text-center text-sm min-w-[200px]">
+    <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
+      {getIcon(type)}
+      {name}
     </div>
+    <div className="text-xs text-gray-500">{type}</div>
+  </div>
+);
+
+// 👉 ใช้สำหรับ render ตำแหน่งแบบแนวตั้ง
+const renderVerticalChain = (positions) => {
+  if (!positions || positions.length === 0) return null;
+  const [first, ...rest] = positions;
+  return (
+    <TreeNode label={<NodeBox name={first.name} type={first.type} />}>
+      {rest.length > 0 ? renderVerticalChain(rest) : null}
+    </TreeNode>
   );
-}
+};
 
 export default function UIOrganize({
   divisions = [],
   departments = [],
   employees = [],
-  positions = [], // ✅ เพิ่ม prop นี้
+  positions = [],
 }) {
-  const treeData = useMemo(
-    () => ({
+  const treeData = useMemo(() => {
+    return {
       name: "CHANNAKORN ENGINEER",
       type: "Company",
       children: divisions.map((division) => {
-        const relatedDepartments = departments
-          .filter((dept) => dept.departmentDivisionId === division.divisionId)
-          .map((dept) => {
-            const relatedPositions = positions.filter(
-              (pos) => pos.positionDepartmentId === dept.departmentId
-            );
-
-            const positionNodes = relatedPositions.map((pos) => ({
-              name: pos.positionNameTH,
-              type: "ตำแหน่ง",
-              children: [],
-            }));
-
-            return {
-              name: dept.departmentName,
-              type: "แผนก",
-              children: positionNodes,
-            };
-          });
+        const relatedDepartments = departments.filter(
+          (dept) => dept.departmentDivisionId === division.divisionId
+        );
 
         return {
           name: division.divisionName,
           type: "ฝ่าย",
-          children: relatedDepartments.length
-            ? relatedDepartments
-            : [{ name: "ไม่มีแผนก", type: "แผนก", children: [] }],
+          children: relatedDepartments.map((dept) => {
+            const relatedPositions = positions.filter(
+              (pos) => pos.positionDepartmentId === dept.departmentId
+            );
+
+            return {
+              name: dept.departmentName,
+              type: "แผนก",
+              children: relatedPositions.map((pos) => ({
+                name: pos.positionNameTH,
+                type: "ตำแหน่ง",
+              })),
+            };
+          }),
         };
       }),
-    }),
-    [divisions, departments, positions]
-  );
-
-  const getIcon = (type) => {
-    switch (type) {
-      case "Company":
-        return <Building size={20} className="text-primary" />;
-      case "ฝ่าย":
-        return <Network size={20} className="text-yellow-600" />;
-      case "แผนก":
-        return <Users2 size={20} className="text-green-600" />;
-      case "ตำแหน่ง":
-        return <User size={18} className="text-blue-600" />;
-      default:
-        return null;
-    }
-  };
-
-  const renderNode = (node) => (
-    <TreeNode
-      label={
-        <div className="flex flex-col items-center bg-white shadow min-w-60 rounded-xl px-4 py-3 text-center text-sm">
-          <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
-            {getIcon(node.type)}
-            {node.name}
-          </div>
-          <div className="text-xs text-gray-500">{node.type}</div>
-        </div>
-      }
-    >
-      {(node.children || []).map((child, idx) => (
-        <React.Fragment key={idx}>{renderNode(child)}</React.Fragment>
-      ))}
-    </TreeNode>
-  );
+    };
+  }, [divisions, departments, positions]);
 
   return (
     <>
       <UIHeader Header="แผนผังองค์กร" />
       <div className="flex flex-col items-center justify-start w-full min-h-screen p-4 bg-default gap-6">
+        {/* Summary */}
         <div className="w-full max-w-screen-xl flex flex-col lg:flex-row items-center justify-between p-6 gap-6 bg-white shadow rounded-3xl">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="text-lg font-bold text-gray-800">STRUCTURE</div>
@@ -109,23 +105,28 @@ export default function UIOrganize({
           </div>
         </div>
 
+        {/* Tree */}
         <div className="w-full overflow-auto pb-8">
           <Tree
             lineWidth="2px"
             lineColor="#00000030"
             lineBorderRadius="10px"
-            label={
-              <div className="flex flex-col items-center bg-white shadow rounded-xl px-4 py-3 text-center text-sm">
-                <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
-                  <Building size={20} className="text-primary" />
-                  {treeData.name}
-                </div>
-                <div className="text-xs text-gray-500">{treeData.type}</div>
-              </div>
-            }
+            label={<NodeBox name={treeData.name} type={treeData.type} />}
           >
             {treeData.children.map((division, i) => (
-              <React.Fragment key={i}>{renderNode(division)}</React.Fragment>
+              <TreeNode
+                key={i}
+                label={<NodeBox name={division.name} type={division.type} />}
+              >
+                {division.children.map((dept, j) => (
+                  <TreeNode
+                    key={j}
+                    label={<NodeBox name={dept.name} type={dept.type} />}
+                  >
+                    {renderVerticalChain(dept.children)}
+                  </TreeNode>
+                ))}
+              </TreeNode>
             ))}
           </Tree>
         </div>
