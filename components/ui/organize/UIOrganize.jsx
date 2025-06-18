@@ -3,12 +3,13 @@
 import React, { useMemo } from "react";
 import UIHeader from "@/components/other/UIHeader";
 import { Tree, TreeNode } from "react-organizational-chart";
+import { Building, Network, Users2 } from "lucide-react";
 
 function StatBox({ label, value }) {
   return (
-    <div className="flex flex-col items-center justify-evenly w-full h-full p-4 bg-primary text-white shadow-md rounded-3xl">
-      <div className="font-[600]">{label}</div>
-      <div className="text-xl font-[600]">{value}</div>
+    <div className="flex flex-col items-center justify-center min-w-[150px] px-4 py-6 bg-primary text-white shadow rounded-2xl">
+      <div className="text-sm font-semibold">{label}</div>
+      <div className="text-2xl font-bold">{value}</div>
     </div>
   );
 }
@@ -18,8 +19,8 @@ export default function UIOrganize({
   departments = [],
   employees = [],
 }) {
-  const treeData = useMemo(() => {
-    return {
+  const treeData = useMemo(
+    () => ({
       name: "CHANNAKORN ENGINEER",
       type: "Company",
       children: divisions.map((division) => {
@@ -34,27 +35,37 @@ export default function UIOrganize({
         return {
           name: division.divisionName,
           type: "ฝ่าย",
-          children:
-            relatedDepartments.length > 0
-              ? relatedDepartments
-              : [
-                  {
-                    name: "ไม่มีแผนก",
-                    type: "แผนก",
-                    children: [],
-                  },
-                ],
+          children: relatedDepartments.length
+            ? relatedDepartments
+            : [{ name: "ไม่มีแผนก", type: "แผนก", children: [] }],
         };
       }),
-    };
-  }, [divisions, departments]);
+    }),
+    [divisions, departments]
+  );
+
+  const getIcon = (type) => {
+    switch (type) {
+      case "Company":
+        return <Building size={20} className="text-primary" />;
+      case "ฝ่าย":
+        return <Network size={20} className="text-yellow-600" />;
+      case "แผนก":
+        return <Users2 size={20} className="text-green-600" />;
+      default:
+        return null;
+    }
+  };
 
   const renderNode = (node) => (
     <TreeNode
       label={
-        <div className="bg-white shadow-md min-w-60 rounded-3xl p-4 text-sm text-center">
-          <div className="font-[600]">{node.name}</div>
-          <div className="text-xs text-dark/50">{node.type}</div>
+        <div className="flex flex-col items-center bg-white shadow min-w-60 rounded-xl px-4 py-3 text-center text-sm">
+          <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
+            {getIcon(node.type)}
+            {node.name}
+          </div>
+          <div className="text-xs text-gray-500">{node.type}</div>
         </div>
       }
     >
@@ -67,29 +78,36 @@ export default function UIOrganize({
   return (
     <>
       <UIHeader Header="แผนผังองค์กร" />
-      <div className="flex flex-col items-center justify-start w-full h-full gap-6 bg-default overflow-auto">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-60 p-2 gap-4 bg-white shadow-md rounded-3xl">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2">
-            <div className="text-xl font-[600]">STRUCTURE</div>
-            <div className="text-lg font-[600]">CHANNAKORN ENGINEER</div>
-            <div className="text-md font-[600]">COMPANY</div>
+      <div className="flex flex-col items-center justify-start w-full min-h-screen p-4 bg-default gap-6">
+        {/* Header Card */}
+        <div className="w-full max-w-screen-xl flex flex-col lg:flex-row items-center justify-between p-6 gap-6 bg-white shadow rounded-3xl">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="text-lg font-bold text-gray-800">STRUCTURE</div>
+            <div className="text-2xl font-bold text-primary">
+              CHANNAKORN ENGINEER
+            </div>
+            <div className="text-sm text-gray-500">COMPANY</div>
           </div>
-          <div className="flex flex-row items-center justify-center w-full h-full p-2 gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             <StatBox label="จำนวนพนักงาน" value={employees.length} />
             <StatBox label="จำนวนฝ่าย" value={divisions.length} />
             <StatBox label="จำนวนแผนก" value={departments.length} />
           </div>
         </div>
 
-        <div className="w-full overflow-auto min-h-[600px]">
+        {/* Org Chart */}
+        <div className="w-full overflow-auto pb-8">
           <Tree
-            lineWidth={"2px"}
-            lineColor={"#00000050"}
-            lineBorderRadius={"10px"}
+            lineWidth="2px"
+            lineColor="#00000030"
+            lineBorderRadius="10px"
             label={
-              <div className="p-4 text-sm text-center bg-white shadow-md rounded-3xl">
-                <div className="font-[600]">{treeData.name}</div>
-                <div className="text-xs text-dark/50">{treeData.type}</div>
+              <div className="flex flex-col items-center bg-white shadow rounded-xl px-4 py-3 text-center text-sm">
+                <div className="flex items-center gap-2 text-lg font-bold text-gray-700">
+                  <Building size={20} className="text-primary" />
+                  {treeData.name}
+                </div>
+                <div className="text-xs text-gray-500">{treeData.type}</div>
               </div>
             }
           >
