@@ -29,7 +29,7 @@ const getIcon = (type) => {
 
 const NodeBox = ({ name, type }) => (
   <div className="flex flex-col items-center bg-white shadow rounded-xl px-6 py-4 text-center">
-    <div className="flex flex-col items-center justify-center w-40 h-24 p-2 gap-2 text-sm">
+    <div className="flex flex-col items-center justify-center w-32 h-24 p-2 gap-2 text-sm">
       {getIcon(type)}
       {name}
     </div>
