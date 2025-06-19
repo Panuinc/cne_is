@@ -1,7 +1,7 @@
 "use client";
 
 import SignatureCanvas from "react-signature-canvas";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@heroui/react";
 import {
   renderInputField,
@@ -14,20 +14,39 @@ export default function UIRecruitStep5({
   errors,
 }) {
   const sigCanvasRef = useRef();
+  const [signaturePreview, setSignaturePreview] = useState(
+    formData?.recruitDetail?.recruitSignature || ""
+  );
 
   const clearSignature = () => {
     sigCanvasRef.current.clear();
+    setSignaturePreview("");
     handleInputChange("recruitDetail.recruitSignature")("");
+    handleInputChange("recruitDetail.recruitDetailSignatureImage")(null);
   };
 
   const saveSignature = () => {
-    const signatureData = sigCanvasRef.current
-      .getTrimmedCanvas()
-      .toDataURL("image/png");
-    handleInputChange("recruitDetail.recruitSignature")(signatureData);
+    const canvas = sigCanvasRef.current.getTrimmedCanvas();
+    const base64 = canvas.toDataURL("image/png");
+
+    // อัปเดต preview
+    setSignaturePreview(base64);
+    handleInputChange("recruitDetail.recruitSignature")(base64);
+
+    // แปลง base64 เป็น File object
+    fetch(base64)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], "signature.png", { type: "image/png" });
+        handleInputChange("recruitDetail.recruitDetailSignatureImage")({
+          target: { value: file },
+        });
+      });
   };
+
   return (
     <>
+      {/* ส่วนแนะนำตัว */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderTextAreaField({
@@ -43,18 +62,11 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
+      {/* ส่วนลายเซ็น */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
-          ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ
-          หากบริษัทฯ จ้างเข้าทำงานแล้วปรากฏว่าข้อความในใบสมัครงาน
-          เอกสารที่นำมาแสดง หรือรายละเอียดที่ให้ไว้ไม่เป็นความจริง บริษัทฯ
-          มีสิทธิ์ที่จะเลิกจ้างข้าพเจ้าได้โดยไม่ต้องจ่ายเงินชดเชยหรือค่าเสียหายใด
-          ๆ ทั้งสิ้น
-          <br />I hereby certify that all the information provided in this
-          application is true and correct. If the company later discovers that
-          any information, documents, or details provided are false, the company
-          reserves the right to terminate my employment without any compensation
-          or damages.
+          ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ...
+          <br />I hereby certify that all the information provided...
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full gap-2 text-md font-[600]">
@@ -69,25 +81,20 @@ export default function UIRecruitStep5({
           />
           ลายมือชื่อผู้สมัคร / Applicant’s signature
           <div className="flex gap-2 mt-2">
-            <Button
-              color="primary"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2"
-              onPress={saveSignature}
-            >
+            <Button color="primary" onPress={saveSignature}>
               บันทึกลายเซ็น
             </Button>
-            <Button
-              color="danger"
-              size="md"
-              radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2"
-              onPress={clearSignature}
-            >
+            <Button color="danger" onPress={clearSignature}>
               ล้างลายเซ็น
             </Button>
           </div>
+          {signaturePreview && (
+            <img
+              src={signaturePreview}
+              alt="Signature Preview"
+              className="w-[300px] mt-4 border border-gray-300 rounded"
+            />
+          )}
           {errors?.["recruitDetail.recruitDetailSignatureImage"] && (
             <div className="text-red-500 text-sm">
               {errors["recruitDetail.recruitDetailSignatureImage"]}
@@ -96,6 +103,7 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
+      {/* ส่วนแนบเอกสาร */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           เอกสารที่แนบพร้อมใบสมัคร

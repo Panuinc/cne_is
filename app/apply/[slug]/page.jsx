@@ -13,9 +13,11 @@ export default function RecruitApplyPage() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [preview, setPreview] = useState(null);
+  const [signatureBlob, setSignatureBlob] = useState(null); // ⬅️ เพิ่ม
 
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
+  const signatureInputRef = useRef(null);
   const router = useRouter();
   const { slug } = useParams();
 
@@ -58,32 +60,12 @@ export default function RecruitApplyPage() {
   }, [slug]);
 
   useEffect(() => {
-    if (
-      formData?.recruitDetail?.recruitDetailProfileImage &&
-      typeof formData.recruitDetail.recruitDetailProfileImage === "string"
-    ) {
-      setPreview(formData.recruitDetail.recruitDetailProfileImage);
-    }
-  }, [formData?.recruitDetail?.recruitDetailProfileImage]);
-
-  useEffect(() => {
     return () => {
       if (preview?.startsWith("blob:")) {
         URL.revokeObjectURL(preview);
       }
     };
   }, [preview]);
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreview(url);
-      handleInputChange("recruitDetail.recruitDetailProfileImage")({
-        target: { value: file },
-      });
-    }
-  };
 
   const handleInputChange = useCallback(
     (path) => (e) => {
@@ -113,12 +95,23 @@ export default function RecruitApplyPage() {
       });
 
       setErrors((prev) => {
-        const { [path]: _ignore, ...rest } = prev;
+        const { [path]: _, ...rest } = prev;
         return rest;
       });
     },
     []
   );
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+      handleInputChange("recruitDetail.recruitDetailProfileImage")({
+        target: { value: file },
+      });
+    }
+  };
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -126,7 +119,9 @@ export default function RecruitApplyPage() {
       if (!formRef.current || !formData) return;
 
       const form = new FormData(formRef.current);
-      form.append("recruitDetail", JSON.stringify(formData.recruitDetail));
+      const detail = { ...formData.recruitDetail };
+
+      form.append("recruitDetail", JSON.stringify(detail));
 
       const arrayFields = [
         "recruitFamilyMembers",
@@ -143,6 +138,21 @@ export default function RecruitApplyPage() {
           form.append(key, value);
         }
       });
+
+      if (detail.recruitDetailProfileImage instanceof File) {
+        form.append(
+          "recruitDetailProfileImage",
+          detail.recruitDetailProfileImage
+        );
+      }
+
+      // ⬇️ แนบไฟล์ลายเซ็นจริง (จาก canvas)
+      if (signatureBlob instanceof Blob) {
+        form.append(
+          "recruitDetailSignatureImage",
+          new File([signatureBlob], "signature.png", { type: "image/png" })
+        );
+      }
 
       form.append("recruitStatus", "Submitted");
 
@@ -171,7 +181,7 @@ export default function RecruitApplyPage() {
         toast.error(`เกิดข้อผิดพลาด: ${err.message}`);
       }
     },
-    [formData, router]
+    [formData, signatureBlob, router]
   );
 
   const today = new Date();
@@ -200,7 +210,9 @@ export default function RecruitApplyPage() {
           setPreview={setPreview}
           handleFileChange={handleFileChange}
           fileInputRef={fileInputRef}
+          signatureInputRef={signatureInputRef}
           formattedDate={formattedDate}
+          setSignatureBlob={setSignatureBlob} // ⬅️ เพิ่มเข้า Form
         />
       </div>
     </>

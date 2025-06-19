@@ -1,4 +1,7 @@
+import path from "path";
+import { writeFile, mkdir } from "fs/promises";
 import { NextResponse } from "next/server";
+import { customAlphabet } from "nanoid";
 import { RecruitService } from "./recruitService";
 import {
   recruitPostSchema,
@@ -58,7 +61,7 @@ export class RecruitController {
     try {
       ip = await validateRequest(request);
       const id = Number(recruitId);
-      if (Number.isNaN(id)) {
+      if (isNaN(id)) {
         return NextResponse.json(
           { error: "Invalid recruit ID" },
           { status: 400 }
@@ -120,6 +123,7 @@ export class RecruitController {
         "recruitLanguageSkills",
         "recruitWorkExperiences",
       ];
+
       for (const key of jsonFields) {
         try {
           raw[key] = JSON.parse(raw[key] || "[]");
@@ -128,9 +132,43 @@ export class RecruitController {
         }
       }
 
-      const data = recruitPostSchema.parse(raw);
+      const profileImage = formData.get("recruitDetailProfileImage");
+      const signatureImage = formData.get("recruitDetailSignatureImage");
+
+      const slug = customAlphabet(
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+        10
+      )();
+
+      async function uploadFile(file, folder, slug) {
+        if (!file?.name || file.size === 0) return "";
+        const fileName = `${slug}.png`;
+        const folderPath = path.join(process.cwd(), "public", folder);
+        await mkdir(folderPath, { recursive: true });
+        const filePath = path.join(folderPath, fileName).replace(/\\/g, "/");
+        await writeFile(filePath, Buffer.from(await file.arrayBuffer()));
+        return fileName;
+      }
+
+      const profileImageName = await uploadFile(
+        profileImage,
+        "recruitProfileImage",
+        slug
+      );
+      const signatureImageName = await uploadFile(
+        signatureImage,
+        "recruitSignatureImage",
+        slug
+      );
+
+      raw.recruitDetail.recruitDetailProfileImage = profileImageName;
+      raw.recruitDetail.recruitDetailSignatureImage = signatureImageName;
+
+      const data = recruitPostSchema.parse({ ...raw, applySlug: slug });
+
       const recruit = await RecruitService.createRecruit({
         ...data,
+        applySlug: slug,
         recruitCreatedAt: getLocalNow(),
       });
 
@@ -151,14 +189,16 @@ export class RecruitController {
     try {
       ip = await validateRequest(request);
       const id = Number(recruitId);
-      if (Number.isNaN(id)) {
+      if (isNaN(id)) {
         return NextResponse.json(
           { error: "Invalid recruit ID" },
           { status: 400 }
         );
       }
+
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
+
       const data = recruitPutSchema.parse({ ...raw, recruitId: id });
 
       const recruit = await RecruitService.updateRecruit(id, {
@@ -183,7 +223,7 @@ export class RecruitController {
     try {
       ip = await validateRequest(request);
       const id = Number(perReqId);
-      if (Number.isNaN(id)) {
+      if (isNaN(id)) {
         return NextResponse.json(
           { error: "Invalid perReqId" },
           { status: 400 }

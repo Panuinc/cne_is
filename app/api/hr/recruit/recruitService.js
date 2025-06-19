@@ -30,17 +30,12 @@ export class RecruitService {
           select: {
             perReqDocumentId: true,
             perReqStatus: true,
-            PerReqPositionId: {
-              select: { positionNameTH: true },
-            },
+            PerReqPositionId: { select: { positionNameTH: true } },
           },
         },
         recruitDetail: true,
         RecruitUpdateBy: {
-          select: {
-            empFirstNameTH: true,
-            empLastNameTH: true,
-          },
+          select: { empFirstNameTH: true, empLastNameTH: true },
         },
       },
     });
@@ -54,17 +49,12 @@ export class RecruitService {
           select: {
             perReqDocumentId: true,
             perReqStatus: true,
-            PerReqPositionId: {
-              select: { positionNameTH: true },
-            },
+            PerReqPositionId: { select: { positionNameTH: true } },
           },
         },
         recruitDetail: true,
         RecruitUpdateBy: {
-          select: {
-            empFirstNameTH: true,
-            empLastNameTH: true,
-          },
+          select: { empFirstNameTH: true, empLastNameTH: true },
         },
       },
     });
@@ -78,9 +68,7 @@ export class RecruitService {
           select: {
             perReqDocumentId: true,
             perReqStatus: true,
-            PerReqPositionId: {
-              select: { positionNameTH: true },
-            },
+            PerReqPositionId: { select: { positionNameTH: true } },
           },
         },
         recruitDetail: true,
@@ -134,12 +122,10 @@ export class RecruitService {
       10
     );
     const slug = nanoid();
-
     await prisma.recruit.update({
       where: { recruitId },
       data: { applySlug: slug },
     });
-
     return slug;
   }
 

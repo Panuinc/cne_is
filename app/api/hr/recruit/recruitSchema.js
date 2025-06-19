@@ -50,8 +50,14 @@ export const recruitEducationsSchema = z.object({
     ],
     "Please select education level"
   ),
-  recruitEducationFromDate: preprocessDate("Please provide start date"),
-  recruitEducationToDate: preprocessDate("Please provide end date"),
+  recruitEducationFromDate: preprocessDate.refine(
+    (date) => date instanceof Date,
+    { message: "Please provide start date" }
+  ),
+  recruitEducationToDate: preprocessDate.refine(
+    (date) => date instanceof Date,
+    { message: "Please provide end date" }
+  ),
   recruitEducationSchool: preprocessString("Please provide school name"),
   recruitEducationDegree: preprocessString("Please provide degree"),
   recruitEducationMajor: preprocessString("Please provide major"),
@@ -85,16 +91,18 @@ export const recruitWorkExperiencesSchema = z.object({
     ["FullTime", "PartTime", "Internship"],
     "Please select employment type"
   ),
-  recruitStartDate: preprocessDate("Please provide start date"),
-  recruitEndDate: preprocessDate("Please provide end date"),
+  recruitStartDate: preprocessDate.refine((date) => date instanceof Date, {
+    message: "Please provide start date",
+  }),
+  recruitEndDate: preprocessDate.refine((date) => date instanceof Date, {
+    message: "Please provide end date",
+  }),
   recruitSalary: preprocessInt("Please provide salary"),
   recruitExtraIncome: preprocessInt("Please provide extra income"),
   recruitReasonForLeaving: preprocessString(
     "Please provide reason for leaving"
   ),
-  recruitJobDescription: z.any({
-    required_error: "Please provide job description",
-  }),
+  recruitJobDescription: preprocessString("Please provide job description"),
 });
 
 const recruitDetailSchema = z.object({
@@ -102,7 +110,9 @@ const recruitDetailSchema = z.object({
   recruitFullNameEn: preprocessString("Full name (EN) is required"),
   recruitNickName: preprocessString("Nickname is required"),
   recruitDetailSalary: preprocessInt("Expected salary is required"),
-  recruitDetailBirthDay: preprocessDate("Birthdate is required"),
+  recruitDetailBirthDay: preprocessDate.refine((date) => date instanceof Date, {
+    message: "Birthdate is required",
+  }),
   recruitDetailGender: preprocessEnum(
     ["Male", "FeMale", "Other"],
     "Gender is required"
@@ -120,10 +130,14 @@ const recruitDetailSchema = z.object({
   recruitDetailIdCardIssuedAt: preprocessString(
     "ID card issued place is required"
   ),
-  recruitDetailIdCardIssuedDate: preprocessDate(
-    "ID card issue date is required"
+  recruitDetailIdCardIssuedDate: preprocessDate.refine(
+    (date) => date instanceof Date,
+    { message: "ID card issue date is required" }
   ),
-  recruitDetailIdCardEndDate: preprocessDate("ID card expiry date is required"),
+  recruitDetailIdCardEndDate: preprocessDate.refine(
+    (date) => date instanceof Date,
+    { message: "ID card expiry date is required" }
+  ),
   recruitDetailPhone: preprocessString("Phone is required"),
   recruitDetailEmail: preprocessString("Email is required"),
   recruitDetailLine: preprocessString("Line ID is required"),

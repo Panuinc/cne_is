@@ -21,17 +21,15 @@ export default function UIRecruitForm({
   setPreview,
   handleFileChange,
   fileInputRef,
+  handleSignatureFileChange,
+  signatureInputRef,
   formattedDate,
+  setSignatureBlob,
 }) {
   const [step, setStep] = useState(1);
 
-  const handleNext = () => {
-    setStep((prev) => prev + 1);
-  };
-
-  const handleBack = () => {
-    setStep((prev) => prev - 1);
-  };
+  const handleNext = () => setStep((prev) => prev + 1);
+  const handleBack = () => setStep((prev) => prev - 1);
 
   return (
     <>
@@ -49,6 +47,8 @@ export default function UIRecruitForm({
             setPreview={setPreview}
             handleFileChange={handleFileChange}
             fileInputRef={fileInputRef}
+            handleSignatureFileChange={handleSignatureFileChange}
+            signatureInputRef={signatureInputRef}
             formattedDate={formattedDate}
           />
         )}
@@ -78,6 +78,7 @@ export default function UIRecruitForm({
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
+            setSignatureBlob={setSignatureBlob}
           />
         )}
         {step === 6 && (
