@@ -1,14 +1,7 @@
 "use client";
 
-import SignatureCanvas from "react-signature-canvas";
-import { useRef } from "react";
-import { Button } from "@heroui/react";
-import { MinusCircle, PlusCircle } from "lucide-react";
 import {
-  renderInputField,
-  renderTextAreaField,
   renderRadioGroupField,
-  renderSelectField,
 } from "@/components/ui/hr/recruit/components/UIRenderField";
 
 export default function UIRecruitStep6({

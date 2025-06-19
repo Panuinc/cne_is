@@ -17,8 +17,6 @@ export default function UIRecruitForm({
   errors,
   formData,
   handleInputChange,
-  isUpdate,
-  operatedBy,
   preview,
   setPreview,
   handleFileChange,
