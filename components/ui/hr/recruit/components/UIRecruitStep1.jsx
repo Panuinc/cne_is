@@ -54,8 +54,8 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-1 border-dark/25">
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 gap-2">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 gap-2 border-1 border-dark/25">
           <div className="flex flex-col items-center justify-center w-full h-full">
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
               ตำแหน่งที่สมัคร <br /> The job position you are applying for
@@ -75,7 +75,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 gap-2">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 gap-2 border-1 border-dark/25">
           <div className="relative w-full h-full overflow-hidden">
             {preview ? (
               <Image
