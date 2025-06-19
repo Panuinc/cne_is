@@ -120,7 +120,11 @@ export class RecruitService {
   static async updateRecruit(recruitId, data) {
     return prisma.recruit.update({
       where: { recruitId },
-      data,
+      data: {
+        recruitStatus: data.recruitStatus,
+        recruitUpdateBy: data.recruitUpdateBy,
+        recruitUpdatedAt: getLocalNow(),
+      },
     });
   }
 
@@ -151,13 +155,13 @@ export class RecruitService {
         recruitFullNameEn: "",
         recruitNickName: "",
         recruitDetailBirthDay: new Date(),
-        recruitDetailGender: "Other", // ต้องเป็นค่าที่ valid ของ enum Gender
+        recruitDetailGender: "Other",
         recruitDetailAge: 0,
         recruitDetailNationality: "",
         recruitDetailReligion: "",
         recruitDetailWright: 0,
         recruitDetailHeight: 0,
-        recruitDetailBloodGroup: "Unknown", // valid enum
+        recruitDetailBloodGroup: "Unknown",
         recruitDetailIdCardNumber: "",
         recruitDetailIdCardIssuedAt: "",
         recruitDetailIdCardIssuedDate: new Date(),
@@ -168,7 +172,7 @@ export class RecruitService {
         recruitDetailPresentAddress: "",
         recruitDetailPresentAddressLink: "",
         recruitDetailRegisteredAddress: "",
-        recruitDetailResidence: "Parents_house", // enum valid
+        recruitDetailResidence: "Parents_house",
         recruitDetailMaritalStatus: "Single",
         recruitDetailMilitaryStatus: "NotYetServed",
         recruitDetailOwnCar: "No",

@@ -5,7 +5,6 @@ import {
   recruitPutSchema,
   formatRecruitData,
 } from "./recruitSchema";
-
 import { validateRequest } from "@/lib/validateRequest";
 import { getLocalNow } from "@/lib/getLocalNow";
 import { handleErrors, handleGetErrors } from "@/lib/errorHandler";
@@ -54,53 +53,6 @@ export class RecruitController {
     }
   }
 
-  static async createRecruit(request) {
-    let ip = "";
-    try {
-      ip = await validateRequest(request);
-      const formData = await request.formData();
-      const raw = Object.fromEntries(formData.entries());
-
-      const keysToParse = [
-        "recruitFamilyMembers",
-        "recruitEducations",
-        "recruitLanguageSkills",
-        "recruitWorkExperiences",
-      ];
-      for (const key of keysToParse) {
-        try {
-          raw[key] = JSON.parse(raw[key] || "[]");
-        } catch {
-          raw[key] = [];
-        }
-      }
-
-      if (raw.recruitDetail) {
-        try {
-          raw.recruitDetail = JSON.parse(raw.recruitDetail);
-        } catch {
-          raw.recruitDetail = null;
-        }
-      }
-
-      const data = recruitPostSchema.parse(raw);
-      const localNow = getLocalNow();
-      formatRecruitDetailDates(data.recruitDetail);
-
-      const recruit = await RecruitService.createRecruit({
-        ...data,
-        recruitCreatedAt: localNow,
-      });
-
-      return NextResponse.json(
-        { message: "Recruit created successfully", recruit },
-        { status: 201 }
-      );
-    } catch (error) {
-      return handleErrors(error, ip, "Failed to create recruit");
-    }
-  }
-
   static async getRecruitById(request, recruitId) {
     let ip = "";
     try {
@@ -112,7 +64,6 @@ export class RecruitController {
           { status: 400 }
         );
       }
-
       const recruit = await RecruitService.getRecruitById(id);
       if (!recruit) {
         return NextResponse.json(
@@ -120,7 +71,6 @@ export class RecruitController {
           { status: 404 }
         );
       }
-
       return NextResponse.json(
         {
           message: "Successfully retrieved recruit",
@@ -130,6 +80,69 @@ export class RecruitController {
       );
     } catch (error) {
       return handleGetErrors(error, ip, "Failed to retrieve recruit");
+    }
+  }
+
+  static async getRecruitBySlug(request, slug) {
+    let ip = "";
+    try {
+      ip = await validateRequest(request);
+      const recruit = await RecruitService.getRecruitBySlug(slug);
+      if (!recruit) {
+        return NextResponse.json(
+          { error: "Recruit not found" },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json(
+        {
+          message: "Successfully retrieved recruit",
+          recruit: formatRecruitData([recruit]),
+        },
+        { status: 200 }
+      );
+    } catch (error) {
+      return handleGetErrors(error, ip, "Failed to retrieve recruit by slug");
+    }
+  }
+
+  static async createRecruit(request) {
+    let ip = "";
+    try {
+      ip = await validateRequest(request);
+      const formData = await request.formData();
+      const raw = Object.fromEntries(formData.entries());
+
+      const jsonFields = [
+        "recruitDetail",
+        "recruitFamilyMembers",
+        "recruitEducations",
+        "recruitLanguageSkills",
+        "recruitWorkExperiences",
+      ];
+      for (const key of jsonFields) {
+        try {
+          raw[key] = JSON.parse(raw[key] || "[]");
+        } catch {
+          raw[key] = key === "recruitDetail" ? null : [];
+        }
+      }
+
+      const data = recruitPostSchema.parse(raw);
+      const recruit = await RecruitService.createRecruit({
+        ...data,
+        recruitCreatedAt: getLocalNow(),
+      });
+
+      return NextResponse.json(
+        {
+          message: "Recruit created successfully",
+          recruit,
+        },
+        { status: 201 }
+      );
+    } catch (error) {
+      return handleErrors(error, ip, "Failed to create recruit");
     }
   }
 
@@ -144,20 +157,20 @@ export class RecruitController {
           { status: 400 }
         );
       }
-
       const formData = await request.formData();
       const raw = Object.fromEntries(formData.entries());
       const data = recruitPutSchema.parse({ ...raw, recruitId: id });
 
-      const localNow = getLocalNow();
       const recruit = await RecruitService.updateRecruit(id, {
         recruitStatus: data.recruitStatus,
         recruitUpdateBy: data.recruitUpdateBy,
-        recruitUpdatedAt: localNow,
       });
 
       return NextResponse.json(
-        { message: "Recruit updated successfully", recruit },
+        {
+          message: "Recruit updated successfully",
+          recruit,
+        },
         { status: 200 }
       );
     } catch (error) {
@@ -176,36 +189,10 @@ export class RecruitController {
           { status: 400 }
         );
       }
-
       const url = await RecruitService.getOrCreateApplyLink(id);
       return NextResponse.json({ url }, { status: 200 });
     } catch (error) {
       return handleGetErrors(error, ip, "Failed to create link");
-    }
-  }
-
-  static async getRecruitBySlug(request, slug) {
-    let ip = "";
-    try {
-      ip = await validateRequest(request);
-      const recruit = await RecruitService.getRecruitBySlug(slug);
-
-      if (!recruit) {
-        return NextResponse.json(
-          { error: "Recruit not found" },
-          { status: 404 }
-        );
-      }
-
-      return NextResponse.json(
-        {
-          message: "Successfully retrieved recruit",
-          recruit: formatRecruitData([recruit]),
-        },
-        { status: 200 }
-      );
-    } catch (error) {
-      return handleGetErrors(error, ip, "Failed to retrieve recruit by slug");
     }
   }
 }

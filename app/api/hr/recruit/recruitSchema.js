@@ -4,7 +4,6 @@ import {
   preprocessString,
   preprocessEnum,
   preprocessDate,
-  preprocessBoolean,
   formatData,
 } from "@/lib/zodSchema";
 
@@ -19,157 +18,255 @@ export const formatRecruitData = (recruits) =>
     ]
   );
 
-export const recruitPostSchema = z.object({
-  recruitPerReqId: preprocessInt("Please provide the related perReqId"),
+const preprocessFloat = (msg = "Invalid number") =>
+  z.preprocess(
+    (val) => (val === "" || val == null ? undefined : parseFloat(val)),
+    z.number({ required_error: msg, invalid_type_error: msg })
+  );
 
-  recruitStatus: preprocessEnum(
-    ["Pending", "Submitted", "Interviewing", "Rejected", "Hired", "Considered"],
-    "Please provide a valid recruit status"
-  ).optional(),
+export const recruitFamilyMembersSchema = z.object({
+  recruitFamilyMemberRelation: preprocessEnum(
+    ["Father", "Mother", "Elder", "Younger", "Wife", "Husband"],
+    "Please select family relation"
+  ),
+  recruitFamilyMemberFullName: preprocessString("Please provide full name"),
+  recruitFamilyMemberAge: preprocessInt("Please provide age"),
+  recruitFamilyMemberOccupation: preprocessString("Please provide occupation"),
+  recruitFamilyMemberWorkplace: preprocessString("Please provide workplace"),
+  recruitFamilyMemberPhone: preprocessString("Please provide phone number"),
+});
 
-  recruitDetail: z.object({
-    recruitFullNameTh: preprocessString("Please provide the full name (TH)"),
-    recruitFullNameEn: preprocessString("Please provide the full name (EN)"),
-    recruitNickName: preprocessString("Please provide the nickname"),
+export const recruitEducationsSchema = z.object({
+  recruitEducationLevel: preprocessEnum(
+    [
+      "Primary",
+      "LowerSecondary",
+      "UpperSecondary",
+      "Vocational",
+      "HighVocational",
+      "Bachelor",
+      "Master",
+      "Doctorate",
+    ],
+    "Please select education level"
+  ),
+  recruitEducationFromDate: preprocessDate("Please provide start date"),
+  recruitEducationToDate: preprocessDate("Please provide end date"),
+  recruitEducationSchool: preprocessString("Please provide school name"),
+  recruitEducationDegree: preprocessString("Please provide degree"),
+  recruitEducationMajor: preprocessString("Please provide major"),
+  recruitEducationGPA: preprocessFloat("Please provide GPA"),
+});
 
-    recruitDetailSalary: preprocessInt("Please provide the expected salary"),
-    recruitDetailBirthDay: preprocessDate,
-    recruitDetailGender: preprocessEnum(
-      ["Male", "FeMale", "Other"],
-      "Please provide gender"
-    ),
-    recruitDetailAge: preprocessInt("Please provide the age"),
-    recruitDetailNationality: preprocessString(
-      "Please provide the nationality"
-    ),
-    recruitDetailReligion: preprocessString("Please provide the religion"),
-    recruitDetailWright: preprocessInt("Please provide the weight"),
-    recruitDetailHeight: preprocessInt("Please provide the height"),
-    recruitDetailBloodGroup: preprocessEnum(
-      ["A", "B", "AB", "O", "Unknown"],
-      "Invalid blood group"
-    ),
-    recruitDetailIdCardNumber: preprocessString(
-      "Please provide ID card number"
-    ),
-    recruitDetailIdCardIssuedAt: preprocessString(
-      "Please provide ID card issued at"
-    ),
-    recruitDetailIdCardIssuedDate: preprocessDate,
-    recruitDetailIdCardEndDate: preprocessDate,
-    recruitDetailPhone: preprocessString("Please provide phone number"),
-    recruitDetailEmail: preprocessString("Please provide email"),
-    recruitDetailLine: preprocessString("Please provide Line ID"),
-    recruitDetailPresentAddress: preprocessString(
-      "Please provide present address"
-    ),
-    recruitDetailPresentAddressLink: preprocessString(
-      "Please provide present address link"
-    ),
-    recruitDetailRegisteredAddress: preprocessString(
-      "Please provide registered address"
-    ),
-    recruitDetailMaritalStatus: preprocessEnum(
-      ["Single", "Married", "Divorced", "Widowed"],
-      "Please provide marital status"
-    ),
-    recruitDetailSpouseEarnIncome: preprocessEnum(
-      ["Yes", "No"],
-      "Please specify spouse income"
-    ).optional(),
-    recruitDetailSpouseIncomeAmount: preprocessInt().optional(),
-    recruitDetailNumberOfChildren: preprocessInt().optional(),
-    recruitDetailMilitaryStatus: preprocessEnum(
-      ["Exempted", "Completed", "NotYetServed"],
-      "Please provide military status"
-    ),
-    recruitDetailOwnCar: preprocessEnum(["Yes", "No"], "Own a car?"),
-    recruitDetailOwnMotorcycle: preprocessEnum(
-      ["Yes", "No"],
-      "Own a motorcycle?"
-    ),
-    recruitDetailHaveCarLicense: preprocessEnum(
-      ["Yes", "No"],
-      "Have car license?"
-    ),
-    recruitDetailHaveMotorcycleLicense: preprocessEnum(
-      ["Yes", "No"],
-      "Have motorcycle license?"
-    ),
-    recruitDetailComputerSkill: preprocessString(
-      "Please provide Computer Skill"
-    ),
-    recruitDetailOtherSkill: preprocessString("Please provide Other Skill"),
+export const recruitLanguageSkillsSchema = z.object({
+  recruitLanguageName: preprocessString("Please provide language name"),
+  recruitLanguageListenLevel: preprocessEnum(
+    ["Fair", "Good", "Excellent"],
+    "Please select listening level"
+  ),
+  recruitLanguageSpeakLevel: preprocessEnum(
+    ["Fair", "Good", "Excellent"],
+    "Please select speaking level"
+  ),
+  recruitLanguageReadLevel: preprocessEnum(
+    ["Fair", "Good", "Excellent"],
+    "Please select reading level"
+  ),
+  recruitLanguageWriteLevel: preprocessEnum(
+    ["Fair", "Good", "Excellent"],
+    "Please select writing level"
+  ),
+});
 
-    recruitDetailScoreToeic: preprocessString("Please provide Score Toeic"),
-    recruitDetailScoreToefl: preprocessString("Please provide Score Toefl"),
-    recruitDetailScoreIelts: preprocessString("Please provide Score elts"),
-
-    recruitDetailAllowReferenceCheck: preprocessBoolean(
-      "Allow reference check?"
-    ),
-    recruitDetailAllowReferenceCheckReason: preprocessString().optional(),
-    recruitDetailEverFired: preprocessBoolean("Ever fired?"),
-    recruitDetailEverFiredReason: preprocessString().optional(),
-    recruitDetailSevereIllnessHistory: preprocessBoolean(
-      "Severe illness history?"
-    ),
-    recruitDetailSevereIllnessDetail: preprocessString().optional(),
-    recruitDetailCriminalRecord: preprocessBoolean("Any criminal record?"),
-    recruitDetailCriminalRecordDetail: preprocessString().optional(),
-    recruitDetailIsPregnant: preprocessBoolean("Is pregnant?"),
-    recruitDetailPregnancyDetail: preprocessString().optional(),
-    recruitDetailHasFriendInCompany: preprocessBoolean(
-      "Has friend in company?"
-    ),
-    recruitDetailFriendInCompanyName: preprocessString().optional(),
-    recruitDetailRef1Name: preprocessString("Please provide reference 1 name"),
-    recruitDetailRef1Address: preprocessString(
-      "Please provide reference 1 address"
-    ),
-    recruitDetailRef1Phone: preprocessString(
-      "Please provide reference 1 phone"
-    ),
-    recruitDetailRef1Occupation: preprocessString(
-      "Please provide reference 1 occupation"
-    ),
-    recruitDetailRef2Name: preprocessString("Please provide reference 2 name"),
-    recruitDetailRef2Address: preprocessString(
-      "Please provide reference 2 address"
-    ),
-    recruitDetailRef2Phone: preprocessString(
-      "Please provide reference 2 phone"
-    ),
-    recruitDetailRef2Occupation: preprocessString(
-      "Please provide reference 2 occupation"
-    ),
-    recruitDetailSelfIntro: preprocessString().optional(),
-    recruitDetailHomeMapUrl: preprocessString().optional(),
-    recruitDetailAttachIdCard: preprocessString().optional(),
-    recruitDetailAttachHouseReg: preprocessString().optional(),
-    recruitDetailAttachEducation: preprocessString().optional(),
-    recruitDetailAttachMedicalCert: preprocessString().optional(),
-    recruitDetailAttachMilitaryDoc: preprocessString().optional(),
-    recruitDetailConsentGeneral: preprocessBoolean("Consent for general data?"),
-    recruitDetailConsentSensitive: preprocessBoolean(
-      "Consent for sensitive data?"
-    ),
-    recruitDetailSignatureImage: preprocessString().optional(),
-    recruitDetailProfileImage: preprocessString().optional(),
+export const recruitWorkExperiencesSchema = z.object({
+  recruitWorkplaceName: preprocessString("Please provide company name"),
+  recruitWorkPosition: preprocessString("Please provide position"),
+  recruitEmploymentType: preprocessEnum(
+    ["FullTime", "PartTime", "Internship"],
+    "Please select employment type"
+  ),
+  recruitStartDate: preprocessDate("Please provide start date"),
+  recruitEndDate: preprocessDate("Please provide end date"),
+  recruitSalary: preprocessInt("Please provide salary"),
+  recruitExtraIncome: preprocessInt("Please provide extra income"),
+  recruitReasonForLeaving: preprocessString(
+    "Please provide reason for leaving"
+  ),
+  recruitJobDescription: z.any({
+    required_error: "Please provide job description",
   }),
+});
 
-  recruitFamilyMembers: z.array(z.any()).optional(),
-  recruitEducations: z.array(z.any()).optional(),
-  recruitProfessionalLicenses: z.array(z.any()).optional(),
-  recruitLanguageSkills: z.array(z.any()).optional(),
-  recruitWorkExperiences: z.array(z.any()).optional(),
+const recruitDetailSchema = z.object({
+  recruitFullNameTh: preprocessString("Full name (TH) is required"),
+  recruitFullNameEn: preprocessString("Full name (EN) is required"),
+  recruitNickName: preprocessString("Nickname is required"),
+  recruitDetailSalary: preprocessInt("Expected salary is required"),
+  recruitDetailBirthDay: preprocessDate("Birthdate is required"),
+  recruitDetailGender: preprocessEnum(
+    ["Male", "FeMale", "Other"],
+    "Gender is required"
+  ),
+  recruitDetailAge: preprocessInt("Age is required"),
+  recruitDetailNationality: preprocessString("Nationality is required"),
+  recruitDetailReligion: preprocessString("Religion is required"),
+  recruitDetailWright: preprocessInt("Weight is required"),
+  recruitDetailHeight: preprocessInt("Height is required"),
+  recruitDetailBloodGroup: preprocessEnum(
+    ["A", "B", "AB", "O", "Unknown"],
+    "Blood group is required"
+  ),
+  recruitDetailIdCardNumber: preprocessString("ID card number is required"),
+  recruitDetailIdCardIssuedAt: preprocessString(
+    "ID card issued place is required"
+  ),
+  recruitDetailIdCardIssuedDate: preprocessDate(
+    "ID card issue date is required"
+  ),
+  recruitDetailIdCardEndDate: preprocessDate("ID card expiry date is required"),
+  recruitDetailPhone: preprocessString("Phone is required"),
+  recruitDetailEmail: preprocessString("Email is required"),
+  recruitDetailLine: preprocessString("Line ID is required"),
+  recruitDetailPresentAddress: preprocessString("Present address is required"),
+  recruitDetailPresentAddressLink: preprocessString("Address link is required"),
+  recruitDetailRegisteredAddress: preprocessString(
+    "Registered address is required"
+  ),
+  recruitDetailResidence: preprocessEnum(
+    ["Parents_house", "Own_house", "Boarding_house_Rented_house"],
+    "Residence is required"
+  ),
+  recruitDetailMaritalStatus: preprocessEnum(
+    ["Single", "Married", "Divorced", "Widowed"],
+    "Marital status is required"
+  ),
+  recruitDetailSpouseEarnIncome: preprocessEnum(
+    ["Yes", "No"],
+    "Spouse income status is required"
+  ),
+  recruitDetailSpouseIncomeAmount: preprocessInt(
+    "Spouse income amount is required"
+  ),
+  recruitDetailNumberOfChildren: preprocessInt(
+    "Number of children is required"
+  ),
+  recruitDetailMilitaryStatus: preprocessEnum(
+    ["Exempted", "Completed", "NotYetServed"],
+    "Military status is required"
+  ),
+  recruitDetailEmergencyFullName: preprocessString(
+    "Emergency contact name is required"
+  ),
+  recruitDetailEmergencyRelationship: preprocessString(
+    "Emergency relationship is required"
+  ),
+  recruitDetailEmergencyPhone: preprocessString("Emergency phone is required"),
+  recruitDetailLicenseName: preprocessString("License name is required"),
+  recruitDetailLicenseNumber: preprocessString("License number is required"),
+  recruitDetailComputerSkill: preprocessString("Computer skill is required"),
+  recruitDetailSportSkill: preprocessString("Sport skill is required"),
+  recruitDetailOtherSkill: preprocessString("Other skill is required"),
+  recruitDetailScoreToeic: preprocessString("TOEIC score is required"),
+  recruitDetailScoreToefl: preprocessString("TOEFL score is required"),
+  recruitDetailScoreIelts: preprocessString("IELTS score is required"),
+  recruitDetailOwnCar: preprocessEnum(
+    ["Yes", "No"],
+    "Car ownership is required"
+  ),
+  recruitDetailOwnMotorcycle: preprocessEnum(
+    ["Yes", "No"],
+    "Motorcycle ownership is required"
+  ),
+  recruitDetailHaveCarLicense: preprocessEnum(
+    ["Yes", "No"],
+    "Car license info is required"
+  ),
+  recruitDetailHaveMotorcycleLicense: preprocessEnum(
+    ["Yes", "No"],
+    "Motorcycle license info is required"
+  ),
+  recruitDetailWhenStartWork: preprocessString("Start work date is required"),
+  recruitDetailCheckWorkingHistory: preprocessEnum(
+    ["Yes", "No"],
+    "Work history check consent is required"
+  ),
+  recruitDischarged: preprocessEnum(
+    ["Yes", "No"],
+    "Discharged status is required"
+  ),
+  recruitDischargedReason: preprocessString("Discharge reason is required"),
+  recruitDetailSeriousIllnessOrContagious: preprocessEnum(
+    ["Yes", "No"],
+    "Illness status is required"
+  ),
+  recruitDetailIllnessName: preprocessString("Illness name is required"),
+  recruitDetailCriminalConvictionOrBankrupt: preprocessEnum(
+    ["Yes", "No"],
+    "Criminal/bankruptcy status is required"
+  ),
+  recruitDetailIsPregnant: preprocessEnum(
+    ["Yes", "No"],
+    "Pregnancy status is required"
+  ),
+  recruitDetailPregnancyMonth: preprocessInt("Pregnancy month is required"),
+  recruitDetailHasRelativesInCompany: preprocessEnum(
+    ["Yes", "No"],
+    "Relatives in company is required"
+  ),
+  recruitDetailRelativesName: preprocessString("Relatives' name is required"),
+  recruitDetailRef1Name: preprocessString("Reference 1 name is required"),
+  recruitDetailRef2Name: preprocessString("Reference 2 name is required"),
+  recruitDetailSelfIntro: preprocessString("Self-introduction is required"),
+  recruitDetailSignatureImage: preprocessString("Signature image is required"),
+  recruitDetailProfileImage: preprocessString("Profile image is required"),
+  recruitDetailAttachIdCard: preprocessString("ID card attachment is required"),
+  recruitDetailAttachHouseReg: preprocessString(
+    "House reg. attachment is required"
+  ),
+  recruitDetailAttachEducation: preprocessString(
+    "Education attachment is required"
+  ),
+  recruitDetailAttachMedicalCert: preprocessString("Medical cert is required"),
+  recruitDetailAttachMilitaryDoc: preprocessString(
+    "Military document is required"
+  ),
+  recruitConsentGeneral: preprocessEnum(
+    ["Yes", "No"],
+    "Consent for general data is required"
+  ),
+  recruitConsentSensitive: preprocessEnum(
+    ["Yes", "No"],
+    "Consent for sensitive data is required"
+  ),
+  recruitConsentPdpa: preprocessEnum(["Yes", "No"], "PDPA consent is required"),
+});
+
+export const recruitPostSchema = z.object({
+  recruitPerReqId: preprocessInt("PerReq ID is required"),
+  recruitStatus: preprocessEnum(
+    ["Pending", "Submitted", "Rejected", "Hired", "Considered"],
+    "Recruit status is required"
+  ),
+  recruitDetail: recruitDetailSchema,
+  recruitFamilyMembers: z.array(recruitFamilyMembersSchema, {
+    required_error: "Family members are required",
+  }),
+  recruitEducations: z.array(recruitEducationsSchema, {
+    required_error: "Educations are required",
+  }),
+  recruitLanguageSkills: z.array(recruitLanguageSkillsSchema, {
+    required_error: "Language skills are required",
+  }),
+  recruitWorkExperiences: z.array(recruitWorkExperiencesSchema, {
+    required_error: "Work experience is required",
+  }),
 });
 
 export const recruitPutSchema = z.object({
-  recruitId: preprocessInt("Please provide recruit ID to update"),
+  recruitId: preprocessInt("Recruit ID is required"),
   recruitStatus: preprocessEnum(
-    ["Pending", "Submitted", "Interviewing", "Rejected", "Hired", "Considered"],
-    "Please provide a valid status"
+    ["Pending", "Submitted", "Rejected", "Hired", "Considered"],
+    "Recruit status is required"
   ),
-  recruitUpdateBy: preprocessInt("Please provide the updater's user ID"),
+  recruitUpdateBy: preprocessInt("Updater ID is required"),
 });
