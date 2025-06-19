@@ -201,7 +201,7 @@ export default function UIRecruitStep2({
           )}
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           กรณีเร่งด่วนติดต่อ In case od emergency, please notify
         </div>
 
@@ -256,7 +256,7 @@ export default function UIRecruitStep2({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ประวัติการศึกษา
           <br />
           Education Back Ground
@@ -421,7 +421,7 @@ export default function UIRecruitStep2({
             </div>
           )}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ใบประกอบวิชาชีพ / Professional License
         </div>
 

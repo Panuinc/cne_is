@@ -40,7 +40,7 @@ export default function UIRecruitStep3({
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ภาษา กรุณาระบุ ดีมาก ดี พอใช้
           <br />
           Language - Please Identify Excellent Good Fair
@@ -193,7 +193,7 @@ export default function UIRecruitStep3({
           )}
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ทักษะอื่นๆ
           <br />
           Other Skills
@@ -271,7 +271,7 @@ export default function UIRecruitStep3({
           })}
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
           ท่านมีรถยนต์ /
           มอเตอร์ไซต์ส่วนตัวที่สามารถนำมาใช้ในธุระของบริษัทหรือไม่
           <br />
@@ -307,7 +307,7 @@ export default function UIRecruitStep3({
           })}
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
           ท่านมีใบขับขี่หรือไม่
           <br />
           Do you have a driving license?

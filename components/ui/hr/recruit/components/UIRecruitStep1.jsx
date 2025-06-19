@@ -29,11 +29,11 @@ export default function UIRecruitStep1({
           />
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600] text-center">
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600] text-center">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-sm text-center">
           35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140
           <br />
           35, Moo 12, Khubangluang Sub-district, Lat Lum Kaeo District, Pathum
