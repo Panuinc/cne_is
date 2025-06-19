@@ -704,32 +704,6 @@ model RecruitDetail {
   recruitConsentSensitive                   YesOrNo
   recruitConsentPdpa                        YesOrNo
 
-  // recruitDetailAllowReferenceCheck       Boolean
-  // recruitDetailAllowReferenceCheckReason String?                      @db.VarChar(255)
-  // recruitDetailEverFired                 Boolean
-  // recruitDetailEverFiredReason           String?                      @db.VarChar(255)
-  // recruitDetailSevereIllnessHistory      Boolean
-  // recruitDetailSevereIllnessDetail       String?                      @db.VarChar(255)
-  // recruitDetailCriminalRecord            Boolean
-  // recruitDetailCriminalRecordDetail      String?                      @db.VarChar(255)
-  // recruitDetailIsPregnant                Boolean
-  // recruitDetailPregnancyDetail           String?                      @db.VarChar(255)
-  // recruitDetailHasFriendInCompany        Boolean
-  // recruitDetailFriendInCompanyName       String?                      @db.VarChar(255)
-  // recruitDetailRef1Name                  String                       @db.VarChar(255)
-  // recruitDetailRef1Address               String                       @db.VarChar(255)
-  // recruitDetailRef1Phone                 String                       @db.VarChar(20)
-  // recruitDetailRef1Occupation            String                       @db.VarChar(255)
-  // recruitDetailRef2Name                  String                       @db.VarChar(255)
-  // recruitDetailRef2Address               String                       @db.VarChar(255)
-  // recruitDetailRef2Phone                 String                       @db.VarChar(20)
-  // recruitDetailRef2Occupation            String                       @db.VarChar(255)
-  // recruitDetailSelfIntro                 String?                      @db.Text
-  // recruitDetailHomeMapUrl                String?                      @db.VarChar(500)
-  // recruitDetailConsentGeneral            Boolean
-  // recruitDetailConsentSensitive          Boolean
-  // recruitDetailSignatureImage            String?                      @db.VarChar(500)
-
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
 
