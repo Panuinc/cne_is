@@ -227,7 +227,7 @@ export default function UIRecruitStep1({
               { labelTH: "B", value: "B" },
               { labelTH: "AB", value: "AB" },
               { labelTH: "O", value: "O" },
-              { labelTH: "Other", value: "Other" },
+              { labelTH: "Unknown", value: "Unknown" },
             ],
           })}
         </div>
