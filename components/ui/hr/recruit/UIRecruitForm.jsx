@@ -37,6 +37,7 @@ export default function UIRecruitForm({
         ref={formRef}
         onSubmit={onSubmit}
         className="flex flex-col items-center justify-start w-full h-full p-2 xl:p-4 gap-2 border-2 border-dark/25 bg-white overflow-auto"
+        encType="multipart/form-data"
       >
         {step === 1 && (
           <UIRecruitStep1
@@ -97,6 +98,7 @@ export default function UIRecruitForm({
           />
         )}
 
+        {/* ปุ่มควบคุม */}
         <div className="flex flex-row items-center justify-center w-full p-2 gap-2">
           {step > 1 && (
             <div className="flex items-center justify-start w-full h-full gap-2">

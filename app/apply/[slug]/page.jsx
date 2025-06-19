@@ -36,6 +36,7 @@ export default function RecruitApplyPage() {
         }
 
         const data = JSON.parse(JSON.stringify(json.recruit[0]));
+
         data.recruitFamilyMembers = data.recruitFamilyMembers?.length
           ? data.recruitFamilyMembers
           : [{}];
@@ -139,7 +140,6 @@ export default function RecruitApplyPage() {
         }
       });
 
-      // 🔗 Profile Image
       if (detail.recruitDetailProfileImage instanceof File) {
         form.append(
           "recruitDetailProfileImage",
@@ -147,7 +147,6 @@ export default function RecruitApplyPage() {
         );
       }
 
-      // ✍️ Signature
       if (signatureBlob instanceof Blob) {
         form.append(
           "recruitDetailSignatureImage",
@@ -155,7 +154,6 @@ export default function RecruitApplyPage() {
         );
       }
 
-      // 📎 Attachments
       const attachmentFields = [
         "recruitDetailAttachIdCard",
         "recruitDetailAttachHouseReg",

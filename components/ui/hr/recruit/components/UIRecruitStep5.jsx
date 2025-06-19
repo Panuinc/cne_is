@@ -7,41 +7,56 @@ import {
   renderInputField,
   renderTextAreaField,
 } from "@/components/ui/hr/recruit/components/UIRenderField";
+import toast from "react-hot-toast";
 
 export default function UIRecruitStep5({
   formData,
   handleInputChange,
   errors,
+  setSignatureBlob,
 }) {
-  const sigCanvasRef = useRef();
+  const sigCanvasRef = useRef(null);
   const [signaturePreview, setSignaturePreview] = useState(
     formData?.recruitDetail?.recruitSignature || ""
   );
 
   const clearSignature = () => {
-    sigCanvasRef.current.clear();
+    sigCanvasRef.current?.clear();
     setSignaturePreview("");
     handleInputChange("recruitDetail.recruitSignature")("");
-    handleInputChange("recruitDetail.recruitDetailSignatureImage")(null);
+    handleInputChange("recruitDetail.recruitDetailSignatureImage")({
+      target: { value: null },
+    });
+    setSignatureBlob?.(null);
   };
 
   const saveSignature = () => {
-    const canvas = sigCanvasRef.current.getTrimmedCanvas();
+    const canvasObj = sigCanvasRef.current;
+    if (!canvasObj || typeof canvasObj.getTrimmedCanvas !== "function") {
+      toast.error("ไม่สามารถบันทึกลายเซ็นได้");
+      return;
+    }
+
+    const canvas = canvasObj.getTrimmedCanvas();
     const base64 = canvas.toDataURL("image/png");
 
-    // อัปเดต preview
     setSignaturePreview(base64);
     handleInputChange("recruitDetail.recruitSignature")(base64);
 
-    // แปลง base64 เป็น File object
-    fetch(base64)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const file = new File([blob], "signature.png", { type: "image/png" });
-        handleInputChange("recruitDetail.recruitDetailSignatureImage")({
-          target: { value: file },
-        });
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        toast.error("ไม่สามารถแปลงลายเซ็นเป็นไฟล์ได้");
+        return;
+      }
+
+      const file = new File([blob], "signature.png", { type: "image/png" });
+
+      handleInputChange("recruitDetail.recruitDetailSignatureImage")({
+        target: { value: file },
       });
+
+      setSignatureBlob?.(blob);
+    }, "image/png");
   };
 
   return (

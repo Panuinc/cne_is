@@ -137,13 +137,13 @@ export class RecruitController {
         10
       )();
 
-      const rawName = raw.recruitFullNameTh || "unnamed";
+      const rawName = raw.recruitDetail?.recruitFullNameTh || "unnamed";
       const sanitizedName = rawName
         .trim()
         .replace(/\s+/g, "_")
         .replace(/[^a-zA-Z0-9ก-๙_]/g, "");
 
-      async function uploadFile(file, folder, fileNameWithoutExt) {
+      const uploadFile = async (file, folder, fileNameWithoutExt) => {
         if (!file?.name || file.size === 0) return "";
         const fileName = `${fileNameWithoutExt}.png`;
         const folderPath = path.join(process.cwd(), "public", folder);
@@ -151,9 +151,8 @@ export class RecruitController {
         const filePath = path.join(folderPath, fileName).replace(/\\/g, "/");
         await writeFile(filePath, Buffer.from(await file.arrayBuffer()));
         return fileName;
-      }
+      };
 
-      // 🎯 อัปโหลดรูปภาพโปรไฟล์และลายเซ็น
       const profileImage = formData.get("recruitDetailProfileImage");
       const signatureImage = formData.get("recruitDetailSignatureImage");
 
@@ -168,7 +167,6 @@ export class RecruitController {
         sanitizedName
       );
 
-      // 🗂️ อัปโหลดไฟล์เอกสารแนบ
       const attachFields = {
         recruitDetailAttachIdCard: "idcard",
         recruitDetailAttachHouseReg: "houseReg",
@@ -184,21 +182,12 @@ export class RecruitController {
           `recruit/recruitAttachment/${type}`,
           `${sanitizedName}_${type}`
         );
-        raw.recruitDetail[field] = {
-          url: fileName,
-          description: `${type} file`,
-        };
+        raw.recruitDetail[field] = fileName || null;
       }
 
-      // 🔁 ตั้งชื่อรูปลงใน detail
-      raw.recruitDetail.recruitDetailProfileImage = {
-        url: profileImageName,
-        description: "profile image",
-      };
-      raw.recruitDetail.recruitDetailSignatureImage = {
-        url: signatureImageName,
-        description: "signature image",
-      };
+      raw.recruitDetail.recruitDetailProfileImage = profileImageName || null;
+      raw.recruitDetail.recruitDetailSignatureImage =
+        signatureImageName || null;
 
       const data = recruitPostSchema.parse({ ...raw, applySlug: slug });
 
