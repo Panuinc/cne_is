@@ -720,7 +720,7 @@ export default function UIPerReqForm({
                     </div>
                     <div className="flex flex-col xl:flex-row items-start xl:items-center justify-center xl:justify-start w-full xl:w-9/12 h-full p-2 gap-8">
                       {[
-                        { level: "Basic", text: "พอใช้" },
+                        { level: "Fair", text: "พอใช้" },
                         { level: "Good", text: "ดี" },
                         { level: "Excellent", text: "ดีมาก" },
                       ].map(({ level, text }) => (

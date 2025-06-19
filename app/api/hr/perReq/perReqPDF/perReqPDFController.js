@@ -348,7 +348,7 @@ export class PerReqPDFController {
             <div class="flex flex-wrap gap-2">
                 <span class="w-28">${label}</span>
                 ${[
-                  ["Basic", "พอใช้"],
+                  ["Fair", "พอใช้"],
                   ["Good", "ดี"],
                   ["Excellent", "ดีมาก"],
                 ]

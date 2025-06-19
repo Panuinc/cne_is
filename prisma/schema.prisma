@@ -55,8 +55,8 @@ enum PerReqReasonExperience {
   Experience5YearsUp
 }
 
-enum SkillProficiency {
-  Basic
+enum SkillLevel {
+  Fair
   Good
   Excellent
 }
@@ -77,24 +77,24 @@ enum perReqEducation {
 }
 
 enum RecruitStatus {
-  Pending // นำส่งใบสมัครให้ผู้สมัครงานเรียบร้อย
-  Submitted // ผู้สมัครกรอกใบสมัครแล้วเสร็จ  Interviewing // นัดสัมภาษณ์
-  Rejected // ไม่ผ่าน
-  Hired // ได้รับเลือก
-  Considered // เก็บไว้พิจารณา
+  Pending
+  Submitted
+  Rejected
+  Hired
+  Considered
 }
 
 enum RecruitMaritalStatus {
-  Single // โสด
-  Married // สมรส
-  Divorced // หย่าร้าง
-  Widowed // หม้าย
+  Single
+  Married
+  Divorced
+  Widowed
 }
 
 enum RecruitMilitaryServiceStatus {
-  Exempted // ได้รับการยกเว้น
-  Completed // ผ่านการเกณฑ์แล้ว
-  NotYetServed // ยังไม่เกณฑ์
+  Exempted
+  Completed
+  NotYetServed
 }
 
 enum RecruitFamilyRelation {
@@ -129,44 +129,20 @@ enum RecruitEmergencyRelation {
 }
 
 enum EducationLevel {
-  Primary // ประถมศึกษา
-  LowerSecondary // มัธยมศึกษาตอนต้น
-  UpperSecondary // มัธยมศึกษาตอนปลาย
-  Vocational // ปวช.
-  HighVocational // ปวส.
-  Bachelor // ปริญญาตรี
-  Master // ปริญญาโท
-  Doctorate // ปริญญาเอก
-}
-
-enum SkillLevel {
-  Excellent
-  Good
-  Fair
-}
-
-enum OtherSkillType {
-  Computer
-  Sport
-  OtherLanguageScore
-}
-
-enum EnglishTestType {
-  TOEIC
-  TOEFL
-  IELTS
-  OTHER
-}
-
-enum VehiclePossession {
-  Yes
-  No
+  Primary
+  LowerSecondary
+  UpperSecondary
+  Vocational
+  HighVocational
+  Bachelor
+  Master
+  Doctorate
 }
 
 enum EmploymentType {
-  FullTime // ประจำ
-  PartTime // ชั่วคราว
-  Internship // ฝึกงาน
+  FullTime
+  PartTime
+  Internship
 }
 
 enum Residence {
@@ -443,11 +419,11 @@ model EmpCvProject {
 }
 
 model EmpCvLanguageSkill {
-  empCvLanguageSkillId          Int               @id @default(autoincrement())
-  empCvLanguageSkillEmpCvId     Int
-  empCvLanguageSkillNameTH      String?           @db.VarChar(255)
-  empCvLanguageSkillNameEN      String?           @db.VarChar(255)
-  empCvLanguageSkillProficiency SkillProficiency?
+  empCvLanguageSkillId      Int         @id @default(autoincrement())
+  empCvLanguageSkillEmpCvId Int
+  empCvLanguageSkillNameTH  String?     @db.VarChar(255)
+  empCvLanguageSkillNameEN  String?     @db.VarChar(255)
+  empCvLanguageSkillLevel   SkillLevel?
 
   empCv EmpCv @relation(fields: [empCvLanguageSkillEmpCvId], references: [empCvId])
 
@@ -676,10 +652,10 @@ model RecruitDetail {
   recruitDetailScoreToeic                   String?                      @db.VarChar(255)
   recruitDetailScoreToefl                   String?                      @db.VarChar(255)
   recruitDetailScoreIelts                   String?                      @db.VarChar(255)
-  recruitDetailOwnCar                       VehiclePossession
-  recruitDetailOwnMotorcycle                VehiclePossession
-  recruitDetailHaveCarLicense               VehiclePossession
-  recruitDetailHaveMotorcycleLicense        VehiclePossession
+  recruitDetailOwnCar                       YesOrNo
+  recruitDetailOwnMotorcycle                YesOrNo
+  recruitDetailHaveCarLicense               YesOrNo
+  recruitDetailHaveMotorcycleLicense        YesOrNo
   recruitDetailWhenStartWork                String                       @db.VarChar(255)
   recruitDetailCheckWorkingHistory          YesOrNo
   recruitDischarged                         YesOrNo

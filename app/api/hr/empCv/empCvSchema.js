@@ -110,8 +110,8 @@ const empCvLanguageSkillSchema = z.object({
   empCvLanguageSkillNameTH: preprocessString("Language Name (TH).").optional(),
   empCvLanguageSkillNameEN: preprocessString("Language Name (EN).").optional(),
   empCvLanguageSkillProficiency: preprocessEnum(
-    ["Basic", "Good", "Excellent"],
-    "Proficiency must be 'Basic', 'Good', or 'Excellent'."
+    ["Fair", "Good", "Excellent"],
+    "Proficiency must be 'Fair', 'Good', or 'Excellent'."
   ).optional(),
 });
 

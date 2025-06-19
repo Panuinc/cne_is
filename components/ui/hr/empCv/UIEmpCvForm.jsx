@@ -422,7 +422,7 @@ export default function UIEmpCvForm({
                         )({ target: { value: e.target?.value || e } })
                       }
                     >
-                      <SelectItem key="Basic">พอใช้</SelectItem>
+                      <SelectItem key="Fair">พอใช้</SelectItem>
                       <SelectItem key="Good">ดี</SelectItem>
                       <SelectItem key="Excellent">ดีมาก</SelectItem>
                     </Select>
