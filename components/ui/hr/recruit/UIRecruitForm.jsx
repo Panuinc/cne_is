@@ -115,7 +115,7 @@ export default function UIRecruitForm({
           {step < 7 && (
             <div className="flex items-center justify-end w-full h-full gap-2">
               <Button
-                color="warning"
+                color="primary"
                 size="md"
                 radius="full"
                 className="flex items-center justify-center h-full px-8 py-4 gap-2"

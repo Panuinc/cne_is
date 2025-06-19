@@ -15,7 +15,7 @@ export function renderInputField({
   labelEN,
   name,
   type,
-  placeholder = "xxx xxx",
+
   value,
   onChange,
   error,
@@ -30,10 +30,9 @@ export function renderInputField({
         <Input
           name={name}
           type={type}
-          placeholder={placeholder}
           size="md"
           variant="underlined"
-          color="none"
+          color="primary"
           radius="full"
           required={required}
           value={value}
@@ -50,7 +49,7 @@ export function renderTextAreaField({
   labelTH,
   labelEN,
   name,
-  placeholder = "xxx xxx",
+
   value,
   onChange,
   error,
@@ -65,7 +64,6 @@ export function renderTextAreaField({
       <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         <Textarea
           name={name}
-          placeholder={placeholder}
           value={value}
           onValueChange={(val) => onChange({ target: { value: val } })}
           isRequired={required}
@@ -92,7 +90,6 @@ export function renderSelectField({
   onChange,
   error,
   options = [],
-  placeholder = "xxx xxx",
 }) {
   const selectedKeys = value ? new Set([value]) : new Set();
 
@@ -110,10 +107,9 @@ export function renderSelectField({
       <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         <Select
           name={name}
-          placeholder={placeholder}
           size="md"
           variant="underlined"
-          color="none"
+          color="primary"
           radius="full"
           selectedKeys={selectedKeys}
           onSelectionChange={handleSelectionChange}
