@@ -22,11 +22,11 @@ export function renderInputField({
   required = true,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 text-sm">
         {labelTH} <br /> {labelEN}
       </div>
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         <Input
           name={name}
           type={type}
@@ -57,12 +57,12 @@ export function renderTextAreaField({
   required = true,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 text-sm">
         {labelTH} <br /> {labelEN}
       </div>
 
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         <Textarea
           name={name}
           placeholder={placeholder}
@@ -102,12 +102,12 @@ export function renderSelectField({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 text-sm">
         {labelTH} <br /> {labelEN}
       </div>
 
-      <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-center w-full h-full p-2 gap-2">
         <Select
           name={name}
           placeholder={placeholder}
@@ -149,11 +149,11 @@ export function renderRadioGroupField({
   orientation = "horizontal",
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
-      <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <div className="flex items-start justify-start w-full h-full p-2 gap-2 text-sm">
         {labelTH} <br /> {labelEN}
       </div>
-      <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex items-center justify-start w-full h-full p-2 gap-2">
         <RadioGroup
           name={name}
           size="md"

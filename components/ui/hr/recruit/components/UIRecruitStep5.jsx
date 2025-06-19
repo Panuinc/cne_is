@@ -31,8 +31,8 @@ export default function UIRecruitStep5({
   };
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderTextAreaField({
             labelTH: "กรุณาแนะนำตัวท่านเอง เพื่อให้บริษัทรู้จักท่านดีขึ้น",
             labelEN:
@@ -46,8 +46,8 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ
           หากบริษัทฯ จ้างเข้าทำงานแล้วปรากฏว่าข้อความในใบสมัครงาน
           เอกสารที่นำมาแสดง หรือรายละเอียดที่ให้ไว้ไม่เป็นความจริง บริษัทฯ
@@ -60,7 +60,7 @@ export default function UIRecruitStep5({
           or damages.
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning text-md font-[600]">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2 text-md font-[600]">
           <SignatureCanvas
             ref={sigCanvasRef}
             penColor="black"
@@ -76,7 +76,7 @@ export default function UIRecruitStep5({
               color="primary"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2"
               onPress={saveSignature}
             >
               บันทึกลายเซ็น
@@ -85,7 +85,7 @@ export default function UIRecruitStep5({
               color="danger"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2"
               onPress={clearSignature}
             >
               ล้างลายเซ็น
@@ -99,14 +99,14 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           เอกสารที่แนบพร้อมใบสมัคร
           <br />
           Enclosed Documents
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "สำเนาบัตรประชาชน",
             labelEN: "Identification Card",

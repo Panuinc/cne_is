@@ -59,8 +59,8 @@ export default function UIRecruitStep2({
   };
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-md font-[600] text-center">
           ข้อมูลทางครอบครัว
           <br />
           Family Data
@@ -69,7 +69,7 @@ export default function UIRecruitStep2({
         {familyMembers.map((_, index) => (
           <div
             key={index}
-            className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning"
+            className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2"
           >
             {renderSelectField({
               labelTH: "ความสัมพันธ์",
@@ -174,25 +174,25 @@ export default function UIRecruitStep2({
           </div>
         ))}
 
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
+        <div className="flex flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
             <Button
               color="primary"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2"
               onPress={handleAddFamilyMember}
             >
               <PlusCircle /> เพิ่มสมาชิก
             </Button>
           </div>
           {familyMembers.length > 1 && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2">
               <Button
                 color="danger"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2"
                 onPress={handleRemoveLastMember}
               >
                 <MinusCircle /> ลบสมาชิก
@@ -201,11 +201,11 @@ export default function UIRecruitStep2({
           )}
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-md font-[600] text-center">
           กรณีเร่งด่วนติดต่อ In case od emergency, please notify
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "ชื่อ - นามสกุล",
             labelEN: "Name - Surname",
@@ -245,7 +245,7 @@ export default function UIRecruitStep2({
           })}
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
           ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
           สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
@@ -255,8 +255,8 @@ export default function UIRecruitStep2({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-md font-[600] text-center">
           ประวัติการศึกษา
           <br />
           Education Back Ground
@@ -265,7 +265,7 @@ export default function UIRecruitStep2({
         {educationList.map((_, index) => (
           <div
             key={index}
-            className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning"
+            className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2"
           >
             {renderSelectField({
               labelTH: "ระดับการศึกษา",
@@ -395,25 +395,25 @@ export default function UIRecruitStep2({
             })}
           </div>
         ))}
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
+        <div className="flex flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
             <Button
               color="primary"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2"
               onPress={handleAddEducation}
             >
               <PlusCircle /> เพิ่มประวัติการศึกษา
             </Button>
           </div>
           {educationList.length > 1 && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2">
               <Button
                 color="danger"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2"
                 onPress={handleRemoveLastEducation}
               >
                 <MinusCircle /> ลบรายการล่าสุด
@@ -421,11 +421,11 @@ export default function UIRecruitStep2({
             </div>
           )}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-md font-[600] text-center">
           ใบประกอบวิชาชีพ / Professional License
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "ชื่อใบประกอบวิชาชีพ",
             labelEN: "License name",

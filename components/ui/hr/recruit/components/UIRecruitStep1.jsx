@@ -18,8 +18,8 @@ export default function UIRecruitStep1({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2">
           <Image
             src="/logoCompany/com-1.png"
             alt="com-1"
@@ -29,11 +29,11 @@ export default function UIRecruitStep1({
           />
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-xl font-[600] text-center">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-xl font-[600] text-center">
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-sm text-center">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-sm text-center border-1 border-dark/25">
           35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140
           <br />
           35, Moo 12, Khubangluang Sub-district, Lat Lum Kaeo District, Pathum
@@ -41,26 +41,26 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-lg font-[600] text-center">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 text-lg font-[600] text-center">
           ใบสมัครงาน
           <br />
           Employment Application
         </div>
 
-        <div className="flex items-center justify-start w-full h-full xl:w-2/12 p-2 gap-2 border-2 border-dark">
+        <div className="flex items-center justify-start w-full h-full xl:w-2/12 p-2 gap-2">
           วันที่ {formattedDate} <br />
           Date
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-4 border-warning">
-          <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-1 border-dark/25">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 gap-2">
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
               ตำแหน่งที่สมัคร <br /> The job position you are applying for
             </div>
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
               {formData?.recruitPerReq?.PerReqPositionId?.positionNameTH || ""}
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 gap-2">
           <div className="relative w-full h-full overflow-hidden">
             {preview ? (
               <Image
@@ -104,14 +104,14 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-md font-[600] text-center">
           ประวัติส่วนตัว
           <br />
           Personal Data
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "ชื่อ - นามสกุล",
             labelEN: "Full name (TH)",
@@ -143,7 +143,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "วัน เดือน ปี เกิด",
             labelEN: "Date Of Birth",
@@ -232,7 +232,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "เลขที่บัตรประชาชน",
             labelEN: "Identification card No",
@@ -279,7 +279,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "เบอร์โทรศัพท์",
             labelEN: "Phone number",
@@ -309,7 +309,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "ที่อยู่ปัจจุบัน",
             labelEN: "Present address",
@@ -429,7 +429,7 @@ export default function UIRecruitStep1({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "สถานภาพทางทหาร",
             labelEN: "Military Service Status",

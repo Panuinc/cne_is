@@ -187,7 +187,7 @@ export default function RecruitApplyPage() {
   return (
     <>
       <Toaster position="top-right" />
-      <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-screen gap-2 border-2 border-dark">
+      <div className="flex flex-col items-center justify-center w-full xl:w-10/12 h-screen gap-2">
         <UIRecruitForm
           formRef={formRef}
           onSubmit={handleSubmit}

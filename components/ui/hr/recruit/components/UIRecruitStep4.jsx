@@ -44,14 +44,14 @@ export default function UIRecruitStep4({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-md font-[600] text-center">
           ประวัติการทำงาน
           <br />
           From the most current
         </div>
 
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           กรุณาเรียงจากปัจจุบันไปหาอดีต
           <br />
           Do you have a driving license?
@@ -59,7 +59,7 @@ export default function UIRecruitStep4({
 
         {workExperiences.map((_, index) => (
           <React.Fragment key={index}>
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               {renderInputField({
                 labelTH: "ชื่อสถานที่ทำงาน",
                 labelEN: "Company's name",
@@ -91,7 +91,7 @@ export default function UIRecruitStep4({
               })}
             </div>
 
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               {renderRadioGroupField({
                 labelTH: "ประเภทการจ้างงาน",
                 labelEN: "Type of employment",
@@ -121,7 +121,7 @@ export default function UIRecruitStep4({
               })}
             </div>
 
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               {renderInputField({
                 labelTH: "วัน เดือน ปี ที่เข้าทำงาน",
                 labelEN: "Starting date",
@@ -152,7 +152,7 @@ export default function UIRecruitStep4({
               })}
             </div>
 
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               {renderInputField({
                 labelTH: "เงินเดือน",
                 labelEN: "Salary",
@@ -199,7 +199,7 @@ export default function UIRecruitStep4({
               })}
             </div>
 
-            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
               {renderTextAreaField({
                 labelTH: "ลักษณะงานที่รับผิดชอบ",
                 labelEN: "Job description & responsibility",
@@ -217,25 +217,25 @@ export default function UIRecruitStep4({
             </div>
           </React.Fragment>
         ))}
-        <div className="flex flex-row items-center justify-center w-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-primary">
+        <div className="flex flex-row items-center justify-center w-full gap-2">
+          <div className="flex items-center justify-end w-full h-full p-2 gap-2">
             <Button
               color="primary"
               size="md"
               radius="full"
-              className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+              className="flex items-center justify-center h-full px-8 py-4 gap-2"
               onPress={handleAddWorkExperience}
             >
               <PlusCircle /> เพิ่มประสบการณ์ทำงาน
             </Button>
           </div>
           {workExperiences.length > 1 && (
-            <div className="flex items-center justify-end w-full h-full p-2 gap-2 border-4 border-warning">
+            <div className="flex items-center justify-end w-full h-full p-2 gap-2">
               <Button
                 color="danger"
                 size="md"
                 radius="full"
-                className="flex items-center justify-center h-full px-8 py-4 gap-2 border-2 border-dark"
+                className="flex items-center justify-center h-full px-8 py-4 gap-2"
                 onPress={handleRemoveLastWorkExperience}
               >
                 <MinusCircle /> ลบประสบการณ์ทำงาน
@@ -244,8 +244,8 @@ export default function UIRecruitStep4({
           )}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "ท่านจะมาเริ่มงานกับบริษัทได้เมื่อไหร่ ถ้ามีตำแหน่งให้",
             labelEN: "When can you start working with us, if employed",
@@ -258,7 +258,7 @@ export default function UIRecruitStep4({
             error: errors?.["recruitDetail.recruitDetailWhenStartWork"],
           })}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "ข้าพเข้า",
             labelEN: "I",
@@ -275,7 +275,7 @@ export default function UIRecruitStep4({
             ],
           })}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           ให้บริษัทตรวจสอบประวัติการทำงานและความประพฤติของข้าพเจ้ากับนายจ้างเดิม
           เพื่อยืนยันข้อมูลที่ข้าพเจ้าได้ให้ไว้กับบริษัทเพื่อการพิจารณาการจ้างงาน
           <br />I authorize the company to verify my employment history and
@@ -283,14 +283,14 @@ export default function UIRecruitStep4({
           provided for recruitment consideration.
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 text-center text-md font-[600]">
           ข้อความเพิ่มเติม
           <br />
           Further Information
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "ท่านเคยถูกให้ออกจากงานหรือไม่",
             labelEN:
@@ -319,7 +319,7 @@ export default function UIRecruitStep4({
             })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "ท่านเคยป่วยหนักและเป็นโรคติดต่อร้ายแรงมาก่อนหรือไม่",
             labelEN:
@@ -354,7 +354,7 @@ export default function UIRecruitStep4({
             })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH:
               "ท่านเคยได้รับโทษทางอาญาหรือจำคุกหรือเป็นบุคคลล้มละลายหรือไม่",
@@ -378,7 +378,7 @@ export default function UIRecruitStep4({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "ขณะนี้คุณตั้งครรภ์หรือไม่",
             labelEN: "Are you pregnant",
@@ -408,7 +408,7 @@ export default function UIRecruitStep4({
             })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderRadioGroupField({
             labelTH: "ท่านมีเพื่อนที่รู้จัก หรือญาติที่ทำงานในบรษัทนี้หรือไม่",
             labelEN:
@@ -442,8 +442,8 @@ export default function UIRecruitStep4({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+      <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           เขียนชื่อ ที่อยู่ โทรศัพท์ และอาชีพของผู้ที่อ้างถึง 2 คน
           (ซึ่งไม่ใช่ญาติหรือนายจ้างเดิม) ที่รู้จักคุ้นเคยตัวท่านดี
           <br />
@@ -452,7 +452,7 @@ export default function UIRecruitStep4({
           with you.
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2">
           {renderInputField({
             labelTH: "คนที่ 1",
             labelEN: "No 1",
@@ -472,7 +472,7 @@ export default function UIRecruitStep4({
             error: errors?.["recruitDetail.recruitDetailRef2Name"],
           })}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           ข้าพเจ้าขอรับรองว่า ได้รับอนุญาตจากบุคคลอ้างอิงที่มีรายชื่อข้างต้น
           ให้ระบุชื่อเพื่อเป็นข้อมูลอ้างอิงกับบริษัท
           รวมถึงเพื่อให้บริษัทสามารถติดต่อสอบถามข้อมูลและยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
