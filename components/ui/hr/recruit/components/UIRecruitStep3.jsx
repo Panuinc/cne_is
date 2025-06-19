@@ -40,7 +40,7 @@ export default function UIRecruitStep3({
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
           ภาษา กรุณาระบุ ดีมาก ดี พอใช้
           <br />
           Language - Please Identify Excellent Good Fair
@@ -193,7 +193,7 @@ export default function UIRecruitStep3({
           )}
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
           ทักษะอื่นๆ
           <br />
           Other Skills
@@ -271,13 +271,11 @@ export default function UIRecruitStep3({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ท่านมีรถยนต์ /
-            มอเตอร์ไซต์ส่วนตัวที่สามารถนำมาใช้ในธุระของบริษัทหรือไม่
-            <br />
-            Do you have a car / motorcycle available for company business
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          ท่านมีรถยนต์ /
+          มอเตอร์ไซต์ส่วนตัวที่สามารถนำมาใช้ในธุระของบริษัทหรือไม่
+          <br />
+          Do you have a car / motorcycle available for company business
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
@@ -309,12 +307,10 @@ export default function UIRecruitStep3({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ท่านมีใบขับขี่หรือไม่
-            <br />
-            Do you have a driving license?
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          ท่านมีใบขับขี่หรือไม่
+          <br />
+          Do you have a driving license?
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">

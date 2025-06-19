@@ -45,18 +45,16 @@ export default function UIRecruitStep4({
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
           ประวัติการทำงาน
           <br />
           From the most current
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            กรุณาเรียงจากปัจจุบันไปหาอดีต
-            <br />
-            Do you have a driving license?
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+          กรุณาเรียงจากปัจจุบันไปหาอดีต
+          <br />
+          Do you have a driving license?
         </div>
 
         {workExperiences.map((_, index) => (
@@ -277,18 +275,16 @@ export default function UIRecruitStep4({
             ],
           })}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ให้บริษัทตรวจสอบประวัติการทำงานและความประพฤติของข้าพเจ้ากับนายจ้างเดิม
-            เพื่อยืนยันข้อมูลที่ข้าพเจ้าได้ให้ไว้กับบริษัทเพื่อการพิจารณาการจ้างงาน
-            <br />I authorize the company to verify my employment history and
-            conduct with my previous employers to confirm the information I have
-            provided for recruitment consideration.
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+          ให้บริษัทตรวจสอบประวัติการทำงานและความประพฤติของข้าพเจ้ากับนายจ้างเดิม
+          เพื่อยืนยันข้อมูลที่ข้าพเจ้าได้ให้ไว้กับบริษัทเพื่อการพิจารณาการจ้างงาน
+          <br />I authorize the company to verify my employment history and
+          conduct with my previous employers to confirm the information I have
+          provided for recruitment consideration.
         </div>
       </div>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
           ข้อความเพิ่มเติม
           <br />
           Further Information
@@ -447,7 +443,7 @@ export default function UIRecruitStep4({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
           เขียนชื่อ ที่อยู่ โทรศัพท์ และอาชีพของผู้ที่อ้างถึง 2 คน
           (ซึ่งไม่ใช่ญาติหรือนายจ้างเดิม) ที่รู้จักคุ้นเคยตัวท่านดี
           <br />
@@ -476,7 +472,7 @@ export default function UIRecruitStep4({
             error: errors?.["recruitDetail.recruitDetailRef2Name"],
           })}
         </div>
-        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
           ข้าพเจ้าขอรับรองว่า ได้รับอนุญาตจากบุคคลอ้างอิงที่มีรายชื่อข้างต้น
           ให้ระบุชื่อเพื่อเป็นข้อมูลอ้างอิงกับบริษัท
           รวมถึงเพื่อให้บริษัทสามารถติดต่อสอบถามข้อมูลและยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า

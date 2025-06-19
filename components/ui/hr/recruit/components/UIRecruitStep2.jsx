@@ -60,7 +60,7 @@ export default function UIRecruitStep2({
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ข้อมูลทางครอบครัว
           <br />
           Family Data
@@ -201,10 +201,8 @@ export default function UIRecruitStep2({
           )}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            กรณีเร่งด่วนติดต่อ In case od emergency, please notify
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          กรณีเร่งด่วนติดต่อ In case od emergency, please notify
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
@@ -247,20 +245,18 @@ export default function UIRecruitStep2({
           })}
         </div>
 
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
-            ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
-            ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
-            สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
-            <br />I certify that I have received the above person’s consent for
-            disclosing his/her personal data to the company for making contact,
-            asking for information and verifying my information.
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+          ข้าพเจ้าขอรับรองว่าได้รับอนุญาตจากบุคคลที่มีรายชื่อข้างต้น
+          ให้เปิดเผยข้อมูลส่วนบุคคลแก่บริษัท เพื่อให้บริษัทสามารถติดต่อ
+          สอบถามข้อมูล และยืนยันข้อมูลเกี่ยวกับตัวข้าพเจ้า
+          <br />I certify that I have received the above person’s consent for
+          disclosing his/her personal data to the company for making contact,
+          asking for information and verifying my information.
         </div>
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-md font-[600]">
           ประวัติการศึกษา
           <br />
           Education Back Ground
@@ -425,10 +421,8 @@ export default function UIRecruitStep2({
             </div>
           )}
         </div>
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ใบประกอบวิชาชีพ / Professional License
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
+          ใบประกอบวิชาชีพ / Professional License
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">

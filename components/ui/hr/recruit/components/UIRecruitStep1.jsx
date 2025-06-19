@@ -18,7 +18,6 @@ export default function UIRecruitStep1({
 }) {
   return (
     <>
-      {/* Session 1 */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark">
           <Image
@@ -34,7 +33,7 @@ export default function UIRecruitStep1({
           บริษัท ชาญนครวิศวกรรม จำกัด
         </div>
 
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-sm font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600] text-center">
           35 ม.12 ตำบล คูบางหลวง อำเภอลาดหลุมแก้ว ปทุมธานี 12140
           <br />
           35, Moo 12, Khubangluang Sub-district, Lat Lum Kaeo District, Pathum
@@ -42,9 +41,8 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* Session 2 */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-2 border-dark text-lg font-[600] text-center">
           ใบสมัครงาน
           <br />
           Employment Application
@@ -56,11 +54,10 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* Session 3 */}
       <div className="flex flex-col xl:flex-row items-center justify-center w-full p-2 gap-2 border-4 border-danger">
         <div className="flex flex-col items-center justify-center w-full h-full xl:w-10/12 p-2 gap-2 border-4 border-warning">
-          <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
-            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
+          <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
+            <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
               ตำแหน่งที่สมัคร <br /> The job position you are applying for
             </div>
             <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark">
@@ -93,7 +90,7 @@ export default function UIRecruitStep1({
               </div>
             )}
           </div>
-          <label className="flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 cursor-pointer transition">
+          <label className="flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-100 cursor-pointer transition">
             เลือกรูปภาพ
             <input
               ref={fileInputRef}
@@ -107,9 +104,8 @@ export default function UIRecruitStep1({
         </div>
       </div>
 
-      {/* Session 4 */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-center text-lg font-[600]">
+        <div className="flex items-center justify-center w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600] text-center">
           ประวัติส่วนตัว
           <br />
           Personal Data

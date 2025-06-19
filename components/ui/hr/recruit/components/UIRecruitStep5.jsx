@@ -47,19 +47,17 @@ export default function UIRecruitStep5({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ
-            หากบริษัทฯ จ้างเข้าทำงานแล้วปรากฏว่าข้อความในใบสมัครงาน
-            เอกสารที่นำมาแสดง หรือรายละเอียดที่ให้ไว้ไม่เป็นความจริง บริษัทฯ
-            มีสิทธิ์ที่จะเลิกจ้างข้าพเจ้าได้โดยไม่ต้องจ่ายเงินชดเชยหรือค่าเสียหายใด
-            ๆ ทั้งสิ้น
-            <br />I hereby certify that all the information provided in this
-            application is true and correct. If the company later discovers that
-            any information, documents, or details provided are false, the
-            company reserves the right to terminate my employment without any
-            compensation or damages.
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+          ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ
+          หากบริษัทฯ จ้างเข้าทำงานแล้วปรากฏว่าข้อความในใบสมัครงาน
+          เอกสารที่นำมาแสดง หรือรายละเอียดที่ให้ไว้ไม่เป็นความจริง บริษัทฯ
+          มีสิทธิ์ที่จะเลิกจ้างข้าพเจ้าได้โดยไม่ต้องจ่ายเงินชดเชยหรือค่าเสียหายใด
+          ๆ ทั้งสิ้น
+          <br />I hereby certify that all the information provided in this
+          application is true and correct. If the company later discovers that
+          any information, documents, or details provided are false, the company
+          reserves the right to terminate my employment without any compensation
+          or damages.
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning text-md font-[600]">
@@ -102,12 +100,10 @@ export default function UIRecruitStep5({
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2 border-4 border-danger">
-        <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">
-          <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-md font-[600]">
-            เอกสารที่แนบพร้อมใบสมัคร
-            <br />
-            Enclosed Documents
-          </div>
+        <div className="flex items-center justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm">
+          เอกสารที่แนบพร้อมใบสมัคร
+          <br />
+          Enclosed Documents
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full p-2 gap-2 border-4 border-warning">

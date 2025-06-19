@@ -22,7 +22,7 @@ export function renderInputField({
   required = true,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
       <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
         {labelTH} <br /> {labelEN}
       </div>
@@ -57,7 +57,7 @@ export function renderTextAreaField({
   required = true,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
       <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
         {labelTH} <br /> {labelEN}
       </div>
@@ -102,7 +102,7 @@ export function renderSelectField({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
       <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
         {labelTH} <br /> {labelEN}
       </div>
@@ -149,7 +149,7 @@ export function renderRadioGroupField({
   orientation = "horizontal",
 }) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 border-4 border-primary">
+    <div className="flex flex-col items-center justify-center w-full h-full border-4 border-primary">
       <div className="flex items-start justify-start w-full h-full p-2 gap-2 border-2 border-dark text-sm font-[600]">
         {labelTH} <br /> {labelEN}
       </div>
