@@ -117,10 +117,14 @@ export default function UIRecruitStep5({
             labelEN: "Identification Card",
             name: "recruitDetail.recruitDetailAttachIdCard",
             type: "file",
-            value: formData?.recruitDetail?.recruitDetailAttachIdCard || "",
-            onChange: handleInputChange(
-              "recruitDetail.recruitDetailAttachIdCard"
-            ),
+            onChange: (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleInputChange("recruitDetail.recruitDetailAttachIdCard")({
+                  target: { value: file },
+                });
+              }
+            },
             error: errors?.["recruitDetail.recruitDetailAttachIdCard"],
           })}
           {renderInputField({
@@ -128,10 +132,14 @@ export default function UIRecruitStep5({
             labelEN: "House Registration",
             name: "recruitDetail.recruitDetailAttachHouseReg",
             type: "file",
-            value: formData?.recruitDetail?.recruitDetailAttachHouseReg || "",
-            onChange: handleInputChange(
-              "recruitDetail.recruitDetailAttachHouseReg"
-            ),
+            onChange: (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleInputChange("recruitDetail.recruitDetailAttachHouseReg")({
+                  target: { value: file },
+                });
+              }
+            },
             error: errors?.["recruitDetail.recruitDetailAttachHouseReg"],
           })}
           {renderInputField({
@@ -139,10 +147,16 @@ export default function UIRecruitStep5({
             labelEN: "Transcript",
             name: "recruitDetail.recruitDetailAttachEducation",
             type: "file",
-            value: formData?.recruitDetail?.recruitDetailAttachEducation || "",
-            onChange: handleInputChange(
-              "recruitDetail.recruitDetailAttachEducation"
-            ),
+            onChange: (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleInputChange("recruitDetail.recruitDetailAttachEducation")(
+                  {
+                    target: { value: file },
+                  }
+                );
+              }
+            },
             error: errors?.["recruitDetail.recruitDetailAttachEducation"],
           })}
           {renderInputField({
@@ -150,11 +164,16 @@ export default function UIRecruitStep5({
             labelEN: "Medical Certificate",
             name: "recruitDetail.recruitDetailAttachMedicalCert",
             type: "file",
-            value:
-              formData?.recruitDetail?.recruitDetailAttachMedicalCert || "",
-            onChange: handleInputChange(
-              "recruitDetail.recruitDetailAttachMedicalCert"
-            ),
+            onChange: (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleInputChange(
+                  "recruitDetail.recruitDetailAttachMedicalCert"
+                )({
+                  target: { value: file },
+                });
+              }
+            },
             error: errors?.["recruitDetail.recruitDetailAttachMedicalCert"],
           })}
           {renderInputField({
@@ -162,11 +181,16 @@ export default function UIRecruitStep5({
             labelEN: "Military Certificate",
             name: "recruitDetail.recruitDetailAttachMilitaryDoc",
             type: "file",
-            value:
-              formData?.recruitDetail?.recruitDetailAttachMilitaryDoc || "",
-            onChange: handleInputChange(
-              "recruitDetail.recruitDetailAttachMilitaryDoc"
-            ),
+            onChange: (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleInputChange(
+                  "recruitDetail.recruitDetailAttachMilitaryDoc"
+                )({
+                  target: { value: file },
+                });
+              }
+            },
             error: errors?.["recruitDetail.recruitDetailAttachMilitaryDoc"],
           })}
         </div>

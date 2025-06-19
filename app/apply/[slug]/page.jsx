@@ -13,7 +13,7 @@ export default function RecruitApplyPage() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [preview, setPreview] = useState(null);
-  const [signatureBlob, setSignatureBlob] = useState(null); // ⬅️ เพิ่ม
+  const [signatureBlob, setSignatureBlob] = useState(null);
 
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -139,6 +139,7 @@ export default function RecruitApplyPage() {
         }
       });
 
+      // 🔗 Profile Image
       if (detail.recruitDetailProfileImage instanceof File) {
         form.append(
           "recruitDetailProfileImage",
@@ -146,13 +147,29 @@ export default function RecruitApplyPage() {
         );
       }
 
-      // ⬇️ แนบไฟล์ลายเซ็นจริง (จาก canvas)
+      // ✍️ Signature
       if (signatureBlob instanceof Blob) {
         form.append(
           "recruitDetailSignatureImage",
           new File([signatureBlob], "signature.png", { type: "image/png" })
         );
       }
+
+      // 📎 Attachments
+      const attachmentFields = [
+        "recruitDetailAttachIdCard",
+        "recruitDetailAttachHouseReg",
+        "recruitDetailAttachEducation",
+        "recruitDetailAttachMedicalCert",
+        "recruitDetailAttachMilitaryDoc",
+      ];
+
+      attachmentFields.forEach((field) => {
+        const file = detail[field];
+        if (file instanceof File) {
+          form.append(field, file);
+        }
+      });
 
       form.append("recruitStatus", "Submitted");
 
@@ -212,7 +229,7 @@ export default function RecruitApplyPage() {
           fileInputRef={fileInputRef}
           signatureInputRef={signatureInputRef}
           formattedDate={formattedDate}
-          setSignatureBlob={setSignatureBlob} // ⬅️ เพิ่มเข้า Form
+          setSignatureBlob={setSignatureBlob}
         />
       </div>
     </>

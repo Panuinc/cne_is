@@ -5,6 +5,7 @@ import {
   preprocessEnum,
   preprocessDate,
   formatData,
+  preprocessAny,
 } from "@/lib/zodSchema";
 
 export const formatRecruitData = (recruits) =>
@@ -208,12 +209,16 @@ const recruitDetailSchema = z.object({
     ["Yes", "No"],
     "Discharged status is required"
   ),
-  recruitDischargedReason: preprocessString("Discharge reason is required"),
+  recruitDischargedReason: preprocessString("Discharge reason is required")
+    .optional()
+    .nullable(),
   recruitDetailSeriousIllnessOrContagious: preprocessEnum(
     ["Yes", "No"],
     "Illness status is required"
   ),
-  recruitDetailIllnessName: preprocessString("Illness name is required"),
+  recruitDetailIllnessName: preprocessString("Illness name is required")
+    .optional()
+    .nullable(),
   recruitDetailCriminalConvictionOrBankrupt: preprocessEnum(
     ["Yes", "No"],
     "Criminal/bankruptcy status is required"
@@ -222,28 +227,50 @@ const recruitDetailSchema = z.object({
     ["Yes", "No"],
     "Pregnancy status is required"
   ),
-  recruitDetailPregnancyMonth: preprocessInt("Pregnancy month is required"),
+  recruitDetailPregnancyMonth: preprocessInt("Pregnancy month is required")
+    .optional()
+    .nullable(),
   recruitDetailHasRelativesInCompany: preprocessEnum(
     ["Yes", "No"],
     "Relatives in company is required"
   ),
-  recruitDetailRelativesName: preprocessString("Relatives' name is required"),
+  recruitDetailRelativesName: preprocessString("Relatives' name is required")
+    .optional()
+    .nullable(),
   recruitDetailRef1Name: preprocessString("Reference 1 name is required"),
   recruitDetailRef2Name: preprocessString("Reference 2 name is required"),
   recruitDetailSelfIntro: preprocessString("Self-introduction is required"),
-  recruitDetailSignatureImage: preprocessString("Signature image is required"),
-  recruitDetailProfileImage: preprocessString("Profile image is required"),
-  recruitDetailAttachIdCard: preprocessString("ID card attachment is required"),
-  recruitDetailAttachHouseReg: preprocessString(
-    "House reg. attachment is required"
-  ),
-  recruitDetailAttachEducation: preprocessString(
-    "Education attachment is required"
-  ),
-  recruitDetailAttachMedicalCert: preprocessString("Medical cert is required"),
-  recruitDetailAttachMilitaryDoc: preprocessString(
-    "Military document is required"
-  ),
+  recruitDetailSignatureImage: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+  recruitDetailProfileImage: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+  recruitDetailAttachIdCard: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+  recruitDetailAttachHouseReg: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+  recruitDetailAttachEducation: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+
+  recruitDetailAttachMedicalCert: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+
+  recruitDetailAttachMilitaryDoc: preprocessAny({
+    url: z.string(),
+    description: z.string(),
+  }),
+
   recruitConsentGeneral: preprocessEnum(
     ["Yes", "No"],
     "Consent for general data is required"

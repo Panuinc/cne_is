@@ -161,9 +161,9 @@ export default function UIRecruitStep1({
             onChange: handleInputChange("recruitDetail.recruitDetailGender"),
             error: errors?.["recruitDetail.recruitDetailGender"],
             options: [
-              { labelTH: "ชาย", labelEN: "Male", value: "ชาย" },
-              { labelTH: "หญิง", labelEN: "Female", value: "หญิง" },
-              { labelTH: "อื่นๆ", labelEN: "Other", value: "อื่นๆ" },
+              { labelTH: "ชาย", labelEN: "Male", value: "Male" },
+              { labelTH: "หญิง", labelEN: "Female", value: "FeMale" },
+              { labelTH: "อื่นๆ", labelEN: "Other", value: "Other" },
             ],
           })}
           {renderInputField({

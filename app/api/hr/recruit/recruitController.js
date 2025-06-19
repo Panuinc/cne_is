@@ -132,17 +132,20 @@ export class RecruitController {
         }
       }
 
-      const profileImage = formData.get("recruitDetailProfileImage");
-      const signatureImage = formData.get("recruitDetailSignatureImage");
-
       const slug = customAlphabet(
         "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
         10
       )();
 
-      async function uploadFile(file, folder, slug) {
+      const rawName = raw.recruitFullNameTh || "unnamed";
+      const sanitizedName = rawName
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-zA-Z0-9ก-๙_]/g, "");
+
+      async function uploadFile(file, folder, fileNameWithoutExt) {
         if (!file?.name || file.size === 0) return "";
-        const fileName = `${slug}.png`;
+        const fileName = `${fileNameWithoutExt}.png`;
         const folderPath = path.join(process.cwd(), "public", folder);
         await mkdir(folderPath, { recursive: true });
         const filePath = path.join(folderPath, fileName).replace(/\\/g, "/");
@@ -150,19 +153,52 @@ export class RecruitController {
         return fileName;
       }
 
+      // 🎯 อัปโหลดรูปภาพโปรไฟล์และลายเซ็น
+      const profileImage = formData.get("recruitDetailProfileImage");
+      const signatureImage = formData.get("recruitDetailSignatureImage");
+
       const profileImageName = await uploadFile(
         profileImage,
-        "recruitProfileImage",
-        slug
+        "recruit/recruitProfileImage",
+        sanitizedName
       );
       const signatureImageName = await uploadFile(
         signatureImage,
-        "recruitSignatureImage",
-        slug
+        "recruit/recruitSignatureImage",
+        sanitizedName
       );
 
-      raw.recruitDetail.recruitDetailProfileImage = profileImageName;
-      raw.recruitDetail.recruitDetailSignatureImage = signatureImageName;
+      // 🗂️ อัปโหลดไฟล์เอกสารแนบ
+      const attachFields = {
+        recruitDetailAttachIdCard: "idcard",
+        recruitDetailAttachHouseReg: "houseReg",
+        recruitDetailAttachEducation: "education",
+        recruitDetailAttachMedicalCert: "medicalCert",
+        recruitDetailAttachMilitaryDoc: "militaryDoc",
+      };
+
+      for (const [field, type] of Object.entries(attachFields)) {
+        const file = formData.get(field);
+        const fileName = await uploadFile(
+          file,
+          `recruit/recruitAttachment/${type}`,
+          `${sanitizedName}_${type}`
+        );
+        raw.recruitDetail[field] = {
+          url: fileName,
+          description: `${type} file`,
+        };
+      }
+
+      // 🔁 ตั้งชื่อรูปลงใน detail
+      raw.recruitDetail.recruitDetailProfileImage = {
+        url: profileImageName,
+        description: "profile image",
+      };
+      raw.recruitDetail.recruitDetailSignatureImage = {
+        url: signatureImageName,
+        description: "signature image",
+      };
 
       const data = recruitPostSchema.parse({ ...raw, applySlug: slug });
 
