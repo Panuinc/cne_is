@@ -171,7 +171,7 @@ export default function RecruitApplyPage() {
 
       form.append("recruitStatus", "Submitted");
       form.append("recruitId", formData.recruitId);
-      form.append("recruitUpdateBy", "1"); // หรือดึงจาก session/auth จริง
+      form.append("recruitUpdateBy", "1");
 
       try {
         const res = await fetch(`/api/hr/recruit/${formData.recruitId}`, {

@@ -134,7 +134,7 @@ export class RecruitController {
       const recruit = await RecruitService.createRecruit({
         ...data,
         applySlug: slug,
-        recruitCreatedAt: getLocalNow(),
+        recruitCreateAt: getLocalNow(),
         recruitDetail,
       });
 

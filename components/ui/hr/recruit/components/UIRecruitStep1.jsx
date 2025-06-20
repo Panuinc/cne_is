@@ -77,9 +77,12 @@ export default function UIRecruitStep1({
 
         <div className="flex flex-col items-center justify-center w-full h-full xl:w-2/12 gap-2 border-1 border-dark/25">
           <div className="relative w-full h-full overflow-hidden">
-            {preview ? (
+            {preview || formData?.recruitDetail?.recruitDetailProfileImage ? (
               <Image
-                src={preview}
+                src={
+                  preview ||
+                  `/recruit/recruitProfileImage/${formData.recruitDetail.recruitDetailProfileImage}`
+                }
                 alt="Profile Preview"
                 fill
                 className="object-contain object-center"
@@ -90,17 +93,21 @@ export default function UIRecruitStep1({
               </div>
             )}
           </div>
-          <label className="flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-100 cursor-pointer transition">
-            เลือกรูปภาพ
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              name="recruitDetailProfileImage"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-          </label>
+
+          {/* แสดงปุ่มอัปโหลดเฉพาะตอนยังไม่มีรูป */}
+          {!formData?.recruitDetail?.recruitDetailProfileImage && (
+            <label className="flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-100 cursor-pointer transition">
+              เลือกรูปภาพ
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                name="recruitDetailProfileImage"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+            </label>
+          )}
         </div>
       </div>
 
@@ -118,7 +125,9 @@ export default function UIRecruitStep1({
             name: "recruitDetail.recruitDetailFullNameTh",
             type: "text",
             value: formData?.recruitDetail?.recruitDetailFullNameTh || "",
-            onChange: handleInputChange("recruitDetail.recruitDetailFullNameTh"),
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailFullNameTh"
+            ),
             error: errors?.["recruitDetail.recruitDetailFullNameTh"],
           })}
 
@@ -128,7 +137,9 @@ export default function UIRecruitStep1({
             name: "recruitDetail.recruitDetailFullNameEn",
             type: "text",
             value: formData?.recruitDetail?.recruitDetailFullNameEn || "",
-            onChange: handleInputChange("recruitDetail.recruitDetailFullNameEn"),
+            onChange: handleInputChange(
+              "recruitDetail.recruitDetailFullNameEn"
+            ),
             error: errors?.["recruitDetail.recruitDetailFullNameEn"],
           })}
 

@@ -1,7 +1,7 @@
 "use client";
 
 import SignatureCanvas from "react-signature-canvas";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import {
   renderInputField,
@@ -36,32 +36,50 @@ export default function UIRecruitStep5({
       toast.error("ไม่สามารถบันทึกลายเซ็นได้");
       return;
     }
+    if (canvasObj.isEmpty()) {
+      toast.error("โปรดเขียนลายเซ็นก่อนบันทึก");
+      return;
+    }
 
     const canvas = canvasObj.getTrimmedCanvas();
     const base64 = canvas.toDataURL("image/png");
-
     setSignaturePreview(base64);
     handleInputChange("recruitDetail.recruitSignature")(base64);
 
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        toast.error("ไม่สามารถแปลงลายเซ็นเป็นไฟล์ได้");
-        return;
-      }
-
-      const file = new File([blob], "signature.png", { type: "image/png" });
-
-      handleInputChange("recruitDetail.recruitDetailSignatureImage")({
-        target: { value: file },
-      });
-
-      setSignatureBlob?.(blob);
-    }, "image/png");
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          toast.error("ไม่สามารถแปลงลายเซ็นเป็นไฟล์ได้");
+          return;
+        }
+        const file = new File([blob], "signature.png", { type: "image/png" });
+        handleInputChange("recruitDetail.recruitDetailSignatureImage")({
+          target: { value: file },
+        });
+        setSignatureBlob?.(blob);
+      },
+      "image/png",
+      1
+    );
   };
+
+  const sigImg = formData?.recruitDetail?.recruitDetailSignatureImage;
+  const isServerImage = typeof sigImg === "string" && sigImg.length > 0;
+  const isLocalFile = typeof window !== "undefined" && sigImg instanceof File;
+
+  useEffect(() => {
+    let objUrl;
+    if (isLocalFile) {
+      objUrl = URL.createObjectURL(sigImg);
+      setSignaturePreview(objUrl);
+    }
+    return () => {
+      if (objUrl) URL.revokeObjectURL(objUrl);
+    };
+  }, [isLocalFile, sigImg]);
 
   return (
     <>
-      {/* ส่วนแนะนำตัว */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex flex-col xl:flex-row items-center justify-center w-full h-full gap-2">
           {renderTextAreaField({
@@ -77,7 +95,6 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      {/* ส่วนลายเซ็น */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           ข้าพเจ้าขอรับรองว่า ข้อความทั้งหมดในใบสมัครนี้เป็นความจริงทุกประการ...
@@ -85,31 +102,48 @@ export default function UIRecruitStep5({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full gap-2 text-md font-[600]">
-          <SignatureCanvas
-            ref={sigCanvasRef}
-            penColor="black"
-            canvasProps={{
-              width: 500,
-              height: 200,
-              className: "border-b-2 border-dark/25",
-            }}
-          />
-          ลายมือชื่อผู้สมัคร / Applicant’s signature
-          <div className="flex gap-2 mt-2">
-            <Button color="primary" onPress={saveSignature}>
-              บันทึกลายเซ็น
-            </Button>
-            <Button color="danger" onPress={clearSignature}>
-              ล้างลายเซ็น
-            </Button>
-          </div>
-          {signaturePreview && (
-            <img
-              src={signaturePreview}
-              alt="Signature Preview"
-              className="w-[300px] mt-4 border border-gray-300 rounded"
-            />
+          {isServerImage ? (
+            <>
+              <div>ลายมือชื่อผู้สมัคร / Applicant’s signature</div>
+              <img
+                src={`/recruit/recruitSignatureImage/${sigImg}`}
+                alt="Signature Preview"
+                className="w-[300px] mt-4 border border-gray-300 rounded"
+              />
+            </>
+          ) : (
+            <>
+              {!signaturePreview && (
+                <SignatureCanvas
+                  ref={sigCanvasRef}
+                  penColor="black"
+                  canvasProps={{
+                    width: 500,
+                    height: 200,
+                    className: "border-b-2 border-dark/25",
+                  }}
+                />
+              )}
+              <div>ลายมือชื่อผู้สมัคร / Applicant’s signature</div>
+              <div className="flex gap-2 mt-2">
+                <Button color="primary" onPress={saveSignature}>
+                  บันทึกลายเซ็น
+                </Button>
+                <Button color="danger" onPress={clearSignature}>
+                  ล้างลายเซ็น
+                </Button>
+              </div>
+
+              {signaturePreview && (
+                <img
+                  src={signaturePreview}
+                  alt="Signature Preview"
+                  className="w-[300px] mt-4 border border-gray-300 rounded"
+                />
+              )}
+            </>
           )}
+
           {errors?.["recruitDetail.recruitDetailSignatureImage"] && (
             <div className="text-red-500 text-sm">
               {errors["recruitDetail.recruitDetailSignatureImage"]}
@@ -118,7 +152,6 @@ export default function UIRecruitStep5({
         </div>
       </div>
 
-      {/* ส่วนแนบเอกสาร */}
       <div className="flex flex-col items-center justify-center w-full p-2 gap-2">
         <div className="flex items-center justify-start w-full h-full p-2 gap-2 text-sm">
           เอกสารที่แนบพร้อมใบสมัคร

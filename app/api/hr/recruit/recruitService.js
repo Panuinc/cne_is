@@ -109,7 +109,7 @@ export class RecruitService {
       where: { recruitId },
       data: {
         ...recruitData,
-        recruitUpdatedAt: getLocalNow(),
+        recruitUpdateAt: getLocalNow(),
         recruitDetail: {
           update: recruitDetail,
         },
@@ -149,7 +149,7 @@ export class RecruitService {
   static async getOrCreateApplyLink(perReqId) {
     const recruit = await RecruitService.createRecruit({
       recruitPerReqId: perReqId,
-      recruitCreatedAt: getLocalNow(),
+      recruitCreateAt: getLocalNow(),
       recruitDetail: {},
     });
 
