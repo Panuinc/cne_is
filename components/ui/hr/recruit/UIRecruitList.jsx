@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 import { Setting } from "@/components/icons/icons";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
-  Input,
   Button,
   Select,
   SelectItem,
@@ -68,7 +67,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     roleName === "ผู้ดูแลระบบ" || divisionName === "ทรัพยากรบุคคล";
 
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
   const [completionFilter, setCompletionFilter] = useState("all");
   const [pageNumber, setPageNumber] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -94,27 +92,17 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
 
   const filteredData = useMemo(() => {
     let result = data;
-
-    if (searchTerm.trim()) {
-      result = result.filter((recruit) =>
-        recruit.recruitDetail?.recruitDetailFullNameTh
-          ?.toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      );
-    }
-
     if (completionFilter !== "all") {
       result = result.filter(
         (recruit) => recruit.recruitStatus === completionFilter
       );
     }
-
     return result;
-  }, [data, searchTerm, completionFilter]);
+  }, [data, completionFilter]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [searchTerm, completionFilter]);
+  }, [completionFilter]);
 
   const handleAction = useCallback(
     (action, item) => {
@@ -212,22 +200,6 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     <>
       <UIHeader Header={header} />
       <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto">
-        <div className="flex flex-row items-center justify-between w-full p-2 gap-2">
-          <div className="flex items-center justify-center w-full xl:w-6/12 h-full p-2 gap-2">
-            <Input
-              isClearable
-              label="ค้นหา"
-              placeholder="ค้นหาโดยข้อมูล ระดับตำแหน่ง"
-              size="md"
-              variant="underlined"
-              color="none"
-              radius="full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-
         <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
             <UISelectFilter
