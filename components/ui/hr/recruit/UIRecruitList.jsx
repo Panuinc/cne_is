@@ -18,6 +18,9 @@ import {
   DropdownItem,
 } from "@heroui/react";
 
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+
 const completionOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
   { name: "นำส่งใบสมัคร", uniqueIdentifier: "Pending" },
@@ -196,10 +199,33 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
     [handleAction, pageNumber, rowsPerPage, canManage]
   );
 
+  const interviewEvents = useMemo(() => {
+    return data
+      .filter(
+        (item) =>
+          item.recruitStatus === "Interviewing" && item.recruitInterviewDate
+      )
+      .map((item) => ({
+        title: item.recruitDetail?.recruitDetailFullNameTh || "ไม่ระบุชื่อ",
+        date: item.recruitInterviewDate,
+      }));
+  }, [data]);
+
   return (
     <>
       <UIHeader Header={header} />
+
       <div className="flex flex-col items-center justify-start w-full h-full p-2 gap-2 bg-white shadow-md rounded-3xl overflow-auto">
+        <div className="w-full p-2 gap-2">
+          <h2 className="text-xl font-bold mb-4">ตารางนัดสัมภาษณ์</h2>
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            events={interviewEvents}
+            height="auto"
+          />
+        </div>
+
         <div className="flex flex-row items-center justify-start w-full p-2 gap-2">
           <div className="flex items-center justify-center w-full xl:w-3/12 h-full p-2 gap-2">
             <UISelectFilter
