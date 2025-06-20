@@ -614,9 +614,9 @@ model RecruitDetail {
   recruitDetailRecruitId                    Int                          @unique
   recruitDetailSalary                       Int
   recruitDetailProfileImage                 String                       @db.VarChar(500)
-  recruitDetailFullNameTh                         String                       @db.VarChar(255)
-  recruitDetailFullNameEn                         String                       @db.VarChar(255)
-  recruitDetailNickName                           String                       @db.VarChar(255)
+  recruitDetailFullNameTh                   String                       @db.VarChar(255)
+  recruitDetailFullNameEn                   String                       @db.VarChar(255)
+  recruitDetailNickName                     String                       @db.VarChar(255)
   recruitDetailBirthDay                     DateTime
   recruitDetailGender                       Gender
   recruitDetailAge                          Int
@@ -658,8 +658,8 @@ model RecruitDetail {
   recruitDetailHaveMotorcycleLicense        YesOrNo
   recruitDetailWhenStartWork                String                       @db.VarChar(255)
   recruitDetailCheckWorkingHistory          YesOrNo
-  recruitDetailDischarged                         YesOrNo
-  recruitDetailDischargedReason                   String?                      @db.VarChar(255)
+  recruitDetailDischarged                   YesOrNo
+  recruitDetailDischargedReason             String?                      @db.VarChar(255)
   recruitDetailSeriousIllnessOrContagious   YesOrNo
   recruitDetailIllnessName                  String?                      @db.VarChar(255)
   recruitDetailCriminalConvictionOrBankrupt YesOrNo
@@ -676,9 +676,9 @@ model RecruitDetail {
   recruitDetailAttachEducation              String?                      @db.VarChar(500)
   recruitDetailAttachMedicalCert            String?                      @db.VarChar(500)
   recruitDetailAttachMilitaryDoc            String?                      @db.VarChar(500)
-  recruitDetailConsentGeneral                     YesOrNo
-  recruitDetailConsentSensitive                   YesOrNo
-  recruitDetailConsentPdpa                        YesOrNo
+  recruitDetailConsentGeneral               YesOrNo
+  recruitDetailConsentSensitive             YesOrNo
+  recruitDetailConsentPdpa                  YesOrNo
 
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
