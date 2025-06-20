@@ -294,27 +294,27 @@ export default function UIRecruitStep4({
             labelTH: "ท่านเคยถูกให้ออกจากงานหรือไม่",
             labelEN:
               "Have you ever been discharged from employment for any reason",
-            name: "recruitDetail.recruitDischarged",
-            value: formData?.recruitDetail?.recruitDischarged || "",
-            onChange: handleInputChange("recruitDetail.recruitDischarged"),
-            error: errors?.["recruitDetail.recruitDischarged"],
+            name: "recruitDetail.recruitDetailDischarged",
+            value: formData?.recruitDetail?.recruitDetailDischarged || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailDischarged"),
+            error: errors?.["recruitDetail.recruitDetailDischarged"],
             options: [
               { labelTH: "ไม่เคย", labelEN: "No", value: "No" },
               { labelTH: "เคย", labelEN: "Yes", value: "Yes" },
             ],
           })}
 
-          {formData?.recruitDetail?.recruitDischarged === "Yes" &&
+          {formData?.recruitDetail?.recruitDetailDischarged === "Yes" &&
             renderInputField({
               labelTH: "เพราะ",
               labelEN: "Because",
-              name: "recruitDetail.recruitDischargedReason",
+              name: "recruitDetail.recruitDetailDischargedReason",
               type: "text",
-              value: formData?.recruitDetail?.recruitDischargedReason || "",
+              value: formData?.recruitDetail?.recruitDetailDischargedReason || "",
               onChange: handleInputChange(
-                "recruitDetail.recruitDischargedReason"
+                "recruitDetail.recruitDetailDischargedReason"
               ),
-              error: errors?.["recruitDetail.recruitDischargedReason"],
+              error: errors?.["recruitDetail.recruitDetailDischargedReason"],
             })}
         </div>
 

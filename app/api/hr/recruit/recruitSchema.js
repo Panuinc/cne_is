@@ -107,9 +107,9 @@ export const recruitWorkExperiencesSchema = z.object({
 });
 
 const recruitDetailSchema = z.object({
-  recruitFullNameTh: preprocessString("Full name (TH) is required"),
-  recruitFullNameEn: preprocessString("Full name (EN) is required"),
-  recruitNickName: preprocessString("Nickname is required"),
+  recruitDetailFullNameTh: preprocessString("Full name (TH) is required"),
+  recruitDetailFullNameEn: preprocessString("Full name (EN) is required"),
+  recruitDetailNickName: preprocessString("Nickname is required"),
   recruitDetailSalary: preprocessInt("Expected salary is required"),
   recruitDetailBirthDay: preprocessDate.refine((date) => date instanceof Date, {
     message: "Birthdate is required",
@@ -205,11 +205,11 @@ const recruitDetailSchema = z.object({
     ["Yes", "No"],
     "Work history check consent is required"
   ),
-  recruitDischarged: preprocessEnum(
+  recruitDetailDischarged: preprocessEnum(
     ["Yes", "No"],
     "Discharged status is required"
   ),
-  recruitDischargedReason: preprocessString("Discharge reason is required")
+  recruitDetailDischargedReason: preprocessString("Discharge reason is required")
     .optional()
     .nullable(),
   recruitDetailSeriousIllnessOrContagious: preprocessEnum(
@@ -271,15 +271,15 @@ const recruitDetailSchema = z.object({
     description: z.string(),
   }),
 
-  recruitConsentGeneral: preprocessEnum(
+  recruitDetailConsentGeneral: preprocessEnum(
     ["Yes", "No"],
     "Consent for general data is required"
   ),
-  recruitConsentSensitive: preprocessEnum(
+  recruitDetailConsentSensitive: preprocessEnum(
     ["Yes", "No"],
     "Consent for sensitive data is required"
   ),
-  recruitConsentPdpa: preprocessEnum(["Yes", "No"], "PDPA consent is required"),
+  recruitDetailConsentPdpa: preprocessEnum(["Yes", "No"], "PDPA consent is required"),
 });
 
 export const recruitPostSchema = z.object({

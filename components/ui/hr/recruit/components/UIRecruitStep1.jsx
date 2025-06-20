@@ -115,31 +115,31 @@ export default function UIRecruitStep1({
           {renderInputField({
             labelTH: "ชื่อ - นามสกุล",
             labelEN: "Full name (TH)",
-            name: "recruitDetail.recruitFullNameTh",
+            name: "recruitDetail.recruitDetailFullNameTh",
             type: "text",
-            value: formData?.recruitDetail?.recruitFullNameTh || "",
-            onChange: handleInputChange("recruitDetail.recruitFullNameTh"),
-            error: errors?.["recruitDetail.recruitFullNameTh"],
+            value: formData?.recruitDetail?.recruitDetailFullNameTh || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailFullNameTh"),
+            error: errors?.["recruitDetail.recruitDetailFullNameTh"],
           })}
 
           {renderInputField({
             labelTH: "Name - Surname",
             labelEN: "Full name (EN)",
-            name: "recruitDetail.recruitFullNameEn",
+            name: "recruitDetail.recruitDetailFullNameEn",
             type: "text",
-            value: formData?.recruitDetail?.recruitFullNameEn || "",
-            onChange: handleInputChange("recruitDetail.recruitFullNameEn"),
-            error: errors?.["recruitDetail.recruitFullNameEn"],
+            value: formData?.recruitDetail?.recruitDetailFullNameEn || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailFullNameEn"),
+            error: errors?.["recruitDetail.recruitDetailFullNameEn"],
           })}
 
           {renderInputField({
             labelTH: "ชื่อเล่น",
             labelEN: "Nickname",
-            name: "recruitDetail.recruitNickName",
+            name: "recruitDetail.recruitDetailNickName",
             type: "text",
-            value: formData?.recruitDetail?.recruitNickName || "",
-            onChange: handleInputChange("recruitDetail.recruitNickName"),
-            error: errors?.["recruitDetail.recruitNickName"],
+            value: formData?.recruitDetail?.recruitDetailNickName || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailNickName"),
+            error: errors?.["recruitDetail.recruitDetailNickName"],
           })}
         </div>
 

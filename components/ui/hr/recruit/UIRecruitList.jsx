@@ -76,7 +76,7 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
   const columns = useMemo(() => {
     const baseColumns = [
       { name: "ลำดับ", uid: "recruitId" },
-      { name: "ใบสมัครงาน", uid: "recruitFullNameTh" },
+      { name: "ใบสมัครงาน", uid: "recruitDetailFullNameTh" },
       { name: "เลขที่เอกสารอ้างอิง", uid: "perReqDocumentId" },
       { name: "ตำแหน่งที่เปิดรับสมัคร", uid: "positionNameTH" },
       { name: "สถานะการใช้งาน", uid: "recruitStatus" },
@@ -97,7 +97,7 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
 
     if (searchTerm.trim()) {
       result = result.filter((recruit) =>
-        recruit.recruitDetail?.recruitFullNameTh
+        recruit.recruitDetail?.recruitDetailFullNameTh
           ?.toLowerCase()
           .includes(searchTerm.toLowerCase())
       );
@@ -130,7 +130,7 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
       switch (colKey) {
         case "recruitId":
           return (pageNumber - 1) * rowsPerPage + idx + 1;
-        case "recruitFullNameTh":
+        case "recruitDetailFullNameTh":
           return (
             <Link
               href={item.applySlug ? `/apply/${item.applySlug}` : "#"}
@@ -142,8 +142,8 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
                   : "ยังไม่มีลิงก์ใบสมัคร"
               }
             >
-              {item.recruitDetail?.recruitFullNameTh?.trim()
-                ? item.recruitDetail.recruitFullNameTh.trim()
+              {item.recruitDetail?.recruitDetailFullNameTh?.trim()
+                ? item.recruitDetail.recruitDetailFullNameTh.trim()
                 : "คลิกเพื่อดูใบสมัคร"}
             </Link>
           );

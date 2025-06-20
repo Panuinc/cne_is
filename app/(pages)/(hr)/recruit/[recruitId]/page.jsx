@@ -19,7 +19,7 @@ export default function recruitUpdate() {
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    recruitFullNameTh: "",
+    recruitDetailFullNameTh: "",
     recruitNameShot: "",
     recruitStatus: "",
   });

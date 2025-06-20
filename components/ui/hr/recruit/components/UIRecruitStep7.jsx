@@ -283,10 +283,10 @@ export default function UIRecruitStep7({
           {renderRadioGroupField({
             labelTH: "ข้าพเข้า",
             labelEN: "I",
-            name: "recruitDetail.recruitConsentPdpa",
-            value: formData?.recruitDetail?.recruitConsentPdpa || "",
-            onChange: handleInputChange("recruitDetail.recruitConsentPdpa"),
-            error: errors?.["recruitDetail.recruitConsentPdpa"],
+            name: "recruitDetail.recruitDetailConsentPdpa",
+            value: formData?.recruitDetail?.recruitDetailConsentPdpa || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailConsentPdpa"),
+            error: errors?.["recruitDetail.recruitDetailConsentPdpa"],
             options: [
               {
                 labelTH:

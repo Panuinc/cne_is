@@ -57,10 +57,10 @@ export default function UIRecruitStep6({
           {renderRadioGroupField({
             labelTH: "ข้าพเข้า",
             labelEN: "I",
-            name: "recruitDetail.recruitConsentGeneral",
-            value: formData?.recruitDetail?.recruitConsentGeneral || "",
-            onChange: handleInputChange("recruitDetail.recruitConsentGeneral"),
-            error: errors?.["recruitDetail.recruitConsentGeneral"],
+            name: "recruitDetail.recruitDetailConsentGeneral",
+            value: formData?.recruitDetail?.recruitDetailConsentGeneral || "",
+            onChange: handleInputChange("recruitDetail.recruitDetailConsentGeneral"),
+            error: errors?.["recruitDetail.recruitDetailConsentGeneral"],
             options: [
               { labelTH: "ยินยอม", labelEN: "Yes", value: "Yes" },
               { labelTH: "ไม่ยินยอม", labelEN: "No", value: "No" },
@@ -86,12 +86,12 @@ export default function UIRecruitStep6({
           {renderRadioGroupField({
             labelTH: "ข้าพเข้า",
             labelEN: "I",
-            name: "recruitDetail.recruitConsentSensitive",
-            value: formData?.recruitDetail?.recruitConsentSensitive || "",
+            name: "recruitDetail.recruitDetailConsentSensitive",
+            value: formData?.recruitDetail?.recruitDetailConsentSensitive || "",
             onChange: handleInputChange(
-              "recruitDetail.recruitConsentSensitive"
+              "recruitDetail.recruitDetailConsentSensitive"
             ),
-            error: errors?.["recruitDetail.recruitConsentSensitive"],
+            error: errors?.["recruitDetail.recruitDetailConsentSensitive"],
             options: [
               { labelTH: "ยินยอม", labelEN: "Yes", value: "Yes" },
               { labelTH: "ไม่ยินยอม", labelEN: "No", value: "No" },

@@ -137,7 +137,7 @@ export class RecruitController {
         10
       )();
 
-      const rawName = raw.recruitDetail?.recruitFullNameTh || "unnamed";
+      const rawName = raw.recruitDetail?.recruitDetailFullNameTh || "unnamed";
       const sanitizedName = rawName
         .trim()
         .replace(/\s+/g, "_")
