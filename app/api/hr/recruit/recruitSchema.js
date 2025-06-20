@@ -296,7 +296,16 @@ export const recruitPostSchema = z.object({
 export const recruitPutSchema = z.object({
   recruitId: preprocessInt("Recruit ID is required"),
   recruitStatus: preprocessEnum(
-    ["Pending", "Submitted", "Rejected", "Hired", "Considered"],
+    [
+      "Pending",
+      "Submitted",
+      "Interviewing",
+      "PassedInterview",
+      "FailedInterview",
+      "Considered",
+      "Rejected",
+      "Hired",
+    ],
     "Recruit status is required"
   ),
   recruitDetail: recruitDetailSchema,
@@ -313,5 +322,7 @@ export const recruitPutSchema = z.object({
     required_error: "Work experience is required",
   }),
 
-  recruitUpdateBy: preprocessInt("Updater ID is required"),
+  recruitUpdateBy: preprocessInt("Updater ID is required")
+    .optional()
+    .nullable(),
 });

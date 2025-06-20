@@ -110,17 +110,12 @@ export class RecruitService {
       data: {
         ...recruitData,
         recruitUpdateAt: getLocalNow(),
-        recruitDetail: {
-          update: recruitDetail,
-        },
-        recruitFamilyMembers: {
-          deleteMany: {},
-          create: recruitFamilyMembers,
-        },
-        recruitEducations: {
-          deleteMany: {},
-          create: recruitEducations,
-        },
+        ...(recruitData.recruitUpdateBy && {
+          recruitUpdateBy: recruitData.recruitUpdateBy,
+        }),
+        recruitDetail: { update: recruitDetail },
+        recruitFamilyMembers: { deleteMany: {}, create: recruitFamilyMembers },
+        recruitEducations: { deleteMany: {}, create: recruitEducations },
         recruitLanguageSkills: {
           deleteMany: {},
           create: recruitLanguageSkills,

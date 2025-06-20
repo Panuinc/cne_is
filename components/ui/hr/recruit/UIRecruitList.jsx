@@ -20,15 +20,18 @@ import {
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import thLocale from "@fullcalendar/core/locales/th";
 
 const completionOptions = [
   { name: "ทั้งหมด", uniqueIdentifier: "all" },
-  { name: "นำส่งใบสมัคร", uniqueIdentifier: "Pending" },
-  { name: "ผู้สมัครกรอกใบสมัครแล้วเสร็จ", uniqueIdentifier: "Submitted" },
+  { name: "ยังไม่กรอก/ยังไม่ส่งใบสมัคร", uniqueIdentifier: "Pending" },
+  { name: "ส่งใบสมัครแล้ว", uniqueIdentifier: "Submitted" },
   { name: "นัดสัมภาษณ์", uniqueIdentifier: "Interviewing" },
-  { name: "ไม่ผ่าน", uniqueIdentifier: "Rejected" },
-  { name: "ได้รับเลือก", uniqueIdentifier: "Hired" },
+  { name: "สัมภาษณ์ผ่าน", uniqueIdentifier: "PassedInterview" },
+  { name: "สัมภาษณ์ไม่ผ่าน", uniqueIdentifier: "FailedInterview" },
   { name: "เก็บไว้พิจารณา", uniqueIdentifier: "Considered" },
+  { name: "ปฏิเสธ", uniqueIdentifier: "Rejected" },
+  { name: "รับเข้าทำงาน", uniqueIdentifier: "Hired" },
 ];
 
 const rowsOptions = [5, 10, 15];
@@ -223,6 +226,7 @@ export default function UIRecruitList({ header, data = [], error = "" }) {
             initialView="dayGridMonth"
             events={interviewEvents}
             height="auto"
+            locale={thLocale} 
           />
         </div>
 

@@ -77,11 +77,14 @@ enum perReqEducation {
 }
 
 enum RecruitStatus {
-  Pending
-  Submitted
-  Rejected
-  Hired
-  Considered
+  Pending // ยังกรอกไม่ครบ หรือยังไม่ส่งใบสมัคร
+  Submitted // ผู้สมัครกรอกใบสมัครและกดส่งแล้ว
+  Interviewing // นัดสัมภาษณ์
+  PassedInterview // ผ่านการสัมภาษณ์
+  FailedInterview // ไม่ผ่านสัมภาษณ์
+  Considered // เก็บไว้พิจารณาภายหลัง
+  Rejected // ปฏิเสธ / ไม่รับ
+  Hired // รับเข้าทำงาน
 }
 
 enum RecruitMaritalStatus {
@@ -587,13 +590,13 @@ model PerReq {
 }
 
 model Recruit {
-  recruitId        Int           @id @default(autoincrement())
-  recruitPerReqId  Int
-  recruitStatus    RecruitStatus @default(Pending)
+  recruitId       Int           @id @default(autoincrement())
+  recruitPerReqId Int
+  recruitStatus   RecruitStatus @default(Pending)
   recruitCreateAt DateTime      @default(now()) @db.Timestamp()
-  recruitUpdateBy  Int?
+  recruitUpdateBy Int?
   recruitUpdateAt DateTime?
-  applySlug        String?       @unique @db.VarChar(255)
+  applySlug       String?       @unique @db.VarChar(255)
 
   recruitDetail RecruitDetail?
 
