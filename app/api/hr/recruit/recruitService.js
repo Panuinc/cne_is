@@ -117,16 +117,56 @@ export class RecruitService {
     });
   }
 
+  // static async updateRecruit(recruitId, data) {
+  //   return prisma.recruit.update({
+  //     where: { recruitId },
+  //     data: {
+  //       recruitStatus: data.recruitStatus,
+  //       recruitUpdateBy: data.recruitUpdateBy,
+  //       recruitUpdatedAt: getLocalNow(),
+  //     },
+  //   });
+  // }
+
   static async updateRecruit(recruitId, data) {
-    return prisma.recruit.update({
-      where: { recruitId },
-      data: {
-        recruitStatus: data.recruitStatus,
-        recruitUpdateBy: data.recruitUpdateBy,
-        recruitUpdatedAt: getLocalNow(),
+  const {
+    recruitDetail = {},
+    recruitFamilyMembers = [],
+    recruitEducations = [],
+    recruitLanguageSkills = [],
+    recruitWorkExperiences = [],
+    ...recruitData
+  } = data;
+
+  applyDateFormatting(recruitDetail);
+
+  return prisma.recruit.update({
+    where: { recruitId },
+    data: {
+      ...recruitData,
+      recruitUpdatedAt: getLocalNow(),
+      recruitDetail: {
+        update: recruitDetail,
       },
-    });
-  }
+      recruitFamilyMembers: {
+        deleteMany: {},
+        create: recruitFamilyMembers,
+      },
+      recruitEducations: {
+        deleteMany: {},
+        create: recruitEducations,
+      },
+      recruitLanguageSkills: {
+        deleteMany: {},
+        create: recruitLanguageSkills,
+      },
+      recruitWorkExperiences: {
+        deleteMany: {},
+        create: recruitWorkExperiences,
+      },
+    },
+  });
+}
 
   static async generateSlug(recruitId) {
     const nanoid = customAlphabet(

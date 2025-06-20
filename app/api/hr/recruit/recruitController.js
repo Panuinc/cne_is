@@ -250,39 +250,131 @@ export class RecruitController {
     }
   }
 
+  // static async updateRecruit(request, recruitId) {
+  //   let ip = "";
+  //   try {
+  //     ip = await validateRequest(request);
+  //     const id = Number(recruitId);
+  //     if (isNaN(id)) {
+  //       return NextResponse.json(
+  //         { error: "Invalid recruit ID" },
+  //         { status: 400 }
+  //       );
+  //     }
+
+  //     const formData = await request.formData();
+  //     const raw = Object.fromEntries(formData.entries());
+
+  //     const data = recruitPutSchema.parse({ ...raw, recruitId: id });
+
+  //     const recruit = await RecruitService.updateRecruit(id, {
+  //       recruitStatus: data.recruitStatus,
+  //       recruitUpdateBy: data.recruitUpdateBy,
+  //     });
+
+  //     return NextResponse.json(
+  //       {
+  //         message: "Recruit updated successfully",
+  //         recruit,
+  //       },
+  //       { status: 200 }
+  //     );
+  //   } catch (error) {
+  //     return handleErrors(error, ip, "Failed to update recruit");
+  //   }
+  // }
+
   static async updateRecruit(request, recruitId) {
-    let ip = "";
-    try {
-      ip = await validateRequest(request);
-      const id = Number(recruitId);
-      if (isNaN(id)) {
-        return NextResponse.json(
-          { error: "Invalid recruit ID" },
-          { status: 400 }
-        );
-      }
-
-      const formData = await request.formData();
-      const raw = Object.fromEntries(formData.entries());
-
-      const data = recruitPutSchema.parse({ ...raw, recruitId: id });
-
-      const recruit = await RecruitService.updateRecruit(id, {
-        recruitStatus: data.recruitStatus,
-        recruitUpdateBy: data.recruitUpdateBy,
-      });
-
-      return NextResponse.json(
-        {
-          message: "Recruit updated successfully",
-          recruit,
-        },
-        { status: 200 }
-      );
-    } catch (error) {
-      return handleErrors(error, ip, "Failed to update recruit");
+  let ip = "";
+  try {
+    ip = await validateRequest(request);
+    const id = Number(recruitId);
+    if (isNaN(id)) {
+      return NextResponse.json({ error: "Invalid recruit ID" }, { status: 400 });
     }
+
+    const formData = await request.formData();
+    const raw = Object.fromEntries(formData.entries());
+
+    const jsonFields = [
+      "recruitDetail",
+      "recruitFamilyMembers",
+      "recruitEducations",
+      "recruitLanguageSkills",
+      "recruitWorkExperiences",
+    ];
+
+    for (const key of jsonFields) {
+      try {
+        raw[key] = JSON.parse(raw[key] || "[]");
+      } catch {
+        raw[key] = key === "recruitDetail" ? null : [];
+      }
+    }
+
+    const rawName = raw.recruitDetail?.recruitDetailFullNameTh || "unnamed";
+    const sanitizedName = rawName
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9ก-๙_]/g, "");
+
+    const uploadFile = async (file, folder, fileNameWithoutExt) => {
+      if (!file?.name || file.size === 0) return "";
+      const fileName = `${fileNameWithoutExt}.png`;
+      const folderPath = path.join(process.cwd(), "public", folder);
+      await mkdir(folderPath, { recursive: true });
+      const filePath = path.join(folderPath, fileName).replace(/\\/g, "/");
+      await writeFile(filePath, Buffer.from(await file.arrayBuffer()));
+      return fileName;
+    };
+
+    const profileImage = formData.get("recruitDetailProfileImage");
+    const signatureImage = formData.get("recruitDetailSignatureImage");
+
+    const profileImageName = await uploadFile(
+      profileImage,
+      "recruit/recruitProfileImage",
+      sanitizedName
+    );
+    const signatureImageName = await uploadFile(
+      signatureImage,
+      "recruit/recruitSignatureImage",
+      sanitizedName
+    );
+
+    const attachFields = {
+      recruitDetailAttachIdCard: "idcard",
+      recruitDetailAttachHouseReg: "houseReg",
+      recruitDetailAttachEducation: "education",
+      recruitDetailAttachMedicalCert: "medicalCert",
+      recruitDetailAttachMilitaryDoc: "militaryDoc",
+    };
+
+    for (const [field, type] of Object.entries(attachFields)) {
+      const file = formData.get(field);
+      const fileName = await uploadFile(
+        file,
+        `recruit/recruitAttachment/${type}`,
+        `${sanitizedName}_${type}`
+      );
+      raw.recruitDetail[field] = fileName || null;
+    }
+
+    raw.recruitDetail.recruitDetailProfileImage = profileImageName || null;
+    raw.recruitDetail.recruitDetailSignatureImage = signatureImageName || null;
+
+    const data = recruitPutSchema.parse({ ...raw, recruitId: id });
+
+    const recruit = await RecruitService.updateRecruit(id, data);
+
+    return NextResponse.json(
+      { message: "Recruit updated successfully", recruit },
+      { status: 200 }
+    );
+  } catch (error) {
+    return handleErrors(error, ip, "Failed to update recruit");
   }
+}
 
   static async getApplyLink(request, perReqId) {
     let ip = "";

@@ -170,10 +170,12 @@ export default function RecruitApplyPage() {
       });
 
       form.append("recruitStatus", "Submitted");
+      form.append("recruitId", formData.recruitId);
+      form.append("recruitUpdateBy", "1"); // หรือดึงจาก session/auth จริง
 
       try {
-        const res = await fetch("/api/hr/recruit", {
-          method: "POST",
+        const res = await fetch(`/api/hr/recruit/${formData.recruitId}`, {
+          method: "PUT",
           body: form,
           headers: { "secret-token": SECRET_TOKEN || "" },
         });
@@ -181,8 +183,8 @@ export default function RecruitApplyPage() {
         const result = await res.json();
 
         if (res.ok) {
-          toast.success("ส่งใบสมัครเรียบร้อยแล้ว");
-          setTimeout(() => router.push("/thank-you"), 2000);
+          toast.success("อัปเดตใบสมัครเรียบร้อยแล้ว");
+          setTimeout(() => router.push("/thankYou"), 2000);
         } else {
           if (result.details) {
             const fieldErrors = Object.fromEntries(
@@ -190,7 +192,7 @@ export default function RecruitApplyPage() {
             );
             setErrors(fieldErrors);
           }
-          toast.error(result.error || "ไม่สามารถบันทึกข้อมูลได้");
+          toast.error(result.error || "ไม่สามารถอัปเดตข้อมูลได้");
         }
       } catch (err) {
         toast.error(`เกิดข้อผิดพลาด: ${err.message}`);
