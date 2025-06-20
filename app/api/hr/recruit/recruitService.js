@@ -80,15 +80,32 @@ export class RecruitService {
     });
   }
 
+  // static async createRecruit(data) {
+  //   const {
+  //     recruitDetail = {},
+  //     recruitFamilyMembers = [],
+  //     recruitEducations = [],
+  //     recruitLanguageSkills = [],
+  //     recruitWorkExperiences = [],
+  //     ...recruitData
+  //   } = data;
+
+  //   applyDateFormatting(recruitDetail);
+
+  //   return prisma.recruit.create({
+  //     data: {
+  //       ...recruitData,
+  //       recruitDetail: { create: recruitDetail },
+  //       recruitFamilyMembers: { create: recruitFamilyMembers },
+  //       recruitEducations: { create: recruitEducations },
+  //       recruitLanguageSkills: { create: recruitLanguageSkills },
+  //       recruitWorkExperiences: { create: recruitWorkExperiences },
+  //     },
+  //   });
+  // }
+
   static async createRecruit(data) {
-    const {
-      recruitDetail = {},
-      recruitFamilyMembers = [],
-      recruitEducations = [],
-      recruitLanguageSkills = [],
-      recruitWorkExperiences = [],
-      ...recruitData
-    } = data;
+    const { recruitDetail = {}, ...recruitData } = data;
 
     applyDateFormatting(recruitDetail);
 
@@ -96,10 +113,6 @@ export class RecruitService {
       data: {
         ...recruitData,
         recruitDetail: { create: recruitDetail },
-        recruitFamilyMembers: { create: recruitFamilyMembers },
-        recruitEducations: { create: recruitEducations },
-        recruitLanguageSkills: { create: recruitLanguageSkills },
-        recruitWorkExperiences: { create: recruitWorkExperiences },
       },
     });
   }
