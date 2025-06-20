@@ -82,7 +82,7 @@ export class RecruitService {
 
   static async createRecruit(data) {
     const {
-      recruitDetail,
+      recruitDetail = {},
       recruitFamilyMembers = [],
       recruitEducations = [],
       recruitLanguageSkills = [],
@@ -95,7 +95,6 @@ export class RecruitService {
     return prisma.recruit.create({
       data: {
         ...recruitData,
-        recruitStatus: recruitData.recruitStatus ?? "Pending",
         recruitDetail: { create: recruitDetail },
         recruitFamilyMembers: { create: recruitFamilyMembers },
         recruitEducations: { create: recruitEducations },
@@ -132,55 +131,8 @@ export class RecruitService {
   static async getOrCreateApplyLink(perReqId) {
     const recruit = await RecruitService.createRecruit({
       recruitPerReqId: perReqId,
-      recruitStatus: "Pending",
       recruitCreatedAt: getLocalNow(),
-      recruitDetail: {
-        recruitDetailSalary: 0,
-        recruitDetailProfileImage: "",
-        recruitDetailFullNameTh: "",
-        recruitDetailFullNameEn: "",
-        recruitDetailNickName: "",
-        recruitDetailBirthDay: new Date(),
-        recruitDetailGender: "Other",
-        recruitDetailAge: 0,
-        recruitDetailNationality: "",
-        recruitDetailReligion: "",
-        recruitDetailWright: 0,
-        recruitDetailHeight: 0,
-        recruitDetailBloodGroup: "Unknown",
-        recruitDetailIdCardNumber: "",
-        recruitDetailIdCardIssuedAt: "",
-        recruitDetailIdCardIssuedDate: new Date(),
-        recruitDetailIdCardEndDate: new Date(),
-        recruitDetailPhone: "",
-        recruitDetailEmail: "",
-        recruitDetailLine: "",
-        recruitDetailPresentAddress: "",
-        recruitDetailPresentAddressLink: "",
-        recruitDetailRegisteredAddress: "",
-        recruitDetailResidence: "Parents_house",
-        recruitDetailMaritalStatus: "Single",
-        recruitDetailMilitaryStatus: "NotYetServed",
-        recruitDetailOwnCar: "Yes",
-        recruitDetailOwnMotorcycle: "Yes",
-        recruitDetailHaveCarLicense: "Yes",
-        recruitDetailHaveMotorcycleLicense: "Yes",
-        recruitDetailWhenStartWork: "",
-        recruitDetailCheckWorkingHistory: "Yes",
-        recruitDetailDischarged: "No",
-        recruitDetailSeriousIllnessOrContagious: "No",
-        recruitDetailCriminalConvictionOrBankrupt: "No",
-        recruitDetailIsPregnant: "No",
-        recruitDetailHasRelativesInCompany: "No",
-        recruitDetailRef1Name: "",
-        recruitDetailRef2Name: "",
-        recruitDetailEmergencyFullName: "",
-        recruitDetailEmergencyRelationship: "",
-        recruitDetailEmergencyPhone: "",
-        recruitDetailConsentGeneral: "Yes",
-        recruitDetailConsentSensitive: "Yes",
-        recruitDetailConsentPdpa: "Yes",
-      },
+      recruitDetail: {},
     });
 
     let slug = recruit.applySlug;

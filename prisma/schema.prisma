@@ -610,88 +610,88 @@ model Recruit {
 }
 
 model RecruitDetail {
-  recruitDetailId                           Int                          @id @default(autoincrement())
-  recruitDetailRecruitId                    Int                          @unique
-  recruitDetailSalary                       Int
-  recruitDetailProfileImage                 String                       @db.VarChar(500)
-  recruitDetailFullNameTh                   String                       @db.VarChar(255)
-  recruitDetailFullNameEn                   String                       @db.VarChar(255)
-  recruitDetailNickName                     String                       @db.VarChar(255)
-  recruitDetailBirthDay                     DateTime
-  recruitDetailGender                       Gender
-  recruitDetailAge                          Int
-  recruitDetailNationality                  String                       @db.VarChar(255)
-  recruitDetailReligion                     String                       @db.VarChar(255)
-  recruitDetailWright                       Int
-  recruitDetailHeight                       Int
-  recruitDetailBloodGroup                   RecruitBloodGroup
-  recruitDetailIdCardNumber                 String                       @db.VarChar(20)
-  recruitDetailIdCardIssuedAt               String                       @db.VarChar(255)
-  recruitDetailIdCardIssuedDate             DateTime
-  recruitDetailIdCardEndDate                DateTime
-  recruitDetailPhone                        String                       @db.VarChar(20)
-  recruitDetailEmail                        String                       @db.VarChar(255)
-  recruitDetailLine                         String                       @db.VarChar(255)
-  recruitDetailPresentAddress               String                       @db.VarChar(255)
-  recruitDetailPresentAddressLink           String                       @db.VarChar(255)
-  recruitDetailRegisteredAddress            String                       @db.VarChar(255)
-  recruitDetailResidence                    Residence
-  recruitDetailMaritalStatus                RecruitMaritalStatus
+  recruitDetailId                           Int                           @id @default(autoincrement())
+  recruitDetailRecruitId                    Int                           @unique
+  recruitDetailSalary                       Int?
+  recruitDetailProfileImage                 String?
+  recruitDetailFullNameTh                   String?
+  recruitDetailFullNameEn                   String?
+  recruitDetailNickName                     String?
+  recruitDetailBirthDay                     DateTime?
+  recruitDetailGender                       Gender?
+  recruitDetailAge                          Int?
+  recruitDetailNationality                  String?
+  recruitDetailReligion                     String?
+  recruitDetailWright                       Int?
+  recruitDetailHeight                       Int?
+  recruitDetailBloodGroup                   RecruitBloodGroup?
+  recruitDetailIdCardNumber                 String?
+  recruitDetailIdCardIssuedAt               String?
+  recruitDetailIdCardIssuedDate             DateTime?
+  recruitDetailIdCardEndDate                DateTime?
+  recruitDetailPhone                        String?
+  recruitDetailEmail                        String?
+  recruitDetailLine                         String?
+  recruitDetailPresentAddress               String?
+  recruitDetailPresentAddressLink           String?
+  recruitDetailRegisteredAddress            String?
+  recruitDetailResidence                    Residence?
+  recruitDetailMaritalStatus                RecruitMaritalStatus?
   recruitDetailSpouseEarnIncome             RecruitSpouseEarnIncome?
   recruitDetailSpouseIncomeAmount           Int?
   recruitDetailNumberOfChildren             Int?
-  recruitDetailMilitaryStatus               RecruitMilitaryServiceStatus
-  recruitDetailEmergencyFullName            String                       @db.VarChar(255)
-  recruitDetailEmergencyRelationship        String                       @db.VarChar(255)
-  recruitDetailEmergencyPhone               String                       @db.VarChar(255)
-  recruitDetailLicenseName                  String?                      @db.VarChar(255)
-  recruitDetailLicenseNumber                String?                      @db.VarChar(255)
-  recruitDetailComputerSkill                String?                      @db.VarChar(255)
-  recruitDetailSportSkill                   String?                      @db.VarChar(255)
-  recruitDetailOtherSkill                   String?                      @db.VarChar(255)
-  recruitDetailScoreToeic                   String?                      @db.VarChar(255)
-  recruitDetailScoreToefl                   String?                      @db.VarChar(255)
-  recruitDetailScoreIelts                   String?                      @db.VarChar(255)
-  recruitDetailOwnCar                       YesOrNo
-  recruitDetailOwnMotorcycle                YesOrNo
-  recruitDetailHaveCarLicense               YesOrNo
-  recruitDetailHaveMotorcycleLicense        YesOrNo
-  recruitDetailWhenStartWork                String                       @db.VarChar(255)
-  recruitDetailCheckWorkingHistory          YesOrNo
-  recruitDetailDischarged                   YesOrNo
-  recruitDetailDischargedReason             String?                      @db.VarChar(255)
-  recruitDetailSeriousIllnessOrContagious   YesOrNo
-  recruitDetailIllnessName                  String?                      @db.VarChar(255)
-  recruitDetailCriminalConvictionOrBankrupt YesOrNo
-  recruitDetailIsPregnant                   YesOrNo
+  recruitDetailMilitaryStatus               RecruitMilitaryServiceStatus?
+  recruitDetailEmergencyFullName            String?
+  recruitDetailEmergencyRelationship        String?
+  recruitDetailEmergencyPhone               String?
+  recruitDetailLicenseName                  String?
+  recruitDetailLicenseNumber                String?
+  recruitDetailComputerSkill                String?
+  recruitDetailSportSkill                   String?
+  recruitDetailOtherSkill                   String?
+  recruitDetailScoreToeic                   String?
+  recruitDetailScoreToefl                   String?
+  recruitDetailScoreIelts                   String?
+  recruitDetailOwnCar                       YesOrNo?
+  recruitDetailOwnMotorcycle                YesOrNo?
+  recruitDetailHaveCarLicense               YesOrNo?
+  recruitDetailHaveMotorcycleLicense        YesOrNo?
+  recruitDetailWhenStartWork                String?
+  recruitDetailCheckWorkingHistory          YesOrNo?
+  recruitDetailDischarged                   YesOrNo?
+  recruitDetailDischargedReason             String?
+  recruitDetailSeriousIllnessOrContagious   YesOrNo?
+  recruitDetailIllnessName                  String?
+  recruitDetailCriminalConvictionOrBankrupt YesOrNo?
+  recruitDetailIsPregnant                   YesOrNo?
   recruitDetailPregnancyMonth               Int?
-  recruitDetailHasRelativesInCompany        YesOrNo
-  recruitDetailRelativesName                String?                      @db.VarChar(255)
-  recruitDetailRef1Name                     String                       @db.VarChar(255)
-  recruitDetailRef2Name                     String                       @db.VarChar(255)
-  recruitDetailSelfIntro                    String?                      @db.Text
-  recruitDetailSignatureImage               String?                      @db.VarChar(500)
-  recruitDetailAttachIdCard                 String?                      @db.VarChar(500)
-  recruitDetailAttachHouseReg               String?                      @db.VarChar(500)
-  recruitDetailAttachEducation              String?                      @db.VarChar(500)
-  recruitDetailAttachMedicalCert            String?                      @db.VarChar(500)
-  recruitDetailAttachMilitaryDoc            String?                      @db.VarChar(500)
-  recruitDetailConsentGeneral               YesOrNo
-  recruitDetailConsentSensitive             YesOrNo
-  recruitDetailConsentPdpa                  YesOrNo
+  recruitDetailHasRelativesInCompany        YesOrNo?
+  recruitDetailRelativesName                String?
+  recruitDetailRef1Name                     String?
+  recruitDetailRef2Name                     String?
+  recruitDetailSelfIntro                    String?
+  recruitDetailSignatureImage               String?
+  recruitDetailAttachIdCard                 String?
+  recruitDetailAttachHouseReg               String?
+  recruitDetailAttachEducation              String?
+  recruitDetailAttachMedicalCert            String?
+  recruitDetailAttachMilitaryDoc            String?
+  recruitDetailConsentGeneral               YesOrNo?
+  recruitDetailConsentSensitive             YesOrNo?
+  recruitDetailConsentPdpa                  YesOrNo?
 
   recruitDetailRecruit Recruit @relation(fields: [recruitDetailRecruitId], references: [recruitId])
 }
 
 model RecruitFamilyMember {
-  recruitFamilyMemberId         Int                   @id @default(autoincrement())
+  recruitFamilyMemberId         Int                    @id @default(autoincrement())
   recruitFamilyMemberRecruitId  Int
-  recruitFamilyMemberRelation   RecruitFamilyRelation
-  recruitFamilyMemberFullName   String                @db.VarChar(255)
+  recruitFamilyMemberRelation   RecruitFamilyRelation?
+  recruitFamilyMemberFullName   String?                @db.VarChar(255)
   recruitFamilyMemberAge        Int?
-  recruitFamilyMemberOccupation String?               @db.VarChar(255)
-  recruitFamilyMemberWorkplace  String?               @db.VarChar(255)
-  recruitFamilyMemberPhone      String?               @db.VarChar(20)
+  recruitFamilyMemberOccupation String?                @db.VarChar(255)
+  recruitFamilyMemberWorkplace  String?                @db.VarChar(255)
+  recruitFamilyMemberPhone      String?                @db.VarChar(20)
 
   RecruitFamilyMemberRecruitId Recruit @relation("RecruitFamilyMemberRecruitId", fields: [recruitFamilyMemberRecruitId], references: [recruitId])
 
@@ -699,14 +699,14 @@ model RecruitFamilyMember {
 }
 
 model RecruitEducation {
-  recruitEducationId        Int            @id @default(autoincrement())
+  recruitEducationId        Int             @id @default(autoincrement())
   recruitEducationRecruitId Int
-  recruitEducationLevel     EducationLevel
-  recruitEducationFromDate  DateTime
-  recruitEducationToDate    DateTime
-  recruitEducationSchool    String         @db.VarChar(255)
-  recruitEducationDegree    String         @db.VarChar(255)
-  recruitEducationMajor     String?        @db.VarChar(255)
+  recruitEducationLevel     EducationLevel?
+  recruitEducationFromDate  DateTime?
+  recruitEducationToDate    DateTime?
+  recruitEducationSchool    String?         @db.VarChar(255)
+  recruitEducationDegree    String?         @db.VarChar(255)
+  recruitEducationMajor     String?         @db.VarChar(255)
   recruitEducationGPA       Float?
 
   RecruitEducationRecruitId Recruit @relation("RecruitEducationRecruitId", fields: [recruitEducationRecruitId], references: [recruitId])
@@ -715,13 +715,13 @@ model RecruitEducation {
 }
 
 model RecruitLanguageSkill {
-  recruitLanguageSkillId        Int        @id @default(autoincrement())
+  recruitLanguageSkillId        Int         @id @default(autoincrement())
   recruitLanguageSkillRecruitId Int
-  recruitLanguageName           String     @db.VarChar(100)
-  recruitLanguageListenLevel    SkillLevel
-  recruitLanguageSpeakLevel     SkillLevel
-  recruitLanguageReadLevel      SkillLevel
-  recruitLanguageWriteLevel     SkillLevel
+  recruitLanguageName           String?     @db.VarChar(100)
+  recruitLanguageListenLevel    SkillLevel?
+  recruitLanguageSpeakLevel     SkillLevel?
+  recruitLanguageReadLevel      SkillLevel?
+  recruitLanguageWriteLevel     SkillLevel?
 
   RecruitLanguageSkillId Recruit @relation("RecruitLanguageSkillId", fields: [recruitLanguageSkillRecruitId], references: [recruitId])
 
@@ -729,17 +729,17 @@ model RecruitLanguageSkill {
 }
 
 model RecruitWorkExperience {
-  recruitWorkExpId        Int            @id @default(autoincrement())
+  recruitWorkExpId        Int             @id @default(autoincrement())
   recruitWorkExpRecruitId Int
-  recruitWorkplaceName    String         @db.VarChar(255)
-  recruitWorkPosition     String         @db.VarChar(255)
-  recruitEmploymentType   EmploymentType
-  recruitStartDate        DateTime
+  recruitWorkplaceName    String?         @db.VarChar(255)
+  recruitWorkPosition     String?         @db.VarChar(255)
+  recruitEmploymentType   EmploymentType?
+  recruitStartDate        DateTime?
   recruitEndDate          DateTime?
   recruitSalary           Int?
   recruitExtraIncome      Int?
-  recruitReasonForLeaving String?        @db.VarChar(255)
-  recruitJobDescription   Json
+  recruitReasonForLeaving String?         @db.VarChar(255)
+  recruitJobDescription   Json?
 
   RecruitWorkExperienceRecruitId Recruit @relation("RecruitWorkExperienceRecruitId", fields: [recruitWorkExpRecruitId], references: [recruitId])
 

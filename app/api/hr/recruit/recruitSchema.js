@@ -209,7 +209,9 @@ const recruitDetailSchema = z.object({
     ["Yes", "No"],
     "Discharged status is required"
   ),
-  recruitDetailDischargedReason: preprocessString("Discharge reason is required")
+  recruitDetailDischargedReason: preprocessString(
+    "Discharge reason is required"
+  )
     .optional()
     .nullable(),
   recruitDetailSeriousIllnessOrContagious: preprocessEnum(
@@ -279,11 +281,18 @@ const recruitDetailSchema = z.object({
     ["Yes", "No"],
     "Consent for sensitive data is required"
   ),
-  recruitDetailConsentPdpa: preprocessEnum(["Yes", "No"], "PDPA consent is required"),
+  recruitDetailConsentPdpa: preprocessEnum(
+    ["Yes", "No"],
+    "PDPA consent is required"
+  ),
 });
 
 export const recruitPostSchema = z.object({
   recruitPerReqId: preprocessInt("PerReq ID is required"),
+});
+
+export const recruitPutSchema = z.object({
+  recruitId: preprocessInt("Recruit ID is required"),
   recruitStatus: preprocessEnum(
     ["Pending", "Submitted", "Rejected", "Hired", "Considered"],
     "Recruit status is required"
@@ -301,13 +310,6 @@ export const recruitPostSchema = z.object({
   recruitWorkExperiences: z.array(recruitWorkExperiencesSchema, {
     required_error: "Work experience is required",
   }),
-});
 
-export const recruitPutSchema = z.object({
-  recruitId: preprocessInt("Recruit ID is required"),
-  recruitStatus: preprocessEnum(
-    ["Pending", "Submitted", "Rejected", "Hired", "Considered"],
-    "Recruit status is required"
-  ),
   recruitUpdateBy: preprocessInt("Updater ID is required"),
 });
