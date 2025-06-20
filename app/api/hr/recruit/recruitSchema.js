@@ -11,8 +11,10 @@ import {
 export const formatRecruitData = (recruits) =>
   formatData(
     recruits,
-    ["recruitCreatedAt", "recruitUpdatedAt"],
+    [],
     [
+      "recruitCreateAt",
+      "recruitUpdateAt",
       "recruitDetailBirthDay",
       "recruitDetailIdCardIssuedDate",
       "recruitDetailIdCardEndDate",
