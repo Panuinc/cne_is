@@ -187,29 +187,20 @@ export class RecruitController {
         .replace(/\s+/g, "_")
         .replace(/[^a-zA-Z0-9ก-๙_]/g, "");
 
-      const uploadFile = async (file, folder, fileNameWithoutExt) => {
-        if (!file?.name || file.size === 0) return "";
-        const fileName = `${fileNameWithoutExt}.png`;
-        const folderPath = path.join(process.cwd(), "public", folder);
-        await mkdir(folderPath, { recursive: true });
-        const filePath = path.join(folderPath, fileName).replace(/\\/g, "/");
-        await writeFile(filePath, Buffer.from(await file.arrayBuffer()));
-        return fileName;
+      const uploadFileBuffer = async (file) => {
+        if (!file?.name || file.size === 0) return null;
+        const arrayBuffer = await file.arrayBuffer();
+        return Buffer.from(arrayBuffer);
       };
 
-      const profileImage = formData.get("recruitDetailProfileImage");
-      const signatureImage = formData.get("recruitDetailSignatureImage");
-
-      const profileImageName = await uploadFile(
-        profileImage,
-        "recruit/recruitProfileImage",
-        sanitizedName
-      );
-      const signatureImageName = await uploadFile(
-        signatureImage,
-        "recruit/recruitSignatureImage",
-        sanitizedName
-      );
+      const buffers = {
+        profileImage: await uploadFileBuffer(
+          formData.get("recruitDetailProfileImage")
+        ),
+        signatureImage: await uploadFileBuffer(
+          formData.get("recruitDetailSignatureImage")
+        ),
+      };
 
       const attachFields = {
         recruitDetailAttachIdCard: "idcard",
@@ -221,21 +212,49 @@ export class RecruitController {
 
       for (const [field, type] of Object.entries(attachFields)) {
         const file = formData.get(field);
-        const fileName = await uploadFile(
-          file,
+        buffers[field] = await uploadFileBuffer(file);
+      }
+
+      const data = recruitPutSchema.parse({ ...raw, recruitId: id });
+
+      const saveBufferToFile = async (buffer, folder, filename) => {
+        if (!buffer) return null;
+        const folderPath = path.join(process.cwd(), "public", folder);
+        await mkdir(folderPath, { recursive: true });
+        const filePath = path.join(folderPath, filename).replace(/\\/g, "/");
+        await writeFile(filePath, buffer);
+        return filename;
+      };
+
+      const profileImageName = await saveBufferToFile(
+        buffers.profileImage,
+        "recruit/recruitProfileImage",
+        `${sanitizedName}.png`
+      );
+
+      const signatureImageName = await saveBufferToFile(
+        buffers.signatureImage,
+        "recruit/recruitSignatureImage",
+        `${sanitizedName}.png`
+      );
+
+      for (const [field, type] of Object.entries(attachFields)) {
+        const filename = `${sanitizedName}_${type}.png`;
+        raw.recruitDetail[field] = await saveBufferToFile(
+          buffers[field],
           `recruit/recruitAttachment/${type}`,
-          `${sanitizedName}_${type}`
+          filename
         );
-        raw.recruitDetail[field] = fileName || null;
       }
 
       raw.recruitDetail.recruitDetailProfileImage = profileImageName || null;
       raw.recruitDetail.recruitDetailSignatureImage =
         signatureImageName || null;
 
-      const data = recruitPutSchema.parse({ ...raw, recruitId: id });
-
-      const recruit = await RecruitService.updateRecruit(id, data);
+      const recruit = await RecruitService.updateRecruit(id, {
+        ...data,
+        recruitDetail: raw.recruitDetail,
+      });
 
       return NextResponse.json(
         { message: "Recruit updated successfully", recruit },
