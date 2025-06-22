@@ -15,7 +15,6 @@ export function renderInputField({
   labelEN,
   name,
   type,
-
   value,
   onChange,
   error,
