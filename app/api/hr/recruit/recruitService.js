@@ -34,6 +34,10 @@ export class RecruitService {
           },
         },
         recruitDetail: true,
+        recruitFamilyMembers: true,
+        recruitEducations: true,
+        recruitLanguageSkills: true,
+        recruitWorkExperiences: true,
         RecruitUpdateBy: {
           select: { empFirstNameTH: true, empLastNameTH: true },
         },
@@ -53,6 +57,10 @@ export class RecruitService {
           },
         },
         recruitDetail: true,
+        recruitFamilyMembers: true,
+        recruitEducations: true,
+        recruitLanguageSkills: true,
+        recruitWorkExperiences: true,
         RecruitUpdateBy: {
           select: { empFirstNameTH: true, empLastNameTH: true },
         },

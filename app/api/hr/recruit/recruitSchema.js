@@ -11,14 +11,12 @@ import {
 export const formatRecruitData = (recruits) =>
   formatData(
     recruits,
-    [],
     [
-      "recruitCreateAt",
-      "recruitUpdateAt",
-      "recruitDetailBirthDay",
-      "recruitDetailIdCardIssuedDate",
-      "recruitDetailIdCardEndDate",
-    ]
+      "recruitDetail.recruitDetailBirthDay",
+      "recruitDetail.recruitDetailIdCardIssuedDate",
+      "recruitDetail.recruitDetailIdCardEndDate",
+    ],
+    ["recruitCreateAt", "recruitUpdateAt"]
   );
 
 const preprocessFloat = (msg = "Invalid number") =>
